@@ -3,7 +3,7 @@
 <html lang="en">
 <head><meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Notebook</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<title>ProjectEDA_Team4</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <style type="text/css">
     pre { line-height: 125%; }
 td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
@@ -7803,7 +7803,7 @@ a.anchor-link {
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h1 id="Public-investment-and-Yelp-review-sentiment">Public investment and Yelp review sentiment<a class="anchor-link" href="#Public-investment-and-Yelp-review-sentiment">¶</a></h1><h2 id="Course-Project-Milestone-2-%E2%80%94-Exploratory-Data-Analysis">Course Project Milestone 2 — Exploratory Data Analysis<a class="anchor-link" href="#Course-Project-Milestone-2-%E2%80%94-Exploratory-Data-Analysis">¶</a></h2><p><strong>CIS 509 · Team 4 · September 5, 2026</strong><br/>
-<strong>Members:</strong> John Wheeler (ASURITE: jwheele4), Ryan Wolff, Cameron Anthony</p>
+<strong>Members:</strong> John Wheeler (ASURITE: jwheele4), Ryan Wolff, Cameron Anthony (ASURITE: cantho19)</p>
 <h3 id="1.-Project-overview">1. Project overview<a class="anchor-link" href="#1.-Project-overview">¶</a></h3><p>City economic development staff and planners need ways to examine whether public investment is associated with changes in local business experiences. Our project joins federal funding records with Yelp review text and presents the results in a geographic interface.</p>
 <p>The question is: <strong>Do places receiving different types and amounts of federal assistance show different patterns in business-review sentiment?</strong> This EDA tests whether our data can support that question. Yelp sentiment measures reviewers' experiences with businesses; it is not a direct measure of residents' well-being or a representative neighborhood survey. An association would not establish that funding caused a change.</p>
 <p>We examine three prerequisites: whether the sources overlap in place and time, whether review coverage is adequate, and whether funding descriptions identify investments plausibly relevant to nearby businesses. These checks determine which analyses are worth pursuing next.</p>
@@ -9799,8 +9799,8 @@ Sampled documents: 5,000; distinct sample tokens: 17,295; repeated sample IDs: 0
 </tbody>
 </table>
 <p>A null or weak relationship remains useful: it may indicate limited sensitivity of this proxy or insufficient geographic resolution, rather than proving that an investment has no effect.</p>
-<h3 id="8.-Generative-AI-use-and-review-status">8. Generative AI use and review status<a class="anchor-link" href="#8.-Generative-AI-use-and-review-status">¶</a></h3><p>OpenAI Codex assisted with organizing this EDA, writing and debugging notebook code, identifying source-provenance issues, producing figures, and drafting interpretations. Numerical findings are computed from the local project data and saved execution outputs. The notebook also reuses the project's existing VADER review scores, checked against a fresh raw-record count and aggregate totals. The creation history of those earlier scripts is not inferred here.</p>
-<p><strong>Team review draft:</strong> Team members should review the analysis, confirm the source selection and any additional prior AI use, and be able to explain the code and conclusions before submission. No claim is made that every team member has already reviewed this draft.</p>
+<h3 id="8.-Generative-AI-use">8. Generative AI use<a class="anchor-link" href="#8.-Generative-AI-use">¶</a></h3><p>OpenAI Codex assisted with organizing this EDA, writing and debugging notebook code, identifying source-provenance issues, producing figures, and drafting interpretations. Anthropic's Claude was used to review the completed notebook against the assignment requirements and to verify the HTML export. Numerical findings are computed from the local project data and saved execution outputs. The notebook also reuses the project's existing VADER review scores, checked against a fresh raw-record count and aggregate totals. The creation history of those earlier scripts is not inferred here.</p>
+<p>The team is responsible for the analysis, code, and conclusions presented here.</p>
 <h3 id="References">References<a class="anchor-link" href="#References">¶</a></h3><ul>
 <li>Yelp Open Dataset: <a href="https://www.yelp.com/dataset">https://www.yelp.com/dataset</a> — local archived business/review data, not current live Yelp reviews.</li>
 <li>USASpending data and API: <a href="https://www.usaspending.gov/">https://www.usaspending.gov/</a> and <a href="https://api.usaspending.gov/docs/">https://api.usaspending.gov/docs/</a> — the exact annual source filenames and row counts are reported above.</li>
