@@ -7802,9 +7802,9 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h1 id="Public-investment-and-Yelp-review-sentiment">Public investment and Yelp review sentiment<a class="anchor-link" href="#Public-investment-and-Yelp-review-sentiment">¶</a></h1><h2 id="Course-Project-Milestone-2-%E2%80%94-Exploratory-Data-Analysis">Course Project Milestone 2 — Exploratory Data Analysis<a class="anchor-link" href="#Course-Project-Milestone-2-%E2%80%94-Exploratory-Data-Analysis">¶</a></h2><p><strong>CIS 509 · Team 4 · September 5, 2026</strong><br/>
+<h1 id="Public-investment-and-Yelp-review-sentiment">Public investment and Yelp review sentiment<a class="anchor-link" href="#Public-investment-and-Yelp-review-sentiment">¶</a></h1><h2 id="Course-Project-Milestone-2-%E2%80%94-Exploratory-Data-Analysis">Course Project Milestone 2 — Exploratory Data Analysis<a class="anchor-link" href="#Course-Project-Milestone-2-%E2%80%94-Exploratory-Data-Analysis">¶</a></h2><h3 id="1.-Team-information">1. Team information<a class="anchor-link" href="#1.-Team-information">¶</a></h3><p><strong>Team ID:</strong> Team 4 · <strong>Course:</strong> CIS 509 · <strong>Date:</strong> September 5, 2026<br/>
 <strong>Members:</strong> John Wheeler (ASURITE: jwheele4), Ryan Wolff, Cameron Anthony (ASURITE: cantho19)</p>
-<h3 id="1.-Project-overview">1. Project overview<a class="anchor-link" href="#1.-Project-overview">¶</a></h3><p>City economic development staff and planners need ways to examine whether public investment is associated with changes in local business experiences. Our project joins federal funding records with Yelp review text and presents the results in a geographic interface.</p>
+<h3 id="2.-Project-overview">2. Project overview<a class="anchor-link" href="#2.-Project-overview">¶</a></h3><p>City economic development staff and planners need ways to examine whether public investment is associated with changes in local business experiences. Our project joins federal funding records with Yelp review text and presents the results in a geographic interface.</p>
 <p>The question is: <strong>Do places receiving different types and amounts of federal assistance show different patterns in business-review sentiment?</strong> This EDA tests whether our data can support that question. Yelp sentiment measures reviewers' experiences with businesses; it is not a direct measure of residents' well-being or a representative neighborhood survey. An association would not establish that funding caused a change.</p>
 <p>We examine three prerequisites: whether the sources overlap in place and time, whether review coverage is adequate, and whether funding descriptions identify investments plausibly relevant to nearby businesses. These checks determine which analyses are worth pursuing next.</p>
 </div>
@@ -7817,7 +7817,7 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="2.-Data-sources-and-selection">2. Data sources and selection<a class="anchor-link" href="#2.-Data-sources-and-selection">¶</a></h3><table>
+<h3 id="3.-Data-sources-and-selection">3. Data sources and selection<a class="anchor-link" href="#3.-Data-sources-and-selection">¶</a></h3><table>
 <thead>
 <tr>
 <th>Source</th>
@@ -7856,7 +7856,7 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Reproduction">Reproduction<a class="anchor-link" href="#Reproduction">¶</a></h3><p>Run all cells in order with Python 3.12 and <code>pandas</code>, <code>numpy</code>, <code>matplotlib</code>, <code>scikit-learn</code>, <code>vaderSentiment</code>, <code>nbformat</code>, <code>nbconvert</code>, and <code>ipykernel</code>. The project data remain local; they are not embedded in this notebook. The rendered HTML contains the tables and figures needed to read the analysis without those files.</p>
+<h4 id="Reproduction">Reproduction<a class="anchor-link" href="#Reproduction">¶</a></h4><p>Run all cells in order with Python 3.12 and <code>pandas</code>, <code>numpy</code>, <code>matplotlib</code>, <code>scikit-learn</code>, <code>vaderSentiment</code>, <code>nbformat</code>, <code>nbconvert</code>, and <code>ipykernel</code>. The project data remain local; they are not embedded in this notebook. The rendered HTML contains the tables and figures needed to read the analysis without those files.</p>
 <p>By default the notebook finds <code>neighborhood-sentiment-map</code> beside the course's <code>Work</code> folder. Set the <code>EDA_PROJECT_ROOT</code> environment variable to use another location. The first run streams the Yelp archive and annual funding downloads; subsequent runs reuse a cache keyed to source file sizes and modification times. Delete <code>_eda_cache</code> to force re-extraction. The sampled text is used for diagnostics only and is not printed in the submitted outputs.</p>
 </div>
 </div>
@@ -7933,7 +7933,7 @@ Study ZIPs: 277 | full years: 2012–2021 | text sample target: 1000 per region
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="3.-Data-description-and-summary-statistics">3. Data description and summary statistics<a class="anchor-link" href="#3.-Data-description-and-summary-statistics">¶</a></h3><p>We keep units of analysis separate: businesses, reviews, assistance transactions, and ZIP-quarter aggregates. A transaction is not a distinct award, and millions of reviews do not imply millions of independent neighborhood observations.</p>
+<h3 id="4.-Data-description-and-summary-statistics">4. Data description and summary statistics<a class="anchor-link" href="#4.-Data-description-and-summary-statistics">¶</a></h3><p>We keep units of analysis separate: businesses, reviews, assistance transactions, and ZIP-quarter aggregates. A transaction is not a distinct award, and millions of reviews do not imply millions of independent neighborhood observations.</p>
 <table>
 <thead>
 <tr>
@@ -8915,8 +8915,8 @@ Sampled documents: 5,000; distinct sample tokens: 17,295; repeated sample IDs: 0
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="4.-Data-quality-and-suitability">4. Data quality and suitability<a class="anchor-link" href="#4.-Data-quality-and-suitability">¶</a></h3><p><strong>Coverage is a substantive finding.</strong> A ZIP with a few reviews cannot support a stable quarterly sentiment estimate. We report coverage at thresholds of 10, 30, and 100 reviews; 30 is an exploratory minimum, not a statistical guarantee. Multiple reviews may come from the same person or business, so later uncertainty estimates must account for clustering.</p>
-<p><strong>Geography requires care.</strong> Postal ZIPs and Census ZCTAs are different geographic concepts. Not every ZIP has a ZCTA, and a current boundary is not necessarily valid for a 2012 observation. An exact code match below is a coverage diagnostic, not a completed point-in-polygon or historical boundary validation. <a href="https://www.census.gov/programs-surveys/geography/guidance/geo-areas/zctas.html">Census explanation</a></p>
+<h3 id="5.-Data-quality-and-suitability">5. Data quality and suitability<a class="anchor-link" href="#5.-Data-quality-and-suitability">¶</a></h3><p><strong>Coverage is a substantive finding.</strong> A ZIP with a few reviews cannot support a stable quarterly sentiment estimate. We report coverage at thresholds of 10, 30, and 100 reviews; 30 is an exploratory minimum, not a statistical guarantee. Multiple reviews may come from the same person or business, so later uncertainty estimates must account for clustering.</p>
+<p><strong>Geography requires care.</strong> Postal ZIPs and Census ZCTAs are different geographic concepts. Not every ZIP has a ZCTA, and a current boundary is not necessarily valid for a 2012 observation. In this study frame the gap is substantial: <strong>196 of 277 study ZIPs (70.8%) match a ZCTA identifier, leaving 81 ZIPs with no polygon available to draw.</strong> Coverage is uneven by region — New Orleans matches 22 of 40 ZIPs (55%) and Tampa Bay 65 of 98 (66%), against 50 of 59 (85%) in Philadelphia. Because the deliverable is a map, this is a design constraint rather than only a data note: the interface must either render these ZIPs through an alternative geometry or mark them as unmapped, instead of silently omitting them. An exact code match below is a coverage diagnostic, not a completed point-in-polygon or historical boundary validation. <a href="https://www.census.gov/programs-surveys/geography/guidance/geo-areas/zctas.html">Census explanation</a></p>
 <p><strong>Funding location is not a benefit footprint.</strong> A recorded place-of-performance ZIP can cover institutional or regional activity; we cannot assume every dollar benefits the businesses in that ZIP. We also cannot interpret a missing funding row as no public investment, because this extract excludes other award types and state/local spending.</p>
 <p><strong>Selection and measurement limit the research question.</strong> Yelp users and listed businesses are self-selected. Review volume, category mix, business entry/exit, and the pandemic may change the composition of reviewers. Snapshot <code>is_open</code> is not a historical closure date. VADER is a baseline text score, not a validated measure of neighborhood quality. We retain three-star reviews in the descriptive EDA; a binary sentiment check below explicitly excludes them.</p>
 </div>
@@ -9175,7 +9175,7 @@ Sampled documents: 5,000; distinct sample tokens: 17,295; repeated sample IDs: 0
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="5.-Preliminary-exploration">5. Preliminary exploration<a class="anchor-link" href="#5.-Preliminary-exploration">¶</a></h3><h4 id="Review-sentiment,-star-ratings,-and-language">Review sentiment, star ratings, and language<a class="anchor-link" href="#Review-sentiment,-star-ratings,-and-language">¶</a></h4><p>We independently score the balanced regional text sample with VADER. Standard categories are negative at compound ≤ −0.05, neutral between −0.05 and +0.05, and positive at ≥ +0.05. The rating comparison treats 1–2 stars as negative and 4–5 as positive; three stars are excluded only from that comparison. Stars are a useful proxy, not independently annotated sentiment truth. <a href="https://github.com/cjhutto/vaderSentiment">VADER method and thresholds</a></p>
+<h3 id="6.-Preliminary-exploration">6. Preliminary exploration<a class="anchor-link" href="#6.-Preliminary-exploration">¶</a></h3><h4 id="Review-sentiment,-star-ratings,-and-language">Review sentiment, star ratings, and language<a class="anchor-link" href="#Review-sentiment,-star-ratings,-and-language">¶</a></h4><p>We independently score the balanced regional text sample with VADER. Standard categories are negative at compound ≤ −0.05, neutral between −0.05 and +0.05, and positive at ≥ +0.05. The rating comparison treats 1–2 stars as negative and 4–5 as positive; three stars are excluded only from that comparison. Stars are a useful proxy, not independently annotated sentiment truth. <a href="https://github.com/cjhutto/vaderSentiment">VADER method and thresholds</a></p>
 <p>For common terms, we count whether a word occurs in each sampled review (document frequency), rather than letting repeated words in long reviews dominate. Stop words are removed only for this descriptive word table, not before VADER scoring.</p>
 </div>
 </div>
@@ -9328,6 +9328,18 @@ Sampled documents: 5,000; distinct sample tokens: 17,295; repeated sample IDs: 0
 </table>
 </div>
 </div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=c6f21231">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h4 id="Comparison-with-a-trivial-baseline">Comparison with a trivial baseline<a class="anchor-link" href="#Comparison-with-a-trivial-baseline">¶</a></h4><p>The table above covers 4,498 sampled reviews, of which 3,476 (<strong>77.3%</strong>) are 4–5 star. A constant "positive" prediction therefore scores 77.3% accuracy. VADER scores (517 + 3,400) / 4,498 = <strong>87.1%</strong>.</p>
+<p>The lexicon adds roughly ten points over predicting a single class, and almost all of its error falls on one side: <strong>479 of 1,022 low-star reviews (46.9%) are labeled actively positive</strong>, not merely neutral. Overall accuracy is therefore the wrong headline measure for this project. A sentiment model for our purpose must be judged on negative-class recall, because the neighborhoods we most need to distinguish are the ones where complaints are being written.</p>
 </div>
 </div>
 </div>
@@ -9705,7 +9717,7 @@ Sampled documents: 5,000; distinct sample tokens: 17,295; repeated sample IDs: 0
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="6.-What-the-EDA-changes-about-the-project">6. What the EDA changes about the project<a class="anchor-link" href="#6.-What-the-EDA-changes-about-the-project">¶</a></h3><p>The business question is meaningful, but a map alone cannot answer whether an investment worked. Review-count thresholds, sentiment validation, award relevance, and geographic assignment must be visible in the analysis and eventual interface.</p>
+<h4 id="What-the-EDA-changes-about-the-project">What the EDA changes about the project<a class="anchor-link" href="#What-the-EDA-changes-about-the-project">¶</a></h4><p>The business question is meaningful, but a map alone cannot answer whether an investment worked. Review-count thresholds, sentiment validation, award relevance, and geographic assignment must be visible in the analysis and eventual interface.</p>
 <p>The available observations are sufficient for descriptive comparisons and developing text classifiers. Sufficiency for detecting a neighborhood-level effect depends on the number of independent places, exposure variation, timing, and measurement error—not the headline review count. The diagnostic checks above identify where to focus the next stage.</p>
 </div>
 </div>
@@ -9773,8 +9785,8 @@ Sampled documents: 5,000; distinct sample tokens: 17,295; repeated sample IDs: 0
 <tbody>
 <tr>
 <td>Validate review sentiment</td>
-<td>Manually annotate a sample stratified by region, year, and star rating; compare VADER with TF-IDF + linear SVM, then a pretrained sentiment model if needed</td>
-<td>Measure macro F1, per-class recall, and regional errors against human text labels. Split by business and time to reduce leakage; use star ratings only as weak training labels.</td>
+<td>Manually annotate a sample stratified by region, year, star rating, and <strong>review length</strong>; compare VADER with TF-IDF + linear SVM, then a pretrained sentiment model if needed</td>
+<td>Measure macro F1, per-class recall, and errors by region <strong>and by length bucket</strong> against human text labels. The VADER compound score is normalized across the whole document, so a long critical review may score less negative than a short one; validation must test this directly rather than assume length is neutral. Beat the majority-class baseline on negative recall, not on overall accuracy. Split by business and time to reduce leakage; use star ratings only as weak training labels.</td>
 </tr>
 <tr>
 <td>Identify locally relevant assistance</td>
@@ -9799,7 +9811,7 @@ Sampled documents: 5,000; distinct sample tokens: 17,295; repeated sample IDs: 0
 </tbody>
 </table>
 <p>A null or weak relationship remains useful: it may indicate limited sensitivity of this proxy or insufficient geographic resolution, rather than proving that an investment has no effect.</p>
-<h3 id="8.-Generative-AI-use">8. Generative AI use<a class="anchor-link" href="#8.-Generative-AI-use">¶</a></h3><p>OpenAI Codex assisted with organizing this EDA, writing and debugging notebook code, identifying source-provenance issues, producing figures, and drafting interpretations. Anthropic's Claude was used to review the completed notebook against the assignment requirements and to verify the HTML export. Numerical findings are computed from the local project data and saved execution outputs. The notebook also reuses the project's existing VADER review scores, checked against a fresh raw-record count and aggregate totals. The creation history of those earlier scripts is not inferred here.</p>
+<h3 id="8.-Generative-AI-use">8. Generative AI use<a class="anchor-link" href="#8.-Generative-AI-use">¶</a></h3><p>OpenAI Codex assisted with organizing this EDA, writing and debugging notebook code, identifying source-provenance issues, producing figures, and drafting interpretations. Anthropic's Claude was used to review the completed notebook against the assignment requirements, to align the section numbering with those requirements, to add the baseline comparison in section 6 and the ZCTA coverage figures in section 5, and to verify the HTML export. It did not alter any computed result. Numerical findings are computed from the local project data and saved execution outputs. The notebook also reuses the project's existing VADER review scores, checked against a fresh raw-record count and aggregate totals. The creation history of those earlier scripts is not inferred here.</p>
 <p>The team is responsible for the analysis, code, and conclusions presented here.</p>
 <h3 id="References">References<a class="anchor-link" href="#References">¶</a></h3><ul>
 <li>Yelp Open Dataset: <a href="https://www.yelp.com/dataset">https://www.yelp.com/dataset</a> — local archived business/review data, not current live Yelp reviews.</li>
