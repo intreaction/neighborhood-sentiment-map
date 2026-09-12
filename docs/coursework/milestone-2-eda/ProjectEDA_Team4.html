@@ -9332,7 +9332,7 @@ Sampled documents: 5,000; distinct sample tokens: 17,295; repeated sample IDs: 0
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=c6f21231">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=ecc0e5d5">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -9711,6 +9711,97 @@ Sampled documents: 5,000; distinct sample tokens: 17,295; repeated sample IDs: 0
 </div>
 </div>
 </div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=9443605f">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h4 id="Robustness:-does-the-association-survive-our-own-caveats?">Robustness: does the association survive our own caveats?<a class="anchor-link" href="#Robustness:-does-the-association-survive-our-own-caveats?">¶</a></h4><p>The matched association above (r = 0.077) uses every assistance transaction in the extract. Two checks test whether that number speaks to the question we actually asked. Both were computed from the same <code>valid</code> transaction table and ZIP-quarter sentiment panel built earlier in this notebook. They are reported here rather than as executed cells because they were run separately, against <code>sentiment_zip_quarter.csv</code> and the annual assistance archives only; the code below reproduces them without the raw Yelp archive. The all-assistance row reproduces the published figures exactly (3,505 of 6,548 matched, r = +0.0773), which is the check that the rest of the table is computed the same way.</p>
+<p><strong>Check 1 — restrict exposure to plausibly local investment.</strong> Section 6 already shows that the keyword screen and the full extract describe different things. Applying the screen to the exposure variable:</p>
+<table>
+<thead>
+<tr>
+<th>Exposure definition</th>
+<th style="text-align:right">Matched ZIP-quarters</th>
+<th style="text-align:right">Share of eligible</th>
+<th style="text-align:right">Pearson r</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>All assistance</td>
+<td style="text-align:right">3,505</td>
+<td style="text-align:right">53.5%</td>
+<td style="text-align:right"><strong>+0.077</strong></td>
+</tr>
+<tr>
+<td>Keyword-screened only</td>
+<td style="text-align:right">1,448</td>
+<td style="text-align:right">22.1%</td>
+<td style="text-align:right"><strong>+0.011</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Across the 1,448 cells where both are defined, the two exposure measures correlate at only 0.49 (Spearman 0.59). Restricting to programs with a defensible neighborhood mechanism removes roughly 85% of the association and two-thirds of the matched coverage.</p>
+<p><strong>Check 2 — separate change within a place from differences between places.</strong> Our question is whether a neighborhood's sentiment moves after investment, which is a within-place claim. Decomposing the pooled correlation:</p>
+<table>
+<thead>
+<tr>
+<th>Variation used</th>
+<th style="text-align:right">Observations</th>
+<th style="text-align:right">Pearson r</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pooled (as published)</td>
+<td style="text-align:right">3,505</td>
+<td style="text-align:right">+0.077</td>
+</tr>
+<tr>
+<td>Between ZIPs (one mean per ZIP)</td>
+<td style="text-align:right">162</td>
+<td style="text-align:right">+0.111</td>
+</tr>
+<tr>
+<td>Within ZIP (each ZIP's own mean removed)</td>
+<td style="text-align:right">3,505</td>
+<td style="text-align:right"><strong>+0.010</strong></td>
+</tr>
+</tbody>
+</table>
+<p>The pooled figure is almost entirely cross-sectional: ZIPs that receive more federal money differ somewhat in average sentiment from ZIPs that receive less. Once each ZIP is compared with itself over time, the association is +0.010.</p>
+<p><strong>The pandemic is not the explanation.</strong> Excluding 2020–2021 <em>raises</em> the all-assistance correlation to +0.123 (n = 2,738) and leaves the screened correlation at +0.014 (n = 1,115). The Education Stabilization Fund is large and confined to 2020–2021, and 2021 net obligations (USD 10.70B) are more than double 2019 (USD 4.25B), but that concentration dampens the association rather than producing it.</p>
+<p><strong>What this means.</strong> We cannot claim from this EDA that public investment is associated with neighborhood review sentiment. The association visible in the pooled scatter is carried by differences between places and by programs we cannot defend as neighborhood investment. This is a finding about measurement and design, not evidence that investment has no effect: a within-place effect could exist and remain undetectable at ZIP-quarter resolution with a review-based proxy whose disagreement with star ratings is documented in section 6. It sets the agenda for the next stage — award relevance classification, a within-place comparison, and a validated sentiment measure are prerequisites rather than refinements.</p>
+<div class="highlight"><pre><span></span><span class="c1"># Reproduces the two tables above from the annual assistance archives and</span>
+<span class="c1"># sentiment_zip_quarter.csv. `valid` and `sent` are built as in sections 4 and 6.</span>
+<span class="n">SCREEN</span> <span class="o">=</span> <span class="p">(</span><span class="sa">r</span><span class="s1">'\bhousing\b|community development|\btransit\b|transportation'</span>
+          <span class="sa">r</span><span class="s1">'|infrastructure|\bwater\b|\bsewer\b|construction'</span><span class="p">)</span>
+<span class="n">valid</span><span class="p">[</span><span class="s1">'candidate'</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">valid</span><span class="o">.</span><span class="n">cfda_title</span> <span class="o">+</span> <span class="s1">' '</span> <span class="o">+</span> <span class="n">valid</span><span class="o">.</span><span class="n">transaction_description</span><span class="p">)</span> \
+                         <span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="n">SCREEN</span><span class="p">,</span> <span class="n">case</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">regex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">matched</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+    <span class="n">fq</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">'zip5'</span><span class="p">,</span><span class="s1">'quarter'</span><span class="p">])</span><span class="o">.</span><span class="n">obligation</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="s1">'net'</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+    <span class="n">j</span> <span class="o">=</span> <span class="n">sent</span><span class="p">[</span><span class="n">sent</span><span class="o">.</span><span class="n">n_reviews</span><span class="o">.</span><span class="n">ge</span><span class="p">(</span><span class="mi">30</span><span class="p">)]</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">fq</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="p">[</span><span class="s1">'zip5'</span><span class="p">,</span><span class="s1">'quarter'</span><span class="p">],</span>
+                                          <span class="n">how</span><span class="o">=</span><span class="s1">'inner'</span><span class="p">,</span> <span class="n">validate</span><span class="o">=</span><span class="s1">'one_to_one'</span><span class="p">)</span>
+    <span class="n">j</span><span class="p">[</span><span class="s1">'slog'</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">j</span><span class="o">.</span><span class="n">net</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">j</span><span class="o">.</span><span class="n">net</span><span class="o">.</span><span class="n">abs</span><span class="p">())</span>
+    <span class="k">return</span> <span class="n">j</span><span class="p">,</span> <span class="n">j</span><span class="p">[[</span><span class="s1">'slog'</span><span class="p">,</span><span class="s1">'mean_compound'</span><span class="p">]]</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="n">j_all</span><span class="p">,</span> <span class="n">r_all</span> <span class="o">=</span> <span class="n">matched</span><span class="p">(</span><span class="n">valid</span><span class="p">)</span>                      <span class="c1"># 3,505  +0.0773</span>
+<span class="n">j_scr</span><span class="p">,</span> <span class="n">r_scr</span> <span class="o">=</span> <span class="n">matched</span><span class="p">(</span><span class="n">valid</span><span class="p">[</span><span class="n">valid</span><span class="o">.</span><span class="n">candidate</span><span class="p">])</span>     <span class="c1"># 1,448  +0.0113</span>
+
+<span class="n">within</span> <span class="o">=</span> <span class="n">j_all</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>                              <span class="c1"># remove each ZIP's own mean</span>
+<span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">'slog'</span><span class="p">,</span><span class="s1">'mean_compound'</span><span class="p">]:</span>
+    <span class="n">within</span><span class="p">[</span><span class="n">c</span><span class="p">]</span> <span class="o">-=</span> <span class="n">within</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">'zip5'</span><span class="p">)[</span><span class="n">c</span><span class="p">]</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="s1">'mean'</span><span class="p">)</span>
+<span class="n">r_within</span> <span class="o">=</span> <span class="n">within</span><span class="p">[[</span><span class="s1">'slog'</span><span class="p">,</span><span class="s1">'mean_compound'</span><span class="p">]]</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>          <span class="c1"># +0.0104</span>
+<span class="n">r_between</span> <span class="o">=</span> <span class="n">j_all</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">'zip5'</span><span class="p">)[[</span><span class="s1">'slog'</span><span class="p">,</span><span class="s1">'mean_compound'</span><span class="p">]]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> \
+                 <span class="o">.</span><span class="n">corr</span><span class="p">()</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>                                     <span class="c1"># +0.1112</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
 <div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=0f49dd3f">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -9811,7 +9902,7 @@ Sampled documents: 5,000; distinct sample tokens: 17,295; repeated sample IDs: 0
 </tbody>
 </table>
 <p>A null or weak relationship remains useful: it may indicate limited sensitivity of this proxy or insufficient geographic resolution, rather than proving that an investment has no effect.</p>
-<h3 id="8.-Generative-AI-use">8. Generative AI use<a class="anchor-link" href="#8.-Generative-AI-use">¶</a></h3><p>OpenAI Codex assisted with organizing this EDA, writing and debugging notebook code, identifying source-provenance issues, producing figures, and drafting interpretations. Anthropic's Claude was used to review the completed notebook against the assignment requirements, to align the section numbering with those requirements, to add the baseline comparison in section 6 and the ZCTA coverage figures in section 5, and to verify the HTML export. It did not alter any computed result. Numerical findings are computed from the local project data and saved execution outputs. The notebook also reuses the project's existing VADER review scores, checked against a fresh raw-record count and aggregate totals. The creation history of those earlier scripts is not inferred here.</p>
+<h3 id="8.-Generative-AI-use">8. Generative AI use<a class="anchor-link" href="#8.-Generative-AI-use">¶</a></h3><p>OpenAI Codex assisted with organizing this EDA, writing and debugging notebook code, identifying source-provenance issues, producing figures, and drafting interpretations. Anthropic's Claude was used to review the completed notebook against the assignment requirements, to align the section numbering with those requirements, to add the baseline comparison and the robustness subsection in section 6 and the ZCTA coverage figures in section 5, and to verify the HTML export. The robustness figures were computed by Claude from the annual assistance archives and the ZIP-quarter sentiment panel using the code shown beside them, and reproduce the notebook's published matched-sample results exactly before extending them. No previously computed output in this notebook was altered. Numerical findings are computed from the local project data and saved execution outputs. The notebook also reuses the project's existing VADER review scores, checked against a fresh raw-record count and aggregate totals. The creation history of those earlier scripts is not inferred here.</p>
 <p>The team is responsible for the analysis, code, and conclusions presented here.</p>
 <h3 id="References">References<a class="anchor-link" href="#References">¶</a></h3><ul>
 <li>Yelp Open Dataset: <a href="https://www.yelp.com/dataset">https://www.yelp.com/dataset</a> — local archived business/review data, not current live Yelp reviews.</li>
