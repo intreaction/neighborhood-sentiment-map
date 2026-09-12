@@ -41,13 +41,13 @@ summary{font-weight:600;color:#20334a;cursor:pointer;font-size:14px;}
 body=re.sub(r'<title>.*?</title>', '<title>Public investment and nearby business engagement | Team 4</title>', body, count=1)
 alts=iter([
     'Five funded projects: location, project type, reported cost, opening date, and pre/post observation windows.',
-    'Business coverage and matched sample size for each project; Water Works has only two eligible matched pairs.',
-    'VADER sentiment labels by star rating and review length by project; positive sentiment is common even in low-star reviews.',
-    'Matched changes in reviews, check-ins, tips, stars, and VADER across five projects; engagement and sentiment do not consistently move together.',
+    'Business coverage and matched sample size for each project. Water Works has only two eligible matched pairs.',
+    'VADER sentiment labels by star rating and review length by project. Positive sentiment is common even in low-star reviews.',
+    'Matched changes in reviews, check-ins, tips, stars, and VADER across five projects. Engagement and sentiment do not consistently move together.',
     'Review growth contrasts across within-city neighborhood income groups, with sample sizes and sparse cells flagged.',
     'Review growth contrasts across 250, 500, and 1000 meter buffers reveal sensitivity to geography.',
     'Unmatched changes in VADER and whole-review stars across six embedding categories and five projects.',
-    'Sun Link full corridor: review composition changes substantially and engagement indicators show mixed relative growth.'
+    'Sun Link corridor review composition changes. Engagement indicators have different relative growth rates.'
 ])
 def describe_image(match):
     tag=match.group(0)
