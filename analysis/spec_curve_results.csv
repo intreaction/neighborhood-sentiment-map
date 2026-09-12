@@ -1,0 +1,1135 @@
+exposure,amount,min_reviews,lag,variation,window,n,r,family
+all assistance,net obligations,10,0,pooled,2012-2021,3782,0.07579,specification
+all assistance,net obligations,10,0,pooled,2012-2019,2975,0.11431,specification
+all assistance,net obligations,10,0,within-ZIP,2012-2021,3773,0.03259,specification
+all assistance,net obligations,10,0,within-ZIP,2012-2019,2964,0.05952,specification
+all assistance,net obligations,10,0,between-ZIP,2012-2021,175,0.01616,specification
+all assistance,net obligations,10,0,between-ZIP,2012-2019,171,0.09131,specification
+all assistance,net obligations,10,1,pooled,2012-2021,3712,0.06391,specification
+all assistance,net obligations,10,1,pooled,2012-2019,2900,0.09544,specification
+all assistance,net obligations,10,1,within-ZIP,2012-2021,3700,-0.00271,specification
+all assistance,net obligations,10,1,within-ZIP,2012-2019,2886,0.02218,specification
+all assistance,net obligations,10,1,between-ZIP,2012-2021,176,0.09321,specification
+all assistance,net obligations,10,1,between-ZIP,2012-2019,173,0.13228,specification
+all assistance,net obligations,10,2,pooled,2012-2021,3596,0.09307,specification
+all assistance,net obligations,10,2,pooled,2012-2019,2783,0.10761,specification
+all assistance,net obligations,10,2,within-ZIP,2012-2021,3584,0.0466,specification
+all assistance,net obligations,10,2,within-ZIP,2012-2019,2772,0.03344,specification
+all assistance,net obligations,10,2,between-ZIP,2012-2021,175,0.08842,specification
+all assistance,net obligations,10,2,between-ZIP,2012-2019,170,0.12592,specification
+all assistance,net obligations,10,4,pooled,2012-2021,3410,0.07992,specification
+all assistance,net obligations,10,4,pooled,2012-2019,2608,0.0946,specification
+all assistance,net obligations,10,4,within-ZIP,2012-2021,3397,0.01894,specification
+all assistance,net obligations,10,4,within-ZIP,2012-2019,2597,0.02302,specification
+all assistance,net obligations,10,4,between-ZIP,2012-2021,175,0.08806,specification
+all assistance,net obligations,10,4,between-ZIP,2012-2019,170,0.11287,specification
+all assistance,net obligations,30,0,pooled,2012-2021,3505,0.07735,specification
+all assistance,net obligations,30,0,pooled,2012-2019,2738,0.1225,specification
+all assistance,net obligations,30,0,within-ZIP,2012-2021,3500,0.01044,specification
+all assistance,net obligations,30,0,within-ZIP,2012-2019,2729,0.04854,specification
+all assistance,net obligations,30,0,between-ZIP,2012-2021,162,0.11122,specification
+all assistance,net obligations,30,0,between-ZIP,2012-2019,159,0.16774,specification
+all assistance,net obligations,30,1,pooled,2012-2021,3445,0.06823,specification
+all assistance,net obligations,30,1,pooled,2012-2019,2679,0.10371,specification
+all assistance,net obligations,30,1,within-ZIP,2012-2021,3437,-0.01411,specification
+all assistance,net obligations,30,1,within-ZIP,2012-2019,2668,0.01632,specification
+all assistance,net obligations,30,1,between-ZIP,2012-2021,164,0.10271,specification
+all assistance,net obligations,30,1,between-ZIP,2012-2019,161,0.14678,specification
+all assistance,net obligations,30,2,pooled,2012-2021,3346,0.10061,specification
+all assistance,net obligations,30,2,pooled,2012-2019,2574,0.12128,specification
+all assistance,net obligations,30,2,within-ZIP,2012-2021,3337,0.0473,specification
+all assistance,net obligations,30,2,within-ZIP,2012-2019,2564,0.0443,specification
+all assistance,net obligations,30,2,between-ZIP,2012-2021,165,0.13692,specification
+all assistance,net obligations,30,2,between-ZIP,2012-2019,160,0.20235,specification
+all assistance,net obligations,30,4,pooled,2012-2021,3169,0.08541,specification
+all assistance,net obligations,30,4,pooled,2012-2019,2409,0.10935,specification
+all assistance,net obligations,30,4,within-ZIP,2012-2021,3160,0.01208,specification
+all assistance,net obligations,30,4,within-ZIP,2012-2019,2402,0.02689,specification
+all assistance,net obligations,30,4,between-ZIP,2012-2021,162,0.10006,specification
+all assistance,net obligations,30,4,between-ZIP,2012-2019,157,0.16254,specification
+all assistance,net obligations,100,0,pooled,2012-2021,2888,0.07952,specification
+all assistance,net obligations,100,0,pooled,2012-2019,2252,0.12003,specification
+all assistance,net obligations,100,0,within-ZIP,2012-2021,2879,-0.00277,specification
+all assistance,net obligations,100,0,within-ZIP,2012-2019,2240,0.03276,specification
+all assistance,net obligations,100,0,between-ZIP,2012-2021,143,0.03707,specification
+all assistance,net obligations,100,0,between-ZIP,2012-2019,141,0.08077,specification
+all assistance,net obligations,100,1,pooled,2012-2021,2845,0.08815,specification
+all assistance,net obligations,100,1,pooled,2012-2019,2212,0.11991,specification
+all assistance,net obligations,100,1,within-ZIP,2012-2021,2837,-0.01736,specification
+all assistance,net obligations,100,1,within-ZIP,2012-2019,2203,0.00175,specification
+all assistance,net obligations,100,1,between-ZIP,2012-2021,141,0.16236,specification
+all assistance,net obligations,100,1,between-ZIP,2012-2019,139,0.17578,specification
+all assistance,net obligations,100,2,pooled,2012-2021,2787,0.09828,specification
+all assistance,net obligations,100,2,pooled,2012-2019,2148,0.12458,specification
+all assistance,net obligations,100,2,within-ZIP,2012-2021,2778,0.03009,specification
+all assistance,net obligations,100,2,within-ZIP,2012-2019,2139,0.03198,specification
+all assistance,net obligations,100,2,between-ZIP,2012-2021,142,0.12558,specification
+all assistance,net obligations,100,2,between-ZIP,2012-2019,137,0.15345,specification
+all assistance,net obligations,100,4,pooled,2012-2021,2687,0.08651,specification
+all assistance,net obligations,100,4,pooled,2012-2019,2056,0.11762,specification
+all assistance,net obligations,100,4,within-ZIP,2012-2021,2677,0.00926,specification
+all assistance,net obligations,100,4,within-ZIP,2012-2019,2047,0.0319,specification
+all assistance,net obligations,100,4,between-ZIP,2012-2021,142,0.03472,specification
+all assistance,net obligations,100,4,between-ZIP,2012-2019,139,0.07085,specification
+all assistance,gross positive,10,0,pooled,2012-2021,3782,0.09225,specification
+all assistance,gross positive,10,0,pooled,2012-2019,2975,0.12766,specification
+all assistance,gross positive,10,0,within-ZIP,2012-2021,3773,0.02829,specification
+all assistance,gross positive,10,0,within-ZIP,2012-2019,2964,0.05744,specification
+all assistance,gross positive,10,0,between-ZIP,2012-2021,175,0.03813,specification
+all assistance,gross positive,10,0,between-ZIP,2012-2019,171,0.09557,specification
+all assistance,gross positive,10,1,pooled,2012-2021,3712,0.07981,specification
+all assistance,gross positive,10,1,pooled,2012-2019,2900,0.11142,specification
+all assistance,gross positive,10,1,within-ZIP,2012-2021,3700,-0.0125,specification
+all assistance,gross positive,10,1,within-ZIP,2012-2019,2886,0.02265,specification
+all assistance,gross positive,10,1,between-ZIP,2012-2021,176,0.07604,specification
+all assistance,gross positive,10,1,between-ZIP,2012-2019,173,0.10944,specification
+all assistance,gross positive,10,2,pooled,2012-2021,3596,0.1197,specification
+all assistance,gross positive,10,2,pooled,2012-2019,2783,0.13132,specification
+all assistance,gross positive,10,2,within-ZIP,2012-2021,3584,0.06938,specification
+all assistance,gross positive,10,2,within-ZIP,2012-2019,2772,0.05468,specification
+all assistance,gross positive,10,2,between-ZIP,2012-2021,175,0.08497,specification
+all assistance,gross positive,10,2,between-ZIP,2012-2019,170,0.11243,specification
+all assistance,gross positive,10,4,pooled,2012-2021,3410,0.10566,specification
+all assistance,gross positive,10,4,pooled,2012-2019,2608,0.11585,specification
+all assistance,gross positive,10,4,within-ZIP,2012-2021,3397,0.04258,specification
+all assistance,gross positive,10,4,within-ZIP,2012-2019,2597,0.04039,specification
+all assistance,gross positive,10,4,between-ZIP,2012-2021,175,0.06673,specification
+all assistance,gross positive,10,4,between-ZIP,2012-2019,170,0.0889,specification
+all assistance,gross positive,30,0,pooled,2012-2021,3505,0.09912,specification
+all assistance,gross positive,30,0,pooled,2012-2019,2738,0.14432,specification
+all assistance,gross positive,30,0,within-ZIP,2012-2021,3500,0.00941,specification
+all assistance,gross positive,30,0,within-ZIP,2012-2019,2729,0.0547,specification
+all assistance,gross positive,30,0,between-ZIP,2012-2021,162,0.11326,specification
+all assistance,gross positive,30,0,between-ZIP,2012-2019,159,0.16175,specification
+all assistance,gross positive,30,1,pooled,2012-2021,3445,0.09035,specification
+all assistance,gross positive,30,1,pooled,2012-2019,2679,0.12689,specification
+all assistance,gross positive,30,1,within-ZIP,2012-2021,3437,-0.02406,specification
+all assistance,gross positive,30,1,within-ZIP,2012-2019,2668,0.0169,specification
+all assistance,gross positive,30,1,between-ZIP,2012-2021,164,0.12371,specification
+all assistance,gross positive,30,1,between-ZIP,2012-2019,161,0.15609,specification
+all assistance,gross positive,30,2,pooled,2012-2021,3346,0.13266,specification
+all assistance,gross positive,30,2,pooled,2012-2019,2574,0.15014,specification
+all assistance,gross positive,30,2,within-ZIP,2012-2021,3337,0.07248,specification
+all assistance,gross positive,30,2,within-ZIP,2012-2019,2564,0.06718,specification
+all assistance,gross positive,30,2,between-ZIP,2012-2021,165,0.13677,specification
+all assistance,gross positive,30,2,between-ZIP,2012-2019,160,0.1845,specification
+all assistance,gross positive,30,4,pooled,2012-2021,3169,0.1118,specification
+all assistance,gross positive,30,4,pooled,2012-2019,2409,0.1338,specification
+all assistance,gross positive,30,4,within-ZIP,2012-2021,3160,0.02706,specification
+all assistance,gross positive,30,4,within-ZIP,2012-2019,2402,0.04355,specification
+all assistance,gross positive,30,4,between-ZIP,2012-2021,162,0.07587,specification
+all assistance,gross positive,30,4,between-ZIP,2012-2019,157,0.12472,specification
+all assistance,gross positive,100,0,pooled,2012-2021,2888,0.10154,specification
+all assistance,gross positive,100,0,pooled,2012-2019,2252,0.14247,specification
+all assistance,gross positive,100,0,within-ZIP,2012-2021,2879,-0.01105,specification
+all assistance,gross positive,100,0,within-ZIP,2012-2019,2240,0.03582,specification
+all assistance,gross positive,100,0,between-ZIP,2012-2021,143,0.04604,specification
+all assistance,gross positive,100,0,between-ZIP,2012-2019,141,0.08265,specification
+all assistance,gross positive,100,1,pooled,2012-2021,2845,0.1123,specification
+all assistance,gross positive,100,1,pooled,2012-2019,2212,0.146,specification
+all assistance,gross positive,100,1,within-ZIP,2012-2021,2837,-0.02713,specification
+all assistance,gross positive,100,1,within-ZIP,2012-2019,2203,0.00892,specification
+all assistance,gross positive,100,1,between-ZIP,2012-2021,141,0.15757,specification
+all assistance,gross positive,100,1,between-ZIP,2012-2019,139,0.16934,specification
+all assistance,gross positive,100,2,pooled,2012-2021,2787,0.1278,specification
+all assistance,gross positive,100,2,pooled,2012-2019,2148,0.14893,specification
+all assistance,gross positive,100,2,within-ZIP,2012-2021,2778,0.0498,specification
+all assistance,gross positive,100,2,within-ZIP,2012-2019,2139,0.05101,specification
+all assistance,gross positive,100,2,between-ZIP,2012-2021,142,0.091,specification
+all assistance,gross positive,100,2,between-ZIP,2012-2019,137,0.10976,specification
+all assistance,gross positive,100,4,pooled,2012-2021,2687,0.11949,specification
+all assistance,gross positive,100,4,pooled,2012-2019,2056,0.1481,specification
+all assistance,gross positive,100,4,within-ZIP,2012-2021,2677,0.02402,specification
+all assistance,gross positive,100,4,within-ZIP,2012-2019,2047,0.04882,specification
+all assistance,gross positive,100,4,between-ZIP,2012-2021,142,0.06333,specification
+all assistance,gross positive,100,4,between-ZIP,2012-2019,139,0.08723,specification
+all assistance,transaction count,10,0,pooled,2012-2021,3782,0.17464,specification
+all assistance,transaction count,10,0,pooled,2012-2019,2975,0.18378,specification
+all assistance,transaction count,10,0,within-ZIP,2012-2021,3773,-0.0191,specification
+all assistance,transaction count,10,0,within-ZIP,2012-2019,2964,0.00203,specification
+all assistance,transaction count,10,0,between-ZIP,2012-2021,175,0.15633,specification
+all assistance,transaction count,10,0,between-ZIP,2012-2019,171,0.17078,specification
+all assistance,transaction count,10,1,pooled,2012-2021,3712,0.16796,specification
+all assistance,transaction count,10,1,pooled,2012-2019,2900,0.17878,specification
+all assistance,transaction count,10,1,within-ZIP,2012-2021,3700,-0.06145,specification
+all assistance,transaction count,10,1,within-ZIP,2012-2019,2886,-0.02839,specification
+all assistance,transaction count,10,1,between-ZIP,2012-2021,176,0.15864,specification
+all assistance,transaction count,10,1,between-ZIP,2012-2019,173,0.16053,specification
+all assistance,transaction count,10,2,pooled,2012-2021,3596,0.1714,specification
+all assistance,transaction count,10,2,pooled,2012-2019,2783,0.1793,specification
+all assistance,transaction count,10,2,within-ZIP,2012-2021,3584,-0.02995,specification
+all assistance,transaction count,10,2,within-ZIP,2012-2019,2772,-0.01315,specification
+all assistance,transaction count,10,2,between-ZIP,2012-2021,175,0.14182,specification
+all assistance,transaction count,10,2,between-ZIP,2012-2019,170,0.13,specification
+all assistance,transaction count,10,4,pooled,2012-2021,3410,0.17463,specification
+all assistance,transaction count,10,4,pooled,2012-2019,2608,0.18059,specification
+all assistance,transaction count,10,4,within-ZIP,2012-2021,3397,-0.03544,specification
+all assistance,transaction count,10,4,within-ZIP,2012-2019,2597,-0.02015,specification
+all assistance,transaction count,10,4,between-ZIP,2012-2021,175,0.17309,specification
+all assistance,transaction count,10,4,between-ZIP,2012-2019,170,0.13712,specification
+all assistance,transaction count,30,0,pooled,2012-2021,3505,0.17192,specification
+all assistance,transaction count,30,0,pooled,2012-2019,2738,0.18743,specification
+all assistance,transaction count,30,0,within-ZIP,2012-2021,3500,-0.03595,specification
+all assistance,transaction count,30,0,within-ZIP,2012-2019,2729,-0.00236,specification
+all assistance,transaction count,30,0,between-ZIP,2012-2021,162,0.20622,specification
+all assistance,transaction count,30,0,between-ZIP,2012-2019,159,0.22116,specification
+all assistance,transaction count,30,1,pooled,2012-2021,3445,0.1647,specification
+all assistance,transaction count,30,1,pooled,2012-2019,2679,0.18133,specification
+all assistance,transaction count,30,1,within-ZIP,2012-2021,3437,-0.08524,specification
+all assistance,transaction count,30,1,within-ZIP,2012-2019,2668,-0.04454,specification
+all assistance,transaction count,30,1,between-ZIP,2012-2021,164,0.20981,specification
+all assistance,transaction count,30,1,between-ZIP,2012-2019,161,0.21709,specification
+all assistance,transaction count,30,2,pooled,2012-2021,3346,0.17281,specification
+all assistance,transaction count,30,2,pooled,2012-2019,2574,0.18675,specification
+all assistance,transaction count,30,2,within-ZIP,2012-2021,3337,-0.02983,specification
+all assistance,transaction count,30,2,within-ZIP,2012-2019,2564,-0.00279,specification
+all assistance,transaction count,30,2,between-ZIP,2012-2021,165,0.18202,specification
+all assistance,transaction count,30,2,between-ZIP,2012-2019,160,0.18271,specification
+all assistance,transaction count,30,4,pooled,2012-2021,3169,0.16878,specification
+all assistance,transaction count,30,4,pooled,2012-2019,2409,0.18304,specification
+all assistance,transaction count,30,4,within-ZIP,2012-2021,3160,-0.05882,specification
+all assistance,transaction count,30,4,within-ZIP,2012-2019,2402,-0.02139,specification
+all assistance,transaction count,30,4,between-ZIP,2012-2021,162,0.20523,specification
+all assistance,transaction count,30,4,between-ZIP,2012-2019,157,0.18372,specification
+all assistance,transaction count,100,0,pooled,2012-2021,2888,0.17074,specification
+all assistance,transaction count,100,0,pooled,2012-2019,2252,0.17592,specification
+all assistance,transaction count,100,0,within-ZIP,2012-2021,2879,-0.04978,specification
+all assistance,transaction count,100,0,within-ZIP,2012-2019,2240,-0.00953,specification
+all assistance,transaction count,100,0,between-ZIP,2012-2021,143,0.18158,specification
+all assistance,transaction count,100,0,between-ZIP,2012-2019,141,0.176,specification
+all assistance,transaction count,100,1,pooled,2012-2021,2845,0.16148,specification
+all assistance,transaction count,100,1,pooled,2012-2019,2212,0.1641,specification
+all assistance,transaction count,100,1,within-ZIP,2012-2021,2837,-0.09829,specification
+all assistance,transaction count,100,1,within-ZIP,2012-2019,2203,-0.06832,specification
+all assistance,transaction count,100,1,between-ZIP,2012-2021,141,0.19508,specification
+all assistance,transaction count,100,1,between-ZIP,2012-2019,139,0.17921,specification
+all assistance,transaction count,100,2,pooled,2012-2021,2787,0.16752,specification
+all assistance,transaction count,100,2,pooled,2012-2019,2148,0.16977,specification
+all assistance,transaction count,100,2,within-ZIP,2012-2021,2778,-0.03229,specification
+all assistance,transaction count,100,2,within-ZIP,2012-2019,2139,-0.00204,specification
+all assistance,transaction count,100,2,between-ZIP,2012-2021,142,0.17052,specification
+all assistance,transaction count,100,2,between-ZIP,2012-2019,137,0.14599,specification
+all assistance,transaction count,100,4,pooled,2012-2021,2687,0.16492,specification
+all assistance,transaction count,100,4,pooled,2012-2019,2056,0.1675,specification
+all assistance,transaction count,100,4,within-ZIP,2012-2021,2677,-0.05141,specification
+all assistance,transaction count,100,4,within-ZIP,2012-2019,2047,-0.00702,specification
+all assistance,transaction count,100,4,between-ZIP,2012-2021,142,0.1882,specification
+all assistance,transaction count,100,4,between-ZIP,2012-2019,139,0.16201,specification
+keyword-screened,net obligations,10,0,pooled,2012-2021,1562,0.01391,specification
+keyword-screened,net obligations,10,0,pooled,2012-2019,1215,0.0151,specification
+keyword-screened,net obligations,10,0,within-ZIP,2012-2021,1545,0.02797,specification
+keyword-screened,net obligations,10,0,within-ZIP,2012-2019,1200,0.05372,specification
+keyword-screened,net obligations,10,0,between-ZIP,2012-2021,126,-0.06324,specification
+keyword-screened,net obligations,10,0,between-ZIP,2012-2019,114,-0.02876,specification
+keyword-screened,net obligations,10,1,pooled,2012-2021,1535,-0.00274,specification
+keyword-screened,net obligations,10,1,pooled,2012-2019,1195,0.00174,specification
+keyword-screened,net obligations,10,1,within-ZIP,2012-2021,1517,-0.00149,specification
+keyword-screened,net obligations,10,1,within-ZIP,2012-2019,1179,0.00188,specification
+keyword-screened,net obligations,10,1,between-ZIP,2012-2021,126,-0.06963,specification
+keyword-screened,net obligations,10,1,between-ZIP,2012-2019,114,0.06619,specification
+keyword-screened,net obligations,10,2,pooled,2012-2021,1465,-0.00251,specification
+keyword-screened,net obligations,10,2,pooled,2012-2019,1142,-0.04194,specification
+keyword-screened,net obligations,10,2,within-ZIP,2012-2021,1451,0.00012,specification
+keyword-screened,net obligations,10,2,within-ZIP,2012-2019,1128,-0.03696,specification
+keyword-screened,net obligations,10,2,between-ZIP,2012-2021,120,-0.02091,specification
+keyword-screened,net obligations,10,2,between-ZIP,2012-2019,112,-0.11918,specification
+keyword-screened,net obligations,10,4,pooled,2012-2021,1381,0.02071,specification
+keyword-screened,net obligations,10,4,pooled,2012-2019,1061,-0.00252,specification
+keyword-screened,net obligations,10,4,within-ZIP,2012-2021,1368,0.05216,specification
+keyword-screened,net obligations,10,4,within-ZIP,2012-2019,1045,0.02287,specification
+keyword-screened,net obligations,10,4,between-ZIP,2012-2021,116,-0.00439,specification
+keyword-screened,net obligations,10,4,between-ZIP,2012-2019,111,-0.00933,specification
+keyword-screened,net obligations,30,0,pooled,2012-2021,1448,0.01128,specification
+keyword-screened,net obligations,30,0,pooled,2012-2019,1115,0.01438,specification
+keyword-screened,net obligations,30,0,within-ZIP,2012-2021,1432,0.01199,specification
+keyword-screened,net obligations,30,0,within-ZIP,2012-2019,1102,0.02874,specification
+keyword-screened,net obligations,30,0,between-ZIP,2012-2021,117,-0.00372,specification
+keyword-screened,net obligations,30,0,between-ZIP,2012-2019,105,0.07651,specification
+keyword-screened,net obligations,30,1,pooled,2012-2021,1421,-0.00951,specification
+keyword-screened,net obligations,30,1,pooled,2012-2019,1097,-0.00797,specification
+keyword-screened,net obligations,30,1,within-ZIP,2012-2021,1407,-0.01861,specification
+keyword-screened,net obligations,30,1,within-ZIP,2012-2019,1085,-0.02832,specification
+keyword-screened,net obligations,30,1,between-ZIP,2012-2021,115,-0.04908,specification
+keyword-screened,net obligations,30,1,between-ZIP,2012-2019,104,0.03836,specification
+keyword-screened,net obligations,30,2,pooled,2012-2021,1358,-0.01135,specification
+keyword-screened,net obligations,30,2,pooled,2012-2019,1050,-0.03692,specification
+keyword-screened,net obligations,30,2,within-ZIP,2012-2021,1347,-0.02249,specification
+keyword-screened,net obligations,30,2,within-ZIP,2012-2019,1038,-0.04068,specification
+keyword-screened,net obligations,30,2,between-ZIP,2012-2021,110,0.04231,specification
+keyword-screened,net obligations,30,2,between-ZIP,2012-2019,103,-0.07552,specification
+keyword-screened,net obligations,30,4,pooled,2012-2021,1282,0.00474,specification
+keyword-screened,net obligations,30,4,pooled,2012-2019,976,-0.00658,specification
+keyword-screened,net obligations,30,4,within-ZIP,2012-2021,1270,0.03446,specification
+keyword-screened,net obligations,30,4,within-ZIP,2012-2019,963,0.02929,specification
+keyword-screened,net obligations,30,4,between-ZIP,2012-2021,107,0.06383,specification
+keyword-screened,net obligations,30,4,between-ZIP,2012-2019,102,0.01099,specification
+keyword-screened,net obligations,100,0,pooled,2012-2021,1213,-0.0087,specification
+keyword-screened,net obligations,100,0,pooled,2012-2019,931,0.00105,specification
+keyword-screened,net obligations,100,0,within-ZIP,2012-2021,1199,0.00566,specification
+keyword-screened,net obligations,100,0,within-ZIP,2012-2019,920,0.04112,specification
+keyword-screened,net obligations,100,0,between-ZIP,2012-2021,103,-0.04554,specification
+keyword-screened,net obligations,100,0,between-ZIP,2012-2019,93,0.01197,specification
+keyword-screened,net obligations,100,1,pooled,2012-2021,1195,-0.04441,specification
+keyword-screened,net obligations,100,1,pooled,2012-2019,919,-0.02682,specification
+keyword-screened,net obligations,100,1,within-ZIP,2012-2021,1179,-0.05226,specification
+keyword-screened,net obligations,100,1,within-ZIP,2012-2019,906,-0.06021,specification
+keyword-screened,net obligations,100,1,between-ZIP,2012-2021,105,-0.05066,specification
+keyword-screened,net obligations,100,1,between-ZIP,2012-2019,94,0.08916,specification
+keyword-screened,net obligations,100,2,pooled,2012-2021,1151,-0.01915,specification
+keyword-screened,net obligations,100,2,pooled,2012-2019,890,-0.03942,specification
+keyword-screened,net obligations,100,2,within-ZIP,2012-2021,1138,-0.02948,specification
+keyword-screened,net obligations,100,2,within-ZIP,2012-2019,878,-0.04386,specification
+keyword-screened,net obligations,100,2,between-ZIP,2012-2021,101,0.13891,specification
+keyword-screened,net obligations,100,2,between-ZIP,2012-2019,93,0.00345,specification
+keyword-screened,net obligations,100,4,pooled,2012-2021,1099,-0.01347,specification
+keyword-screened,net obligations,100,4,pooled,2012-2019,840,-0.03268,specification
+keyword-screened,net obligations,100,4,within-ZIP,2012-2021,1088,0.0045,specification
+keyword-screened,net obligations,100,4,within-ZIP,2012-2019,828,0.00401,specification
+keyword-screened,net obligations,100,4,between-ZIP,2012-2021,96,0.04232,specification
+keyword-screened,net obligations,100,4,between-ZIP,2012-2019,91,-0.15809,specification
+keyword-screened,gross positive,10,0,pooled,2012-2021,1562,0.05228,specification
+keyword-screened,gross positive,10,0,pooled,2012-2019,1215,0.04577,specification
+keyword-screened,gross positive,10,0,within-ZIP,2012-2021,1545,0.05498,specification
+keyword-screened,gross positive,10,0,within-ZIP,2012-2019,1200,0.07547,specification
+keyword-screened,gross positive,10,0,between-ZIP,2012-2021,126,0.04385,specification
+keyword-screened,gross positive,10,0,between-ZIP,2012-2019,114,0.09074,specification
+keyword-screened,gross positive,10,1,pooled,2012-2021,1535,0.02644,specification
+keyword-screened,gross positive,10,1,pooled,2012-2019,1195,0.02447,specification
+keyword-screened,gross positive,10,1,within-ZIP,2012-2021,1517,0.0175,specification
+keyword-screened,gross positive,10,1,within-ZIP,2012-2019,1179,0.03297,specification
+keyword-screened,gross positive,10,1,between-ZIP,2012-2021,126,-0.08414,specification
+keyword-screened,gross positive,10,1,between-ZIP,2012-2019,114,0.03248,specification
+keyword-screened,gross positive,10,2,pooled,2012-2021,1465,0.04231,specification
+keyword-screened,gross positive,10,2,pooled,2012-2019,1142,-0.00588,specification
+keyword-screened,gross positive,10,2,within-ZIP,2012-2021,1451,0.04237,specification
+keyword-screened,gross positive,10,2,within-ZIP,2012-2019,1128,0.00017,specification
+keyword-screened,gross positive,10,2,between-ZIP,2012-2021,120,0.04714,specification
+keyword-screened,gross positive,10,2,between-ZIP,2012-2019,112,-0.02821,specification
+keyword-screened,gross positive,10,4,pooled,2012-2021,1381,0.05491,specification
+keyword-screened,gross positive,10,4,pooled,2012-2019,1061,0.01212,specification
+keyword-screened,gross positive,10,4,within-ZIP,2012-2021,1368,0.07956,specification
+keyword-screened,gross positive,10,4,within-ZIP,2012-2019,1045,0.03097,specification
+keyword-screened,gross positive,10,4,between-ZIP,2012-2021,116,0.09214,specification
+keyword-screened,gross positive,10,4,between-ZIP,2012-2019,111,0.06572,specification
+keyword-screened,gross positive,30,0,pooled,2012-2021,1448,0.04804,specification
+keyword-screened,gross positive,30,0,pooled,2012-2019,1115,0.04108,specification
+keyword-screened,gross positive,30,0,within-ZIP,2012-2021,1432,0.04631,specification
+keyword-screened,gross positive,30,0,within-ZIP,2012-2019,1102,0.06014,specification
+keyword-screened,gross positive,30,0,between-ZIP,2012-2021,117,0.01425,specification
+keyword-screened,gross positive,30,0,between-ZIP,2012-2019,105,0.10301,specification
+keyword-screened,gross positive,30,1,pooled,2012-2021,1421,0.02687,specification
+keyword-screened,gross positive,30,1,pooled,2012-2019,1097,0.02275,specification
+keyword-screened,gross positive,30,1,within-ZIP,2012-2021,1407,0.01685,specification
+keyword-screened,gross positive,30,1,within-ZIP,2012-2019,1085,0.01752,specification
+keyword-screened,gross positive,30,1,between-ZIP,2012-2021,115,-0.02279,specification
+keyword-screened,gross positive,30,1,between-ZIP,2012-2019,104,0.05432,specification
+keyword-screened,gross positive,30,2,pooled,2012-2021,1358,0.03257,specification
+keyword-screened,gross positive,30,2,pooled,2012-2019,1050,-0.0005,specification
+keyword-screened,gross positive,30,2,within-ZIP,2012-2021,1347,0.02863,specification
+keyword-screened,gross positive,30,2,within-ZIP,2012-2019,1038,0.01376,specification
+keyword-screened,gross positive,30,2,between-ZIP,2012-2021,110,0.07168,specification
+keyword-screened,gross positive,30,2,between-ZIP,2012-2019,103,-0.02885,specification
+keyword-screened,gross positive,30,4,pooled,2012-2021,1282,0.0322,specification
+keyword-screened,gross positive,30,4,pooled,2012-2019,976,0.00377,specification
+keyword-screened,gross positive,30,4,within-ZIP,2012-2021,1270,0.06003,specification
+keyword-screened,gross positive,30,4,within-ZIP,2012-2019,963,0.02531,specification
+keyword-screened,gross positive,30,4,between-ZIP,2012-2021,107,0.09179,specification
+keyword-screened,gross positive,30,4,between-ZIP,2012-2019,102,0.0401,specification
+keyword-screened,gross positive,100,0,pooled,2012-2021,1213,0.01933,specification
+keyword-screened,gross positive,100,0,pooled,2012-2019,931,0.02065,specification
+keyword-screened,gross positive,100,0,within-ZIP,2012-2021,1199,0.0188,specification
+keyword-screened,gross positive,100,0,within-ZIP,2012-2019,920,0.06515,specification
+keyword-screened,gross positive,100,0,between-ZIP,2012-2021,103,-0.02404,specification
+keyword-screened,gross positive,100,0,between-ZIP,2012-2019,93,0.0217,specification
+keyword-screened,gross positive,100,1,pooled,2012-2021,1195,0.0012,specification
+keyword-screened,gross positive,100,1,pooled,2012-2019,919,0.01586,specification
+keyword-screened,gross positive,100,1,within-ZIP,2012-2021,1179,-0.02473,specification
+keyword-screened,gross positive,100,1,within-ZIP,2012-2019,906,-0.02194,specification
+keyword-screened,gross positive,100,1,between-ZIP,2012-2021,105,-0.02098,specification
+keyword-screened,gross positive,100,1,between-ZIP,2012-2019,94,0.1275,specification
+keyword-screened,gross positive,100,2,pooled,2012-2021,1151,0.02654,specification
+keyword-screened,gross positive,100,2,pooled,2012-2019,890,0.00298,specification
+keyword-screened,gross positive,100,2,within-ZIP,2012-2021,1138,0.01335,specification
+keyword-screened,gross positive,100,2,within-ZIP,2012-2019,878,0.01414,specification
+keyword-screened,gross positive,100,2,between-ZIP,2012-2021,101,0.17527,specification
+keyword-screened,gross positive,100,2,between-ZIP,2012-2019,93,0.0706,specification
+keyword-screened,gross positive,100,4,pooled,2012-2021,1099,0.02186,specification
+keyword-screened,gross positive,100,4,pooled,2012-2019,840,-0.00254,specification
+keyword-screened,gross positive,100,4,within-ZIP,2012-2021,1088,0.02623,specification
+keyword-screened,gross positive,100,4,within-ZIP,2012-2019,828,0.01625,specification
+keyword-screened,gross positive,100,4,between-ZIP,2012-2021,96,0.07592,specification
+keyword-screened,gross positive,100,4,between-ZIP,2012-2019,91,-0.09493,specification
+keyword-screened,transaction count,10,0,pooled,2012-2021,1562,0.09119,specification
+keyword-screened,transaction count,10,0,pooled,2012-2019,1215,0.0776,specification
+keyword-screened,transaction count,10,0,within-ZIP,2012-2021,1545,0.02608,specification
+keyword-screened,transaction count,10,0,within-ZIP,2012-2019,1200,0.04885,specification
+keyword-screened,transaction count,10,0,between-ZIP,2012-2021,126,0.15445,specification
+keyword-screened,transaction count,10,0,between-ZIP,2012-2019,114,0.11874,specification
+keyword-screened,transaction count,10,1,pooled,2012-2021,1535,0.07899,specification
+keyword-screened,transaction count,10,1,pooled,2012-2019,1195,0.06819,specification
+keyword-screened,transaction count,10,1,within-ZIP,2012-2021,1517,-0.01363,specification
+keyword-screened,transaction count,10,1,within-ZIP,2012-2019,1179,0.01967,specification
+keyword-screened,transaction count,10,1,between-ZIP,2012-2021,126,0.16807,specification
+keyword-screened,transaction count,10,1,between-ZIP,2012-2019,114,0.12172,specification
+keyword-screened,transaction count,10,2,pooled,2012-2021,1465,0.05791,specification
+keyword-screened,transaction count,10,2,pooled,2012-2019,1142,0.036,specification
+keyword-screened,transaction count,10,2,within-ZIP,2012-2021,1451,-0.03313,specification
+keyword-screened,transaction count,10,2,within-ZIP,2012-2019,1128,-0.02457,specification
+keyword-screened,transaction count,10,2,between-ZIP,2012-2021,120,0.14875,specification
+keyword-screened,transaction count,10,2,between-ZIP,2012-2019,112,0.12369,specification
+keyword-screened,transaction count,10,4,pooled,2012-2021,1381,0.0738,specification
+keyword-screened,transaction count,10,4,pooled,2012-2019,1061,0.03687,specification
+keyword-screened,transaction count,10,4,within-ZIP,2012-2021,1368,0.00024,specification
+keyword-screened,transaction count,10,4,within-ZIP,2012-2019,1045,-0.03443,specification
+keyword-screened,transaction count,10,4,between-ZIP,2012-2021,116,0.18182,specification
+keyword-screened,transaction count,10,4,between-ZIP,2012-2019,111,0.1249,specification
+keyword-screened,transaction count,30,0,pooled,2012-2021,1448,0.08665,specification
+keyword-screened,transaction count,30,0,pooled,2012-2019,1115,0.07961,specification
+keyword-screened,transaction count,30,0,within-ZIP,2012-2021,1432,-0.0004,specification
+keyword-screened,transaction count,30,0,within-ZIP,2012-2019,1102,0.04214,specification
+keyword-screened,transaction count,30,0,between-ZIP,2012-2021,117,0.18311,specification
+keyword-screened,transaction count,30,0,between-ZIP,2012-2019,105,0.1513,specification
+keyword-screened,transaction count,30,1,pooled,2012-2021,1421,0.08386,specification
+keyword-screened,transaction count,30,1,pooled,2012-2019,1097,0.08193,specification
+keyword-screened,transaction count,30,1,within-ZIP,2012-2021,1407,-0.02213,specification
+keyword-screened,transaction count,30,1,within-ZIP,2012-2019,1085,0.0209,specification
+keyword-screened,transaction count,30,1,between-ZIP,2012-2021,115,0.21445,specification
+keyword-screened,transaction count,30,1,between-ZIP,2012-2019,104,0.1622,specification
+keyword-screened,transaction count,30,2,pooled,2012-2021,1358,0.06678,specification
+keyword-screened,transaction count,30,2,pooled,2012-2019,1050,0.05844,specification
+keyword-screened,transaction count,30,2,within-ZIP,2012-2021,1347,-0.01493,specification
+keyword-screened,transaction count,30,2,within-ZIP,2012-2019,1038,0.02111,specification
+keyword-screened,transaction count,30,2,between-ZIP,2012-2021,110,0.16003,specification
+keyword-screened,transaction count,30,2,between-ZIP,2012-2019,103,0.13732,specification
+keyword-screened,transaction count,30,4,pooled,2012-2021,1282,0.06296,specification
+keyword-screened,transaction count,30,4,pooled,2012-2019,976,0.03631,specification
+keyword-screened,transaction count,30,4,within-ZIP,2012-2021,1270,-0.00799,specification
+keyword-screened,transaction count,30,4,within-ZIP,2012-2019,963,-0.04801,specification
+keyword-screened,transaction count,30,4,between-ZIP,2012-2021,107,0.18281,specification
+keyword-screened,transaction count,30,4,between-ZIP,2012-2019,102,0.13526,specification
+keyword-screened,transaction count,100,0,pooled,2012-2021,1213,0.04757,specification
+keyword-screened,transaction count,100,0,pooled,2012-2019,931,0.03161,specification
+keyword-screened,transaction count,100,0,within-ZIP,2012-2021,1199,-0.02713,specification
+keyword-screened,transaction count,100,0,within-ZIP,2012-2019,920,0.04433,specification
+keyword-screened,transaction count,100,0,between-ZIP,2012-2021,103,0.20906,specification
+keyword-screened,transaction count,100,0,between-ZIP,2012-2019,93,0.1393,specification
+keyword-screened,transaction count,100,1,pooled,2012-2021,1195,0.04257,specification
+keyword-screened,transaction count,100,1,pooled,2012-2019,919,0.03515,specification
+keyword-screened,transaction count,100,1,within-ZIP,2012-2021,1179,-0.07847,specification
+keyword-screened,transaction count,100,1,within-ZIP,2012-2019,906,-0.01758,specification
+keyword-screened,transaction count,100,1,between-ZIP,2012-2021,105,0.25711,specification
+keyword-screened,transaction count,100,1,between-ZIP,2012-2019,94,0.18576,specification
+keyword-screened,transaction count,100,2,pooled,2012-2021,1151,0.02533,specification
+keyword-screened,transaction count,100,2,pooled,2012-2019,890,0.02705,specification
+keyword-screened,transaction count,100,2,within-ZIP,2012-2021,1138,-0.0181,specification
+keyword-screened,transaction count,100,2,within-ZIP,2012-2019,878,0.05562,specification
+keyword-screened,transaction count,100,2,between-ZIP,2012-2021,101,0.16934,specification
+keyword-screened,transaction count,100,2,between-ZIP,2012-2019,93,0.1323,specification
+keyword-screened,transaction count,100,4,pooled,2012-2021,1099,0.01679,specification
+keyword-screened,transaction count,100,4,pooled,2012-2019,840,-0.0082,specification
+keyword-screened,transaction count,100,4,within-ZIP,2012-2021,1088,-0.0484,specification
+keyword-screened,transaction count,100,4,within-ZIP,2012-2019,828,-0.06982,specification
+keyword-screened,transaction count,100,4,between-ZIP,2012-2021,96,0.15874,specification
+keyword-screened,transaction count,100,4,between-ZIP,2012-2019,91,0.07953,specification
+place-based CFDA,net obligations,10,0,pooled,2012-2021,557,0.01222,specification
+place-based CFDA,net obligations,10,0,pooled,2012-2019,461,0.0254,specification
+place-based CFDA,net obligations,10,0,within-ZIP,2012-2021,552,0.09783,specification
+place-based CFDA,net obligations,10,0,within-ZIP,2012-2019,456,0.10429,specification
+place-based CFDA,net obligations,10,0,between-ZIP,2012-2021,39,-0.11025,specification
+place-based CFDA,net obligations,10,0,between-ZIP,2012-2019,39,-0.10501,specification
+place-based CFDA,net obligations,10,1,pooled,2012-2021,546,-0.0601,specification
+place-based CFDA,net obligations,10,1,pooled,2012-2019,448,-0.04327,specification
+place-based CFDA,net obligations,10,1,within-ZIP,2012-2021,541,-0.02985,specification
+place-based CFDA,net obligations,10,1,within-ZIP,2012-2019,442,-0.01895,specification
+place-based CFDA,net obligations,10,1,between-ZIP,2012-2021,39,-0.20464,specification
+place-based CFDA,net obligations,10,1,between-ZIP,2012-2019,39,-0.19827,specification
+place-based CFDA,net obligations,10,2,pooled,2012-2021,532,0.00531,specification
+place-based CFDA,net obligations,10,2,pooled,2012-2019,436,0.01554,specification
+place-based CFDA,net obligations,10,2,within-ZIP,2012-2021,527,0.06241,specification
+place-based CFDA,net obligations,10,2,within-ZIP,2012-2019,430,0.06872,specification
+place-based CFDA,net obligations,10,2,between-ZIP,2012-2021,39,-0.16081,specification
+place-based CFDA,net obligations,10,2,between-ZIP,2012-2019,39,-0.14276,specification
+place-based CFDA,net obligations,10,4,pooled,2012-2021,507,-0.02336,specification
+place-based CFDA,net obligations,10,4,pooled,2012-2019,419,-0.007,specification
+place-based CFDA,net obligations,10,4,within-ZIP,2012-2021,502,0.01482,specification
+place-based CFDA,net obligations,10,4,within-ZIP,2012-2019,413,0.01961,specification
+place-based CFDA,net obligations,10,4,between-ZIP,2012-2021,39,-0.12472,specification
+place-based CFDA,net obligations,10,4,between-ZIP,2012-2019,39,-0.1091,specification
+place-based CFDA,net obligations,30,0,pooled,2012-2021,511,0.02905,specification
+place-based CFDA,net obligations,30,0,pooled,2012-2019,417,0.056,specification
+place-based CFDA,net obligations,30,0,within-ZIP,2012-2021,506,0.10956,specification
+place-based CFDA,net obligations,30,0,within-ZIP,2012-2019,412,0.1293,specification
+place-based CFDA,net obligations,30,0,between-ZIP,2012-2021,36,-0.04974,specification
+place-based CFDA,net obligations,30,0,between-ZIP,2012-2019,36,-0.03994,specification
+place-based CFDA,net obligations,30,1,pooled,2012-2021,501,-0.04934,specification
+place-based CFDA,net obligations,30,1,pooled,2012-2019,406,-0.03424,specification
+place-based CFDA,net obligations,30,1,within-ZIP,2012-2021,495,-0.0422,specification
+place-based CFDA,net obligations,30,1,within-ZIP,2012-2019,399,-0.0588,specification
+place-based CFDA,net obligations,30,1,between-ZIP,2012-2021,37,-0.13444,specification
+place-based CFDA,net obligations,30,1,between-ZIP,2012-2019,37,-0.12462,specification
+place-based CFDA,net obligations,30,2,pooled,2012-2021,487,0.00976,specification
+place-based CFDA,net obligations,30,2,pooled,2012-2019,394,0.03655,specification
+place-based CFDA,net obligations,30,2,within-ZIP,2012-2021,482,0.05691,specification
+place-based CFDA,net obligations,30,2,within-ZIP,2012-2019,388,0.07315,specification
+place-based CFDA,net obligations,30,2,between-ZIP,2012-2021,36,-0.18073,specification
+place-based CFDA,net obligations,30,2,between-ZIP,2012-2019,36,-0.15152,specification
+place-based CFDA,net obligations,30,4,pooled,2012-2021,467,-0.01212,specification
+place-based CFDA,net obligations,30,4,pooled,2012-2019,381,0.01132,specification
+place-based CFDA,net obligations,30,4,within-ZIP,2012-2021,463,0.0253,specification
+place-based CFDA,net obligations,30,4,within-ZIP,2012-2019,376,0.02383,specification
+place-based CFDA,net obligations,30,4,between-ZIP,2012-2021,36,-0.13581,specification
+place-based CFDA,net obligations,30,4,between-ZIP,2012-2019,36,-0.11032,specification
+place-based CFDA,net obligations,100,0,pooled,2012-2021,415,0.09597,specification
+place-based CFDA,net obligations,100,0,pooled,2012-2019,337,0.10048,specification
+place-based CFDA,net obligations,100,0,within-ZIP,2012-2021,410,0.13957,specification
+place-based CFDA,net obligations,100,0,within-ZIP,2012-2019,332,0.15504,specification
+place-based CFDA,net obligations,100,0,between-ZIP,2012-2021,35,-0.09631,specification
+place-based CFDA,net obligations,100,0,between-ZIP,2012-2019,35,-0.09539,specification
+place-based CFDA,net obligations,100,1,pooled,2012-2021,410,0.01576,specification
+place-based CFDA,net obligations,100,1,pooled,2012-2019,331,0.01012,specification
+place-based CFDA,net obligations,100,1,within-ZIP,2012-2021,406,-0.02237,specification
+place-based CFDA,net obligations,100,1,within-ZIP,2012-2019,326,-0.04756,specification
+place-based CFDA,net obligations,100,1,between-ZIP,2012-2021,35,-0.16272,specification
+place-based CFDA,net obligations,100,1,between-ZIP,2012-2019,35,-0.15625,specification
+place-based CFDA,net obligations,100,2,pooled,2012-2021,404,0.0813,specification
+place-based CFDA,net obligations,100,2,pooled,2012-2019,327,0.08726,specification
+place-based CFDA,net obligations,100,2,within-ZIP,2012-2021,400,0.10197,specification
+place-based CFDA,net obligations,100,2,within-ZIP,2012-2019,322,0.12091,specification
+place-based CFDA,net obligations,100,2,between-ZIP,2012-2021,35,-0.13327,specification
+place-based CFDA,net obligations,100,2,between-ZIP,2012-2019,35,-0.11188,specification
+place-based CFDA,net obligations,100,4,pooled,2012-2021,393,0.04237,specification
+place-based CFDA,net obligations,100,4,pooled,2012-2019,323,0.03952,specification
+place-based CFDA,net obligations,100,4,within-ZIP,2012-2021,389,0.0324,specification
+place-based CFDA,net obligations,100,4,within-ZIP,2012-2019,318,0.02317,specification
+place-based CFDA,net obligations,100,4,between-ZIP,2012-2021,35,-0.12858,specification
+place-based CFDA,net obligations,100,4,between-ZIP,2012-2019,35,-0.11418,specification
+place-based CFDA,gross positive,10,0,pooled,2012-2021,557,-0.00693,specification
+place-based CFDA,gross positive,10,0,pooled,2012-2019,461,-0.02283,specification
+place-based CFDA,gross positive,10,0,within-ZIP,2012-2021,552,0.04278,specification
+place-based CFDA,gross positive,10,0,within-ZIP,2012-2019,456,0.01745,specification
+place-based CFDA,gross positive,10,0,between-ZIP,2012-2021,39,-0.04524,specification
+place-based CFDA,gross positive,10,0,between-ZIP,2012-2019,39,-0.05241,specification
+place-based CFDA,gross positive,10,1,pooled,2012-2021,546,-0.04926,specification
+place-based CFDA,gross positive,10,1,pooled,2012-2019,448,-0.04313,specification
+place-based CFDA,gross positive,10,1,within-ZIP,2012-2021,541,-0.05349,specification
+place-based CFDA,gross positive,10,1,within-ZIP,2012-2019,442,-0.04376,specification
+place-based CFDA,gross positive,10,1,between-ZIP,2012-2021,39,-0.13234,specification
+place-based CFDA,gross positive,10,1,between-ZIP,2012-2019,39,-0.13723,specification
+place-based CFDA,gross positive,10,2,pooled,2012-2021,532,0.01359,specification
+place-based CFDA,gross positive,10,2,pooled,2012-2019,436,0.00142,specification
+place-based CFDA,gross positive,10,2,within-ZIP,2012-2021,527,0.0654,specification
+place-based CFDA,gross positive,10,2,within-ZIP,2012-2019,430,0.05453,specification
+place-based CFDA,gross positive,10,2,between-ZIP,2012-2021,39,-0.10187,specification
+place-based CFDA,gross positive,10,2,between-ZIP,2012-2019,39,-0.09956,specification
+place-based CFDA,gross positive,10,4,pooled,2012-2021,507,-0.01232,specification
+place-based CFDA,gross positive,10,4,pooled,2012-2019,419,-0.01297,specification
+place-based CFDA,gross positive,10,4,within-ZIP,2012-2021,502,0.03353,specification
+place-based CFDA,gross positive,10,4,within-ZIP,2012-2019,413,0.03088,specification
+place-based CFDA,gross positive,10,4,between-ZIP,2012-2021,39,-0.08845,specification
+place-based CFDA,gross positive,10,4,between-ZIP,2012-2019,39,-0.09204,specification
+place-based CFDA,gross positive,30,0,pooled,2012-2021,511,0.02378,specification
+place-based CFDA,gross positive,30,0,pooled,2012-2019,417,0.02944,specification
+place-based CFDA,gross positive,30,0,within-ZIP,2012-2021,506,0.04132,specification
+place-based CFDA,gross positive,30,0,within-ZIP,2012-2019,412,0.01982,specification
+place-based CFDA,gross positive,30,0,between-ZIP,2012-2021,36,0.02952,specification
+place-based CFDA,gross positive,30,0,between-ZIP,2012-2019,36,0.02908,specification
+place-based CFDA,gross positive,30,1,pooled,2012-2021,501,0.00976,specification
+place-based CFDA,gross positive,30,1,pooled,2012-2019,406,0.02344,specification
+place-based CFDA,gross positive,30,1,within-ZIP,2012-2021,495,-0.00859,specification
+place-based CFDA,gross positive,30,1,within-ZIP,2012-2019,399,-0.04071,specification
+place-based CFDA,gross positive,30,1,between-ZIP,2012-2021,37,-0.04985,specification
+place-based CFDA,gross positive,30,1,between-ZIP,2012-2019,37,-0.04627,specification
+place-based CFDA,gross positive,30,2,pooled,2012-2021,487,0.0331,specification
+place-based CFDA,gross positive,30,2,pooled,2012-2019,394,0.0529,specification
+place-based CFDA,gross positive,30,2,within-ZIP,2012-2021,482,0.04955,specification
+place-based CFDA,gross positive,30,2,within-ZIP,2012-2019,388,0.05918,specification
+place-based CFDA,gross positive,30,2,between-ZIP,2012-2021,36,-0.12601,specification
+place-based CFDA,gross positive,30,2,between-ZIP,2012-2019,36,-0.10781,specification
+place-based CFDA,gross positive,30,4,pooled,2012-2021,467,0.00405,specification
+place-based CFDA,gross positive,30,4,pooled,2012-2019,381,0.01183,specification
+place-based CFDA,gross positive,30,4,within-ZIP,2012-2021,463,0.02683,specification
+place-based CFDA,gross positive,30,4,within-ZIP,2012-2019,376,-0.013,specification
+place-based CFDA,gross positive,30,4,between-ZIP,2012-2021,36,-0.09507,specification
+place-based CFDA,gross positive,30,4,between-ZIP,2012-2019,36,-0.08325,specification
+place-based CFDA,gross positive,100,0,pooled,2012-2021,415,0.15403,specification
+place-based CFDA,gross positive,100,0,pooled,2012-2019,337,0.1322,specification
+place-based CFDA,gross positive,100,0,within-ZIP,2012-2021,410,0.07117,specification
+place-based CFDA,gross positive,100,0,within-ZIP,2012-2019,332,0.04439,specification
+place-based CFDA,gross positive,100,0,between-ZIP,2012-2021,35,-0.01788,specification
+place-based CFDA,gross positive,100,0,between-ZIP,2012-2019,35,-0.02941,specification
+place-based CFDA,gross positive,100,1,pooled,2012-2021,410,0.13755,specification
+place-based CFDA,gross positive,100,1,pooled,2012-2019,331,0.12173,specification
+place-based CFDA,gross positive,100,1,within-ZIP,2012-2021,406,0.03415,specification
+place-based CFDA,gross positive,100,1,within-ZIP,2012-2019,326,0.00633,specification
+place-based CFDA,gross positive,100,1,between-ZIP,2012-2021,35,-0.10285,specification
+place-based CFDA,gross positive,100,1,between-ZIP,2012-2019,35,-0.11122,specification
+place-based CFDA,gross positive,100,2,pooled,2012-2021,404,0.15749,specification
+place-based CFDA,gross positive,100,2,pooled,2012-2019,327,0.14295,specification
+place-based CFDA,gross positive,100,2,within-ZIP,2012-2021,400,0.08997,specification
+place-based CFDA,gross positive,100,2,within-ZIP,2012-2019,322,0.11114,specification
+place-based CFDA,gross positive,100,2,between-ZIP,2012-2021,35,-0.07902,specification
+place-based CFDA,gross positive,100,2,between-ZIP,2012-2019,35,-0.07521,specification
+place-based CFDA,gross positive,100,4,pooled,2012-2021,393,0.14626,specification
+place-based CFDA,gross positive,100,4,pooled,2012-2019,323,0.117,specification
+place-based CFDA,gross positive,100,4,within-ZIP,2012-2021,389,0.0756,specification
+place-based CFDA,gross positive,100,4,within-ZIP,2012-2019,318,0.04277,specification
+place-based CFDA,gross positive,100,4,between-ZIP,2012-2021,35,-0.0512,specification
+place-based CFDA,gross positive,100,4,between-ZIP,2012-2019,35,-0.05292,specification
+place-based CFDA,transaction count,10,0,pooled,2012-2021,557,0.06098,specification
+place-based CFDA,transaction count,10,0,pooled,2012-2019,461,0.03675,specification
+place-based CFDA,transaction count,10,0,within-ZIP,2012-2021,552,-0.02048,specification
+place-based CFDA,transaction count,10,0,within-ZIP,2012-2019,456,-0.02565,specification
+place-based CFDA,transaction count,10,0,between-ZIP,2012-2021,39,0.05747,specification
+place-based CFDA,transaction count,10,0,between-ZIP,2012-2019,39,0.0364,specification
+place-based CFDA,transaction count,10,1,pooled,2012-2021,546,0.05648,specification
+place-based CFDA,transaction count,10,1,pooled,2012-2019,448,0.03875,specification
+place-based CFDA,transaction count,10,1,within-ZIP,2012-2021,541,-0.03271,specification
+place-based CFDA,transaction count,10,1,within-ZIP,2012-2019,442,-0.0385,specification
+place-based CFDA,transaction count,10,1,between-ZIP,2012-2021,39,0.09885,specification
+place-based CFDA,transaction count,10,1,between-ZIP,2012-2019,39,0.08429,specification
+place-based CFDA,transaction count,10,2,pooled,2012-2021,532,0.03327,specification
+place-based CFDA,transaction count,10,2,pooled,2012-2019,436,-0.00237,specification
+place-based CFDA,transaction count,10,2,within-ZIP,2012-2021,527,-0.01373,specification
+place-based CFDA,transaction count,10,2,within-ZIP,2012-2019,430,-0.03292,specification
+place-based CFDA,transaction count,10,2,between-ZIP,2012-2021,39,0.02089,specification
+place-based CFDA,transaction count,10,2,between-ZIP,2012-2019,39,0.00274,specification
+place-based CFDA,transaction count,10,4,pooled,2012-2021,507,0.00978,specification
+place-based CFDA,transaction count,10,4,pooled,2012-2019,419,-0.02953,specification
+place-based CFDA,transaction count,10,4,within-ZIP,2012-2021,502,-0.05919,specification
+place-based CFDA,transaction count,10,4,within-ZIP,2012-2019,413,-0.11426,specification
+place-based CFDA,transaction count,10,4,between-ZIP,2012-2021,39,-0.03107,specification
+place-based CFDA,transaction count,10,4,between-ZIP,2012-2019,39,-0.0457,specification
+place-based CFDA,transaction count,30,0,pooled,2012-2021,511,0.10968,specification
+place-based CFDA,transaction count,30,0,pooled,2012-2019,417,0.10287,specification
+place-based CFDA,transaction count,30,0,within-ZIP,2012-2021,506,-0.049,specification
+place-based CFDA,transaction count,30,0,within-ZIP,2012-2019,412,-0.05396,specification
+place-based CFDA,transaction count,30,0,between-ZIP,2012-2021,36,0.10675,specification
+place-based CFDA,transaction count,30,0,between-ZIP,2012-2019,36,0.09345,specification
+place-based CFDA,transaction count,30,1,pooled,2012-2021,501,0.10531,specification
+place-based CFDA,transaction count,30,1,pooled,2012-2019,406,0.10568,specification
+place-based CFDA,transaction count,30,1,within-ZIP,2012-2021,495,-0.0625,specification
+place-based CFDA,transaction count,30,1,within-ZIP,2012-2019,399,-0.07737,specification
+place-based CFDA,transaction count,30,1,between-ZIP,2012-2021,37,0.1517,specification
+place-based CFDA,transaction count,30,1,between-ZIP,2012-2019,37,0.14745,specification
+place-based CFDA,transaction count,30,2,pooled,2012-2021,487,0.09127,specification
+place-based CFDA,transaction count,30,2,pooled,2012-2019,394,0.07918,specification
+place-based CFDA,transaction count,30,2,within-ZIP,2012-2021,482,-0.04422,specification
+place-based CFDA,transaction count,30,2,within-ZIP,2012-2019,388,-0.0572,specification
+place-based CFDA,transaction count,30,2,between-ZIP,2012-2021,36,0.07176,specification
+place-based CFDA,transaction count,30,2,between-ZIP,2012-2019,36,0.06526,specification
+place-based CFDA,transaction count,30,4,pooled,2012-2021,467,0.04417,specification
+place-based CFDA,transaction count,30,4,pooled,2012-2019,381,0.01778,specification
+place-based CFDA,transaction count,30,4,within-ZIP,2012-2021,463,-0.08641,specification
+place-based CFDA,transaction count,30,4,within-ZIP,2012-2019,376,-0.16643,specification
+place-based CFDA,transaction count,30,4,between-ZIP,2012-2021,36,0.03224,specification
+place-based CFDA,transaction count,30,4,between-ZIP,2012-2019,36,0.02716,specification
+place-based CFDA,transaction count,100,0,pooled,2012-2021,415,0.10904,specification
+place-based CFDA,transaction count,100,0,pooled,2012-2019,337,0.06427,specification
+place-based CFDA,transaction count,100,0,within-ZIP,2012-2021,410,0.00139,specification
+place-based CFDA,transaction count,100,0,within-ZIP,2012-2019,332,-0.03464,specification
+place-based CFDA,transaction count,100,0,between-ZIP,2012-2021,35,0.07007,specification
+place-based CFDA,transaction count,100,0,between-ZIP,2012-2019,35,0.04015,specification
+place-based CFDA,transaction count,100,1,pooled,2012-2021,410,0.10491,specification
+place-based CFDA,transaction count,100,1,pooled,2012-2019,331,0.07202,specification
+place-based CFDA,transaction count,100,1,within-ZIP,2012-2021,406,-0.0144,specification
+place-based CFDA,transaction count,100,1,within-ZIP,2012-2019,326,-0.05372,specification
+place-based CFDA,transaction count,100,1,between-ZIP,2012-2021,35,0.10015,specification
+place-based CFDA,transaction count,100,1,between-ZIP,2012-2019,35,0.08074,specification
+place-based CFDA,transaction count,100,2,pooled,2012-2021,404,0.10133,specification
+place-based CFDA,transaction count,100,2,pooled,2012-2019,327,0.06614,specification
+place-based CFDA,transaction count,100,2,within-ZIP,2012-2021,400,0.04004,specification
+place-based CFDA,transaction count,100,2,within-ZIP,2012-2019,322,0.04922,specification
+place-based CFDA,transaction count,100,2,between-ZIP,2012-2021,35,0.0854,specification
+place-based CFDA,transaction count,100,2,between-ZIP,2012-2019,35,0.06346,specification
+place-based CFDA,transaction count,100,4,pooled,2012-2021,393,0.05747,specification
+place-based CFDA,transaction count,100,4,pooled,2012-2019,323,0.00887,specification
+place-based CFDA,transaction count,100,4,within-ZIP,2012-2021,389,-0.04065,specification
+place-based CFDA,transaction count,100,4,within-ZIP,2012-2019,318,-0.1622,specification
+place-based CFDA,transaction count,100,4,between-ZIP,2012-2021,35,0.04172,specification
+place-based CFDA,transaction count,100,4,between-ZIP,2012-2019,35,0.02143,specification
+all assistance,net obligations,10,-1,pooled,2012-2021,3710,0.06799,placebo (funding after sentiment)
+all assistance,net obligations,10,-1,pooled,2012-2019,2899,0.10574,placebo (funding after sentiment)
+all assistance,net obligations,10,-1,within-ZIP,2012-2021,3700,0.02417,placebo (funding after sentiment)
+all assistance,net obligations,10,-1,within-ZIP,2012-2019,2887,0.05082,placebo (funding after sentiment)
+all assistance,net obligations,10,-1,between-ZIP,2012-2021,176,-0.01542,placebo (funding after sentiment)
+all assistance,net obligations,10,-1,between-ZIP,2012-2019,172,0.06426,placebo (funding after sentiment)
+all assistance,net obligations,10,-2,pooled,2012-2021,3609,0.06654,placebo (funding after sentiment)
+all assistance,net obligations,10,-2,pooled,2012-2019,2798,0.0971,placebo (funding after sentiment)
+all assistance,net obligations,10,-2,within-ZIP,2012-2021,3597,0.02507,placebo (funding after sentiment)
+all assistance,net obligations,10,-2,within-ZIP,2012-2019,2783,0.03465,placebo (funding after sentiment)
+all assistance,net obligations,10,-2,between-ZIP,2012-2021,175,0.02932,placebo (funding after sentiment)
+all assistance,net obligations,10,-2,between-ZIP,2012-2019,171,0.11616,placebo (funding after sentiment)
+all assistance,net obligations,10,-4,pooled,2012-2021,3445,0.06946,placebo (funding after sentiment)
+all assistance,net obligations,10,-4,pooled,2012-2019,2626,0.09503,placebo (funding after sentiment)
+all assistance,net obligations,10,-4,within-ZIP,2012-2021,3433,0.02561,placebo (funding after sentiment)
+all assistance,net obligations,10,-4,within-ZIP,2012-2019,2610,0.03133,placebo (funding after sentiment)
+all assistance,net obligations,10,-4,between-ZIP,2012-2021,175,0.02045,placebo (funding after sentiment)
+all assistance,net obligations,10,-4,between-ZIP,2012-2019,170,0.09917,placebo (funding after sentiment)
+all assistance,net obligations,30,-1,pooled,2012-2021,3430,0.07363,placebo (funding after sentiment)
+all assistance,net obligations,30,-1,pooled,2012-2019,2664,0.11327,placebo (funding after sentiment)
+all assistance,net obligations,30,-1,within-ZIP,2012-2021,3421,0.01863,placebo (funding after sentiment)
+all assistance,net obligations,30,-1,within-ZIP,2012-2019,2650,0.05635,placebo (funding after sentiment)
+all assistance,net obligations,30,-1,between-ZIP,2012-2021,165,0.04078,placebo (funding after sentiment)
+all assistance,net obligations,30,-1,between-ZIP,2012-2019,162,0.09513,placebo (funding after sentiment)
+all assistance,net obligations,30,-2,pooled,2012-2021,3343,0.07345,placebo (funding after sentiment)
+all assistance,net obligations,30,-2,pooled,2012-2019,2577,0.10862,placebo (funding after sentiment)
+all assistance,net obligations,30,-2,within-ZIP,2012-2021,3332,0.01847,placebo (funding after sentiment)
+all assistance,net obligations,30,-2,within-ZIP,2012-2019,2561,0.03483,placebo (funding after sentiment)
+all assistance,net obligations,30,-2,between-ZIP,2012-2021,165,0.09923,placebo (funding after sentiment)
+all assistance,net obligations,30,-2,between-ZIP,2012-2019,162,0.22257,placebo (funding after sentiment)
+all assistance,net obligations,30,-4,pooled,2012-2021,3183,0.06355,placebo (funding after sentiment)
+all assistance,net obligations,30,-4,pooled,2012-2019,2411,0.09559,placebo (funding after sentiment)
+all assistance,net obligations,30,-4,within-ZIP,2012-2021,3172,0.00181,placebo (funding after sentiment)
+all assistance,net obligations,30,-4,within-ZIP,2012-2019,2398,0.01963,placebo (funding after sentiment)
+all assistance,net obligations,30,-4,between-ZIP,2012-2021,163,0.1124,placebo (funding after sentiment)
+all assistance,net obligations,30,-4,between-ZIP,2012-2019,159,0.17825,placebo (funding after sentiment)
+all assistance,net obligations,100,-1,pooled,2012-2021,2823,0.09486,placebo (funding after sentiment)
+all assistance,net obligations,100,-1,pooled,2012-2019,2180,0.13806,placebo (funding after sentiment)
+all assistance,net obligations,100,-1,within-ZIP,2012-2021,2813,0.03147,placebo (funding after sentiment)
+all assistance,net obligations,100,-1,within-ZIP,2012-2019,2168,0.07702,placebo (funding after sentiment)
+all assistance,net obligations,100,-1,between-ZIP,2012-2021,143,0.07605,placebo (funding after sentiment)
+all assistance,net obligations,100,-1,between-ZIP,2012-2019,141,0.11222,placebo (funding after sentiment)
+all assistance,net obligations,100,-2,pooled,2012-2021,2753,0.07672,placebo (funding after sentiment)
+all assistance,net obligations,100,-2,pooled,2012-2019,2097,0.1075,placebo (funding after sentiment)
+all assistance,net obligations,100,-2,within-ZIP,2012-2021,2746,0.01119,placebo (funding after sentiment)
+all assistance,net obligations,100,-2,within-ZIP,2012-2019,2086,0.02176,placebo (funding after sentiment)
+all assistance,net obligations,100,-2,between-ZIP,2012-2021,141,0.07272,placebo (funding after sentiment)
+all assistance,net obligations,100,-2,between-ZIP,2012-2019,139,0.10927,placebo (funding after sentiment)
+all assistance,net obligations,100,-4,pooled,2012-2021,2615,0.06936,placebo (funding after sentiment)
+all assistance,net obligations,100,-4,pooled,2012-2019,1940,0.10733,placebo (funding after sentiment)
+all assistance,net obligations,100,-4,within-ZIP,2012-2021,2609,-0.00372,placebo (funding after sentiment)
+all assistance,net obligations,100,-4,within-ZIP,2012-2019,1931,0.01233,placebo (funding after sentiment)
+all assistance,net obligations,100,-4,between-ZIP,2012-2021,141,0.0,placebo (funding after sentiment)
+all assistance,net obligations,100,-4,between-ZIP,2012-2019,138,0.03338,placebo (funding after sentiment)
+all assistance,gross positive,10,-1,pooled,2012-2021,3710,0.08971,placebo (funding after sentiment)
+all assistance,gross positive,10,-1,pooled,2012-2019,2899,0.12272,placebo (funding after sentiment)
+all assistance,gross positive,10,-1,within-ZIP,2012-2021,3700,0.03574,placebo (funding after sentiment)
+all assistance,gross positive,10,-1,within-ZIP,2012-2019,2887,0.06605,placebo (funding after sentiment)
+all assistance,gross positive,10,-1,between-ZIP,2012-2021,176,-0.00491,placebo (funding after sentiment)
+all assistance,gross positive,10,-1,between-ZIP,2012-2019,172,0.0546,placebo (funding after sentiment)
+all assistance,gross positive,10,-2,pooled,2012-2021,3609,0.0905,placebo (funding after sentiment)
+all assistance,gross positive,10,-2,pooled,2012-2019,2798,0.11615,placebo (funding after sentiment)
+all assistance,gross positive,10,-2,within-ZIP,2012-2021,3597,0.04026,placebo (funding after sentiment)
+all assistance,gross positive,10,-2,within-ZIP,2012-2019,2783,0.04667,placebo (funding after sentiment)
+all assistance,gross positive,10,-2,between-ZIP,2012-2021,175,0.04085,placebo (funding after sentiment)
+all assistance,gross positive,10,-2,between-ZIP,2012-2019,171,0.11373,placebo (funding after sentiment)
+all assistance,gross positive,10,-4,pooled,2012-2021,3445,0.09437,placebo (funding after sentiment)
+all assistance,gross positive,10,-4,pooled,2012-2019,2626,0.11878,placebo (funding after sentiment)
+all assistance,gross positive,10,-4,within-ZIP,2012-2021,3433,0.04179,placebo (funding after sentiment)
+all assistance,gross positive,10,-4,within-ZIP,2012-2019,2610,0.05525,placebo (funding after sentiment)
+all assistance,gross positive,10,-4,between-ZIP,2012-2021,175,0.03109,placebo (funding after sentiment)
+all assistance,gross positive,10,-4,between-ZIP,2012-2019,170,0.08724,placebo (funding after sentiment)
+all assistance,gross positive,30,-1,pooled,2012-2021,3430,0.10493,placebo (funding after sentiment)
+all assistance,gross positive,30,-1,pooled,2012-2019,2664,0.14143,placebo (funding after sentiment)
+all assistance,gross positive,30,-1,within-ZIP,2012-2021,3421,0.03826,placebo (funding after sentiment)
+all assistance,gross positive,30,-1,within-ZIP,2012-2019,2650,0.08507,placebo (funding after sentiment)
+all assistance,gross positive,30,-1,between-ZIP,2012-2021,165,0.07258,placebo (funding after sentiment)
+all assistance,gross positive,30,-1,between-ZIP,2012-2019,162,0.0993,placebo (funding after sentiment)
+all assistance,gross positive,30,-2,pooled,2012-2021,3343,0.10155,placebo (funding after sentiment)
+all assistance,gross positive,30,-2,pooled,2012-2019,2577,0.13158,placebo (funding after sentiment)
+all assistance,gross positive,30,-2,within-ZIP,2012-2021,3332,0.03657,placebo (funding after sentiment)
+all assistance,gross positive,30,-2,within-ZIP,2012-2019,2561,0.04764,placebo (funding after sentiment)
+all assistance,gross positive,30,-2,between-ZIP,2012-2021,165,0.12386,placebo (funding after sentiment)
+all assistance,gross positive,30,-2,between-ZIP,2012-2019,162,0.20395,placebo (funding after sentiment)
+all assistance,gross positive,30,-4,pooled,2012-2021,3183,0.09908,placebo (funding after sentiment)
+all assistance,gross positive,30,-4,pooled,2012-2019,2411,0.13283,placebo (funding after sentiment)
+all assistance,gross positive,30,-4,within-ZIP,2012-2021,3172,0.02335,placebo (funding after sentiment)
+all assistance,gross positive,30,-4,within-ZIP,2012-2019,2398,0.05185,placebo (funding after sentiment)
+all assistance,gross positive,30,-4,between-ZIP,2012-2021,163,0.12598,placebo (funding after sentiment)
+all assistance,gross positive,30,-4,between-ZIP,2012-2019,159,0.18259,placebo (funding after sentiment)
+all assistance,gross positive,100,-1,pooled,2012-2021,2823,0.12395,placebo (funding after sentiment)
+all assistance,gross positive,100,-1,pooled,2012-2019,2180,0.16267,placebo (funding after sentiment)
+all assistance,gross positive,100,-1,within-ZIP,2012-2021,2813,0.03892,placebo (funding after sentiment)
+all assistance,gross positive,100,-1,within-ZIP,2012-2019,2168,0.08795,placebo (funding after sentiment)
+all assistance,gross positive,100,-1,between-ZIP,2012-2021,143,0.08265,placebo (funding after sentiment)
+all assistance,gross positive,100,-1,between-ZIP,2012-2019,141,0.10975,placebo (funding after sentiment)
+all assistance,gross positive,100,-2,pooled,2012-2021,2753,0.10848,placebo (funding after sentiment)
+all assistance,gross positive,100,-2,pooled,2012-2019,2097,0.14055,placebo (funding after sentiment)
+all assistance,gross positive,100,-2,within-ZIP,2012-2021,2746,0.02805,placebo (funding after sentiment)
+all assistance,gross positive,100,-2,within-ZIP,2012-2019,2086,0.03898,placebo (funding after sentiment)
+all assistance,gross positive,100,-2,between-ZIP,2012-2021,141,0.10392,placebo (funding after sentiment)
+all assistance,gross positive,100,-2,between-ZIP,2012-2019,139,0.13815,placebo (funding after sentiment)
+all assistance,gross positive,100,-4,pooled,2012-2021,2615,0.10152,placebo (funding after sentiment)
+all assistance,gross positive,100,-4,pooled,2012-2019,1940,0.1448,placebo (funding after sentiment)
+all assistance,gross positive,100,-4,within-ZIP,2012-2021,2609,0.01314,placebo (funding after sentiment)
+all assistance,gross positive,100,-4,within-ZIP,2012-2019,1931,0.05014,placebo (funding after sentiment)
+all assistance,gross positive,100,-4,between-ZIP,2012-2021,141,0.03017,placebo (funding after sentiment)
+all assistance,gross positive,100,-4,between-ZIP,2012-2019,138,0.05675,placebo (funding after sentiment)
+all assistance,transaction count,10,-1,pooled,2012-2021,3710,0.17322,placebo (funding after sentiment)
+all assistance,transaction count,10,-1,pooled,2012-2019,2899,0.17572,placebo (funding after sentiment)
+all assistance,transaction count,10,-1,within-ZIP,2012-2021,3700,-0.01593,placebo (funding after sentiment)
+all assistance,transaction count,10,-1,within-ZIP,2012-2019,2887,-0.01201,placebo (funding after sentiment)
+all assistance,transaction count,10,-1,between-ZIP,2012-2021,176,0.13086,placebo (funding after sentiment)
+all assistance,transaction count,10,-1,between-ZIP,2012-2019,172,0.1407,placebo (funding after sentiment)
+all assistance,transaction count,10,-2,pooled,2012-2021,3609,0.17708,placebo (funding after sentiment)
+all assistance,transaction count,10,-2,pooled,2012-2019,2798,0.1831,placebo (funding after sentiment)
+all assistance,transaction count,10,-2,within-ZIP,2012-2021,3597,0.00118,placebo (funding after sentiment)
+all assistance,transaction count,10,-2,within-ZIP,2012-2019,2783,0.00845,placebo (funding after sentiment)
+all assistance,transaction count,10,-2,between-ZIP,2012-2021,175,0.14681,placebo (funding after sentiment)
+all assistance,transaction count,10,-2,between-ZIP,2012-2019,171,0.16675,placebo (funding after sentiment)
+all assistance,transaction count,10,-4,pooled,2012-2021,3445,0.18241,placebo (funding after sentiment)
+all assistance,transaction count,10,-4,pooled,2012-2019,2626,0.18592,placebo (funding after sentiment)
+all assistance,transaction count,10,-4,within-ZIP,2012-2021,3433,-0.00177,placebo (funding after sentiment)
+all assistance,transaction count,10,-4,within-ZIP,2012-2019,2610,0.0261,placebo (funding after sentiment)
+all assistance,transaction count,10,-4,between-ZIP,2012-2021,175,0.1455,placebo (funding after sentiment)
+all assistance,transaction count,10,-4,between-ZIP,2012-2019,170,0.13444,placebo (funding after sentiment)
+all assistance,transaction count,30,-1,pooled,2012-2021,3430,0.17138,placebo (funding after sentiment)
+all assistance,transaction count,30,-1,pooled,2012-2019,2664,0.17775,placebo (funding after sentiment)
+all assistance,transaction count,30,-1,within-ZIP,2012-2021,3421,-0.01484,placebo (funding after sentiment)
+all assistance,transaction count,30,-1,within-ZIP,2012-2019,2650,0.00151,placebo (funding after sentiment)
+all assistance,transaction count,30,-1,between-ZIP,2012-2021,165,0.17083,placebo (funding after sentiment)
+all assistance,transaction count,30,-1,between-ZIP,2012-2019,162,0.17958,placebo (funding after sentiment)
+all assistance,transaction count,30,-2,pooled,2012-2021,3343,0.17627,placebo (funding after sentiment)
+all assistance,transaction count,30,-2,pooled,2012-2019,2577,0.18462,placebo (funding after sentiment)
+all assistance,transaction count,30,-2,within-ZIP,2012-2021,3332,-0.01034,placebo (funding after sentiment)
+all assistance,transaction count,30,-2,within-ZIP,2012-2019,2561,0.00323,placebo (funding after sentiment)
+all assistance,transaction count,30,-2,between-ZIP,2012-2021,165,0.20666,placebo (funding after sentiment)
+all assistance,transaction count,30,-2,between-ZIP,2012-2019,162,0.21064,placebo (funding after sentiment)
+all assistance,transaction count,30,-4,pooled,2012-2021,3183,0.17993,placebo (funding after sentiment)
+all assistance,transaction count,30,-4,pooled,2012-2019,2411,0.18646,placebo (funding after sentiment)
+all assistance,transaction count,30,-4,within-ZIP,2012-2021,3172,-0.01664,placebo (funding after sentiment)
+all assistance,transaction count,30,-4,within-ZIP,2012-2019,2398,0.02192,placebo (funding after sentiment)
+all assistance,transaction count,30,-4,between-ZIP,2012-2021,163,0.17788,placebo (funding after sentiment)
+all assistance,transaction count,30,-4,between-ZIP,2012-2019,159,0.18227,placebo (funding after sentiment)
+all assistance,transaction count,100,-1,pooled,2012-2021,2823,0.17409,placebo (funding after sentiment)
+all assistance,transaction count,100,-1,pooled,2012-2019,2180,0.17495,placebo (funding after sentiment)
+all assistance,transaction count,100,-1,within-ZIP,2012-2021,2813,-0.03712,placebo (funding after sentiment)
+all assistance,transaction count,100,-1,within-ZIP,2012-2019,2168,-0.00811,placebo (funding after sentiment)
+all assistance,transaction count,100,-1,between-ZIP,2012-2021,143,0.16528,placebo (funding after sentiment)
+all assistance,transaction count,100,-1,between-ZIP,2012-2019,141,0.15459,placebo (funding after sentiment)
+all assistance,transaction count,100,-2,pooled,2012-2021,2753,0.16926,placebo (funding after sentiment)
+all assistance,transaction count,100,-2,pooled,2012-2019,2097,0.17165,placebo (funding after sentiment)
+all assistance,transaction count,100,-2,within-ZIP,2012-2021,2746,-0.03209,placebo (funding after sentiment)
+all assistance,transaction count,100,-2,within-ZIP,2012-2019,2086,-0.01599,placebo (funding after sentiment)
+all assistance,transaction count,100,-2,between-ZIP,2012-2021,141,0.17305,placebo (funding after sentiment)
+all assistance,transaction count,100,-2,between-ZIP,2012-2019,139,0.15803,placebo (funding after sentiment)
+all assistance,transaction count,100,-4,pooled,2012-2021,2615,0.18143,placebo (funding after sentiment)
+all assistance,transaction count,100,-4,pooled,2012-2019,1940,0.18633,placebo (funding after sentiment)
+all assistance,transaction count,100,-4,within-ZIP,2012-2021,2609,-0.03107,placebo (funding after sentiment)
+all assistance,transaction count,100,-4,within-ZIP,2012-2019,1931,0.00622,placebo (funding after sentiment)
+all assistance,transaction count,100,-4,between-ZIP,2012-2021,141,0.16955,placebo (funding after sentiment)
+all assistance,transaction count,100,-4,between-ZIP,2012-2019,138,0.15237,placebo (funding after sentiment)
+keyword-screened,net obligations,10,-1,pooled,2012-2021,1533,0.01028,placebo (funding after sentiment)
+keyword-screened,net obligations,10,-1,pooled,2012-2019,1185,0.00505,placebo (funding after sentiment)
+keyword-screened,net obligations,10,-1,within-ZIP,2012-2021,1515,0.01167,placebo (funding after sentiment)
+keyword-screened,net obligations,10,-1,within-ZIP,2012-2019,1169,0.01009,placebo (funding after sentiment)
+keyword-screened,net obligations,10,-1,between-ZIP,2012-2021,126,-0.04896,placebo (funding after sentiment)
+keyword-screened,net obligations,10,-1,between-ZIP,2012-2019,114,-0.00591,placebo (funding after sentiment)
+keyword-screened,net obligations,10,-2,pooled,2012-2021,1478,-0.00385,placebo (funding after sentiment)
+keyword-screened,net obligations,10,-2,pooled,2012-2019,1130,-0.01272,placebo (funding after sentiment)
+keyword-screened,net obligations,10,-2,within-ZIP,2012-2021,1463,-0.03111,placebo (funding after sentiment)
+keyword-screened,net obligations,10,-2,within-ZIP,2012-2019,1116,-0.04208,placebo (funding after sentiment)
+keyword-screened,net obligations,10,-2,between-ZIP,2012-2021,123,-0.01686,placebo (funding after sentiment)
+keyword-screened,net obligations,10,-2,between-ZIP,2012-2019,111,0.01062,placebo (funding after sentiment)
+keyword-screened,net obligations,10,-4,pooled,2012-2021,1412,0.01343,placebo (funding after sentiment)
+keyword-screened,net obligations,10,-4,pooled,2012-2019,1058,0.00559,placebo (funding after sentiment)
+keyword-screened,net obligations,10,-4,within-ZIP,2012-2021,1396,0.00335,placebo (funding after sentiment)
+keyword-screened,net obligations,10,-4,within-ZIP,2012-2019,1041,0.00013,placebo (funding after sentiment)
+keyword-screened,net obligations,10,-4,between-ZIP,2012-2021,125,0.04316,placebo (funding after sentiment)
+keyword-screened,net obligations,10,-4,between-ZIP,2012-2019,112,0.09406,placebo (funding after sentiment)
+keyword-screened,net obligations,30,-1,pooled,2012-2021,1418,0.01301,placebo (funding after sentiment)
+keyword-screened,net obligations,30,-1,pooled,2012-2019,1084,0.00896,placebo (funding after sentiment)
+keyword-screened,net obligations,30,-1,within-ZIP,2012-2021,1401,0.01973,placebo (funding after sentiment)
+keyword-screened,net obligations,30,-1,within-ZIP,2012-2019,1071,0.01701,placebo (funding after sentiment)
+keyword-screened,net obligations,30,-1,between-ZIP,2012-2021,117,-0.00172,placebo (funding after sentiment)
+keyword-screened,net obligations,30,-1,between-ZIP,2012-2019,105,0.03548,placebo (funding after sentiment)
+keyword-screened,net obligations,30,-2,pooled,2012-2021,1369,-0.00784,placebo (funding after sentiment)
+keyword-screened,net obligations,30,-2,pooled,2012-2019,1037,-0.01387,placebo (funding after sentiment)
+keyword-screened,net obligations,30,-2,within-ZIP,2012-2021,1353,-0.04169,placebo (funding after sentiment)
+keyword-screened,net obligations,30,-2,within-ZIP,2012-2019,1025,-0.05736,placebo (funding after sentiment)
+keyword-screened,net obligations,30,-2,between-ZIP,2012-2021,116,0.01888,placebo (funding after sentiment)
+keyword-screened,net obligations,30,-2,between-ZIP,2012-2019,104,0.03311,placebo (funding after sentiment)
+keyword-screened,net obligations,30,-4,pooled,2012-2021,1300,0.00045,placebo (funding after sentiment)
+keyword-screened,net obligations,30,-4,pooled,2012-2019,967,-0.00412,placebo (funding after sentiment)
+keyword-screened,net obligations,30,-4,within-ZIP,2012-2021,1282,-0.00595,placebo (funding after sentiment)
+keyword-screened,net obligations,30,-4,within-ZIP,2012-2019,952,-0.02955,placebo (funding after sentiment)
+keyword-screened,net obligations,30,-4,between-ZIP,2012-2021,115,0.10999,placebo (funding after sentiment)
+keyword-screened,net obligations,30,-4,between-ZIP,2012-2019,103,0.14571,placebo (funding after sentiment)
+keyword-screened,net obligations,100,-1,pooled,2012-2021,1184,-0.00287,placebo (funding after sentiment)
+keyword-screened,net obligations,100,-1,pooled,2012-2019,899,-0.00011,placebo (funding after sentiment)
+keyword-screened,net obligations,100,-1,within-ZIP,2012-2021,1167,0.01594,placebo (funding after sentiment)
+keyword-screened,net obligations,100,-1,within-ZIP,2012-2019,885,0.02628,placebo (funding after sentiment)
+keyword-screened,net obligations,100,-1,between-ZIP,2012-2021,103,-0.03532,placebo (funding after sentiment)
+keyword-screened,net obligations,100,-1,between-ZIP,2012-2019,93,0.0151,placebo (funding after sentiment)
+keyword-screened,net obligations,100,-2,pooled,2012-2021,1155,-0.01412,placebo (funding after sentiment)
+keyword-screened,net obligations,100,-2,pooled,2012-2019,863,-0.02254,placebo (funding after sentiment)
+keyword-screened,net obligations,100,-2,within-ZIP,2012-2021,1142,-0.01876,placebo (funding after sentiment)
+keyword-screened,net obligations,100,-2,within-ZIP,2012-2019,853,-0.04628,placebo (funding after sentiment)
+keyword-screened,net obligations,100,-2,between-ZIP,2012-2021,102,-0.02095,placebo (funding after sentiment)
+keyword-screened,net obligations,100,-2,between-ZIP,2012-2019,92,0.02468,placebo (funding after sentiment)
+keyword-screened,net obligations,100,-4,pooled,2012-2021,1098,-0.00982,placebo (funding after sentiment)
+keyword-screened,net obligations,100,-4,pooled,2012-2019,797,-0.01074,placebo (funding after sentiment)
+keyword-screened,net obligations,100,-4,within-ZIP,2012-2021,1086,-0.00824,placebo (funding after sentiment)
+keyword-screened,net obligations,100,-4,within-ZIP,2012-2019,786,-0.01233,placebo (funding after sentiment)
+keyword-screened,net obligations,100,-4,between-ZIP,2012-2021,101,-0.02553,placebo (funding after sentiment)
+keyword-screened,net obligations,100,-4,between-ZIP,2012-2019,91,-0.01778,placebo (funding after sentiment)
+keyword-screened,gross positive,10,-1,pooled,2012-2021,1533,0.04474,placebo (funding after sentiment)
+keyword-screened,gross positive,10,-1,pooled,2012-2019,1185,0.03257,placebo (funding after sentiment)
+keyword-screened,gross positive,10,-1,within-ZIP,2012-2021,1515,0.03753,placebo (funding after sentiment)
+keyword-screened,gross positive,10,-1,within-ZIP,2012-2019,1169,0.02872,placebo (funding after sentiment)
+keyword-screened,gross positive,10,-1,between-ZIP,2012-2021,126,-0.00088,placebo (funding after sentiment)
+keyword-screened,gross positive,10,-1,between-ZIP,2012-2019,114,0.05328,placebo (funding after sentiment)
+keyword-screened,gross positive,10,-2,pooled,2012-2021,1478,0.04272,placebo (funding after sentiment)
+keyword-screened,gross positive,10,-2,pooled,2012-2019,1130,0.03601,placebo (funding after sentiment)
+keyword-screened,gross positive,10,-2,within-ZIP,2012-2021,1463,0.0192,placebo (funding after sentiment)
+keyword-screened,gross positive,10,-2,within-ZIP,2012-2019,1116,0.02173,placebo (funding after sentiment)
+keyword-screened,gross positive,10,-2,between-ZIP,2012-2021,123,0.01156,placebo (funding after sentiment)
+keyword-screened,gross positive,10,-2,between-ZIP,2012-2019,111,0.05782,placebo (funding after sentiment)
+keyword-screened,gross positive,10,-4,pooled,2012-2021,1412,0.0459,placebo (funding after sentiment)
+keyword-screened,gross positive,10,-4,pooled,2012-2019,1058,0.03696,placebo (funding after sentiment)
+keyword-screened,gross positive,10,-4,within-ZIP,2012-2021,1396,0.03887,placebo (funding after sentiment)
+keyword-screened,gross positive,10,-4,within-ZIP,2012-2019,1041,0.04912,placebo (funding after sentiment)
+keyword-screened,gross positive,10,-4,between-ZIP,2012-2021,125,0.05707,placebo (funding after sentiment)
+keyword-screened,gross positive,10,-4,between-ZIP,2012-2019,112,0.12591,placebo (funding after sentiment)
+keyword-screened,gross positive,30,-1,pooled,2012-2021,1418,0.05323,placebo (funding after sentiment)
+keyword-screened,gross positive,30,-1,pooled,2012-2019,1084,0.03916,placebo (funding after sentiment)
+keyword-screened,gross positive,30,-1,within-ZIP,2012-2021,1401,0.06087,placebo (funding after sentiment)
+keyword-screened,gross positive,30,-1,within-ZIP,2012-2019,1071,0.05748,placebo (funding after sentiment)
+keyword-screened,gross positive,30,-1,between-ZIP,2012-2021,117,0.05531,placebo (funding after sentiment)
+keyword-screened,gross positive,30,-1,between-ZIP,2012-2019,105,0.0952,placebo (funding after sentiment)
+keyword-screened,gross positive,30,-2,pooled,2012-2021,1369,0.03798,placebo (funding after sentiment)
+keyword-screened,gross positive,30,-2,pooled,2012-2019,1037,0.03624,placebo (funding after sentiment)
+keyword-screened,gross positive,30,-2,within-ZIP,2012-2021,1353,0.01468,placebo (funding after sentiment)
+keyword-screened,gross positive,30,-2,within-ZIP,2012-2019,1025,0.01718,placebo (funding after sentiment)
+keyword-screened,gross positive,30,-2,between-ZIP,2012-2021,116,0.07014,placebo (funding after sentiment)
+keyword-screened,gross positive,30,-2,between-ZIP,2012-2019,104,0.10794,placebo (funding after sentiment)
+keyword-screened,gross positive,30,-4,pooled,2012-2021,1300,0.04594,placebo (funding after sentiment)
+keyword-screened,gross positive,30,-4,pooled,2012-2019,967,0.04397,placebo (funding after sentiment)
+keyword-screened,gross positive,30,-4,within-ZIP,2012-2021,1282,0.05296,placebo (funding after sentiment)
+keyword-screened,gross positive,30,-4,within-ZIP,2012-2019,952,0.05498,placebo (funding after sentiment)
+keyword-screened,gross positive,30,-4,between-ZIP,2012-2021,115,0.12395,placebo (funding after sentiment)
+keyword-screened,gross positive,30,-4,between-ZIP,2012-2019,103,0.17445,placebo (funding after sentiment)
+keyword-screened,gross positive,100,-1,pooled,2012-2021,1184,0.0309,placebo (funding after sentiment)
+keyword-screened,gross positive,100,-1,pooled,2012-2019,899,0.02999,placebo (funding after sentiment)
+keyword-screened,gross positive,100,-1,within-ZIP,2012-2021,1167,0.02881,placebo (funding after sentiment)
+keyword-screened,gross positive,100,-1,within-ZIP,2012-2019,885,0.04491,placebo (funding after sentiment)
+keyword-screened,gross positive,100,-1,between-ZIP,2012-2021,103,-0.01883,placebo (funding after sentiment)
+keyword-screened,gross positive,100,-1,between-ZIP,2012-2019,93,0.03003,placebo (funding after sentiment)
+keyword-screened,gross positive,100,-2,pooled,2012-2021,1155,0.02909,placebo (funding after sentiment)
+keyword-screened,gross positive,100,-2,pooled,2012-2019,863,0.02703,placebo (funding after sentiment)
+keyword-screened,gross positive,100,-2,within-ZIP,2012-2021,1142,0.01296,placebo (funding after sentiment)
+keyword-screened,gross positive,100,-2,within-ZIP,2012-2019,853,0.00477,placebo (funding after sentiment)
+keyword-screened,gross positive,100,-2,between-ZIP,2012-2021,102,0.01528,placebo (funding after sentiment)
+keyword-screened,gross positive,100,-2,between-ZIP,2012-2019,92,0.09398,placebo (funding after sentiment)
+keyword-screened,gross positive,100,-4,pooled,2012-2021,1098,0.03039,placebo (funding after sentiment)
+keyword-screened,gross positive,100,-4,pooled,2012-2019,797,0.03887,placebo (funding after sentiment)
+keyword-screened,gross positive,100,-4,within-ZIP,2012-2021,1086,0.02325,placebo (funding after sentiment)
+keyword-screened,gross positive,100,-4,within-ZIP,2012-2019,786,0.05614,placebo (funding after sentiment)
+keyword-screened,gross positive,100,-4,between-ZIP,2012-2021,101,0.00523,placebo (funding after sentiment)
+keyword-screened,gross positive,100,-4,between-ZIP,2012-2019,91,0.03236,placebo (funding after sentiment)
+keyword-screened,transaction count,10,-1,pooled,2012-2021,1533,0.09726,placebo (funding after sentiment)
+keyword-screened,transaction count,10,-1,pooled,2012-2019,1185,0.07938,placebo (funding after sentiment)
+keyword-screened,transaction count,10,-1,within-ZIP,2012-2021,1515,0.01572,placebo (funding after sentiment)
+keyword-screened,transaction count,10,-1,within-ZIP,2012-2019,1169,0.01397,placebo (funding after sentiment)
+keyword-screened,transaction count,10,-1,between-ZIP,2012-2021,126,0.16368,placebo (funding after sentiment)
+keyword-screened,transaction count,10,-1,between-ZIP,2012-2019,114,0.13282,placebo (funding after sentiment)
+keyword-screened,transaction count,10,-2,pooled,2012-2021,1478,0.09262,placebo (funding after sentiment)
+keyword-screened,transaction count,10,-2,pooled,2012-2019,1130,0.08055,placebo (funding after sentiment)
+keyword-screened,transaction count,10,-2,within-ZIP,2012-2021,1463,0.00323,placebo (funding after sentiment)
+keyword-screened,transaction count,10,-2,within-ZIP,2012-2019,1116,0.01893,placebo (funding after sentiment)
+keyword-screened,transaction count,10,-2,between-ZIP,2012-2021,123,0.1503,placebo (funding after sentiment)
+keyword-screened,transaction count,10,-2,between-ZIP,2012-2019,111,0.1397,placebo (funding after sentiment)
+keyword-screened,transaction count,10,-4,pooled,2012-2021,1412,0.09952,placebo (funding after sentiment)
+keyword-screened,transaction count,10,-4,pooled,2012-2019,1058,0.09162,placebo (funding after sentiment)
+keyword-screened,transaction count,10,-4,within-ZIP,2012-2021,1396,0.01797,placebo (funding after sentiment)
+keyword-screened,transaction count,10,-4,within-ZIP,2012-2019,1041,0.05798,placebo (funding after sentiment)
+keyword-screened,transaction count,10,-4,between-ZIP,2012-2021,125,0.1398,placebo (funding after sentiment)
+keyword-screened,transaction count,10,-4,between-ZIP,2012-2019,112,0.12968,placebo (funding after sentiment)
+keyword-screened,transaction count,30,-1,pooled,2012-2021,1418,0.0984,placebo (funding after sentiment)
+keyword-screened,transaction count,30,-1,pooled,2012-2019,1084,0.08102,placebo (funding after sentiment)
+keyword-screened,transaction count,30,-1,within-ZIP,2012-2021,1401,0.01796,placebo (funding after sentiment)
+keyword-screened,transaction count,30,-1,within-ZIP,2012-2019,1071,0.03811,placebo (funding after sentiment)
+keyword-screened,transaction count,30,-1,between-ZIP,2012-2021,117,0.19584,placebo (funding after sentiment)
+keyword-screened,transaction count,30,-1,between-ZIP,2012-2019,105,0.15393,placebo (funding after sentiment)
+keyword-screened,transaction count,30,-2,pooled,2012-2021,1369,0.09132,placebo (funding after sentiment)
+keyword-screened,transaction count,30,-2,pooled,2012-2019,1037,0.08683,placebo (funding after sentiment)
+keyword-screened,transaction count,30,-2,within-ZIP,2012-2021,1353,0.00187,placebo (funding after sentiment)
+keyword-screened,transaction count,30,-2,within-ZIP,2012-2019,1025,0.03931,placebo (funding after sentiment)
+keyword-screened,transaction count,30,-2,between-ZIP,2012-2021,116,0.17358,placebo (funding after sentiment)
+keyword-screened,transaction count,30,-2,between-ZIP,2012-2019,104,0.16454,placebo (funding after sentiment)
+keyword-screened,transaction count,30,-4,pooled,2012-2021,1300,0.10441,placebo (funding after sentiment)
+keyword-screened,transaction count,30,-4,pooled,2012-2019,967,0.10112,placebo (funding after sentiment)
+keyword-screened,transaction count,30,-4,within-ZIP,2012-2021,1282,0.01012,placebo (funding after sentiment)
+keyword-screened,transaction count,30,-4,within-ZIP,2012-2019,952,0.06946,placebo (funding after sentiment)
+keyword-screened,transaction count,30,-4,between-ZIP,2012-2021,115,0.17606,placebo (funding after sentiment)
+keyword-screened,transaction count,30,-4,between-ZIP,2012-2019,103,0.15272,placebo (funding after sentiment)
+keyword-screened,transaction count,100,-1,pooled,2012-2021,1184,0.05178,placebo (funding after sentiment)
+keyword-screened,transaction count,100,-1,pooled,2012-2019,899,0.0344,placebo (funding after sentiment)
+keyword-screened,transaction count,100,-1,within-ZIP,2012-2021,1167,-0.02719,placebo (funding after sentiment)
+keyword-screened,transaction count,100,-1,within-ZIP,2012-2019,885,0.01972,placebo (funding after sentiment)
+keyword-screened,transaction count,100,-1,between-ZIP,2012-2021,103,0.20231,placebo (funding after sentiment)
+keyword-screened,transaction count,100,-1,between-ZIP,2012-2019,93,0.14209,placebo (funding after sentiment)
+keyword-screened,transaction count,100,-2,pooled,2012-2021,1155,0.04124,placebo (funding after sentiment)
+keyword-screened,transaction count,100,-2,pooled,2012-2019,863,0.02898,placebo (funding after sentiment)
+keyword-screened,transaction count,100,-2,within-ZIP,2012-2021,1142,-0.03004,placebo (funding after sentiment)
+keyword-screened,transaction count,100,-2,within-ZIP,2012-2019,853,0.02393,placebo (funding after sentiment)
+keyword-screened,transaction count,100,-2,between-ZIP,2012-2021,102,0.16853,placebo (funding after sentiment)
+keyword-screened,transaction count,100,-2,between-ZIP,2012-2019,92,0.1528,placebo (funding after sentiment)
+keyword-screened,transaction count,100,-4,pooled,2012-2021,1098,0.06698,placebo (funding after sentiment)
+keyword-screened,transaction count,100,-4,pooled,2012-2019,797,0.0544,placebo (funding after sentiment)
+keyword-screened,transaction count,100,-4,within-ZIP,2012-2021,1086,-0.04406,placebo (funding after sentiment)
+keyword-screened,transaction count,100,-4,within-ZIP,2012-2019,786,0.03031,placebo (funding after sentiment)
+keyword-screened,transaction count,100,-4,between-ZIP,2012-2021,101,0.21343,placebo (funding after sentiment)
+keyword-screened,transaction count,100,-4,between-ZIP,2012-2019,91,0.17773,placebo (funding after sentiment)
+place-based CFDA,net obligations,10,-1,pooled,2012-2021,548,-0.06078,placebo (funding after sentiment)
+place-based CFDA,net obligations,10,-1,pooled,2012-2019,451,-0.05592,placebo (funding after sentiment)
+place-based CFDA,net obligations,10,-1,within-ZIP,2012-2021,544,-0.03535,placebo (funding after sentiment)
+place-based CFDA,net obligations,10,-1,within-ZIP,2012-2019,447,-0.05012,placebo (funding after sentiment)
+place-based CFDA,net obligations,10,-1,between-ZIP,2012-2021,38,-0.12739,placebo (funding after sentiment)
+place-based CFDA,net obligations,10,-1,between-ZIP,2012-2019,38,-0.12568,placebo (funding after sentiment)
+place-based CFDA,net obligations,10,-2,pooled,2012-2021,536,-0.04988,placebo (funding after sentiment)
+place-based CFDA,net obligations,10,-2,pooled,2012-2019,439,-0.03979,placebo (funding after sentiment)
+place-based CFDA,net obligations,10,-2,within-ZIP,2012-2021,532,-0.03264,placebo (funding after sentiment)
+place-based CFDA,net obligations,10,-2,within-ZIP,2012-2019,435,-0.04009,placebo (funding after sentiment)
+place-based CFDA,net obligations,10,-2,between-ZIP,2012-2021,38,-0.10734,placebo (funding after sentiment)
+place-based CFDA,net obligations,10,-2,between-ZIP,2012-2019,38,-0.0984,placebo (funding after sentiment)
+place-based CFDA,net obligations,10,-4,pooled,2012-2021,509,-0.03356,placebo (funding after sentiment)
+place-based CFDA,net obligations,10,-4,pooled,2012-2019,413,-0.02487,placebo (funding after sentiment)
+place-based CFDA,net obligations,10,-4,within-ZIP,2012-2021,505,0.02509,placebo (funding after sentiment)
+place-based CFDA,net obligations,10,-4,within-ZIP,2012-2019,409,0.02387,placebo (funding after sentiment)
+place-based CFDA,net obligations,10,-4,between-ZIP,2012-2021,38,-0.12068,placebo (funding after sentiment)
+place-based CFDA,net obligations,10,-4,between-ZIP,2012-2019,38,-0.12364,placebo (funding after sentiment)
+place-based CFDA,net obligations,30,-1,pooled,2012-2021,502,-0.00602,placebo (funding after sentiment)
+place-based CFDA,net obligations,30,-1,pooled,2012-2019,408,0.01413,placebo (funding after sentiment)
+place-based CFDA,net obligations,30,-1,within-ZIP,2012-2021,498,0.04666,placebo (funding after sentiment)
+place-based CFDA,net obligations,30,-1,within-ZIP,2012-2019,404,0.04397,placebo (funding after sentiment)
+place-based CFDA,net obligations,30,-1,between-ZIP,2012-2021,35,-0.09098,placebo (funding after sentiment)
+place-based CFDA,net obligations,30,-1,between-ZIP,2012-2019,35,-0.08392,placebo (funding after sentiment)
+place-based CFDA,net obligations,30,-2,pooled,2012-2021,491,-0.04284,placebo (funding after sentiment)
+place-based CFDA,net obligations,30,-2,pooled,2012-2019,397,-0.02676,placebo (funding after sentiment)
+place-based CFDA,net obligations,30,-2,within-ZIP,2012-2021,487,-0.02313,placebo (funding after sentiment)
+place-based CFDA,net obligations,30,-2,within-ZIP,2012-2019,393,-0.03575,placebo (funding after sentiment)
+place-based CFDA,net obligations,30,-2,between-ZIP,2012-2021,35,-0.20638,placebo (funding after sentiment)
+place-based CFDA,net obligations,30,-2,between-ZIP,2012-2019,35,-0.188,placebo (funding after sentiment)
+place-based CFDA,net obligations,30,-4,pooled,2012-2021,466,-0.05056,placebo (funding after sentiment)
+place-based CFDA,net obligations,30,-4,pooled,2012-2019,372,-0.03934,placebo (funding after sentiment)
+place-based CFDA,net obligations,30,-4,within-ZIP,2012-2021,463,-0.02413,placebo (funding after sentiment)
+place-based CFDA,net obligations,30,-4,within-ZIP,2012-2019,369,-0.04248,placebo (funding after sentiment)
+place-based CFDA,net obligations,30,-4,between-ZIP,2012-2021,35,-0.11427,placebo (funding after sentiment)
+place-based CFDA,net obligations,30,-4,between-ZIP,2012-2019,35,-0.10456,placebo (funding after sentiment)
+place-based CFDA,net obligations,100,-1,pooled,2012-2021,403,0.06642,placebo (funding after sentiment)
+place-based CFDA,net obligations,100,-1,pooled,2012-2019,323,0.06772,placebo (funding after sentiment)
+place-based CFDA,net obligations,100,-1,within-ZIP,2012-2021,399,0.05863,placebo (funding after sentiment)
+place-based CFDA,net obligations,100,-1,within-ZIP,2012-2019,319,0.0501,placebo (funding after sentiment)
+place-based CFDA,net obligations,100,-1,between-ZIP,2012-2021,33,-0.12064,placebo (funding after sentiment)
+place-based CFDA,net obligations,100,-1,between-ZIP,2012-2019,33,-0.1238,placebo (funding after sentiment)
+place-based CFDA,net obligations,100,-2,pooled,2012-2021,393,0.03429,placebo (funding after sentiment)
+place-based CFDA,net obligations,100,-2,pooled,2012-2019,311,0.04074,placebo (funding after sentiment)
+place-based CFDA,net obligations,100,-2,within-ZIP,2012-2021,390,-0.00035,placebo (funding after sentiment)
+place-based CFDA,net obligations,100,-2,within-ZIP,2012-2019,308,-0.02215,placebo (funding after sentiment)
+place-based CFDA,net obligations,100,-2,between-ZIP,2012-2021,32,-0.01158,placebo (funding after sentiment)
+place-based CFDA,net obligations,100,-2,between-ZIP,2012-2019,32,0.00739,placebo (funding after sentiment)
+place-based CFDA,net obligations,100,-4,pooled,2012-2021,367,0.01587,placebo (funding after sentiment)
+place-based CFDA,net obligations,100,-4,pooled,2012-2019,282,0.02595,placebo (funding after sentiment)
+place-based CFDA,net obligations,100,-4,within-ZIP,2012-2021,363,-0.07448,placebo (funding after sentiment)
+place-based CFDA,net obligations,100,-4,within-ZIP,2012-2019,278,-0.1232,placebo (funding after sentiment)
+place-based CFDA,net obligations,100,-4,between-ZIP,2012-2021,31,0.00703,placebo (funding after sentiment)
+place-based CFDA,net obligations,100,-4,between-ZIP,2012-2019,31,-0.00169,placebo (funding after sentiment)
+place-based CFDA,gross positive,10,-1,pooled,2012-2021,548,-0.08644,placebo (funding after sentiment)
+place-based CFDA,gross positive,10,-1,pooled,2012-2019,451,-0.11267,placebo (funding after sentiment)
+place-based CFDA,gross positive,10,-1,within-ZIP,2012-2021,544,-0.12386,placebo (funding after sentiment)
+place-based CFDA,gross positive,10,-1,within-ZIP,2012-2019,447,-0.19025,placebo (funding after sentiment)
+place-based CFDA,gross positive,10,-1,between-ZIP,2012-2021,38,-0.04648,placebo (funding after sentiment)
+place-based CFDA,gross positive,10,-1,between-ZIP,2012-2019,38,-0.0572,placebo (funding after sentiment)
+place-based CFDA,gross positive,10,-2,pooled,2012-2021,536,-0.01688,placebo (funding after sentiment)
+place-based CFDA,gross positive,10,-2,pooled,2012-2019,439,-0.01933,placebo (funding after sentiment)
+place-based CFDA,gross positive,10,-2,within-ZIP,2012-2021,532,-0.0081,placebo (funding after sentiment)
+place-based CFDA,gross positive,10,-2,within-ZIP,2012-2019,435,-0.02196,placebo (funding after sentiment)
+place-based CFDA,gross positive,10,-2,between-ZIP,2012-2021,38,-0.04928,placebo (funding after sentiment)
+place-based CFDA,gross positive,10,-2,between-ZIP,2012-2019,38,-0.05112,placebo (funding after sentiment)
+place-based CFDA,gross positive,10,-4,pooled,2012-2021,509,0.0316,placebo (funding after sentiment)
+place-based CFDA,gross positive,10,-4,pooled,2012-2019,413,0.03947,placebo (funding after sentiment)
+place-based CFDA,gross positive,10,-4,within-ZIP,2012-2021,505,0.12943,placebo (funding after sentiment)
+place-based CFDA,gross positive,10,-4,within-ZIP,2012-2019,409,0.15713,placebo (funding after sentiment)
+place-based CFDA,gross positive,10,-4,between-ZIP,2012-2021,38,-0.06015,placebo (funding after sentiment)
+place-based CFDA,gross positive,10,-4,between-ZIP,2012-2019,38,-0.07645,placebo (funding after sentiment)
+place-based CFDA,gross positive,30,-1,pooled,2012-2021,502,-1e-05,placebo (funding after sentiment)
+place-based CFDA,gross positive,30,-1,pooled,2012-2019,408,0.00201,placebo (funding after sentiment)
+place-based CFDA,gross positive,30,-1,within-ZIP,2012-2021,498,0.01221,placebo (funding after sentiment)
+place-based CFDA,gross positive,30,-1,within-ZIP,2012-2019,404,-0.03379,placebo (funding after sentiment)
+place-based CFDA,gross positive,30,-1,between-ZIP,2012-2021,35,-0.01628,placebo (funding after sentiment)
+place-based CFDA,gross positive,30,-1,between-ZIP,2012-2019,35,-0.02144,placebo (funding after sentiment)
+place-based CFDA,gross positive,30,-2,pooled,2012-2021,491,0.00442,placebo (funding after sentiment)
+place-based CFDA,gross positive,30,-2,pooled,2012-2019,397,0.01258,placebo (funding after sentiment)
+place-based CFDA,gross positive,30,-2,within-ZIP,2012-2021,487,0.0058,placebo (funding after sentiment)
+place-based CFDA,gross positive,30,-2,within-ZIP,2012-2019,393,-0.02182,placebo (funding after sentiment)
+place-based CFDA,gross positive,30,-2,between-ZIP,2012-2021,35,-0.10343,placebo (funding after sentiment)
+place-based CFDA,gross positive,30,-2,between-ZIP,2012-2019,35,-0.1002,placebo (funding after sentiment)
+place-based CFDA,gross positive,30,-4,pooled,2012-2021,466,0.02669,placebo (funding after sentiment)
+place-based CFDA,gross positive,30,-4,pooled,2012-2019,372,0.04256,placebo (funding after sentiment)
+place-based CFDA,gross positive,30,-4,within-ZIP,2012-2021,463,0.07316,placebo (funding after sentiment)
+place-based CFDA,gross positive,30,-4,within-ZIP,2012-2019,369,0.06875,placebo (funding after sentiment)
+place-based CFDA,gross positive,30,-4,between-ZIP,2012-2021,35,-0.0235,placebo (funding after sentiment)
+place-based CFDA,gross positive,30,-4,between-ZIP,2012-2019,35,-0.02477,placebo (funding after sentiment)
+place-based CFDA,gross positive,100,-1,pooled,2012-2021,403,0.13246,placebo (funding after sentiment)
+place-based CFDA,gross positive,100,-1,pooled,2012-2019,323,0.10416,placebo (funding after sentiment)
+place-based CFDA,gross positive,100,-1,within-ZIP,2012-2021,399,0.01943,placebo (funding after sentiment)
+place-based CFDA,gross positive,100,-1,within-ZIP,2012-2019,319,-0.04058,placebo (funding after sentiment)
+place-based CFDA,gross positive,100,-1,between-ZIP,2012-2021,33,-0.05616,placebo (funding after sentiment)
+place-based CFDA,gross positive,100,-1,between-ZIP,2012-2019,33,-0.0796,placebo (funding after sentiment)
+place-based CFDA,gross positive,100,-2,pooled,2012-2021,393,0.15036,placebo (funding after sentiment)
+place-based CFDA,gross positive,100,-2,pooled,2012-2019,311,0.15129,placebo (funding after sentiment)
+place-based CFDA,gross positive,100,-2,within-ZIP,2012-2021,390,0.04033,placebo (funding after sentiment)
+place-based CFDA,gross positive,100,-2,within-ZIP,2012-2019,308,0.00877,placebo (funding after sentiment)
+place-based CFDA,gross positive,100,-2,between-ZIP,2012-2021,32,-0.10033,placebo (funding after sentiment)
+place-based CFDA,gross positive,100,-2,between-ZIP,2012-2019,32,-0.11143,placebo (funding after sentiment)
+place-based CFDA,gross positive,100,-4,pooled,2012-2021,367,0.14642,placebo (funding after sentiment)
+place-based CFDA,gross positive,100,-4,pooled,2012-2019,282,0.16462,placebo (funding after sentiment)
+place-based CFDA,gross positive,100,-4,within-ZIP,2012-2021,363,0.05157,placebo (funding after sentiment)
+place-based CFDA,gross positive,100,-4,within-ZIP,2012-2019,278,0.02338,placebo (funding after sentiment)
+place-based CFDA,gross positive,100,-4,between-ZIP,2012-2021,31,0.01522,placebo (funding after sentiment)
+place-based CFDA,gross positive,100,-4,between-ZIP,2012-2019,31,-0.01056,placebo (funding after sentiment)
+place-based CFDA,transaction count,10,-1,pooled,2012-2021,548,0.06478,placebo (funding after sentiment)
+place-based CFDA,transaction count,10,-1,pooled,2012-2019,451,0.0349,placebo (funding after sentiment)
+place-based CFDA,transaction count,10,-1,within-ZIP,2012-2021,544,-0.12593,placebo (funding after sentiment)
+place-based CFDA,transaction count,10,-1,within-ZIP,2012-2019,447,-0.169,placebo (funding after sentiment)
+place-based CFDA,transaction count,10,-1,between-ZIP,2012-2021,38,0.13386,placebo (funding after sentiment)
+place-based CFDA,transaction count,10,-1,between-ZIP,2012-2019,38,0.11373,placebo (funding after sentiment)
+place-based CFDA,transaction count,10,-2,pooled,2012-2021,536,0.06519,placebo (funding after sentiment)
+place-based CFDA,transaction count,10,-2,pooled,2012-2019,439,0.03276,placebo (funding after sentiment)
+place-based CFDA,transaction count,10,-2,within-ZIP,2012-2021,532,-0.10617,placebo (funding after sentiment)
+place-based CFDA,transaction count,10,-2,within-ZIP,2012-2019,435,-0.13135,placebo (funding after sentiment)
+place-based CFDA,transaction count,10,-2,between-ZIP,2012-2021,38,0.07098,placebo (funding after sentiment)
+place-based CFDA,transaction count,10,-2,between-ZIP,2012-2019,38,0.05561,placebo (funding after sentiment)
+place-based CFDA,transaction count,10,-4,pooled,2012-2021,509,0.11665,placebo (funding after sentiment)
+place-based CFDA,transaction count,10,-4,pooled,2012-2019,413,0.09471,placebo (funding after sentiment)
+place-based CFDA,transaction count,10,-4,within-ZIP,2012-2021,505,0.00871,placebo (funding after sentiment)
+place-based CFDA,transaction count,10,-4,within-ZIP,2012-2019,409,0.0034,placebo (funding after sentiment)
+place-based CFDA,transaction count,10,-4,between-ZIP,2012-2021,38,0.02669,placebo (funding after sentiment)
+place-based CFDA,transaction count,10,-4,between-ZIP,2012-2019,38,0.01,placebo (funding after sentiment)
+place-based CFDA,transaction count,30,-1,pooled,2012-2021,502,0.10626,placebo (funding after sentiment)
+place-based CFDA,transaction count,30,-1,pooled,2012-2019,408,0.08858,placebo (funding after sentiment)
+place-based CFDA,transaction count,30,-1,within-ZIP,2012-2021,498,-0.09628,placebo (funding after sentiment)
+place-based CFDA,transaction count,30,-1,within-ZIP,2012-2019,404,-0.13874,placebo (funding after sentiment)
+place-based CFDA,transaction count,30,-1,between-ZIP,2012-2021,35,0.1115,placebo (funding after sentiment)
+place-based CFDA,transaction count,30,-1,between-ZIP,2012-2019,35,0.09512,placebo (funding after sentiment)
+place-based CFDA,transaction count,30,-2,pooled,2012-2021,491,0.11291,placebo (funding after sentiment)
+place-based CFDA,transaction count,30,-2,pooled,2012-2019,397,0.09004,placebo (funding after sentiment)
+place-based CFDA,transaction count,30,-2,within-ZIP,2012-2021,487,-0.10431,placebo (funding after sentiment)
+place-based CFDA,transaction count,30,-2,within-ZIP,2012-2019,393,-0.13284,placebo (funding after sentiment)
+place-based CFDA,transaction count,30,-2,between-ZIP,2012-2021,35,0.04074,placebo (funding after sentiment)
+place-based CFDA,transaction count,30,-2,between-ZIP,2012-2019,35,0.02894,placebo (funding after sentiment)
+place-based CFDA,transaction count,30,-4,pooled,2012-2021,466,0.16407,placebo (funding after sentiment)
+place-based CFDA,transaction count,30,-4,pooled,2012-2019,372,0.15145,placebo (funding after sentiment)
+place-based CFDA,transaction count,30,-4,within-ZIP,2012-2021,463,0.00246,placebo (funding after sentiment)
+place-based CFDA,transaction count,30,-4,within-ZIP,2012-2019,369,-0.0007,placebo (funding after sentiment)
+place-based CFDA,transaction count,30,-4,between-ZIP,2012-2021,35,0.06061,placebo (funding after sentiment)
+place-based CFDA,transaction count,30,-4,between-ZIP,2012-2019,35,0.04672,placebo (funding after sentiment)
+place-based CFDA,transaction count,100,-1,pooled,2012-2021,403,0.06825,placebo (funding after sentiment)
+place-based CFDA,transaction count,100,-1,pooled,2012-2019,323,0.01399,placebo (funding after sentiment)
+place-based CFDA,transaction count,100,-1,within-ZIP,2012-2021,399,-0.08242,placebo (funding after sentiment)
+place-based CFDA,transaction count,100,-1,within-ZIP,2012-2019,319,-0.13953,placebo (funding after sentiment)
+place-based CFDA,transaction count,100,-1,between-ZIP,2012-2021,33,0.04099,placebo (funding after sentiment)
+place-based CFDA,transaction count,100,-1,between-ZIP,2012-2019,33,0.00758,placebo (funding after sentiment)
+place-based CFDA,transaction count,100,-2,pooled,2012-2021,393,0.07542,placebo (funding after sentiment)
+place-based CFDA,transaction count,100,-2,pooled,2012-2019,311,0.01925,placebo (funding after sentiment)
+place-based CFDA,transaction count,100,-2,within-ZIP,2012-2021,390,-0.0353,placebo (funding after sentiment)
+place-based CFDA,transaction count,100,-2,within-ZIP,2012-2019,308,-0.07338,placebo (funding after sentiment)
+place-based CFDA,transaction count,100,-2,between-ZIP,2012-2021,32,-0.07793,placebo (funding after sentiment)
+place-based CFDA,transaction count,100,-2,between-ZIP,2012-2019,32,-0.12157,placebo (funding after sentiment)
+place-based CFDA,transaction count,100,-4,pooled,2012-2021,367,0.10837,placebo (funding after sentiment)
+place-based CFDA,transaction count,100,-4,pooled,2012-2019,282,0.04351,placebo (funding after sentiment)
+place-based CFDA,transaction count,100,-4,within-ZIP,2012-2021,363,0.01969,placebo (funding after sentiment)
+place-based CFDA,transaction count,100,-4,within-ZIP,2012-2019,278,-0.01414,placebo (funding after sentiment)
+place-based CFDA,transaction count,100,-4,between-ZIP,2012-2021,31,-0.10811,placebo (funding after sentiment)
+place-based CFDA,transaction count,100,-4,between-ZIP,2012-2019,31,-0.14568,placebo (funding after sentiment)
