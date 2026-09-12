@@ -109,3 +109,76 @@ def sun_panel(composition,scopes,out):
   color=TEAL if val>=0 else ORANGE;ax.hlines(i,0,val,color=color,lw=3);ax.scatter(val,i,color=color,s=60);ax.annotate(f'{val:+.1f}%',(val,i),xytext=(7 if val>=0 else -7,0),textcoords='offset points',ha='left' if val>=0 else 'right',va='center',fontsize=11,fontweight='bold')
  ax.axvline(0,color='#A7B0B8');ax.set(yticks=[0,1,2],yticklabels=['Reviews','Check-ins','Tips'],ylim=(2.6,-.6),xlim=(-48,15),xlabel='Relative growth versus farther area (%)',title='Relative growth by engagement measure');ax.tick_params(axis='y',length=0);title(fig,'Sun Link corridor engagement and business composition','All 717 Yelp listings within 500 m of the route. This unmatched comparison includes listings with no baseline reviews.')
  return finish(fig,out,'08_sun_corridor')
+
+def draw_geometry(ax, geometry, facecolor, edgecolor, linewidth=1, alpha=1):
+ from matplotlib.path import Path as PlotPath
+ from matplotlib.patches import PathPatch
+ kind=geometry['type'];coords=geometry['coordinates']
+ if kind=='Polygon':
+  paths=[]
+  for ring in coords:
+   points=np.asarray(ring)
+   codes=[PlotPath.MOVETO]+[PlotPath.LINETO]*(len(points)-2)+[PlotPath.CLOSEPOLY]
+   paths.append(PlotPath(points,codes))
+  ax.add_patch(PathPatch(PlotPath.make_compound_path(*paths),facecolor=facecolor,edgecolor=edgecolor,lw=linewidth,alpha=alpha))
+ elif kind in ['MultiPolygon','MultiLineString']:
+  for part in coords:draw_geometry(ax,{'type':'Polygon' if kind=='MultiPolygon' else 'LineString','coordinates':part},facecolor,edgecolor,linewidth,alpha)
+ elif kind=='LineString':
+  points=np.asarray(coords);ax.plot(points[:,0],points[:,1],color=edgecolor,lw=linewidth,alpha=alpha)
+
+def project_location_map(cartography,out):
+ fig=plt.figure(figsize=(14,9.1))
+ title(fig,'Project locations and nearby study areas','Five US projects. Local panels show the mapped footprint and the primary 500 m study buffer.')
+ ax=fig.add_axes([.035,.40,.66,.46]);ax.set_aspect('equal');ax.set_axis_off()
+ selected={'Louisiana','Arizona','Pennsylvania','Florida','Tennessee'}
+ for state in cartography['states']:
+  draw_geometry(ax,state['geometry'],'#DCEBED' if state['name'] in selected else '#EEF1F3','white',.75)
+ ax.set_xlim(-2500000,2400000);ax.set_ylim(100000,3300000)
+ offsets=[(-45,-27),(-12,-26),(12,16),(25,-4),(-15,26)]
+ for i,(p,offset) in enumerate(zip(cartography['projects'],offsets)):
+  x,y=p['national_xy'];ax.scatter(x,y,s=170,facecolor=TEAL,edgecolor='white',lw=1.5,zorder=5)
+  ax.text(x,y,str(i+1),ha='center',va='center',fontsize=8,color='white',fontweight='bold',zorder=6)
+  ax.annotate(p['city'],(x,y),xytext=offset,textcoords='offset points',ha='center' if i!=2 else 'left',fontsize=10,color=INK,arrowprops={'arrowstyle':'-','color':GRAY,'lw':.7},bbox={'boxstyle':'round,pad=.2','fc':'white','ec':'none','alpha':.9},zorder=4)
+ fig.text(.735,.825,'Projects',fontsize=13,fontweight='bold')
+ for i,p in enumerate(cartography['projects']):
+  y=.775-i*.063
+  fig.text(.735,y,str(i+1),ha='center',va='center',fontsize=10,color='white',fontweight='bold',bbox={'boxstyle':'circle,pad=.35','fc':TEAL,'ec':'none'})
+  fig.text(.76,y+.008,NAMES[i],fontsize=10,fontweight='bold',va='center')
+  fig.text(.76,y-.017,p['city'],fontsize=9,color='#596876',va='center')
+ fig.text(.035,.37,'Local project footprints',fontsize=13,fontweight='bold')
+ fig.text(.035,.34,'Common scale across panels. Grid north is up. Buffers use local UTM projections.',fontsize=9,color='#596876')
+ for i,p in enumerate(cartography['projects']):
+  a=fig.add_axes([.035+i*.195,.09,.18,.22]);a.set_aspect('equal');a.set_facecolor('#F7F9FA')
+  draw_geometry(a,p['near_buffer'],'#DCEBED','#A2C6CC',.65)
+  draw_geometry(a,p['footprint'],TEAL,TEAL,1.3)
+  a.set(xlim=(-4,4),ylim=(-4,4),xticks=[],yticks=[])
+  for spine in a.spines.values():spine.set_visible(True);spine.set_edgecolor('#E3E8EC')
+  a.set_title(f'{i+1}  {NAMES[i]}',fontsize=9,loc='left',pad=9)
+  a.plot([-3.3,-2.3],[-3.3,-3.3],color=INK,lw=2);a.text(-2.8,-2.95,'1 km',ha='center',fontsize=7)
+ fig.legend(handles=[Patch(facecolor=TEAL,label='Mapped project footprint'),Patch(facecolor='#DCEBED',edgecolor='#A2C6CC',label='Within 500 m of footprint')],loc='lower left',bbox_to_anchor=(.03,.025),ncol=2,frameon=False,fontsize=9)
+ fig.text(.985,.045,'State boundaries: Natural Earth 1:110m',ha='right',fontsize=8,color='#596876')
+ return finish(fig,out,'00_project_map')
+
+def business_growth_panel(growth,out):
+ fig,axes=plt.subplots(1,2,figsize=(13.6,5.4),gridspec_kw={'width_ratios':[1.25,1]})
+ fig.subplots_adjust(left=.18,right=.96,top=.74,bottom=.18,wspace=.42)
+ near=growth[growth.area.eq('Near')].set_index('project').loc[ORDER]
+ ax=axes[0]
+ for i,row in enumerate(near.itertuples()):
+  ax.plot([row.baseline_active,row.post_active],[i,i],color='#CDD6DC',lw=3)
+  ax.scatter(row.baseline_active,i,color=GRAY,s=45,zorder=3);ax.scatter(row.post_active,i,color=TEAL,s=55,zorder=3)
+  ax.annotate(f'{row.baseline_active:,}',(row.baseline_active,i),xytext=(-6,9),textcoords='offset points',ha='right',fontsize=9,color='#596876')
+  ax.annotate(f'{row.post_active:,}',(row.post_active,i),xytext=(6,-13),textcoords='offset points',ha='left',fontsize=9,color=TEAL,fontweight='bold')
+ ax.set(yticks=range(5),yticklabels=NAMES,ylim=(4.6,-.6),xlim=(-25,1280),xlabel='Businesses with at least one review',title='Nearby reviewed businesses');ax.tick_params(axis='y',length=0);ax.grid(axis='x',color=PALE)
+ ax.legend(handles=[Line2D([],[],marker='o',ls='',color=GRAY,label='Baseline'),Line2D([],[],marker='o',ls='',color=TEAL,label='Post-opening')],frameon=False,ncol=2,loc='upper left',bbox_to_anchor=(0,-.16),fontsize=9)
+ ax=axes[1]
+ for i,row in enumerate(near.itertuples()):
+  if row.baseline_active<20:
+   ax.axhspan(i-.33,i+.33,color='#F1F3F5');ax.text(-9,i,'Small baseline: 6 businesses',ha='center',va='center',fontsize=9,color='#75828E');continue
+  v=row.relative_growth_pct;color=TEAL if v>=0 else ORANGE
+  ax.hlines(i,0,v,color=color,lw=2);ax.scatter(v,i,s=55,color=color)
+  ax.annotate(f'{v:+.1f}%',(v,i),xytext=(7 if v>=0 else -7,0),textcoords='offset points',ha='left' if v>=0 else 'right',va='center',fontsize=10,fontweight='bold',color=color)
+ ax.axvline(0,color=GRAY,lw=.8);ax.set(yticks=range(5),yticklabels=[],ylim=(4.6,-.6),xlim=(-29,13),xticks=[-20,-10,0,10],xlabel='Relative growth versus farther area (%)',title='Growth in reviewed-business counts');ax.tick_params(axis='y',length=0);ax.grid(axis='y',color=PALE)
+ title(fig,'Business activity around each project','Nearby: within 500 m. Farther: more than 1.5 km and up to 8 km. These area comparisons are unmatched.')
+ fig.text(.18,.025,'A first or last review does not establish a business opening or closure. Counts use equal two-year windows.',fontsize=9,color='#596876')
+ return finish(fig,out,'09_business_growth')

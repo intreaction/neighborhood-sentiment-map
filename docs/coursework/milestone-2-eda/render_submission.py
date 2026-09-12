@@ -38,8 +38,9 @@ summary{font-weight:600;color:#20334a;cursor:pointer;font-size:14px;}
 @media(max-width:760px){.jp-Notebook{padding:20px 14px!important}.jp-MarkdownOutput h1{font-size:30px!important}.jp-MarkdownOutput{font-size:15px}table{font-size:12px!important}}
 @media print{.jp-Notebook{padding:0!important}details{display:block}.jp-OutputArea-output img{break-inside:avoid}h2,h3{break-after:avoid}}
 </style>'''
-body=re.sub(r'<title>.*?</title>', '<title>Public investment and nearby business engagement | Team 4</title>', body, count=1)
+body=re.sub(r'<title>.*?</title>', '<title>Public investment and nearby business engagement | Public Investment Map Team</title>', body, count=1)
 alts=iter([
+    'Map of five US project locations with local footprints and 500 meter study buffers at a common scale.',
     'Five funded projects: location, project type, reported cost, opening date, and pre/post observation windows.',
     'Business coverage and matched sample size for each project. Water Works has only two eligible matched pairs.',
     'VADER sentiment labels by star rating and review length by project. Positive sentiment is common even in low-star reviews.',
@@ -47,7 +48,8 @@ alts=iter([
     'Review growth contrasts across within-city neighborhood income groups, with sample sizes and sparse cells flagged.',
     'Review growth contrasts across 250, 500, and 1000 meter buffers reveal sensitivity to geography.',
     'Unmatched changes in VADER and whole-review stars across six embedding categories and five projects.',
-    'Sun Link corridor review composition changes. Engagement indicators have different relative growth rates.'
+    'Sun Link corridor review composition changes. Engagement indicators have different relative growth rates.',
+    'Business counts before and after project opening, and relative growth against farther areas. Water Works has a small baseline of six reviewed businesses.'
 ])
 def describe_image(match):
     tag=match.group(0)

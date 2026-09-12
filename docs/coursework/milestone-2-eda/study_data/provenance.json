@@ -80,6 +80,28 @@
     "engagement.csv": "5c950baffd03cf291b0528f5543e4548fa3f1a592ddd9b5c0b6d95d160648817",
     "Dilworth_Park.geojson": "b462a73d05810e490bc4caf659f9c93b43e52aaa4da9f788834147e11dbcdb63",
     "experience.csv": "739ba20c2a5ff8e2fce6757c6df41625545fe973d8be116f00d77f1be4ed50d4",
-    "sun_experience.csv": "6ae2282abae1d3e4d2f3d75324b1538dfe38e2d63ae586211e5143516c3630cb"
+    "sun_experience.csv": "6ae2282abae1d3e4d2f3d75324b1538dfe38e2d63ae586211e5143516c3630cb",
+    "business_growth.csv": "9af8ccc8211eb63efb5a18e43f53e7374937f814e28939c16aa6868357dee505",
+    "business_growth_annual.csv": "5b5dd7280c8cf55344fff4d194373ed6401d95041ec3928b1761a6eb5a27f048",
+    "project_map.json": "f427d1047d2001365fa1dc6b7dcf3eb5897a475f6c4308d3612d8e1c3acb129b"
+  },
+  "map_and_business_growth": {
+    "prepared": "2026-09-12",
+    "script": "prepare_map_and_business_growth.py",
+    "business_sources": [
+      "/Users/john/Documents/AIB/CIS-509-Analytics-Unstructured-Data/Work/Exploratory Data Analysis Submission (Course Project Milestone 2)/Pilot Lafitte/business_features.csv",
+      "/Users/john/Documents/AIB/CIS-509-Analytics-Unstructured-Data/Work/Exploratory Data Analysis Submission (Course Project Milestone 2)/Pilot Lafitte/scored_reviews.csv.gz",
+      "/Users/john/Documents/AIB/CIS-509-Analytics-Unstructured-Data/Work/Exploratory Data Analysis Submission (Course Project Milestone 2)/Sun Link Full Corridor/business_inventory_8km.csv",
+      "/Users/john/Documents/AIB/CIS-509-Analytics-Unstructured-Data/Work/Exploratory Data Analysis Submission (Course Project Milestone 2)/Sun Link Full Corridor/scored_reviews.csv.gz",
+      "/Users/john/Documents/AIB/CIS-509-Analytics-Unstructured-Data/Work/Exploratory Data Analysis Submission (Course Project Milestone 2)/Five Project Study/Dilworth Park/business_features.csv",
+      "/Users/john/Documents/AIB/CIS-509-Analytics-Unstructured-Data/Work/Exploratory Data Analysis Submission (Course Project Milestone 2)/Five Project Study/Dilworth Park/scored_reviews.csv.gz",
+      "/Users/john/Documents/AIB/CIS-509-Analytics-Unstructured-Data/Work/Exploratory Data Analysis Submission (Course Project Milestone 2)/Five Project Study/Water Works Park/business_features.csv",
+      "/Users/john/Documents/AIB/CIS-509-Analytics-Unstructured-Data/Work/Exploratory Data Analysis Submission (Course Project Milestone 2)/Five Project Study/Water Works Park/scored_reviews.csv.gz",
+      "/Users/john/Documents/AIB/CIS-509-Analytics-Unstructured-Data/Work/Exploratory Data Analysis Submission (Course Project Milestone 2)/Five Project Study/Riverfront Ascend/business_features.csv",
+      "/Users/john/Documents/AIB/CIS-509-Analytics-Unstructured-Data/Work/Exploratory Data Analysis Submission (Course Project Milestone 2)/Five Project Study/Riverfront Ascend/scored_reviews.csv.gz"
+    ],
+    "meaning": "Active means at least one Yelp review in the specified two-year period, not verified operation. Sun Link uses inclusive full-corridor inventory.",
+    "map_source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_110m_admin_1_states_provinces.geojson",
+    "map_projection": "National EPSG:5070; project-specific UTM for 500 m buffers."
   }
 }
