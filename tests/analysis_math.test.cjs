@@ -1,0 +1,33 @@
+const assert = require('node:assert/strict');
+const fs = require('node:fs');
+const vm = require('node:vm');
+const path = require('node:path');
+const context = vm.createContext({});
+vm.runInContext(fs.readFileSync(path.join(__dirname, '../src/analysis_math.js'), 'utf8'), context);
+const { fundingWindow, reviewOutcome, signedLog, correlation } = context;
+const { perResident } = context;
+assert.equal(perResident(2000000, 5000), 400);
+assert.equal(perResident(-2000, 1000), -2, 'Normalize signed adjustments');
+assert.equal(perResident(0, 1000), 0, 'Zero funding is valid with a positive denominator');
+assert.equal(perResident(2000, 0), null);
+assert.equal(perResident(2000, null), null);
+assert.equal(perResident(null, 1000), null);
+assert.equal(perResident(2000, 3, 500), null, 'Exclude tiny residential denominators');
+assert.equal(perResident(2000, 500, 500), 4, 'Minimum population is inclusive');
+
+// Outcome at Q8, lag 2: funding ends at Q6, includes Q4–Q6 for a 3-quarter window.
+assert.equal(fundingWindow([10,20,30,40,-15,60,70,80], 7, 2, 3), 85);
+assert.equal(fundingWindow([10,20,30], 1, 1, 2), null, 'Do not pad prehistory with zeros');
+assert.equal(fundingWindow([10,null,30], 2, 0, 3), null, 'Missing funding is not zero');
+assert.equal(fundingWindow([10,-10,0], 2, 0, 3), 0, 'Keep a legitimate net zero');
+assert.equal(fundingWindow([10,-20], 1, 0, 1), -20, 'Keep negative adjustments');
+assert.equal(reviewOutcome([.1,.2,.3,.4,.6], 4, 'change'), .5);
+assert.equal(reviewOutcome([.1,.2,.3,.4,.6], 3, 'change'), null);
+assert.equal(reviewOutcome([null,.2,.3,.4,.6], 4, 'change'), null);
+assert.equal(reviewOutcome([.1,.2,.3,.4,.6], 4, 'level'), .6);
+assert.equal(signedLog(-99), -Math.log(100));
+assert.equal(correlation([[1,2],[2,4],[3,6]]), 1);
+assert.equal(correlation([[1,6],[2,4],[3,2]]), -1);
+assert.equal(correlation([[0,2],[0,4],[0,6]]), null, 'No funding variation');
+assert.equal(correlation([[1,2],[2,4]]), null, 'Do not calculate on fewer than 3 ZIPs');
+console.log('PASS: funding dates, unavailable history, signed adjustments, outcomes and correlation edge cases');

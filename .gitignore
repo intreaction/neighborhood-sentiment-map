@@ -4,8 +4,17 @@
 node_modules/
 __pycache__/
 *.pyc
+.venv
 .venv/
+venv
 venv/
 .ipynb_checkpoints/
 dist/
 build/
+
+# Raw data — large, redistributable only under Yelp ToS
+Yelp JSON/
+data/raw/
+data/interim/
+*.tar
+*.tar.gz

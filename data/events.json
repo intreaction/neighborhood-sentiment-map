@@ -1,0 +1,44 @@
+[
+  {
+    "quarter": "2012Q4",
+    "label": "Hurricane Sandy makes landfall; CDBG-DR flows to the Northeast",
+    "short": "Sandy",
+    "scope": "regional",
+    "metros": ["Philadelphia"]
+  },
+  {
+    "quarter": "2017Q3",
+    "label": "Hurricane Irma crosses Florida; Tampa Bay under evacuation orders",
+    "short": "Irma",
+    "scope": "local",
+    "metros": ["TampaBay"]
+  },
+  {
+    "quarter": "2020Q1",
+    "label": "COVID-19 declared a national emergency (11 Mar 2020); first closures",
+    "short": "COVID",
+    "scope": "national",
+    "metros": []
+  },
+  {
+    "quarter": "2020Q2",
+    "label": "CARES Act relief begins; PPP first and second tranches",
+    "short": "CARES",
+    "scope": "national",
+    "metros": []
+  },
+  {
+    "quarter": "2021Q1",
+    "label": "American Rescue Plan Act signed (11 Mar 2021)",
+    "short": "ARPA",
+    "scope": "national",
+    "metros": []
+  },
+  {
+    "quarter": "2021Q3",
+    "label": "Hurricane Ida strikes Louisiana (29 Aug 2021); New Orleans loses power for days",
+    "short": "Ida",
+    "scope": "local",
+    "metros": ["NewOrleans"]
+  }
+]

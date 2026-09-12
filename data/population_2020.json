@@ -1,0 +1,794 @@
+{
+  "source": "https://tigerweb.geo.census.gov/arcgis/rest/services/Census2020/PUMA_TAD_TAZ_UGA_ZCTA/MapServer/2",
+  "population_field": "POP100",
+  "year": 2020,
+  "retrieved_at": "2026-09-08T23:15:25.491085+00:00",
+  "geography": "Census 2020 ZCTAs; exact GEOID match to map",
+  "records": {
+    "19104": {
+      "population": 56839,
+      "land_m2": 7927199
+    },
+    "19109": {
+      "population": 26,
+      "land_m2": 8800
+    },
+    "19113": {
+      "population": 4,
+      "land_m2": 1741455
+    },
+    "19123": {
+      "population": 18793,
+      "land_m2": 3266555
+    },
+    "19127": {
+      "population": 6929,
+      "land_m2": 1478233
+    },
+    "19106": {
+      "population": 15190,
+      "land_m2": 2201641
+    },
+    "19121": {
+      "population": 41799,
+      "land_m2": 6130997
+    },
+    "19139": {
+      "population": 43281,
+      "land_m2": 4580552
+    },
+    "19108": {
+      "population": 39,
+      "land_m2": 17134
+    },
+    "19143": {
+      "population": 64648,
+      "land_m2": 8069374
+    },
+    "19129": {
+      "population": 11437,
+      "land_m2": 5312932
+    },
+    "19137": {
+      "population": 8682,
+      "land_m2": 6272693
+    },
+    "19107": {
+      "population": 17600,
+      "land_m2": 1408994
+    },
+    "19124": {
+      "population": 68766,
+      "land_m2": 13324440
+    },
+    "19125": {
+      "population": 25325,
+      "land_m2": 3502063
+    },
+    "19133": {
+      "population": 24772,
+      "land_m2": 3323302
+    },
+    "19102": {
+      "population": 7568,
+      "land_m2": 483441
+    },
+    "19111": {
+      "population": 67017,
+      "land_m2": 12550018
+    },
+    "19122": {
+      "population": 26668,
+      "land_m2": 3349412
+    },
+    "19136": {
+      "population": 39151,
+      "land_m2": 12427177
+    },
+    "19142": {
+      "population": 29565,
+      "land_m2": 4522112
+    },
+    "19103": {
+      "population": 28717,
+      "land_m2": 1671814
+    },
+    "19114": {
+      "population": 32645,
+      "land_m2": 14575124
+    },
+    "19116": {
+      "population": 35610,
+      "land_m2": 13522844
+    },
+    "19126": {
+      "population": 16159,
+      "land_m2": 3081406
+    },
+    "19128": {
+      "population": 36808,
+      "land_m2": 18090586
+    },
+    "19131": {
+      "population": 42705,
+      "land_m2": 13652897
+    },
+    "19115": {
+      "population": 35919,
+      "land_m2": 13369507
+    },
+    "19140": {
+      "population": 52124,
+      "land_m2": 8164407
+    },
+    "19130": {
+      "population": 31477,
+      "land_m2": 3205055
+    },
+    "19132": {
+      "population": 33926,
+      "land_m2": 5579209
+    },
+    "19135": {
+      "population": 35422,
+      "land_m2": 5867605
+    },
+    "19138": {
+      "population": 31816,
+      "land_m2": 4569169
+    },
+    "19141": {
+      "population": 31047,
+      "land_m2": 4520532
+    },
+    "19112": {
+      "population": 3,
+      "land_m2": 4591616
+    },
+    "19118": {
+      "population": 9728,
+      "land_m2": 8301042
+    },
+    "19119": {
+      "population": 27265,
+      "land_m2": 8813880
+    },
+    "19120": {
+      "population": 66177,
+      "land_m2": 8376391
+    },
+    "19134": {
+      "population": 57463,
+      "land_m2": 8925216
+    },
+    "19144": {
+      "population": 44481,
+      "land_m2": 9293798
+    },
+    "33618": {
+      "population": 26474,
+      "land_m2": 21857697
+    },
+    "33626": {
+      "population": 31875,
+      "land_m2": 31779023
+    },
+    "33606": {
+      "population": 22271,
+      "land_m2": 8485914
+    },
+    "33612": {
+      "population": 49452,
+      "land_m2": 25755990
+    },
+    "33610": {
+      "population": 45218,
+      "land_m2": 46618625
+    },
+    "33611": {
+      "population": 34101,
+      "land_m2": 16273684
+    },
+    "33614": {
+      "population": 47695,
+      "land_m2": 25225927
+    },
+    "33616": {
+      "population": 14802,
+      "land_m2": 10171597
+    },
+    "33635": {
+      "population": 18780,
+      "land_m2": 16509441
+    },
+    "33602": {
+      "population": 19936,
+      "land_m2": 6712507
+    },
+    "33603": {
+      "population": 19070,
+      "land_m2": 10700971
+    },
+    "33604": {
+      "population": 39071,
+      "land_m2": 19340552
+    },
+    "33607": {
+      "population": 24767,
+      "land_m2": 24029172
+    },
+    "33624": {
+      "population": 38929,
+      "land_m2": 23537775
+    },
+    "33625": {
+      "population": 28704,
+      "land_m2": 23417865
+    },
+    "33634": {
+      "population": 21465,
+      "land_m2": 21856150
+    },
+    "33613": {
+      "population": 38801,
+      "land_m2": 19293787
+    },
+    "33615": {
+      "population": 47434,
+      "land_m2": 22175521
+    },
+    "33617": {
+      "population": 48267,
+      "land_m2": 22885393
+    },
+    "33647": {
+      "population": 69457,
+      "land_m2": 83880768
+    },
+    "33619": {
+      "population": 39881,
+      "land_m2": 71145858
+    },
+    "33637": {
+      "population": 18070,
+      "land_m2": 20290728
+    },
+    "33605": {
+      "population": 18243,
+      "land_m2": 20298741
+    },
+    "33629": {
+      "population": 26394,
+      "land_m2": 12459065
+    },
+    "33701": {
+      "population": 19137,
+      "land_m2": 6903672
+    },
+    "33703": {
+      "population": 23948,
+      "land_m2": 12993389
+    },
+    "19148": {
+      "population": 53976,
+      "land_m2": 10963846
+    },
+    "33609": {
+      "population": 17902,
+      "land_m2": 10351818
+    },
+    "33620": {
+      "population": 5535,
+      "land_m2": 2261767
+    },
+    "33621": {
+      "population": 1878,
+      "land_m2": 21497168
+    },
+    "33702": {
+      "population": 29996,
+      "land_m2": 26869663
+    },
+    "19153": {
+      "population": 11985,
+      "land_m2": 26192036
+    },
+    "19151": {
+      "population": 30394,
+      "land_m2": 6212321
+    },
+    "19152": {
+      "population": 35911,
+      "land_m2": 7464035
+    },
+    "19154": {
+      "population": 34681,
+      "land_m2": 16570590
+    },
+    "19147": {
+      "population": 41096,
+      "land_m2": 3464835
+    },
+    "19145": {
+      "population": 47079,
+      "land_m2": 12420856
+    },
+    "19146": {
+      "population": 41920,
+      "land_m2": 4464988
+    },
+    "19149": {
+      "population": 60408,
+      "land_m2": 6182875
+    },
+    "19150": {
+      "population": 23126,
+      "land_m2": 3830067
+    },
+    "33713": {
+      "population": 31321,
+      "land_m2": 16928214
+    },
+    "33715": {
+      "population": 7876,
+      "land_m2": 9837426
+    },
+    "33772": {
+      "population": 24121,
+      "land_m2": 13667925
+    },
+    "33774": {
+      "population": 18145,
+      "land_m2": 11876979
+    },
+    "33777": {
+      "population": 17793,
+      "land_m2": 14249988
+    },
+    "33778": {
+      "population": 15068,
+      "land_m2": 9745016
+    },
+    "33782": {
+      "population": 22198,
+      "land_m2": 13951184
+    },
+    "33760": {
+      "population": 19565,
+      "land_m2": 14591797
+    },
+    "33764": {
+      "population": 27547,
+      "land_m2": 16352705
+    },
+    "33756": {
+      "population": 31807,
+      "land_m2": 18677899
+    },
+    "33759": {
+      "population": 18316,
+      "land_m2": 13665760
+    },
+    "33707": {
+      "population": 24646,
+      "land_m2": 13677392
+    },
+    "33709": {
+      "population": 27026,
+      "land_m2": 13260944
+    },
+    "33710": {
+      "population": 33172,
+      "land_m2": 20648972
+    },
+    "33773": {
+      "population": 17494,
+      "land_m2": 13096583
+    },
+    "33705": {
+      "population": 27915,
+      "land_m2": 14457845
+    },
+    "33706": {
+      "population": 15309,
+      "land_m2": 9470971
+    },
+    "33708": {
+      "population": 16034,
+      "land_m2": 8821999
+    },
+    "33781": {
+      "population": 27349,
+      "land_m2": 17022739
+    },
+    "33770": {
+      "population": 25475,
+      "land_m2": 13466889
+    },
+    "33771": {
+      "population": 29766,
+      "land_m2": 15510076
+    },
+    "33711": {
+      "population": 20121,
+      "land_m2": 12181775
+    },
+    "33716": {
+      "population": 18023,
+      "land_m2": 18551048
+    },
+    "33767": {
+      "population": 8462,
+      "land_m2": 5199086
+    },
+    "33776": {
+      "population": 12922,
+      "land_m2": 8771184
+    },
+    "33786": {
+      "population": 1706,
+      "land_m2": 1388657
+    },
+    "33704": {
+      "population": 16031,
+      "land_m2": 8862588
+    },
+    "33755": {
+      "population": 28360,
+      "land_m2": 14164706
+    },
+    "33712": {
+      "population": 26395,
+      "land_m2": 16569610
+    },
+    "33714": {
+      "population": 19905,
+      "land_m2": 9457791
+    },
+    "33761": {
+      "population": 18761,
+      "land_m2": 13103175
+    },
+    "33762": {
+      "population": 5572,
+      "land_m2": 18368584
+    },
+    "33763": {
+      "population": 18981,
+      "land_m2": 8685667
+    },
+    "33765": {
+      "population": 13844,
+      "land_m2": 10817765
+    },
+    "33785": {
+      "population": 4863,
+      "land_m2": 3052462
+    },
+    "37201": {
+      "population": 2448,
+      "land_m2": 831543
+    },
+    "37205": {
+      "population": 24551,
+      "land_m2": 36944696
+    },
+    "37203": {
+      "population": 20429,
+      "land_m2": 10863669
+    },
+    "37206": {
+      "population": 27792,
+      "land_m2": 20074192
+    },
+    "37204": {
+      "population": 15959,
+      "land_m2": 18891569
+    },
+    "37232": {
+      "population": 0,
+      "land_m2": 168653
+    },
+    "37208": {
+      "population": 21609,
+      "land_m2": 12472848
+    },
+    "37217": {
+      "population": 33115,
+      "land_m2": 45996969
+    },
+    "37210": {
+      "population": 17134,
+      "land_m2": 24035438
+    },
+    "37212": {
+      "population": 22318,
+      "land_m2": 7122448
+    },
+    "37213": {
+      "population": 112,
+      "land_m2": 1838319
+    },
+    "37218": {
+      "population": 14875,
+      "land_m2": 101114903
+    },
+    "37221": {
+      "population": 42312,
+      "land_m2": 127781482
+    },
+    "37238": {
+      "population": 9,
+      "land_m2": 12052
+    },
+    "37214": {
+      "population": 30480,
+      "land_m2": 56848312
+    },
+    "37219": {
+      "population": 2265,
+      "land_m2": 558282
+    },
+    "37211": {
+      "population": 81830,
+      "land_m2": 56268799
+    },
+    "37209": {
+      "population": 40498,
+      "land_m2": 87150256
+    },
+    "37215": {
+      "population": 23756,
+      "land_m2": 39697553
+    },
+    "37216": {
+      "population": 18191,
+      "land_m2": 17428171
+    },
+    "37220": {
+      "population": 6750,
+      "land_m2": 19973251
+    },
+    "37228": {
+      "population": 1710,
+      "land_m2": 3775476
+    },
+    "70148": {
+      "population": 1603,
+      "land_m2": 1039299
+    },
+    "70122": {
+      "population": 34986,
+      "land_m2": 16236527
+    },
+    "70127": {
+      "population": 24332,
+      "land_m2": 14167246
+    },
+    "70163": {
+      "population": 0,
+      "land_m2": 8899
+    },
+    "37207": {
+      "population": 38719,
+      "land_m2": 50100618
+    },
+    "70125": {
+      "population": 17457,
+      "land_m2": 6064471
+    },
+    "70130": {
+      "population": 14521,
+      "land_m2": 5526397
+    },
+    "70115": {
+      "population": 31736,
+      "land_m2": 9962000
+    },
+    "70126": {
+      "population": 30397,
+      "land_m2": 31276476
+    },
+    "70128": {
+      "population": 18260,
+      "land_m2": 12353685
+    },
+    "70117": {
+      "population": 28528,
+      "land_m2": 14256213
+    },
+    "70124": {
+      "population": 22777,
+      "land_m2": 17292048
+    },
+    "70129": {
+      "population": 10884,
+      "land_m2": 235482050
+    },
+    "70113": {
+      "population": 8569,
+      "land_m2": 2370851
+    },
+    "70118": {
+      "population": 35635,
+      "land_m2": 11978513
+    },
+    "70119": {
+      "population": 38048,
+      "land_m2": 11700581
+    },
+    "70116": {
+      "population": 10676,
+      "land_m2": 3281827
+    },
+    "70121": {
+      "population": 11523,
+      "land_m2": 8486908
+    },
+    "70123": {
+      "population": 27346,
+      "land_m2": 19634043
+    },
+    "70139": {
+      "population": 0,
+      "land_m2": 12861
+    },
+    "70112": {
+      "population": 4988,
+      "land_m2": 2544948
+    },
+    "70114": {
+      "population": 23127,
+      "land_m2": 13088562
+    },
+    "70131": {
+      "population": 27473,
+      "land_m2": 30331831
+    },
+    "85730": {
+      "population": 39258,
+      "land_m2": 97185155
+    },
+    "85743": {
+      "population": 30441,
+      "land_m2": 306267372
+    },
+    "85755": {
+      "population": 18277,
+      "land_m2": 87656358
+    },
+    "85705": {
+      "population": 56711,
+      "land_m2": 35289569
+    },
+    "85706": {
+      "population": 54853,
+      "land_m2": 33965306
+    },
+    "85712": {
+      "population": 33108,
+      "land_m2": 17733470
+    },
+    "85719": {
+      "population": 46242,
+      "land_m2": 20629007
+    },
+    "85715": {
+      "population": 18561,
+      "land_m2": 16969405
+    },
+    "85723": {
+      "population": 132,
+      "land_m2": 573263
+    },
+    "85749": {
+      "population": 19009,
+      "land_m2": 125203495
+    },
+    "85709": {
+      "population": 0,
+      "land_m2": 1018452
+    },
+    "85746": {
+      "population": 43278,
+      "land_m2": 300082523
+    },
+    "85747": {
+      "population": 27703,
+      "land_m2": 173543654
+    },
+    "85721": {
+      "population": 0,
+      "land_m2": 39176
+    },
+    "85711": {
+      "population": 41518,
+      "land_m2": 22316058
+    },
+    "85713": {
+      "population": 46810,
+      "land_m2": 61726947
+    },
+    "85701": {
+      "population": 5132,
+      "land_m2": 3824851
+    },
+    "85708": {
+      "population": 3837,
+      "land_m2": 7481430
+    },
+    "85710": {
+      "population": 57381,
+      "land_m2": 30977741
+    },
+    "85714": {
+      "population": 14232,
+      "land_m2": 14597137
+    },
+    "85726": {
+      "population": 11,
+      "land_m2": 96158
+    },
+    "85737": {
+      "population": 22212,
+      "land_m2": 61396653
+    },
+    "85742": {
+      "population": 30057,
+      "land_m2": 57748478
+    },
+    "85748": {
+      "population": 18816,
+      "land_m2": 30982104
+    },
+    "85750": {
+      "population": 25007,
+      "land_m2": 47066329
+    },
+    "85757": {
+      "population": 21712,
+      "land_m2": 66276212
+    },
+    "85707": {
+      "population": 734,
+      "land_m2": 10666169
+    },
+    "85716": {
+      "population": 31521,
+      "land_m2": 18645487
+    },
+    "85735": {
+      "population": 10522,
+      "land_m2": 452677419
+    },
+    "85739": {
+      "population": 18878,
+      "land_m2": 662162348
+    },
+    "85756": {
+      "population": 35345,
+      "land_m2": 242552951
+    },
+    "85704": {
+      "population": 34430,
+      "land_m2": 47146858
+    },
+    "85718": {
+      "population": 28706,
+      "land_m2": 61225148
+    },
+    "85745": {
+      "population": 36774,
+      "land_m2": 121675911
+    },
+    "85724": {
+      "population": 0,
+      "land_m2": 105627
+    },
+    "85741": {
+      "population": 34131,
+      "land_m2": 24622778
+    }
+  },
+  "missing": []
+}
