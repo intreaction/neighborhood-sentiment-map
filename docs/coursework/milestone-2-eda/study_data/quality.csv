@@ -1,0 +1,6 @@
+project,businesses_8km,reviews_extracted,reviews_prepost,baseline_eligible,baseline_income_complete,missing_income_businesses,baseline_near_500,near500_missing_match_covariates
+Lafitte,5827,536263,209125,1911,1890,74,143,1
+Sun Link,5275,205489,64001,711,708,45,154,3
+Dilworth Park,10804,743862,250972,2669,2623,148,507,9
+Water Works Park,4453,219523,74666,633,627,44,2,0
+Riverfront / Ascend,4817,299128,105261,972,955,75,86,1

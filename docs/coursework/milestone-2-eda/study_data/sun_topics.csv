@@ -1,0 +1,53 @@
+period,category,reviews,businesses,vader,stars,income_group,sparse
+post,Food and dishes,5989,321,0.31980258137269424,3.9263650025045918,All,False
+post,Location/local identity (mixed),6241,433,0.2916868330424449,3.926774555359718,All,False
+post,Mixed evaluations/negation,3799,379,0.11163261501564739,3.4709133982627005,All,False
+post,Mixed interactions/intentions,5231,436,0.22310790139740438,3.6631619193270883,All,False
+post,Overall experience/service,8319,441,0.44172501894300487,3.934487318187282,All,False
+post,Visit timing/waiting,5333,415,0.1730026028286796,3.6266641665104067,All,False
+pre,Food and dishes,2273,187,0.29891793239636766,3.801583809942807,All,False
+pre,Location/local identity (mixed),2696,262,0.28252506476641354,3.833086053412463,All,False
+pre,Mixed evaluations/negation,1638,226,0.13903809472934472,3.6062271062271063,All,False
+pre,Mixed interactions/intentions,2148,244,0.2209934573300949,3.6987895716945998,All,False
+pre,Overall experience/service,2959,253,0.43118756772694844,3.7826968570462993,All,False
+pre,Visit timing/waiting,2144,243,0.1753621522149276,3.703824626865672,All,False
+post,Food and dishes,5618,285,0.31827860607047836,3.9147383410466357,Lower,False
+post,Food and dishes,339,23,0.3505186711166578,4.171091445427729,Middle,False
+post,Food and dishes,32,13,0.26195691964285717,3.375,Unknown,False
+post,Location/local identity (mixed),5831,382,0.28900345441204406,3.912021951637798,Lower,False
+post,Location/local identity (mixed),323,28,0.34282599366062216,4.198142414860681,Middle,False
+post,Location/local identity (mixed),87,23,0.28167340676883784,3.9080459770114944,Unknown,False
+post,Mixed evaluations/negation,1,1,,,Higher,True
+post,Mixed evaluations/negation,3575,336,0.11212903920523921,3.4475524475524475,Lower,False
+post,Mixed evaluations/negation,171,25,0.09726482038429406,3.9590643274853803,Middle,False
+post,Mixed evaluations/negation,52,17,0.12154913461538461,3.4423076923076925,Unknown,False
+post,Mixed interactions/intentions,2,2,,,Higher,True
+post,Mixed interactions/intentions,4885,383,0.22195496969295433,3.6427840327533265,Lower,False
+post,Mixed interactions/intentions,262,29,0.25947246918475925,4.0458015267175576,Middle,False
+post,Mixed interactions/intentions,82,22,0.17894778455284552,3.6219512195121952,Unknown,False
+post,Overall experience/service,1,1,,,Higher,True
+post,Overall experience/service,7824,389,0.44031021904107026,3.9279141104294477,Lower,False
+post,Overall experience/service,411,29,0.4713697294635616,4.104622871046229,Middle,False
+post,Overall experience/service,83,22,0.42854000000000003,3.6987951807228914,Unknown,False
+post,Visit timing/waiting,2,2,,,Higher,True
+post,Visit timing/waiting,5008,366,0.17245106990569675,3.614217252396166,Lower,False
+post,Visit timing/waiting,257,26,0.19226274041133964,3.914396887159533,Middle,False
+post,Visit timing/waiting,66,21,0.14778975018037518,3.409090909090909,Unknown,False
+pre,Food and dishes,2204,169,0.298666120140347,3.8026315789473686,Lower,False
+pre,Food and dishes,63,14,0.3219334372637944,3.761904761904762,Middle,False
+pre,Food and dishes,6,4,,,Unknown,True
+pre,Location/local identity (mixed),2544,233,0.2841510321075784,3.832940251572327,Lower,False
+pre,Location/local identity (mixed),103,17,0.2128965792109724,3.6407766990291264,Middle,False
+pre,Location/local identity (mixed),49,12,0.34446941367023004,4.244897959183674,Unknown,False
+pre,Mixed evaluations/negation,1554,199,0.13687339071214072,3.5984555984555984,Lower,False
+pre,Mixed evaluations/negation,62,16,0.1775084677419355,3.5806451612903225,Middle,False
+pre,Mixed evaluations/negation,22,11,,,Unknown,True
+pre,Mixed interactions/intentions,2049,217,0.22078878298928445,3.6998535871156664,Lower,False
+pre,Mixed interactions/intentions,66,16,0.21272045454545455,3.484848484848485,Middle,False
+pre,Mixed interactions/intentions,33,11,0.2502478787878788,4.0606060606060606,Unknown,False
+pre,Overall experience/service,2822,225,0.43168117811838136,3.7824238128986534,Lower,False
+pre,Overall experience/service,98,16,0.39148396177518624,3.63265306122449,Middle,False
+pre,Overall experience/service,39,12,0.4952384615384615,4.17948717948718,Unknown,False
+pre,Visit timing/waiting,2035,213,0.17675164072364338,3.7017199017199016,Lower,False
+pre,Visit timing/waiting,69,18,0.132383823326432,3.449275362318841,Middle,False
+pre,Visit timing/waiting,40,12,0.17880954166666668,4.25,Unknown,False

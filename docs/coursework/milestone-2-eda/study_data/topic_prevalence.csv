@@ -1,0 +1,121 @@
+project,area,period,category_id,category_reviews,assigned_reviews,prevalence_pct,category
+Dilworth Park,comparison,post,0,808,1499,53.90260173448966,Location/local identity (mixed)
+Dilworth Park,comparison,post,1,807,1499,53.835890593729154,Food and dishes
+Dilworth Park,comparison,post,2,553,1499,36.89126084056037,Mixed evaluations/negation
+Dilworth Park,comparison,post,3,1061,1499,70.78052034689793,Overall experience/service
+Dilworth Park,comparison,post,4,776,1499,51.76784523015343,Mixed interactions/intentions
+Dilworth Park,comparison,post,5,785,1499,52.368245496998,Visit timing/waiting
+Dilworth Park,comparison,pre,0,956,1493,64.03215003348961,Location/local identity (mixed)
+Dilworth Park,comparison,pre,1,935,1493,62.625586068318825,Food and dishes
+Dilworth Park,comparison,pre,2,715,1493,47.8901540522438,Mixed evaluations/negation
+Dilworth Park,comparison,pre,3,1076,1493,72.06965840589417,Overall experience/service
+Dilworth Park,comparison,pre,4,871,1493,58.338914936369726,Mixed interactions/intentions
+Dilworth Park,comparison,pre,5,865,1493,57.9370395177495,Visit timing/waiting
+Dilworth Park,near,post,0,819,1499,54.63642428285524,Location/local identity (mixed)
+Dilworth Park,near,post,1,863,1499,57.571714476317545,Food and dishes
+Dilworth Park,near,post,2,628,1499,41.8945963975984,Mixed evaluations/negation
+Dilworth Park,near,post,3,1063,1499,70.91394262841895,Overall experience/service
+Dilworth Park,near,post,4,812,1499,54.169446297531685,Mixed interactions/intentions
+Dilworth Park,near,post,5,833,1499,55.570380253502336,Visit timing/waiting
+Dilworth Park,near,pre,0,921,1494,61.64658634538153,Location/local identity (mixed)
+Dilworth Park,near,pre,1,872,1494,58.366800535475235,Food and dishes
+Dilworth Park,near,pre,2,685,1494,45.85006693440428,Mixed evaluations/negation
+Dilworth Park,near,pre,3,1073,1494,71.8206157965194,Overall experience/service
+Dilworth Park,near,pre,4,889,1494,59.50468540829986,Mixed interactions/intentions
+Dilworth Park,near,pre,5,859,1494,57.49665327978581,Visit timing/waiting
+Lafitte,comparison,post,0,846,1496,56.55080213903744,Location/local identity (mixed)
+Lafitte,comparison,post,1,863,1496,57.68716577540107,Food and dishes
+Lafitte,comparison,post,2,494,1496,33.02139037433155,Mixed evaluations/negation
+Lafitte,comparison,post,3,1062,1496,70.98930481283422,Overall experience/service
+Lafitte,comparison,post,4,704,1496,47.05882352941177,Mixed interactions/intentions
+Lafitte,comparison,post,5,743,1496,49.66577540106952,Visit timing/waiting
+Lafitte,comparison,pre,0,965,1497,64.4622578490314,Location/local identity (mixed)
+Lafitte,comparison,pre,1,913,1497,60.98864395457582,Food and dishes
+Lafitte,comparison,pre,2,618,1497,41.28256513026052,Mixed evaluations/negation
+Lafitte,comparison,pre,3,1073,1497,71.67668670674682,Overall experience/service
+Lafitte,comparison,pre,4,751,1497,50.16700066800267,Mixed interactions/intentions
+Lafitte,comparison,pre,5,811,1497,54.1750167000668,Visit timing/waiting
+Lafitte,near,post,0,881,1498,58.81174899866489,Location/local identity (mixed)
+Lafitte,near,post,1,791,1498,52.80373831775701,Food and dishes
+Lafitte,near,post,2,486,1498,32.44325767690254,Mixed evaluations/negation
+Lafitte,near,post,3,984,1498,65.68758344459279,Overall experience/service
+Lafitte,near,post,4,713,1498,47.59679572763685,Mixed interactions/intentions
+Lafitte,near,post,5,783,1498,52.26969292389853,Visit timing/waiting
+Lafitte,near,pre,0,1061,1497,70.875083500334,Location/local identity (mixed)
+Lafitte,near,pre,1,802,1497,53.57381429525718,Food and dishes
+Lafitte,near,pre,2,640,1497,42.75217100868404,Mixed evaluations/negation
+Lafitte,near,pre,3,1047,1497,69.93987975951904,Overall experience/service
+Lafitte,near,pre,4,797,1497,53.239812959251836,Mixed interactions/intentions
+Lafitte,near,pre,5,852,1497,56.91382765531062,Visit timing/waiting
+Riverfront / Ascend,comparison,post,0,752,1500,50.13333333333333,Location/local identity (mixed)
+Riverfront / Ascend,comparison,post,1,817,1500,54.46666666666667,Food and dishes
+Riverfront / Ascend,comparison,post,2,507,1500,33.8,Mixed evaluations/negation
+Riverfront / Ascend,comparison,post,3,1006,1500,67.06666666666666,Overall experience/service
+Riverfront / Ascend,comparison,post,4,783,1500,52.2,Mixed interactions/intentions
+Riverfront / Ascend,comparison,post,5,778,1500,51.86666666666667,Visit timing/waiting
+Riverfront / Ascend,comparison,pre,0,937,1497,62.59185036740147,Location/local identity (mixed)
+Riverfront / Ascend,comparison,pre,1,922,1497,61.58984635938544,Food and dishes
+Riverfront / Ascend,comparison,pre,2,727,1497,48.56379425517702,Mixed evaluations/negation
+Riverfront / Ascend,comparison,pre,3,1135,1497,75.81830327321309,Overall experience/service
+Riverfront / Ascend,comparison,pre,4,920,1497,61.4562458249833,Mixed interactions/intentions
+Riverfront / Ascend,comparison,pre,5,889,1497,59.385437541750164,Visit timing/waiting
+Riverfront / Ascend,near,post,0,745,1496,49.79946524064171,Location/local identity (mixed)
+Riverfront / Ascend,near,post,1,779,1496,52.07219251336898,Food and dishes
+Riverfront / Ascend,near,post,2,506,1496,33.8235294117647,Mixed evaluations/negation
+Riverfront / Ascend,near,post,3,1135,1496,75.86898395721926,Overall experience/service
+Riverfront / Ascend,near,post,4,687,1496,45.92245989304813,Mixed interactions/intentions
+Riverfront / Ascend,near,post,5,809,1496,54.07754010695187,Visit timing/waiting
+Riverfront / Ascend,near,pre,0,970,1493,64.96985934360349,Location/local identity (mixed)
+Riverfront / Ascend,near,pre,1,743,1493,49.765572672471535,Food and dishes
+Riverfront / Ascend,near,pre,2,626,1493,41.92900200937709,Mixed evaluations/negation
+Riverfront / Ascend,near,pre,3,1131,1493,75.75351640991293,Overall experience/service
+Riverfront / Ascend,near,pre,4,732,1493,49.028801071667786,Mixed interactions/intentions
+Riverfront / Ascend,near,pre,5,821,1493,54.989953114534494,Visit timing/waiting
+Sun Link,comparison,post,0,771,1494,51.606425702811244,Location/local identity (mixed)
+Sun Link,comparison,post,1,663,1494,44.377510040160644,Food and dishes
+Sun Link,comparison,post,2,530,1494,35.475234270414994,Mixed evaluations/negation
+Sun Link,comparison,post,3,1067,1494,71.4190093708166,Overall experience/service
+Sun Link,comparison,post,4,808,1494,54.08299866131191,Mixed interactions/intentions
+Sun Link,comparison,post,5,815,1494,54.55153949129853,Visit timing/waiting
+Sun Link,comparison,pre,0,1015,1497,67.80227120908484,Location/local identity (mixed)
+Sun Link,comparison,pre,1,899,1497,60.05344021376086,Food and dishes
+Sun Link,comparison,pre,2,664,1497,44.35537742150969,Mixed evaluations/negation
+Sun Link,comparison,pre,3,1085,1497,72.47828991315966,Overall experience/service
+Sun Link,comparison,pre,4,860,1497,57.44822979291917,Mixed interactions/intentions
+Sun Link,comparison,pre,5,823,1497,54.97661990647963,Visit timing/waiting
+Sun Link,near,post,0,855,1496,57.1524064171123,Location/local identity (mixed)
+Sun Link,near,post,1,849,1496,56.75133689839572,Food and dishes
+Sun Link,near,post,2,511,1496,34.157754010695186,Mixed evaluations/negation
+Sun Link,near,post,3,1130,1496,75.53475935828877,Overall experience/service
+Sun Link,near,post,4,736,1496,49.19786096256684,Mixed interactions/intentions
+Sun Link,near,post,5,747,1496,49.9331550802139,Visit timing/waiting
+Sun Link,near,pre,0,1084,1496,72.45989304812834,Location/local identity (mixed)
+Sun Link,near,pre,1,907,1496,60.6283422459893,Food and dishes
+Sun Link,near,pre,2,637,1496,42.580213903743314,Mixed evaluations/negation
+Sun Link,near,pre,3,1187,1496,79.34491978609626,Overall experience/service
+Sun Link,near,pre,4,850,1496,56.81818181818182,Mixed interactions/intentions
+Sun Link,near,pre,5,839,1496,56.08288770053476,Visit timing/waiting
+Water Works Park,comparison,post,0,746,1497,49.83299933199733,Location/local identity (mixed)
+Water Works Park,comparison,post,1,780,1497,52.104208416833664,Food and dishes
+Water Works Park,comparison,post,2,540,1497,36.07214428857716,Mixed evaluations/negation
+Water Works Park,comparison,post,3,1135,1497,75.81830327321309,Overall experience/service
+Water Works Park,comparison,post,4,796,1497,53.17301269205077,Mixed interactions/intentions
+Water Works Park,comparison,post,5,837,1497,55.91182364729459,Visit timing/waiting
+Water Works Park,comparison,pre,0,892,1495,59.66555183946488,Location/local identity (mixed)
+Water Works Park,comparison,pre,1,841,1495,56.25418060200669,Food and dishes
+Water Works Park,comparison,pre,2,561,1495,37.525083612040135,Mixed evaluations/negation
+Water Works Park,comparison,pre,3,1153,1495,77.123745819398,Overall experience/service
+Water Works Park,comparison,pre,4,832,1495,55.65217391304348,Mixed interactions/intentions
+Water Works Park,comparison,pre,5,797,1495,53.31103678929766,Visit timing/waiting
+Water Works Park,near,post,0,631,1179,53.519932145886344,Location/local identity (mixed)
+Water Works Park,near,post,1,706,1179,59.88125530110263,Food and dishes
+Water Works Park,near,post,2,396,1179,33.587786259541986,Mixed evaluations/negation
+Water Works Park,near,post,3,958,1179,81.25530110262935,Overall experience/service
+Water Works Park,near,post,4,602,1179,51.06022052586938,Mixed interactions/intentions
+Water Works Park,near,post,5,677,1179,57.421543681085666,Visit timing/waiting
+Water Works Park,near,pre,0,35,48,72.91666666666667,Location/local identity (mixed)
+Water Works Park,near,pre,1,23,48,47.916666666666664,Food and dishes
+Water Works Park,near,pre,2,21,48,43.75,Mixed evaluations/negation
+Water Works Park,near,pre,3,35,48,72.91666666666667,Overall experience/service
+Water Works Park,near,pre,4,28,48,58.333333333333336,Mixed interactions/intentions
+Water Works Park,near,pre,5,25,48,52.083333333333336,Visit timing/waiting
