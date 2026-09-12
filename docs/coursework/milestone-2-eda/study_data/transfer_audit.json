@@ -1,0 +1,10 @@
+{
+  "baseline_reconstruction_agreement": 1.0,
+  "training": "Original two-city baseline model; no training on new cities or post periods",
+  "new_sample_reviews": 16233,
+  "new_assigned_reviews": 16190,
+  "new_assigned_sentences": 112436,
+  "all_review_category_rows": 94441,
+  "seed_new": 510,
+  "limitation": "Transfer across cities can miss local vocabulary. Fixed exploratory clusters include mixed lexical categories; no claim of validated semantic topics."
+}

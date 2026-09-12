@@ -1,0 +1,14 @@
+{
+  "sampled_reviews": 12000,
+  "qualifying_sentences_before_vector_coverage": 94734,
+  "assigned_sentences": 83419,
+  "assigned_reviews": 11971,
+  "baseline_training_sentences": 52088,
+  "vocabulary": 6966,
+  "clusters": 6,
+  "sample_seed": 509,
+  "embedding": "100-dimensional mean non-stopword Word2Vec; baseline only; minimum3 in-vocabulary tokens",
+  "clustering": "MiniBatchKMeans fixed6 exploratory clusters; baseline fit only",
+  "sentence_filter": "4\u2013150 lowercase alphabetic tokens; excludes others; raw sentence scored with VADER",
+  "warning": "Unequal sampling fractions. Counts are sampled reviews, not population engagement. Review stars apply to whole review, not specific sentence."
+}

@@ -1,0 +1,107 @@
+{
+  "prepared": "2026-09-12",
+  "unit": "Saved aggregate outputs of the executed five-project and full Sun Link pipelines",
+  "raw_sources": [
+    {
+      "path": "Pilot Lafitte/business_features.csv",
+      "bytes": 4567485
+    },
+    {
+      "path": "Pilot Lafitte/scored_reviews.csv.gz",
+      "bytes": 14657992
+    },
+    {
+      "path": "Pilot Sun Link/business_features.csv",
+      "bytes": 3573276
+    },
+    {
+      "path": "Pilot Sun Link/scored_reviews.csv.gz",
+      "bytes": 5708259
+    },
+    {
+      "path": "Five Project Study/Dilworth Park/business_features.csv",
+      "bytes": 7938649
+    },
+    {
+      "path": "Five Project Study/Dilworth Park/scored_reviews.csv.gz",
+      "bytes": 7169222
+    },
+    {
+      "path": "Five Project Study/Water Works Park/business_features.csv",
+      "bytes": 3148068
+    },
+    {
+      "path": "Five Project Study/Water Works Park/scored_reviews.csv.gz",
+      "bytes": 1949494
+    },
+    {
+      "path": "Five Project Study/Riverfront Ascend/business_features.csv",
+      "bytes": 3577413
+    },
+    {
+      "path": "Five Project Study/Riverfront Ascend/scored_reviews.csv.gz",
+      "bytes": 2767284
+    }
+  ],
+  "raw_review_text_included": false,
+  "individual_reviewer_ids_included": false,
+  "files": {
+    "sun_coverage.csv": "95e9dd670ecb010471a39dc3d2483da4104a7f06f94e3c1b70c243e70aaed18a",
+    "topic_sampling.csv": "89d64f4a40f20b894e9b4587c7070c237065e2065dd82e1738800020a790b8ef",
+    "Water_Works_Park.geojson": "28f153946c119ff5585b2e1d8141d07062c1958abfb2296bd2c38d60ed5b4c18",
+    "sun_income.csv": "2f49a84c2fe566138386ed36edad7df0ee48cb2b3d7c95b6e0012ae5b501e268",
+    "text_by_period.csv": "961a71a20f032fe05073174ae20a6695e5f95b1d42e742f999edf20983058ddc",
+    "star_distribution.csv": "c00128523a8559b89b0a1b9d90e975c9b899ffbdc1688933d9299d6b6ce2a8e4",
+    "sun_topic_audit.json": "c99bc5f0e7fac2707ce254876209870a76d3d0104e3a023e00b694eef403b00a",
+    "income_bands.csv": "bc6918a98f24c9bd396bf2b1cc43ce900fd970b6f85b4c96927228c3fc68f990",
+    "balance.csv": "efc6f61a2b47ee1152e0b92bca1dee16845f73a64b9d2be19e18e79e78bec04e",
+    "project_registry.json": "3bea3eb01e8a5238bfcf15131741c3d66ecd2e56b97847c247bb88d1b86445d5",
+    "sun_income_support.csv": "55df18049528e91243acd7f259437b4b140dc13d0a5569491741301529aab9a8",
+    "embedding_audit.json": "79e9d31023c248a76c2e1e3a0723b7a180dfcf39cfa49f7e070fbac3381ac4ba",
+    "quality.csv": "8082e7cc42993e7a4f874765af5a16a3efd65f48d571a318fdb0c968a0912edf",
+    "sun_composition.csv": "048d556e079f0af55fa7f962d686f36b305dc54b74ea59496035ffe31832900c",
+    "transfer_audit.json": "16444020e7f18cc5517296eef69d889d39f4bb6e6c905fd6d98c7ea4ed3d3772",
+    "Lafitte.geojson": "fcf0085fd32f03d08bfe860b31a8e501ad09f1b5c2af5b4c962bdd12bc6cebc5",
+    "topics.csv": "7b57d6940ba98ac202209132078890802464908b8235d3e449b43904a08fa876",
+    "vader_star_counts.csv": "64082ba6c555edb720be5dec10a8df0c68e1ddfba282e8a832670df729619843",
+    "transfer_coverage.csv": "ce65e05dd645292f8cc376e0e625b6bccf421181139e08ee9bf36cfcbea0fbc4",
+    "Sun_Link.geojson": "00aab6c7c19ba0d95b74ad2ba1498b2c5e6fa8c300bc2617c0839a3967452416",
+    "sun_topics.csv": "4f27f521651f67f512094a8b96d6e77dc49375655f2d616b5bc61d0de62c8f7e",
+    "sun_scopes.csv": "c0f791b09ca2e696fc86aa8a2015f9874d65884d23a4437d91b9965885e1cf4d",
+    "income_topics.csv": "af9d31c2f41de972d43351083bc7c634fd3d628de0f3deaa117d9e0547902750",
+    "topic_prevalence.csv": "158fbb8d6febe4090adc1ed8854710b662628cf630165bcd2805b056f40b9578",
+    "text_overview.csv": "808165e6f0710d8639ed1f72d8ba06d127d8570387d24918ef08a7d59a6370fe",
+    "annual.csv": "7078ba23886ab8417d004b5fa945abdbdcdb585d3db09f8ce2fca6b8cce30d4d",
+    "Riverfront_Ascend.geojson": "1577c41d0c03d0b6bb0a4cf177d4b674049a016b609e62811231ecf7d3df1a56",
+    "topic_terms.csv": "e9bd95c0b631c6f49ef713cf8aa0b0ea8beb9fc4dcb448a63ff569f0d4848baa",
+    "support.csv": "7202b26659766be1c0abc517fb74b879266d9702a05e4ac7a92fbd3afed09a17",
+    "influence.csv": "3d66d0ea1d12d48144eecb9a134eb034465c6dfec0af28d6bf4d55e3d74ee117",
+    "missingness.csv": "2d1ad0e5a083c9a543ab95d5453230c4ce6228f37d824a262ed952b68a972d7d",
+    "engagement.csv": "5c950baffd03cf291b0528f5543e4548fa3f1a592ddd9b5c0b6d95d160648817",
+    "Dilworth_Park.geojson": "b462a73d05810e490bc4caf659f9c93b43e52aaa4da9f788834147e11dbcdb63",
+    "experience.csv": "739ba20c2a5ff8e2fce6757c6df41625545fe973d8be116f00d77f1be4ed50d4",
+    "sun_experience.csv": "6ae2282abae1d3e4d2f3d75324b1538dfe38e2d63ae586211e5143516c3630cb",
+    "business_growth.csv": "9af8ccc8211eb63efb5a18e43f53e7374937f814e28939c16aa6868357dee505",
+    "business_growth_annual.csv": "5b5dd7280c8cf55344fff4d194373ed6401d95041ec3928b1761a6eb5a27f048",
+    "project_map.json": "f427d1047d2001365fa1dc6b7dcf3eb5897a475f6c4308d3612d8e1c3acb129b"
+  },
+  "map_and_business_growth": {
+    "prepared": "2026-09-12",
+    "script": "prepare_map_and_business_growth.py",
+    "business_sources": [
+      "/Users/john/Documents/AIB/CIS-509-Analytics-Unstructured-Data/Work/Exploratory Data Analysis Submission (Course Project Milestone 2)/Pilot Lafitte/business_features.csv",
+      "/Users/john/Documents/AIB/CIS-509-Analytics-Unstructured-Data/Work/Exploratory Data Analysis Submission (Course Project Milestone 2)/Pilot Lafitte/scored_reviews.csv.gz",
+      "/Users/john/Documents/AIB/CIS-509-Analytics-Unstructured-Data/Work/Exploratory Data Analysis Submission (Course Project Milestone 2)/Sun Link Full Corridor/business_inventory_8km.csv",
+      "/Users/john/Documents/AIB/CIS-509-Analytics-Unstructured-Data/Work/Exploratory Data Analysis Submission (Course Project Milestone 2)/Sun Link Full Corridor/scored_reviews.csv.gz",
+      "/Users/john/Documents/AIB/CIS-509-Analytics-Unstructured-Data/Work/Exploratory Data Analysis Submission (Course Project Milestone 2)/Five Project Study/Dilworth Park/business_features.csv",
+      "/Users/john/Documents/AIB/CIS-509-Analytics-Unstructured-Data/Work/Exploratory Data Analysis Submission (Course Project Milestone 2)/Five Project Study/Dilworth Park/scored_reviews.csv.gz",
+      "/Users/john/Documents/AIB/CIS-509-Analytics-Unstructured-Data/Work/Exploratory Data Analysis Submission (Course Project Milestone 2)/Five Project Study/Water Works Park/business_features.csv",
+      "/Users/john/Documents/AIB/CIS-509-Analytics-Unstructured-Data/Work/Exploratory Data Analysis Submission (Course Project Milestone 2)/Five Project Study/Water Works Park/scored_reviews.csv.gz",
+      "/Users/john/Documents/AIB/CIS-509-Analytics-Unstructured-Data/Work/Exploratory Data Analysis Submission (Course Project Milestone 2)/Five Project Study/Riverfront Ascend/business_features.csv",
+      "/Users/john/Documents/AIB/CIS-509-Analytics-Unstructured-Data/Work/Exploratory Data Analysis Submission (Course Project Milestone 2)/Five Project Study/Riverfront Ascend/scored_reviews.csv.gz"
+    ],
+    "meaning": "Active means at least one Yelp review in the specified two-year period, not verified operation. Sun Link uses inclusive full-corridor inventory.",
+    "map_source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_110m_admin_1_states_provinces.geojson",
+    "map_projection": "National EPSG:5070; project-specific UTM for 500 m buffers."
+  }
+}

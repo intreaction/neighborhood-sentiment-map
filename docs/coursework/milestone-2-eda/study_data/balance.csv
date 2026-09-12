@@ -1,0 +1,69 @@
+project,income_group,feature,standardized_gap
+Lafitte,All,log_n_pre,0.07070521537274169
+Lafitte,All,compound_pre,-0.024150469627134658
+Lafitte,All,log_income,0.06310364608302861
+Lafitte,All,poverty_rate,0.3555884337535665
+Lafitte,Lower,log_n_pre,0.10630104569352801
+Lafitte,Lower,compound_pre,-0.02786562878196153
+Lafitte,Lower,log_income,0.12607277041065823
+Lafitte,Lower,poverty_rate,0.45123096385215894
+Lafitte,Middle,log_n_pre,-0.07642995364244975
+Lafitte,Middle,compound_pre,0.002638915833565438
+Lafitte,Middle,log_income,-0.1424892829670599
+Lafitte,Middle,poverty_rate,0.0530991577521693
+Lafitte,Higher,log_n_pre,0.5026930822934229
+Lafitte,Higher,compound_pre,-0.25216204263768177
+Lafitte,Higher,log_income,-0.047742202807143065
+Lafitte,Higher,poverty_rate,0.03072022445189103
+Sun Link,All,log_n_pre,0.022181092230928064
+Sun Link,All,compound_pre,-0.027367956768249314
+Sun Link,All,log_income,-0.10586974017698786
+Sun Link,All,poverty_rate,-0.14478619994758837
+Sun Link,Lower,log_n_pre,0.04947126772142512
+Sun Link,Lower,compound_pre,-0.019153405526981603
+Sun Link,Lower,log_income,-0.11267565204549748
+Sun Link,Lower,poverty_rate,-0.1540938842299332
+Sun Link,Middle,log_n_pre,-0.40233274873235886
+Sun Link,Middle,compound_pre,-0.1551498649657402
+Sun Link,Middle,log_income,0.0
+Sun Link,Middle,poverty_rate,0.0
+Dilworth Park,All,log_n_pre,0.024690339304177546
+Dilworth Park,All,compound_pre,-0.03506521126625879
+Dilworth Park,All,log_income,0.16966369846146154
+Dilworth Park,All,poverty_rate,0.00648871233067287
+Dilworth Park,Lower,log_n_pre,0.5041600342212497
+Dilworth Park,Lower,compound_pre,-0.053333237938687876
+Dilworth Park,Lower,log_income,0.0
+Dilworth Park,Lower,poverty_rate,0.0
+Dilworth Park,Middle,log_n_pre,0.013954199057737635
+Dilworth Park,Middle,compound_pre,-0.04292587262472376
+Dilworth Park,Middle,log_income,0.10909933260475653
+Dilworth Park,Middle,poverty_rate,0.1616612372592098
+Dilworth Park,Higher,log_n_pre,0.028851107056398918
+Dilworth Park,Higher,compound_pre,-0.03088594403015404
+Dilworth Park,Higher,log_income,0.2019525642895572
+Dilworth Park,Higher,poverty_rate,-0.07488556083021437
+Water Works Park,All,log_n_pre,-0.12196468761691824
+Water Works Park,All,compound_pre,0.15962056844009337
+Water Works Park,All,log_income,0.0
+Water Works Park,All,poverty_rate,0.0
+Water Works Park,Higher,log_n_pre,-0.12196468761691824
+Water Works Park,Higher,compound_pre,0.15962056844009337
+Water Works Park,Higher,log_income,0.0
+Water Works Park,Higher,poverty_rate,0.0
+Riverfront / Ascend,All,log_n_pre,-0.02547162237588136
+Riverfront / Ascend,All,compound_pre,-0.09143646240898372
+Riverfront / Ascend,All,log_income,-0.008167699256803752
+Riverfront / Ascend,All,poverty_rate,-0.19144311255954327
+Riverfront / Ascend,Lower,log_n_pre,0.03994100966437703
+Riverfront / Ascend,Lower,compound_pre,-0.088899663656038
+Riverfront / Ascend,Lower,log_income,0.03680161721694835
+Riverfront / Ascend,Lower,poverty_rate,0.008691733381989758
+Riverfront / Ascend,Middle,log_n_pre,-0.23209764090780485
+Riverfront / Ascend,Middle,compound_pre,-0.04038881948474976
+Riverfront / Ascend,Middle,log_income,-0.0866944291178333
+Riverfront / Ascend,Middle,poverty_rate,-0.5648094852128674
+Riverfront / Ascend,Higher,log_n_pre,-0.04654168727144412
+Riverfront / Ascend,Higher,compound_pre,-0.0942901736964338
+Riverfront / Ascend,Higher,log_income,-0.0248432070519919
+Riverfront / Ascend,Higher,poverty_rate,-0.2648334298566415
