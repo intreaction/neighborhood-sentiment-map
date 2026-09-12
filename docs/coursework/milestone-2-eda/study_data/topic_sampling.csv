@@ -1,0 +1,21 @@
+project,area,period,available_reviews,sample_reviews
+Lafitte,comparison,post,57821,1500
+Lafitte,comparison,pre,28350,1500
+Lafitte,near,post,8808,1500
+Lafitte,near,pre,3592,1500
+Sun Link,comparison,post,34291,1500
+Sun Link,comparison,pre,9951,1500
+Sun Link,near,post,10918,1500
+Sun Link,near,pre,3804,1500
+Dilworth Park,comparison,post,78090,1500
+Dilworth Park,comparison,pre,41172,1500
+Dilworth Park,near,post,36591,1500
+Dilworth Park,near,pre,17233,1500
+Water Works Park,comparison,post,54351,1500
+Water Works Park,comparison,pre,12402,1500
+Water Works Park,near,post,1185,1185
+Water Works Park,near,pre,48,48
+Riverfront / Ascend,comparison,post,52860,1500
+Riverfront / Ascend,comparison,pre,18884,1500
+Riverfront / Ascend,near,post,13276,1500
+Riverfront / Ascend,near,pre,2441,1500

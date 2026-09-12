@@ -1,49 +1,39 @@
-# Project EDA evaluation
+# Final EDA rubric and validation review
 
-**Artifact reviewed:** `ProjectEDA_Team4.ipynb` and its HTML export  
-**Review date:** September 5, 2026  
-**Evaluator:** OpenAI Codex, applying the assignment's published rubric  
-**Estimated score:** **9.7 / 10 (97%)**  
-**Readiness:** Technically ready; complete the team/content-owner review before submission.
+Prepared September 12, 2026. Assignment: [CIS 509 Milestone 2](https://canvas.asu.edu/courses/264495/assignments/7537751). This is a completion check, not an instructor grade or teammate approval.
 
-This is a rubric-based estimate, not an instructor grade. The notebook was also checked mechanically: all 11 code cells have execution counts and saved outputs, and there are no recorded error outputs.
+| Requirement | Evidence in final notebook |
+|---|---|
+| Team information | Title block includes Team 4, all three names and ASURITE IDs. |
+| Project overview (10%) | Section 1 connects local public investment to business engagement and review experience, with three exploratory expectations. |
+| Data sources (10%) | Section 2 links Yelp, Census, GIS and project accounts; explains selection, time windows, geometry and non-comparable cost scope. |
+| Description/statistics (25%) | Section 3 reports counts, variable types, text lengths, vocabulary size and distributions. Figures 1–3 show study windows, sample attrition and text diagnostics. Section 4 tables report missingness and matched-control support. |
+| Quality/suitability (20%) | Section 4 covers sparse samples, missing context, geometry/ZIP limitations, user selection, composition, shared controls, confounding and missing cost/population denominators. |
+| Preliminary exploration (25%) | Section 5 compares five projects, engagement versus experience, local income groups, radius/weighting sensitivities, embedding categories and all-business Sun Link coverage. Figures 4–8 communicate these findings. |
+| Proposed AI solution (10%) | Section 6 specifies sentiment/topic validation, baseline models, exposure verification, improved study design and an auditable comparison tool. |
+| Generative AI use | Final Section 8 discloses Codex and Claude assistance and the team's responsibility to verify/explain the work. |
+| Deliverable formats | Executed `ProjectEDA_Team4.ipynb` and matching self-contained `ProjectEDA_Team4.html`. |
 
-## Rubric score
+## Technical checks completed
 
-| Rubric area | Weight | Estimated credit | Evaluation |
-|---|---:|---:|---|
-| Project overview | 10% | 10% | Clear business audience, decision problem, analytical question, and appropriately limited claim. The distinction between business-review sentiment and community well-being is especially strong. |
-| Data sources | 10% | 10% | Identifies Yelp, USASpending, and Census sources; explains collection, filtering, time window, geography, and important exclusions; includes source links. |
-| Data description and summary statistics | 25% | 24% | Strong unit-of-analysis discipline, field/type table, record and feature counts, missingness checks, distribution summaries, text statistics, regional coverage, and reproducible figures. A small deduction reflects density: reviewers may need more signposting to distinguish the headline statistics from supporting diagnostics. |
-| Data quality and suitability | 20% | 20% | Excellent. Treats ZIP/ZCTA mismatch, self-selection, historical boundaries, sparse cells, award geography, nominal dollars, dependence, and VADER validity as analytical limitations rather than footnotes. |
-| Preliminary exploration | 25% | 24% | Multiple relevant analyses connect directly to feasibility: rating/sentiment disagreement, time and volume patterns, funding concentration, candidate program language, and matched ZIP-quarter coverage. The association is correctly labeled descriptive. A small deduction reflects that the matched analysis is intentionally preliminary and does not yet include sensitivity views by region, program type, or time lag. |
-| Proposed AI solution | 10% | 10% | Specific next-stage methods, evaluation measures, leakage controls, geographic validation, and interface implications. The plan follows directly from the EDA findings. |
+- All 10 notebook code cells execute without error and generate eight plotted outputs.
+- Required aggregate files have matching SHA-256 hashes. Notebook metadata embeds 36 prepared inputs.
+- A clean directory containing only the submitted notebook restored those inputs and regenerated eight PNG/SVG figures.
+- Assertions verify all five projects, 2,004,265 extracted reviews, 704,025 selected pre/post records, 97,896 nearby text records and 28,233 reviews in the five-case topic sample.
+- Growth and experience contrasts are recomputed from prepared summaries and checked against saved values. VADER diagnostics are calculated from the star-by-label counts.
+- Figure helper code embedded in the notebook matches the accompanying Python module.
+- All eight figures were visually inspected; title spacing and topic labels were adjusted for readability. HTML narrative visibility and embedded figure rendering were checked in a browser. Images have descriptive alternative text.
 
-## What is strongest
+## Interpretation retained in the submission
 
-1. **The analysis tells one story.** It moves from the business question to data feasibility, measurement risk, preliminary relationships, and a defensible next-stage plan.
-2. **Claims are calibrated.** The notebook never turns a descriptive correlation into a causal result and explicitly explains why a weak/null relationship could still be informative.
-3. **The data audit is unusually credible.** Row reconciliation, duplicate checks, signed obligations, cache signatures, missingness, sampling rules, and units of analysis make the work inspectable.
-4. **The proposed AI work is testable.** It names baselines and evaluation measures rather than merely proposing "use AI."
-5. **AI use is disclosed clearly.** The disclosure says what Codex did and reserves interpretation and verification responsibility for the team.
+- Positive review activity is not proof of visits, resident involvement, revenue, welfare or business creation.
+- Water Works has only two primary matched pairs; primary estimates are suppressed rather than presented as supported results.
+- Income groups are within-city ZIP terciles, not individual or nationally comparable income groups.
+- Sentiment and activity use different eligible business cohorts. The inclusive Sun Link extension is pooled/unmatched and includes business-composition changes.
+- Topic labels are provisional; whole-review stars are not aspect ratings. Sampling, coverage and small category cells are disclosed.
+- Five cases and unreconciled cost/population denominators cannot identify a causal project-type effect, cost threshold, or spending per resident by income group.
+- No significance claims, independent-pair confidence intervals, causal placebo claims or unverified photo/visit measures are presented.
 
-## Remaining checks before submission
+## Repository integration
 
-- [ ] Ryan Wolff and Cameron Anthony review the central findings and confirm they can explain the analysis and code.
-- [ ] Confirm the data-source selection and any earlier team AI use so the disclosure is complete.
-- [ ] Confirm that `ProjectEDA_Team4.ipynb` and `ProjectEDA_Team4.html` are the only two files uploaded.
-- [ ] Open the final HTML independently and visually inspect all seven figures and tables.
-- [ ] Verify that the team wants the current cautious framing; do not strengthen the causal language.
-- [ ] Consider adding each teammate's ASURITE only if the instructor expects identifiers for every member. The published instructions require team ID and names, which are already present.
-
-## Optional refinements
-
-These are polish, not blockers:
-
-- Add a one-sentence "headline result" immediately before the preliminary-exploration subsections so a fast reviewer sees the main feasibility conclusion early.
-- Add one compact regional sensitivity table (matched share and descriptive correlation by region) only if it can be explained without crowding the notebook. Do not add it merely to increase analysis volume.
-- Tighten a few long methodology paragraphs if the team wants a shorter read; preserve the caveats and provenance details.
-
-## Bottom line
-
-The notebook fully addresses the published requirements and is stronger than a typical milestone EDA. Its only material prerequisite is human team review. The work should be submitted as a feasibility analysis, not as evidence that federal assistance caused changes in local business sentiment.
+The work is on `eda/five-project-submission`. Cameron's incoming `origin/main` history through `2d3fdf0` was merged with the pre-existing local history through `df9aece`, without rebasing or amending either. The submission revision is a separate commit after that merge. Cameron's `analysis/` files are retained unchanged. Nothing has been pushed or submitted.
