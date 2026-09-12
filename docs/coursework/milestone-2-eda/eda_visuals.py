@@ -22,7 +22,7 @@ def study_design(reg,out):
   ax.broken_barh([(pre[0],2)],(i-.14,.28),facecolors=GRAY);ax.broken_barh([(max(pre)+1,min(post)-max(pre)-1)],(i-.14,.28),facecolors=PALE);ax.broken_barh([(post[0],2)],(i-.14,.28),facecolors=TEAL)
   ax.scatter(year,i,marker='D',s=35,color=GOLD,zorder=3);ax.text(2018.38,i-.07,f'${r.cost_millions:g}m',fontsize=12,fontweight='bold',va='center');ax.text(2018.38,i+.18,types[i],fontsize=8.5,va='center',color='#596876')
  ax.set(yticks=range(5),yticklabels=[f'{NAMES[i]}\n{reg.set_index("project").loc[p,"city"]}' for i,p in enumerate(ORDER)],xlim=(2009.8,2018.1),ylim=(4.6,-.6),xticks=range(2010,2019),xlabel='Calendar year');ax.grid(axis='x',color=PALE);ax.set_axisbelow(True);ax.tick_params(axis='y',length=0,pad=12)
- title(fig,'Five projects and their observation windows','Each case has two baseline and two follow-up years. Construction and opening gaps are excluded.')
+ title(fig,'Project characteristics and observation windows','Each case has two baseline and two follow-up years. Construction and opening gaps are excluded.')
  fig.text(.835,.825,'REPORTED COST / TYPE',fontsize=9,fontweight='bold')
  fig.legend(handles=[Patch(color=GRAY,label='Before construction'),Patch(color=PALE,label='Excluded gap'),Line2D([],[],marker='D',linestyle='',color=GOLD,label='Opening'),Patch(color=TEAL,label='Post-opening')],loc='lower center',ncol=4,frameon=False,bbox_to_anchor=(.47,.01),fontsize=9)
  return finish(fig,out,'01_study_design')
@@ -30,7 +30,7 @@ def coverage(overview,quality,support,out):
  z=overview.set_index('project').loc[ORDER].join(quality.set_index('project')[['baseline_near_500']]).join(support.query("radius_m==500 and income_group=='All'").set_index('project')[['matched_pairs']]);fig,ax=plt.subplots(figsize=(12,4.7));fig.subplots_adjust(left=.20,right=.78,top=.77,bottom=.15)
  y=np.arange(5);ax.barh(y,100,color=PALE,height=.6);ax.barh(y,100*z.baseline_near_500/z.listed_500m,color=GOLD,height=.6);ax.barh(y,100*z.matched_pairs/z.listed_500m,color=TEAL,height=.6)
  for i,p in enumerate(ORDER):ax.text(103,i,f'{int(z.loc[p,"matched_pairs"]):,} / {int(z.loc[p,"listed_500m"]):,}',va='center',fontsize=11,fontweight='bold',color=ORANGE if p=='Water Works Park' else INK)
- ax.set(yticks=y,yticklabels=NAMES,xlim=(0,100),ylim=(4.6,-.6),xticks=[0,25,50,75,100],xlabel='Share of nearby listings (%)');ax.tick_params(axis='y',length=0);title(fig,'Coverage limits the strength of the comparison','Four cases support the primary comparison. Water Works has only two matched businesses.')
+ ax.set(yticks=y,yticklabels=NAMES,xlim=(0,100),ylim=(4.6,-.6),xticks=[0,25,50,75,100],xlabel='Share of nearby listings (%)');ax.tick_params(axis='y',length=0);title(fig,'Business coverage and matched samples','Four cases support the primary comparison. Water Works has only two matched businesses.')
  fig.text(.80,.81,'MATCHED / LISTED',fontsize=9,fontweight='bold');fig.legend(handles=[Patch(color=TEAL,label='Matched'),Patch(color=GOLD,label='Baseline ≥5, unmatched'),Patch(color=PALE,label='Fewer than 5 baseline reviews')],loc='lower center',ncol=3,frameon=False,bbox_to_anchor=(.52,-.02),fontsize=9)
  return finish(fig,out,'02_coverage')
 def text_diagnostics(cm,length,out):
@@ -41,8 +41,8 @@ def text_diagnostics(cm,length,out):
  ax.set(xticks=range(3),xticklabels=pct.columns,yticks=range(5),yticklabels=[f'{i} star'+('' if i==1 else 's') for i in range(1,6)],title='VADER labels within each star rating',xlabel='Whole-review sentiment label');ax.tick_params(length=0)
  ax=axes[1];z=length.set_index('project').loc[ORDER];y=np.arange(5);ax.hlines(y,z.p10_words,z.p90_words,color=GRAY,lw=3);ax.scatter(z.median_words,y,color=TEAL,s=50,zorder=3)
  for i,row in enumerate(z.itertuples()):ax.text(row.p90_words+7,i,str(int(row.median_words))+' median',va='center',fontsize=9)
- ax.set(yticks=y,yticklabels=NAMES,ylim=(4.5,-.5),xlim=(0,340),title='Review length varies substantially',xlabel='Words per review');ax.tick_params(axis='y',length=0);ax.grid(axis='x',color=PALE)
- title(fig,'Positive language can appear in low-star reviews','All pre/post review text within 500 m. Star labels provide an imperfect check on VADER sentiment.')
+ ax.set(yticks=y,yticklabels=NAMES,ylim=(4.5,-.5),xlim=(0,340),title='Review length by project',xlabel='Words per review');ax.tick_params(axis='y',length=0);ax.grid(axis='x',color=PALE)
+ title(fig,'VADER sentiment and review length','All pre/post review text within 500 m. Star labels provide an imperfect check on VADER sentiment.')
  fig.text(.57,.04,'Line: 10th–90th percentile   •   Dot: median',fontsize=9,color='#596876')
  return finish(fig,out,'03_text_diagnostics')
 def outcome_panel(activity,experience,out):
@@ -55,7 +55,7 @@ def outcome_panel(activity,experience,out):
    if n<20:ax.axhspan(i-.35,i+.35,color='#F3F4F5');ax.text(sum(limits)/2,i,'Sparse: n=2',ha='center',va='center',fontsize=8,color='#77828C');continue
    color=TEAL if val>=0 else ORANGE;ax.hlines(i,0,val,color=color,lw=2);ax.scatter(val,i,s=48,color=color,zorder=3);label=f'{val:+.1f}' if metric in ['reviews','checkins','tips'] else f'{val:+.3f}';ax.annotate(label,(val,i),xytext=(5 if val>=0 else -5,0),textcoords='offset points',ha='left' if val>=0 else 'right',va='center',fontsize=8)
   ax.axvline(0,color='#9AA5AF',lw=.8);ax.set(xlim=limits,ylim=(4.6,-.6),yticks=range(5),yticklabels=NAMES if ax==axes[0] else [],title=heading,xlabel=xlabel);ax.tick_params(axis='y',length=0);ax.tick_params(axis='x',labelsize=8);ax.xaxis.set_major_locator(plt.MaxNLocator(3));ax.grid(axis='y',color=PALE,zorder=0)
- title(fig,'Engagement and review experience show different patterns','Matched businesses within 500 m versus farther controls. Positive values favor nearby businesses. The estimates are descriptive.')
+ title(fig,'Matched changes in engagement and review experience','Matched businesses within 500 m versus farther controls. Positive values favor nearby businesses. The estimates are descriptive.')
  fig.text(.16,.025,'Activity cohorts: 142 / 149 / 498 / 2 / 85 pairs.   Experience cohorts: 59 / 75 / 248 / 2 / 45 pairs, in project order.',fontsize=9,color='#596876')
  return finish(fig,out,'04_outcomes')
 def income_panel(activity,support,out):
@@ -67,7 +67,7 @@ def income_panel(activity,support,out):
    if count<20:ax.add_patch(Rectangle((j-.5,i-.5),1,1,facecolor='#EEF0F2',edgecolor='white'));text='No pairs' if count==0 else f'Sparse\nn={count}';color='#78838E'
    else:text=f'{value:+.1f}%\nn={count}';color='white' if abs(value)>130 else INK
    ax.text(j,i,text,ha='center',va='center',color=color,fontsize=10)
- ax.set(xticks=range(3),xticklabels=['Lower local ZIP income','Middle local ZIP income','Higher local ZIP income'],yticks=range(5),yticklabels=NAMES);ax.tick_params(length=0);fig.colorbar(im,ax=ax,fraction=.045,pad=.025,label='Relative review growth (%)',ticks=[-200,-100,0,100,200]);title(fig,'Income comparisons have uneven sample support','Baseline ACS income at the business ZIP. Each city has its own income bands. Reviewer incomes are unknown.')
+ ax.set(xticks=range(3),xticklabels=['Lower local ZIP income','Middle local ZIP income','Higher local ZIP income'],yticks=range(5),yticklabels=NAMES);ax.tick_params(length=0);fig.colorbar(im,ax=ax,fraction=.045,pad=.025,label='Relative review growth (%)',ticks=[-200,-100,0,100,200]);title(fig,'Relative review growth by neighborhood income','Baseline ACS income at the business ZIP. Each city has its own income bands. Reviewer incomes are unknown.')
  return finish(fig,out,'05_income')
 def sensitivity(activity,influence,out):
  fig,axes=plt.subplots(1,5,figsize=(14,4.5),sharey=True);fig.subplots_adjust(left=.07,right=.98,top=.73,bottom=.18,wspace=.20)
@@ -78,7 +78,7 @@ def sensitivity(activity,influence,out):
   if primary.pairs.iloc[0]>=20:ax.scatter(500,primary.relative_growth_pct.iloc[0],color=TEAL,s=65,zorder=3)
   else:ax.text(.5,.8,'250 m / 500 m\nsamples too small',transform=ax.transAxes,ha='center',fontsize=9,color='#75828E')
   ax.axhline(0,color='#A7B0B8',lw=.8);ax.set(title=name,xticks=[250,500,1000],xlim=(175,1075),ylim=(-65,190),xlabel='Radius (m)');ax.tick_params(axis='x',labelsize=9);ax.grid(axis='y',color=PALE)
- axes[0].set_ylabel('Relative review growth (%)');title(fig,'The size of the association depends on geographic scope','Dots compare 250 m, 500 m and 1,000 m definitions. Teal marks the primary estimate. These are sensitivity checks.')
+ axes[0].set_ylabel('Relative review growth (%)');title(fig,'Relative review growth by distance from project','Dots compare 250 m, 500 m and 1,000 m definitions. Teal marks the primary estimate. These are sensitivity checks.')
  return finish(fig,out,'06_sensitivity')
 def topic_panel(topics,out):
  cats=['Food and dishes','Location/local identity (mixed)','Mixed evaluations/negation','Mixed interactions/intentions','Overall experience/service','Visit timing/waiting'];short=['Food /\ndishes','Local\nidentity\n(mixed)','Evaluation\n/ negation\n(mixed)','Interaction\n/ intention\n(mixed)','Experience\n/ service','Visit timing\n/ waiting']
@@ -92,7 +92,7 @@ def topic_panel(topics,out):
     else:label=f'{v:+.2f}';color='white' if abs(v)>.65*limit else INK
     ax.text(j,i,label,ha='center',va='center',fontsize=8,color=color)
   ax.set(xticks=range(6),xticklabels=short,yticks=range(5),yticklabels=NAMES if ax==axes[0] else [],title=heading);ax.tick_params(length=0,labelsize=8);fig.colorbar(im,ax=ax,fraction=.035,pad=.025,shrink=.75)
- title(fig,'Review categories mix topics and evaluative language','Post minus pre means for sampled nearby reviews. Business mix may explain differences. Gray cells lack 30 reviews in a period.')
+ title(fig,'Sentiment and ratings by review category','Post minus pre means for sampled nearby reviews. Business mix may explain differences. Gray cells lack 30 reviews in a period.')
  fig.text(.15,.07,'A review can discuss several categories. Sentence sentiment and whole-review stars measure different things.\nThe model uses the original two cities\' baseline text. We freeze it for all five cases.',fontsize=9,color='#596876')
  return finish(fig,out,'07_topics')
 def sun_panel(composition,scopes,out):
@@ -103,9 +103,9 @@ def sun_panel(composition,scopes,out):
   if group=='No baseline reviews':ax.text(1,bottom[1]+v[1]/2,'49.4%\nof post reviews',ha='center',va='center',color=INK,fontweight='bold',fontsize=10)
   bottom+=v
  for i,v in enumerate(bottom):ax.text(i,v+250,f'{int(v):,}',ha='center',fontweight='bold')
- ax.set(xticks=[0,1],xticklabels=['2010–11\nBaseline','2015–16\nPost-opening'],ylabel='Recorded corridor reviews',ylim=(0,12500),title='Activity includes a changing business mix');ax.legend(loc='upper left',bbox_to_anchor=(-.12,-.18),ncol=1,frameon=False,fontsize=9)
+ ax.set(xticks=[0,1],xticklabels=['2010–11\nBaseline','2015–16\nPost-opening'],ylabel='Recorded corridor reviews',ylim=(0,12500),title='Review counts by baseline activity');ax.legend(loc='upper left',bbox_to_anchor=(-.12,-.18),ncol=1,frameon=False,fontsize=9)
  ax=axes[1];z=scopes.query("radius_m==500 and scope=='All listed businesses' and period=='post'").set_index('metric');metrics=['reviews','checkins','tips'];vals=z.loc[metrics,'relative_growth_pct']
  for i,(metric,val) in enumerate(vals.items()):
   color=TEAL if val>=0 else ORANGE;ax.hlines(i,0,val,color=color,lw=3);ax.scatter(val,i,color=color,s=60);ax.annotate(f'{val:+.1f}%',(val,i),xytext=(7 if val>=0 else -7,0),textcoords='offset points',ha='left' if val>=0 else 'right',va='center',fontsize=11,fontweight='bold')
- ax.axvline(0,color='#A7B0B8');ax.set(yticks=[0,1,2],yticklabels=['Reviews','Check-ins','Tips'],ylim=(2.6,-.6),xlim=(-48,15),xlabel='Relative growth versus farther area (%)',title='Growth is not a uniform relative advantage');ax.tick_params(axis='y',length=0);title(fig,'Sun Link includes a changing business population','All 717 Yelp listings within 500 m of the route. This unmatched comparison includes listings with no baseline reviews.')
+ ax.axvline(0,color='#A7B0B8');ax.set(yticks=[0,1,2],yticklabels=['Reviews','Check-ins','Tips'],ylim=(2.6,-.6),xlim=(-48,15),xlabel='Relative growth versus farther area (%)',title='Relative growth by engagement measure');ax.tick_params(axis='y',length=0);title(fig,'Sun Link corridor engagement and business composition','All 717 Yelp listings within 500 m of the route. This unmatched comparison includes listings with no baseline reviews.')
  return finish(fig,out,'08_sun_corridor')
