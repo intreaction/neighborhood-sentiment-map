@@ -1,0 +1,13 @@
+{
+  "reviews_prepost": 14750,
+  "reviews_by_period": {
+    "post": 10943,
+    "pre": 3807
+  },
+  "eligible_sentences": 111966,
+  "assigned_sentences": 98723,
+  "assigned_reviews": 14717,
+  "review_category_records": 48770,
+  "sampling": "None: all500m pre/post review texts",
+  "model": "Frozen two-city baseline Word2Vec/KMeans; no refit; mixed provisional categories"
+}
