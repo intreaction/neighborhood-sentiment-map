@@ -4,14 +4,14 @@ Prepared September 12, 2026. Assignment: [CIS 509 Milestone 2](https://canvas.as
 
 | Requirement | Evidence in final notebook |
 |---|---|
-| Team information | Title block includes Public Investment Map Team, Team 4, all three names and ASURITE IDs. |
-| Project overview (10%) | Section 1 connects local public investment to business engagement and review experience, with three exploratory expectations. |
-| Data sources (10%) | Section 2 links Yelp, Census, GIS and project accounts; explains selection, time windows, geometry and non-comparable cost scope. |
-| Description/statistics (25%) | Section 3 reports counts, variable types, text lengths, vocabulary size and distributions. Figures 1–4 show project geography, study windows, sample attrition and text diagnostics. Section 4 tables report missingness and matched-control support. |
-| Quality/suitability (20%) | Section 4 covers sparse samples, missing context, geometry/ZIP limitations, user selection, composition, shared controls, confounding and missing cost/population denominators. |
-| Preliminary exploration (25%) | Section 5 compares five projects, engagement versus experience, local income groups, radius/weighting sensitivities, embedding categories and all-business Sun Link coverage. Figures 5–10 communicate these findings and changes in reviewed-business counts. |
-| Proposed AI solution (10%) | Section 6 specifies sentiment/topic validation, baseline models, exposure verification, improved study design and an auditable comparison tool. |
-| Generative AI use | Final Section 8 discloses Codex and Claude assistance and the team's responsibility to verify/explain the work. |
+| Team information | Section 1 lists Public Investment Map Team, Team 4, all three names and ASURITE IDs. |
+| Project overview (10%) | Section 2 names the customer and decision (district and economic-development organisations choosing public-space investments), then connects local public investment to business engagement and review experience, with three exploratory expectations. |
+| Data sources (10%) | Section 3 links Yelp, Census, GIS and project accounts; explains selection, time windows, geometry and non-comparable cost scope. |
+| Description/statistics (25%) | Section 4 reports record counts at four units of observation, variable types, a missingness summary, text lengths, the 6,966-word vocabulary and distributions. Figures 1–4 show project geography, study windows, sample attrition and text diagnostics. Section 5 tables report missingness in full and matched-control support. |
+| Quality/suitability (20%) | Section 5 covers sparse samples, missing context, geometry/ZIP limitations, user selection, composition, shared controls, confounding and missing cost/population denominators. |
+| Preliminary exploration (25%) | Section 6 compares five projects, engagement versus experience, local income groups, radius/weighting sensitivities, embedding categories and all-business Sun Link coverage. Figures 5–10 communicate these findings and changes in reviewed-business counts. |
+| Proposed AI solution (10%) | Section 7 specifies sentiment/topic validation, baseline models, exposure verification, improved study design, an auditable comparison tool, and the open-source Python stack (scikit-learn, NLTK, spaCy, Hugging Face). |
+| Generative AI use | Section 8 discloses Codex and Claude assistance and the team's responsibility to verify/explain the work. Reproduction details follow in Appendix A. |
 | Deliverable formats | Executed `ProjectEDA_Team4.ipynb` and matching self-contained `ProjectEDA_Team4.html`. |
 
 ## Technical checks completed
@@ -36,7 +36,9 @@ Prepared September 12, 2026. Assignment: [CIS 509 Milestone 2](https://canvas.as
 
 ## Repository integration
 
-The work is on `eda/five-project-submission`. Cameron's incoming `origin/main` history through `2d3fdf0` was merged with the pre-existing local history through `df9aece`, without rebasing or amending either. The submission revision is a separate commit after that merge. Cameron's `analysis/` files are retained unchanged. Nothing has been pushed or submitted.
+The five-project submission was pushed as a single commit, `63a4c0f` on `eda/milestone-2-review`, built directly on `2d3fdf0` from `origin/main`. Cameron's `analysis/` files are retained unchanged. Earlier local pilot history is not in the pushed branch; it remains in the assignment's local Work folder.
+
+`e0b8f8c` on `eda/rubric-alignment` then renumbered the notebook so its eight sections map one-to-one onto the rubric, added the customer framing to Section 2, the record/missingness/text-statistics summary to Section 4 and the named toolkit stack to Section 7, and moved reproduction notes to Appendix A. Those edits are markdown only: on re-execution, every computed output value and all ten figures are byte-identical to `63a4c0f`. The team confirmed `eda/rubric-alignment` as the version going forward.
 
 ## Map and business-activity extension
 
