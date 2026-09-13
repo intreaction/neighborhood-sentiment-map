@@ -11,6 +11,13 @@ NotebookClient(nb,timeout=1800,resources={'metadata':{'path':str(P)}}).execute()
 nbformat.write(nb,P/'ProjectEDA_Team4.ipynb')
 exporter=HTMLExporter(exclude_input=True,exclude_input_prompt=True,exclude_output_prompt=True)
 body,_=exporter.from_notebook_node(nb)
+# nbconvert's template loads RequireJS and MathJax from a CDN and adds a Mermaid loader.
+# This report has no widgets, math or diagrams, and remote scripts would contradict the
+# self-contained HTML the README promises.
+body=re.sub(r'<script[^>]*\bsrc="https?://[^"]*"[^>]*>\s*</script>\s*','',body)
+body=re.sub(r'<script type="text/x-mathjax-config">.*?</script>\s*','',body,flags=re.S)
+body=re.sub(r'<script type="module">(?:(?!</script>).)*?mermaid.*?</script>\s*','',body,flags=re.S)
+assert not re.search(r'<script[^>]*\bsrc="https?://',body), 'remote script still present'
 style='''<style id="submission-style">
 :root{--jp-layout-color0:#fff;--jp-content-font-color0:#20334a;--jp-content-font-color1:#26394d;--jp-content-font-family:Arial,Helvetica,sans-serif;--jp-content-font-size1:16px;}
 body{background:#fff!important;color:#26394d!important;}
