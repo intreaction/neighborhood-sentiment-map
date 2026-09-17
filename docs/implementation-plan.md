@@ -15,7 +15,7 @@ The project pivots from an evaluation of customer satisfaction to an evaluation 
 
 1. **Thesis 1 (Community Voice):** People engage with public reviews/comments because they care about the improvement of their community. Unstructured reviews contain substantive discourse on public amenities, physical surroundings, walkability, cleanliness, and accessibility, alongside commercial evaluations.
 2. **Thesis 2 (Engagement Generation):** Publicly funded projects catalyze higher local engagement across business catchments, accelerating review volume, unique reviewer density, and active business participation relative to matched comparison areas.
-3. **Thesis 3 (Capital Efficiency by Project Type):** Capital efficiency—defined as net community engagement generated per public dollar spent—varies systematically across infrastructure typologies (e.g., linear greenways vs. civic plazas vs. heavy transit corridors vs. riverfront parks).
+3. **Thesis 3 (Descriptive Capital Efficiency Across Curated Cases):** Capital efficiency—measured as community engagement generated per public dollar spent—exhibits stark descriptive contrasts across our five curated projects. With $N=5$ cases (one project per city/typology), project type is collinear with geography, cost scale, and local baseline density; this is strictly a descriptive comparison of specific capital investments, not a generalizable causal claim across project classes.
 
 ### 1.2 Grounding in EDA Evidence
 
@@ -48,18 +48,26 @@ Alongside log-transformed contrast to mitigate extreme skew:
 $$\Delta E_{\log} = \frac{1}{|\mathcal{P}|} \sum_{(i, j) \in \mathcal{P}} \left[ \big(\ln(1 + Y_{i, \text{post}}) - \ln(1 + Y_{i, \text{pre}})\big) - \big(\ln(1 + Y_{j, \text{post}}) - \ln(1 + Y_{j, \text{pre}})\big) \right]$$
 
 ### 2.3 Capital Efficiency Estimands ($CE$)
-To measure return in community engagement per dollar of public capital outlay:
+Because absolute review gains are inflated by dense baselines (e.g., Center City Philadelphia) while percentage gains are inflated by sparse baselines (e.g., Water Works Park), we lock in a dual-reporting framework and a baseline-normalized rate:
 
-1. **Raw Review Gain per \$1M Capital Outlay:**
-   $$CE_{\text{reviews}} = \frac{\Delta \text{Net Reviews}}{\text{Cost in Millions}} = \frac{\sum_{i \in \mathcal{N}} (Y_{i, \text{post}} - Y_{i, \text{pre}}) - \sum_{j \in \mathcal{C}} (Y_{j, \text{post}} - Y_{j, \text{pre}})}{\text{Cost (\$M)}}$$
+1. **Absolute Matched Gain per \$1M Capital Outlay ($CE_{\text{abs}}$):**
+   Measures net reviewer traffic added to the matched business sample per million dollars invested:
+   $$CE_{\text{abs}} = \frac{\sum_{i \in \mathcal{N}} (Y_{i, \text{post}} - Y_{i, \text{pre}}) - \sum_{j \in \mathcal{C}} (Y_{j, \text{post}} - Y_{j, \text{pre}})}{\text{Cost (\$M)}} = \frac{|\mathcal{P}| \times \Delta \bar{Y}_{\text{DiD}}}{\text{Cost (\$M)}}$$
 
-2. **Active Business Expansion per \$1M Capital Outlay:**
-   $$CE_{\text{biz}} = \frac{\Delta N_{\mathcal{N}}^{\text{active}} - \Delta N_{\mathcal{C}}^{\text{active}}}{\text{Cost (\$M)}}$$
+2. **Relative Growth Rate per \$1M Capital Outlay ($CE_{\text{rel}}$):**
+   Measures the net percentage acceleration of nearby activity relative to control trend per million dollars:
+   $$CE_{\text{rel}} = \frac{\Delta E_{\text{rel}}}{\text{Cost (\$M)}}$$
 
-3. **Per-Capita Capital Efficiency ($CE_{\text{capita}}$):**
-   Normalizing by baseline residential population within the project catchment area ($Pop_{\text{catchment}}$, Census 2010/2012 ACS 5-year estimate):
-   $$CE_{\text{capita}} = \frac{CE_{\text{reviews}}}{Pop_{\text{catchment}} / 10{,}000}$$
+3. **Baseline-Normalized Capital Efficiency ($CE_{\text{norm}}$):**
+   Normalizes net absolute review generation by the pre-existing baseline review volume of the near cohort:
+   $$CE_{\text{norm}} = \frac{|\mathcal{P}| \times \Delta \bar{Y}_{\text{DiD}}}{\left(\sum_{i \in \mathcal{N}} Y_{i, \text{pre}}\right) \times \text{Cost (\$M)}} \times 100 = \frac{\Delta E_{\text{net}}}{\text{Baseline Volume} \times \text{Cost (\$M)}} \times 100$$
 
+4. **Active Business Expansion per \$1M Capital Outlay ($CE_{\text{biz}}$):**
+   Measures net reviewed business participation on Yelp within the 500m catchment per million dollars:
+   $$CE_{\text{biz}} = \frac{\Delta N_{\mathcal{N}}^{\text{active}} - \left(N_{\mathcal{N}, \text{pre}}^{\text{active}} \times \text{Growth}_{\mathcal{C}}^{\text{biz}}\right)}{\text{Cost (\$M)}}$$
+
+5. **Support and Display Invariant:**
+   Ratios with $N_{\text{pairs}} < 20$ (specifically Water Works Park primary 500m with $N=2$) MUST be marked `low_support = True` and suppressed from ranking comparisons. No ratio may be presented without its underlying baseline counts.
 ### 2.4 Community Voice Share ($CVS$)
 To test Thesis 1, text is partitioned into Community Aspects ($\mathcal{A}_{\text{community}}$) vs. Transactional Aspects ($\mathcal{A}_{\text{commercial}}$):
 - $\mathcal{A}_{\text{community}}$: Surroundings & Streetscape, Accessibility & Transit, Walkability & Bikeability, Cleanliness & Public Safety.
