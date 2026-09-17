@@ -69,6 +69,66 @@
       <p class="method-note">−0.92 net reviews / $1M (−0.02% / $1M). $196.5M fixed rail in Tucson lagged matched citywide review growth.</p>
     </div>
   </div>
+
+  <div class="scenario-card" id="scenario-explorer" style="margin-top: 30px; border-top: 1px solid var(--line); padding-top: 25px;">
+    <div class="card-heading">
+      <div>
+        <span class="eyebrow">Prospective Policy Planning</span>
+        <h3 style="font: 22px/1.2 Georgia, serif; margin: 4px 0 6px;">Reference-Case Scenario Explorer</h3>
+        <p style="font-size: 12px; color: var(--muted); margin: 0;">Apply empirical reference classes to explore prospective review volume generation and capital efficiency. Illustrative scenario ranges derived from observed single-case radius sensitivities (N=1 per typology); not a predictive forecast.</p>
+      </div>
+    </div>
+
+    <div class="scenario-grid" style="display: grid; grid-template-columns: minmax(280px, 1fr) 1.3fr; gap: 20px; margin-top: 18px;">
+      <div class="scenario-controls" style="background: var(--white); padding: 18px; border: 1px solid var(--line); border-radius: 8px;">
+        <label for="scenBudget" style="display:block; font-weight:600; margin-bottom: 6px;">
+          Proposed Capital Outlay: $<span id="scenBudgetValue">15.0</span>M
+        </label>
+        <input id="scenBudget" type="range" min="1" max="250" step="1" value="15" style="width: 100%; accent-color: var(--teal); margin-bottom: 15px;">
+
+        <label for="scenTypology" style="display:block; font-weight:600; margin-bottom: 6px;">Infrastructure Typology</label>
+        <select id="scenTypology" style="width: 100%; padding: 8px; margin-bottom: 15px; background: var(--paper);">
+          <option value="greenway" selected>Linear Greenway / Trail (Ref: Lafitte Greenway, N=1)</option>
+          <option value="plaza">Civic Plaza / Transit Hub (Ref: Dilworth Park, N=1)</option>
+          <option value="riverfront">Riverfront Event Park (Ref: Riverfront / Ascend, N=1)</option>
+          <option value="transit">Fixed-Rail Transit / Streetcar (Ref: Sun Link, N=1)</option>
+        </select>
+
+        <label for="scenZip" style="display:block; font-weight:600; margin-bottom: 6px;">Target Corridor (Study ZCTA)</label>
+        <select id="scenZip" style="width: 100%; padding: 8px; margin-bottom: 10px; background: var(--paper);"></select>
+
+        <div id="scenContext" style="font-size: 11px; color: var(--muted); background: var(--paper); padding: 10px; border-radius: 5px;"></div>
+      </div>
+
+      <div class="scenario-outputs" style="background: var(--white); padding: 18px; border: 1px solid var(--line); border-radius: 8px; display: flex; flex-direction: column; justify-content: space-between;">
+        <div>
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 8px;">
+            <span class="eyebrow" id="scenRefName">Reference Case: Lafitte Greenway (N=1)</span>
+            <span class="pill" id="scenRadiusSpread">DiD Spread: +10.59 to +23.26 revs/biz</span>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px;">
+            <div style="background: var(--paper); padding: 14px; border-radius: 6px;">
+              <div class="eyebrow">Projected Net Reviews</div>
+              <div class="number" id="scenNetReviews" style="font-size: 24px; margin-top: 6px;">+1,500 – +3,300</div>
+              <p class="method-note" style="margin: 4px 0 0;">Estimated customer interaction surge across local business catchment.</p>
+            </div>
+            <div style="background: var(--paper); padding: 14px; border-radius: 6px;">
+              <div class="eyebrow">Projected Capital Efficiency</div>
+              <div class="number" id="scenEfficiency" style="font-size: 24px; margin-top: 6px; color: var(--teal);">+100.0 – +220.0</div>
+              <p class="method-note" style="margin: 4px 0 0;">Net reviews generated per $1M public outlay (CE_abs).</p>
+            </div>
+          </div>
+
+          <div id="scenAlert" style="display:none; padding: 12px; background: #faede6; border-left: 4px solid var(--orange); border-radius: 4px; font-size: 12px; margin-bottom: 12px;"></div>
+        </div>
+
+        <p class="method-note" style="margin: 0; font-size: 11px;">
+          <strong>Methodological Disclaimer:</strong> Adopts the principles of Reference Class Forecasting (Kahneman &amp; Flyvbjerg) using single-case empirical distance sensitivities (N=1). Projections are illustrative scenario ranges, not predictive forecasts. Transferability assumes similar local commercial responsiveness.
+        </p>
+      </div>
+    </div>
+  </div>
 </section>
 
 <section class="chapter" id="lag-lab" aria-labelledby="lag-title">

@@ -83,7 +83,8 @@ function renderAnalysis(){
   const rows=comparisonRows(),included=rows.filter(r=>r.included),r=correlation(included.map(r=>[signedLog(r.xFunding),r.y]));currentRows=rows;
   $('correlation').textContent=r==null?'—':(r>0?'+':'')+r.toFixed(3);$('eligibleCount').textContent=included.length;$('excludedCount').textContent=rows.length-included.length;
   $('relationshipText').textContent=r==null?'Not enough usable variation to calculate a correlation. Adjust the quarter, funding window or review coverage.':`${Math.abs(r)<.1?'Little linear association appears':r>0?'Higher recorded funding aligns with higher outcomes':'Higher recorded funding aligns with lower outcomes'} in this snapshot, using signed-log ${A.basis==='resident'?'funding per 2020 resident':'total funding'} and ${A.outcome==='change'?'annual sentiment change':'sentiment level'}.${included.length<10?' Fewer than ten ZIPs are included; this comparison is especially sensitive to individual places.':''}`;
-  drawScatter(rows);drawLags();renderReviews();renderLedger(rows);renderPopulation();
+  if(S.zip && $('scenZip') && $('scenZip').value !== S.zip) $('scenZip').value = S.zip;
+  drawScatter(rows);drawLags();renderReviews();renderLedger(rows);renderPopulation();renderScenarioExplorer();
 }
 function renderCapitalEfficiency(){
   if(!$('efficiencyRows')) return;
@@ -134,6 +135,87 @@ function renderCapitalEfficiency(){
     </tr>`;
   }).join('');
 }
+const REFERENCE_CLASSES = {
+  greenway: {
+    name: 'Linear Greenway / Trail',
+    source: 'Lafitte Greenway (N=1)',
+    didLow: 10.59,
+    didHigh: 23.26,
+    spreadLabel: 'DiD Spread: +10.59 to +23.26 revs/biz (500m vs 1000m)',
+  },
+  plaza: {
+    name: 'Civic Plaza / Transit Hub',
+    source: 'Dilworth Park (N=1)',
+    didLow: -1.27,
+    didHigh: 7.50,
+    spreadLabel: 'DiD Spread: −1.27 (250m) to +7.50 (500m)',
+  },
+  riverfront: {
+    name: 'Riverfront Event Park',
+    source: 'Riverfront / Ascend (N=1)',
+    didLow: 12.55,
+    didHigh: 44.48,
+    spreadLabel: 'DiD Spread: +12.55 (1000m) to +44.48 (250m)',
+  },
+  transit: {
+    name: 'Fixed-Rail Transit / Streetcar',
+    source: 'Sun Link (N=1)',
+    didLow: -1.36,
+    didHigh: -0.92,
+    spreadLabel: 'DiD Spread: −1.36 (250m) to −0.92 (1000m)',
+  },
+};
+
+function renderScenarioExplorer() {
+  if (!$('scenBudget')) return;
+  const budget = parseFloat($('scenBudget').value) || 15.0;
+  if ($('scenBudgetValue')) $('scenBudgetValue').textContent = budget.toFixed(1);
+
+  const typKey = $('scenTypology') ? $('scenTypology').value : 'greenway';
+  const ref = REFERENCE_CLASSES[typKey] || REFERENCE_CLASSES.greenway;
+
+  if ($('scenRefName')) $('scenRefName').textContent = `Reference Case: ${ref.source}`;
+  if ($('scenRadiusSpread')) $('scenRadiusSpread').textContent = ref.spreadLabel;
+
+  const targetZip = $('scenZip') ? $('scenZip').value : S.zip;
+  const zInfo = features[targetZip]?.properties;
+  const metro = zInfo ? zInfo.metro : S.city;
+  const pop = populationOf(targetZip);
+  const reviewsAtQuarter = zInfo ? zInfo.n[S.q] : 50;
+
+  const estBiz = Math.max(12, Math.round((reviewsAtQuarter || 45) / 12));
+
+  if ($('scenContext')) {
+    $('scenContext').innerHTML = `<strong>ZIP ${safe(targetZip)} (${safe(metro)}):</strong> ~${estBiz} estimated baseline businesses in catchment · ${reviewsAtQuarter ? fmt.format(reviewsAtQuarter) : '0'} quarterly reviews · ${pop ? fmt.format(pop) + ' residents (2020)' : 'Population unavailable'}.`;
+  }
+
+  const revLow = Math.round(estBiz * ref.didLow);
+  const revHigh = Math.round(estBiz * ref.didHigh);
+  const formatRev = v => (v > 0 ? '+' : '') + fmt.format(v);
+
+  if ($('scenNetReviews')) {
+    $('scenNetReviews').textContent = `${formatRev(revLow)} to ${formatRev(revHigh)}`;
+  }
+
+  const effLow = revLow / budget;
+  const effHigh = revHigh / budget;
+  const formatEff = v => (v > 0 ? '+' : '') + v.toFixed(1);
+
+  if ($('scenEfficiency')) {
+    $('scenEfficiency').textContent = `${formatEff(effLow)} to ${formatEff(effHigh)}`;
+    $('scenEfficiency').style.color = effHigh < 0 ? 'var(--orange)' : 'var(--teal)';
+  }
+
+  const alertEl = $('scenAlert');
+  if (alertEl) {
+    if (effHigh < 10.0 && budget >= 25.0) {
+      alertEl.style.display = 'block';
+      alertEl.innerHTML = `<strong>Over-Capitalization Alert:</strong> Proposed $${budget.toFixed(1)}M outlay yields low projected return (${formatEff(effHigh)} revs/$M max). The capital footprint exceeds the commercial carrying capacity of this ~${estBiz}-business catchment. Consider scaling down expenditure or coordinating with pedestrian zoning to expand local storefront capacity.`;
+    } else {
+      alertEl.style.display = 'none';
+    }
+  }
+}
 function initializeAnalysis(){
   for(const [key,t] of Object.entries(REV?.topics||{})){$('reviewLens').add(new Option(t.label,key));$('exampleTopic').add(new Option(t.label,key));}
   $('reviewLens').onchange=e=>setTopic(e.target.value);$('exampleTopic').value=A.example;$('exampleTopic').onchange=e=>{A.example=e.target.value;renderExamples();};$('clearTopic').onclick=()=>setTopic('all');
@@ -146,6 +228,14 @@ function initializeAnalysis(){
   if($('effRadius')) $('effRadius').onchange = renderCapitalEfficiency;
   if($('effIncome')) $('effIncome').onchange = renderCapitalEfficiency;
   renderCapitalEfficiency();
+  if ($('scenZip')) {
+    const zips = GEO.features.map(f => f.properties.zip).sort();
+    $('scenZip').innerHTML = zips.map(z => `<option value="${z}" ${z === (S.zip || zips[0]) ? 'selected' : ''}>ZIP ${z} (${safe(features[z]?.properties.metro || '')})</option>`).join('');
+    $('scenZip').onchange = renderScenarioExplorer;
+  }
+  if ($('scenBudget')) $('scenBudget').oninput = renderScenarioExplorer;
+  if ($('scenTypology')) $('scenTypology').onchange = renderScenarioExplorer;
+  renderScenarioExplorer();
   renderAnalysis();
 }
 
