@@ -183,20 +183,61 @@ To assist policymakers planning future capital investments without making uncons
 ### Phase 2: Community Voice NLP Engine (`src/community_voice_nlp.py`)
 - **Objective:** Separate community/amenity voice from commercial service commentary.
 - **Deliverables:**
-  - Multi-label aspect tagger for `community_voice` vs. `commercial_voice`.
+  - Rule-based multi-label aspect tagger for `community_voice` vs. `commercial_voice`.
   - Sentence extraction module gathering qualitative evidence for the web UI.
-  - Accuracy and negative-recall validation suite.
-- **Verification:** Precision and recall checked against human-labeled calibration set; test suite passing.
+  - Calibration test suite covering parser syntax and edge cases.
+- **Verification & Status:** Rule-based parser operational and tested; formal human precision/recall audit on a stratified 500-review sample remains an open pending milestone item.
 
 ### Phase 3: Web Visualization & Map Refactor (`src/build_map_page.py`, `exploration.js`)
 - **Objective:** Deliver interactive exploration of project efficiency, catchments, and community discourse.
 - **Deliverables:**
   - Updated `web/index.html` featuring project locator, efficiency rankings, and voice excerpts.
-  - Self-contained, offline-renderable build artifact ($\le 4$ MB).
-- **Verification:** Headless browser / syntax check; verified offline rendering; zero broken assets.
+  - Self-contained, offline-renderable build artifact ($\le 4$ MB, current 3.35 MB).
+- **Verification:** Headless Puppeteer render check; verified offline rendering; dynamic FLAG badge assignment; zero broken assets.
 
-### Phase 4: Final Synthesis & Coursework Artifacts
+### Phase 4: Reference-Case Scenario Explorer (`src/exploration.js`, `web/index.html`)
+- **Objective:** Provide policymakers with an interactive scenario planning calculator based on empirical reference classes.
+- **Deliverables:**
+  - Interactive UI controls: proposed budget slider ($M), project typology selector, and target corridor dropdown (drawing from 277 mapped ZCTAs).
+  - Reference class calculation engine applying single-case radius sensitivity bounds with visible $N=1$ evidentiary weight.
+  - Over-Capitalization Risk Alert warning when proposed capital outlays exceed commercial catchment capacity.
+- **Verification:** Browser smoke tests verifying dynamic scenario recalculation and over-capitalization threshold triggers.
+
+### Phase 5: Final Synthesis & Coursework Artifacts
 - **Objective:** Produce final notebook and presentation materials meeting CIS 509 final requirements.
 - **Deliverables:**
-  - End-to-end reproducible Jupyter Notebook incorporating the Public Investment Efficiency Score (PIES) and Scenario Estimator.
+  - End-to-end reproducible Jupyter Notebook incorporating the Public Investment Efficiency Score (PIES) and Reference-Case Scenario Explorer.
   - Final slide deck structure summarizing the Three Hypotheses, 4-stage transmission mechanism, PIES policy scorecard, and municipal capital allocation recommendations.
+
+---
+
+## 6. Dataset Expansion Roadmap: Candidate Cases and Verification Protocol
+
+To move beyond the initial $N=5$ cases and establish multi-observation reference classes, the system defines an empirical expansion roadmap utilizing existing workstation datasets (`data/raw/yelp_academic_dataset_business.json`, `data/interim/reviews_5metro.csv`, and `Yelp JSON/yelp_dataset.tar`):
+
+### 6.1 Tier 1 Expansion: Existing 5-Metro Panel (Zero New Raw Extraction)
+These candidates sit inside the already extracted 277 study ZIPs and 5-metro review panel (`reviews_5metro.csv`). They require only spatial boundary definition and registry verification:
+
+| Candidate Project | Metro & State | Catchment Density | Known Opening Milestone | Reported Cost Baseline | Methodological Value |
+|---|---|---:|---|---:|---|
+| **Tampa Riverwalk** (Central / Kennedy Plaza) | Tampa, FL | **227 businesses** in 500m (ZIP 33602) | Phased; central milestone 2015 | ~$32.0M total ($10.9M TIGER grant + city CIP) | **Solves Tampa's $N=2$ suppression.** Water Works Park was on the sparse northern tip; central Riverwalk provides a dense urban waterfront promenade. |
+| **The Rail Park (Phase 1)** | Philadelphia, PA | **291 businesses** in 500m (ZIPs 19123, 19107) | June 2018 | ~$10.3M ($3.5M state RACP + private match) | Adds a quarter-mile elevated viaduct linear trail in Callowhill with dense commercial Yelp coverage. |
+| **Schuylkill Banks Boardwalk** | Philadelphia, PA | **140 businesses** in 500m (ZIPs 19103, 19146) | October 2014 | ~$18.0M ($13.0M TIGER grant) | 2,000-foot over-water pedestrian boardwalk extending the Schuylkill River Trail in Center City West. |
+| **Crescent Park** | New Orleans, LA | **57 businesses** in 500m (ZIP 70117, Bywater) | July 2014 | ~$31.2M | 1.4-mile linear riverfront park in Bywater/Marigny. *Note: 57 raw listings may yield thin matched pairs (<20) at 500m, requiring 1,000m buffer (207 businesses).* |
+
+### 6.2 Tier 2 Expansion: New Metro Ingestion (from `yelp_dataset.tar`)
+The on-disk raw Yelp dataset (150,346 businesses) covers several additional US metropolitan areas featuring landmark TIGER and urban infrastructure investments:
+
+| Candidate Project | Metro & State | Total Metro Pool | Known Opening Milestone | Reported Cost Baseline | Methodological Value |
+|---|---|---:|---|---:|---|
+| **Indianapolis Cultural Trail** | Indianapolis, IN | 7,540 businesses in IN | May 2013 | ~$63.0M ($20.5M federal TIGER grant + private) | **National gold standard for urban greenways.** 8-mile bicycle/pedestrian trail downtown; 459 Yelp businesses within 500m. |
+| **Gateway Arch Park (CityArchRiver)** | Saint Louis, MO | 6,082 businesses in MO | 2015–2018 | ~$380.0M public-private project | Reconnected downtown St. Louis to the riverfront over I-44 highway lid; 300+ downtown establishments. |
+| **Truckee Riverwalk & Bridge** | Reno, NV | 5,935 businesses in NV | April 2016 | ~$18.3M | Downtown pedestrian bridge and riverwalk corridor. |
+
+### 6.3 Five-Gate Verification Protocol for New Project Additions
+To maintain statistical integrity and prevent arbitrary selection or cherry-picking, any candidate project MUST clear five verification gates before entering the registry:
+1. **Documented Physical Footprint:** Official GIS line or polygon from municipal plans or OpenStreetMap (not an agency headquarters or mailing address).
+2. **Sourced Capital Outlay Ledger:** Capital cost sourced directly from official municipal CIP budget books, FTA grant notices, or agency annual reports.
+3. **Grounded Opening Milestone:** Explicit completion date for the specific funded segment, with phased milestones documented.
+4. **Pre/Post Window Separation:** Two full calendar years before construction and two full calendar years after opening (excluding active construction years).
+5. **Sample Support Gate:** Must achieve $\ge 20$ matched business pairs within the 500m buffer; otherwise flagged as `low_support = True` and suppressed from primary ranking.
