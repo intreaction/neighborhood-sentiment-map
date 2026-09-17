@@ -134,6 +134,27 @@ flowchart TD
     3. Integrates **Community Voice Inspector** showing exact review excerpts where citizens discuss the public space.
     4. Enforces visual support guards (graying out or hatching under-supported estimates like Water Works Park).
 
+### 3.3 Prospective Planning Tool: Reference-Case Scenario Explorer
+To assist policymakers planning future capital investments without making unconstrained statistical claims, the system implements a **Reference-Case Scenario Explorer**:
+
+1. **Methodological Framing (Adopted RCF Spirit):**
+   Supervised machine learning cannot be trained on $N=5$ retrospective case studies (zero degrees of freedom; catastrophic overfitting). Instead, we adopt the principles of Reference Class Forecasting (Kahneman & Flyvbjerg): evaluating proposed investments against the empirical distributions of observed past projects rather than unconstrained regressions. Because our reference class contains 5 cases ($N=1$ per typology), outputs are presented strictly as **illustrative scenario ranges**, never point-estimate predictions.
+
+2. **Single-Case Sourced Bounds (Derived from Distance Sensitivities):**
+   Each typology maps to a single empirical reference project, displaying its $N=1$ evidentiary weight directly in the UI. Rather than fabricated symmetric error bands, scenario bounds reflect the project's actual observed sensitivity across radii (250m, 500m, 1,000m):
+   - **Linear Greenway ($N=1$, Lafitte):** DiD $+10.59$ to $+23.26$ reviews/pair (500m: $+10.59$, 250m: $+19.68$, 1000m: $+23.26$). Consistently positive.
+   - **Civic Plaza / Transit Hub ($N=1$, Dilworth):** DiD **$-1.27$ to $+7.50$** reviews/pair (250m immediate footprint: **$-1.27$**, 500m catchment: $+7.50$, 1000m: $+6.39$). Highlights footprint sign-flip and radius sensitivity.
+   - **Riverfront Event Park ($N=1$, Riverfront / Ascend):** DiD $+12.55$ to $+44.48$ reviews/pair (1000m: $+12.55$, 500m: $+35.93$, 250m: $+44.48$). Concentrated near core.
+   - **Fixed-Rail Transit ($N=1$, Sun Link):** DiD $-1.36$ to $-0.92$ reviews/pair (250m: $-1.36$, 500m: $-1.22$, 1000m: $-0.92$). Consistently negative relative to matched controls.
+
+3. **Scenario Formulation:**
+   For proposed budget $C$ (\$M) and target ZCTA with baseline active businesses $N_{\text{biz}}$:
+   $$\widehat{\Delta \text{Reviews}} = \big[ N_{\text{biz}} \times \Delta \bar{Y}_{\text{low}}, \; N_{\text{biz}} \times \Delta \bar{Y}_{\text{high}} \big]$$
+   $$\widehat{CE}_{\text{abs}} = \left[ \frac{N_{\text{biz}} \times \Delta \bar{Y}_{\text{low}}}{C}, \; \frac{N_{\text{biz}} \times \Delta \bar{Y}_{\text{high}}}{C} \right]$$
+
+4. **Over-Capitalization Risk Warning:**
+   Compares proposed capital expenditure against the commercial carrying capacity of the local catchment. Flags an alert if proposed cost per baseline business exceeds empirical thresholds, preventing over-capitalization in sparse corridors (the "Sun Link trap").
+
 ---
 
 ## 4. Threats to Validity and Risk Controls
@@ -145,6 +166,7 @@ flowchart TD
 | **Yelp Population vs. Business Openings** | An increase in active Yelp listings does not guarantee new business births (could be Yelp platform adoption). | Strictly define metric as *reviewed business participation on Yelp*, not *business formation*. |
 | **Unreconciled Cost Scopes** | Headline costs conflate public grants with private match funding (e.g. Dilworth $55M mixed, Sun Link $196.5M FTA+local). | Document source ledgers in registry; run sensitivity against public-only funding shares. |
 | **Confounding with Wider Metro Growth** | Nashville review volume grew citywide across 2012–2017. | All primary engagement and efficiency indices MUST be difference-in-differences against matched local control pools. |
+| **Scenario Extrapolation Overreach** | Applying a single project's observed DiD spread to a hypothetical corridor assumes transferable commercial elasticity. | Strictly label tool as an illustrative *Scenario Explorer* based on $N=5$ cases; display source project $N=1$ badge and report ranges, never point forecasts. |
 
 ---
 

@@ -185,26 +185,26 @@ The **Public Investment Efficiency Score (PIES)** translates unstructured digita
 
 > **Descriptive Instrument Disclaimer:** PIES evaluates past projects on Yelp-observed commercial engagement; it is a descriptive case-study instrument and reference-class benchmark, not a calibrated black-box predictive model. Tiers are illustrative bins across curated cases.
 
-### 7.4 Prospective Tool: Scenario Planning via Reference Class Forecasting
+### 7.4 Prospective Planning Tool: Reference-Case Scenario Explorer
 
-To assist policymakers planning future capital investments, we can translate these retrospective benchmarks into an interactive **Project Efficiency Estimator**:
+To assist policymakers planning future capital investments without making unconstrained statistical claims, the system translates these retrospective benchmarks into an interactive **Reference-Case Scenario Explorer**:
 
-1. **Why Pure Machine Learning Fails Here:**
-   With $N=5$ retrospective case studies, training a supervised ML regression model (e.g. Random Forest, Ridge) would overfit catastrophically ($N=5$ samples with 3+ features gives zero statistical degrees of freedom).
-2. **The Valid Alternative: Reference Class Forecasting (Flyvbjerg Framework):**
-   Rather than an uncalibrated black-box curve, the tool uses **empirical reference class matching**:
+1. **Why Supervised Machine Learning Fails Here:**
+   With $N=5$ retrospective case studies, training a supervised ML regression model (e.g., Random Forest, Ridge) would overfit catastrophically ($N=5$ samples with 3+ features gives zero statistical degrees of freedom).
+2. **The Valid Alternative: Reference Class Forecasting (Adopted Spirit):**
+   Rather than an uncalibrated black-box curve, the tool adopts the core principle of Reference Class Forecasting (Kahneman & Flyvbjerg): evaluating proposed investments against the empirical distributions of observed past projects rather than unconstrained regressions. Because our reference class contains 5 cases ($N=1$ per typology), outputs are presented strictly as **illustrative scenario ranges**, never point-estimate predictions.
    - **User Inputs:**
      - Proposed Capital Outlay ($C$, in \$M)
      - Proposed Infrastructure Typology (Linear Greenway, Civic Plaza, Riverfront Event Park, Fixed-Rail Transit)
      - Target Neighborhood / Corridor (Selected from our 277 mapped ZCTAs, which auto-populates baseline business density $N_{\text{biz}}$, baseline annual reviews per business $\bar{Y}_{\text{pre}}$, and income tercile).
-   - **Mechanism Engine:**
-     The tool draws the empirical difference-in-differences bounds ($\Delta \bar{Y}_{\text{type}}$) established from the corresponding reference class:
-     - Linear Greenway: $\Delta \bar{Y} \approx +10$ to $+20$ reviews/business
-     - Civic Plaza: $\Delta \bar{Y} \approx +5$ to $+8$ reviews/business
-     - Riverfront Event Park: $\Delta \bar{Y} \approx +30$ to $+40$ reviews/business
-     - Fixed-Rail Transit: $\Delta \bar{Y} \approx -1.5$ to $+0.5$ reviews/business
-   - **Projected Outputs:**
-     $$\widehat{\Delta \text{Reviews}} = N_{\text{biz, local}} \times \Delta \bar{Y}_{\text{type}}$$
-     $$\widehat{CE_{\text{abs}}} = \frac{\widehat{\Delta \text{Reviews}}}{C}$$
+   - **Single-Case Sourced Bounds (Derived from Distance Sensitivities):**
+     Each typology displays its single reference case and $N=1$ evidentiary weight directly in the UI. Bounds reflect observed sensitivity across radii (250m, 500m, 1,000m):
+     - **Linear Greenway ($N=1$, Lafitte):** DiD $+10.59$ to $+23.26$ reviews/pair (500m: $+10.59$, 250m: $+19.68$, 1000m: $+23.26$).
+     - **Civic Plaza / Transit Hub ($N=1$, Dilworth):** DiD **$-1.27$ to $+7.50$** reviews/pair (250m immediate footprint: **$-1.27$**, 500m: $+7.50$, 1000m: $+6.39$). Explicitly reflects footprint sign-flip.
+     - **Riverfront Event Park ($N=1$, Riverfront / Ascend):** DiD $+12.55$ to $+44.48$ reviews/pair (1000m: $+12.55$, 500m: $+35.93$, 250m: $+44.48$).
+     - **Fixed-Rail Transit ($N=1$, Sun Link):** DiD $-1.36$ to $-0.92$ reviews/pair (250m: $-1.36$, 500m: $-1.22$, 1000m: $-0.92$).
+   - **Projected Scenario Outputs (Ranges):**
+     $$\widehat{\Delta \text{Reviews}} = \big[ N_{\text{biz}} \times \Delta \bar{Y}_{\text{low}}, \; N_{\text{biz}} \times \Delta \bar{Y}_{\text{high}} \big]$$
+     $$\widehat{CE}_{\text{abs}} = \left[ \frac{N_{\text{biz}} \times \Delta \bar{Y}_{\text{low}}}{C}, \; \frac{N_{\text{biz}} \times \Delta \bar{Y}_{\text{high}}}{C} \right]$$
    - **Over-Capitalization Risk Warning:**
-     The estimator flags an **Over-Capitalization Alert** when the proposed dollar investment exceeds the commercial carrying capacity of the local catchment (e.g. proposing a \$100M investment in a corridor with only 25 baseline establishments, predicting $\widehat{CE_{\text{abs}}} < 2.0$).
+     The estimator flags an **Over-Capitalization Alert** when the proposed dollar investment exceeds the commercial carrying capacity of the local catchment (e.g., proposing a \$100M investment in a corridor with only 25 baseline establishments, projecting $\widehat{CE}_{\text{abs}} < 2.0$).
