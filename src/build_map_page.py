@@ -26,6 +26,7 @@ AWARDS = INTERIM / "awards_zip_quarter.csv"
 METRO_ZIPS = INTERIM / "metro_zips.json"
 EVENTS = ROOT / "data" / "events.json"
 
+STUDY_DATA = ROOT / "docs" / "coursework" / "milestone-2-eda" / "study_data"
 MIN_REVIEWS = 30
 
 METRO_LABEL = {
@@ -148,6 +149,7 @@ def main():
         "nReviews": sum(sum(v) for v in nrev.values()),
         "zipMetro": metro_of,
         "population": load_json(ROOT / "data" / "population_2020.json", {"records": {}}),
+        "capitalEfficiency": read_csv(STUDY_DATA / "capital_efficiency.csv"),
     }
 
     html = (TEMPLATE
@@ -155,7 +157,7 @@ def main():
             .replace("__EXPLORATION__", (ROOT / "src" / "exploration.html").read_text())
             .replace("__ANALYSIS__", (ROOT / "src" / "exploration.js").read_text())
             .replace("__ANALYSIS_MATH__", (ROOT / "src" / "analysis_math.js").read_text())
-            .replace("__REVIEWS__", json.dumps(load_json(INTERIM / "review_topics.json", None), separators=(",", ":")).replace("<", "\\u003c"))
+            .replace("__REVIEWS__", (INTERIM / "review_topics.json").read_text().replace("<", "\\u003c") if (INTERIM / "review_topics.json").exists() else "null")
             .replace("__DATA__", json.dumps(payload, separators=(",", ":")))
             .replace("__GEO__", json.dumps(gj, separators=(",", ":")))
             .replace("__CTX__", CONTEXT.read_text() if CONTEXT.exists()

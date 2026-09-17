@@ -85,6 +85,48 @@ function renderAnalysis(){
   $('relationshipText').textContent=r==null?'Not enough usable variation to calculate a correlation. Adjust the quarter, funding window or review coverage.':`${Math.abs(r)<.1?'Little linear association appears':r>0?'Higher recorded funding aligns with higher outcomes':'Higher recorded funding aligns with lower outcomes'} in this snapshot, using signed-log ${A.basis==='resident'?'funding per 2020 resident':'total funding'} and ${A.outcome==='change'?'annual sentiment change':'sentiment level'}.${included.length<10?' Fewer than ten ZIPs are included; this comparison is especially sensitive to individual places.':''}`;
   drawScatter(rows);drawLags();renderReviews();renderLedger(rows);renderPopulation();
 }
+function renderCapitalEfficiency(){
+  if(!$('efficiencyRows')) return;
+  const radius = $('effRadius') ? $('effRadius').value : '500';
+  const income = $('effIncome') ? $('effIncome').value : 'All';
+  const rows = (D.capitalEfficiency || []).filter(r =>
+    String(r.radius_m) === radius &&
+    r.income_group === income &&
+    r.metric === 'reviews'
+  );
+  if(!rows.length){
+    $('efficiencyRows').innerHTML = '<tr><td colspan="10" style="text-align:center; padding:18px; color:var(--muted);">No matched data available for this radius and income tier combination.</td></tr>';
+    return;
+  }
+  rows.sort((a, b) => (parseFloat(b.ce_abs_per_million) || 0) - (parseFloat(a.ce_abs_per_million) || 0));
+  $('efficiencyRows').innerHTML = rows.map(r => {
+    const isFlag = r.low_support === true || r.low_support === 'True';
+    const flagHtml = isFlag ? '<span style="color:#b66740; font-weight:600;">FLAG (N&lt;20)</span>' : '<span style="color:#146e64;">OK</span>';
+    const did = parseFloat(r.did_per_pair) || 0;
+    const didStr = (did > 0 ? '+' : '') + did.toFixed(2);
+    const netVol = parseFloat(r.net_volume_gain) || 0;
+    const netVolStr = (netVol > 0 ? '+' : '') + netVol.toFixed(1);
+    const ceAbs = parseFloat(r.ce_abs_per_million);
+    const ceAbsStr = isNaN(ceAbs) ? 'N/A' : (ceAbs > 0 ? '+' : '') + ceAbs.toFixed(2);
+    const ceRel = parseFloat(r.ce_rel_pct_per_million);
+    const ceRelStr = isNaN(ceRel) ? 'N/A' : (ceRel > 0 ? '+' : '') + ceRel.toFixed(2) + '%';
+    const ceNorm = parseFloat(r.ce_norm_pct_per_million);
+    const ceNormStr = isNaN(ceNorm) ? 'N/A' : (ceNorm > 0 ? '+' : '') + ceNorm.toFixed(2) + '%';
+
+    return `<tr>
+      <td><strong>${safe(r.project)}</strong><br><small style="color:var(--muted);">${safe(r.project_type)}</small></td>
+      <td>${safe(r.city)}</td>
+      <td>$${parseFloat(r.cost_millions).toFixed(1)}M</td>
+      <td>${r.pairs}</td>
+      <td style="color:${did < 0 ? 'var(--orange)' : 'inherit'};">${didStr}</td>
+      <td style="color:${netVol < 0 ? 'var(--orange)' : 'inherit'};">${netVolStr}</td>
+      <td><strong>${ceAbsStr}</strong></td>
+      <td>${ceRelStr}</td>
+      <td>${ceNormStr}</td>
+      <td>${flagHtml}</td>
+    </tr>`;
+  }).join('');
+}
 function initializeAnalysis(){
   for(const [key,t] of Object.entries(REV?.topics||{})){$('reviewLens').add(new Option(t.label,key));$('exampleTopic').add(new Option(t.label,key));}
   $('reviewLens').onchange=e=>setTopic(e.target.value);$('exampleTopic').value=A.example;$('exampleTopic').onchange=e=>{A.example=e.target.value;renderExamples();};$('clearTopic').onclick=()=>setTopic('all');
@@ -94,6 +136,9 @@ function initializeAnalysis(){
   $('downloadComparison').onclick=()=>{const end=S.q-A.lag,start=end-A.window+1;const columns=['city','zip','review_theme','review_quarter','funding_start','funding_end','lag_quarters','window_quarters','minimum_reviews','net_obligations','population_2020','funding_per_2020_resident','funding_basis','minimum_population','mean_sentiment','annual_change','matching_reviews','outcome','included','status'];const data=currentRows.map(r=>[S.city,r.zip,themeName(),D.quarters[S.q],start>=0?D.quarters[start]:'',end>=0?D.quarters[end]:'',A.lag,A.window,A.minimum,r.funding,r.population,r.rate,A.basis,A.populationMinimum,r.sent,r.change,r.n,A.outcome,r.included,r.status]);const csv=[columns,...data].map(row=>row.map(v=>'"'+String(typeof v==='number'&&!Number.isInteger(v)?Number(v.toFixed(6)):v??'').replace(/"/g,'""')+'"').join(',')).join('\r\n');if(exportUrl)URL.revokeObjectURL(exportUrl);exportUrl=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'}));$('exportText').value=csv;$('exportSummary').textContent=`${currentRows.length} ZIPs · ${D.metros[S.city].label} · ${D.quarters[S.q]} · ${themeName()} · ${fundingUnits()}`;$('saveCSV').href=exportUrl;$('saveCSV').download=`${S.city}-${D.quarters[S.q]}-lag-${A.lag}-${A.basis}.csv`;$('copyStatus').textContent='';$('exportDialog').showModal();};
   $('copyCSV').onclick=async()=>{try{await navigator.clipboard.writeText($('exportText').value);$('copyStatus').textContent='Copied.';}catch{$('exportText').focus();$('exportText').select();$('copyStatus').textContent='Text selected. Press your copy shortcut.';}};
 
+  if($('effRadius')) $('effRadius').onchange = renderCapitalEfficiency;
+  if($('effIncome')) $('effIncome').onchange = renderCapitalEfficiency;
+  renderCapitalEfficiency();
   renderAnalysis();
 }
 

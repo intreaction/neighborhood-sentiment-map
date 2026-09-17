@@ -1,4 +1,75 @@
-<div class="chapter-navigation"><span class="eyebrow">Keep exploring ↓</span><a href="#lag-lab">02 / Funding &amp; timing</a><a href="#population-lab">Population context</a><a href="#review-lab">03 / Inside the reviews</a><a href="#area-ledger">04 / Compare places</a></div>
+<div class="chapter-navigation"><span class="eyebrow">Keep exploring ↓</span><a href="#capital-efficiency">02 / Capital Efficiency</a><a href="#lag-lab">03 / Funding &amp; timing</a><a href="#population-lab">Population context</a><a href="#review-lab">04 / Community Voice</a><a href="#area-ledger">05 / Compare places</a></div>
+
+<section class="chapter" id="capital-efficiency" aria-labelledby="efficiency-title">
+  <div class="chapter-head">
+    <div>
+      <div class="eyebrow">02 / Capital Efficiency &amp; Community Voice</div>
+      <h2 id="efficiency-title">Engagement per Public Dollar.</h2>
+    </div>
+    <p>Customer satisfaction (stars and sentiment) did not systematically track public spending ($r \approx 0.00$, failed placebo test). We evaluate where public capital actually moved commercial participation and review volume. Compare net review gains and active business expansion across project investments.</p>
+  </div>
+
+  <div class="scope-strip">
+    <strong>Curated Capital Projects Benchmark</strong>
+    <span>Matched 2-Year Pre/Post Windows</span>
+  </div>
+
+  <div class="population-controls">
+    <label for="effRadius">Catchment buffer</label>
+    <select id="effRadius">
+      <option value="500" selected>500 meters (Primary standard)</option>
+      <option value="250">250 meters (Immediate footprint)</option>
+      <option value="1000">1,000 meters (Extended district)</option>
+    </select>
+    <label for="effIncome">Income tercile</label>
+    <select id="effIncome">
+      <option value="All" selected>All neighborhoods</option>
+      <option value="Lower">Lower-income tercile</option>
+      <option value="Middle">Middle-income tercile</option>
+      <option value="Higher">Higher-income tercile</option>
+    </select>
+    <span>Filter matched comparisons by distance and baseline local income.</span>
+  </div>
+
+  <div class="table-wrap" style="margin: 20px 0;">
+    <table>
+      <thead>
+        <tr>
+          <th>Project &amp; Typology</th>
+          <th>City</th>
+          <th>Cost ($M)</th>
+          <th>Pairs</th>
+          <th>DiD / Pair</th>
+          <th>Net Reviews</th>
+          <th>CE (Revs / $1M)</th>
+          <th>CE (Rel % / $1M)</th>
+          <th>CE (Norm % / $1M)</th>
+          <th>Support</th>
+        </tr>
+      </thead>
+      <tbody id="efficiencyRows"></tbody>
+    </table>
+  </div>
+  <p class="method-note"><strong>Descriptive comparison only:</strong> With N=5 cases (one project per city/typology), project type is collinear with geography, cost scale, and local baseline density. Water Works Park is flagged for low sample support when matched pairs fall below 20.</p>
+
+  <div class="population-stats">
+    <div class="data-card">
+      <div class="eyebrow">Highest Efficiency</div>
+      <div class="number" style="font-size:22px; color:var(--teal);">Lafitte Greenway</div>
+      <p class="method-note">+165.2 net reviews / $1M (+3.80% / $1M). Linear trail in New Orleans; gains concentrated in lower-income ZIPs.</p>
+    </div>
+    <div class="data-card">
+      <div class="eyebrow">Highest Raw Volume</div>
+      <div class="number" style="font-size:22px; color:var(--ink);">Dilworth Park</div>
+      <p class="method-note">+67.9 net reviews / $1M (+0.43% / $1M). Dense Center City Philadelphia civic plaza; driven by established commercial core.</p>
+    </div>
+    <div class="data-card">
+      <div class="eyebrow">Lowest Return</div>
+      <div class="number" style="font-size:22px; color:var(--orange);">Sun Link Streetcar</div>
+      <p class="method-note">−0.92 net reviews / $1M (−0.02% / $1M). $196.5M fixed rail in Tucson lagged matched citywide review growth.</p>
+    </div>
+  </div>
+</section>
 
 <section class="chapter" id="lag-lab" aria-labelledby="lag-title">
   <div class="chapter-head"><div><div class="eyebrow">02 / Funding &amp; timing</div><h2 id="lag-title">What if change takes time?</h2></div><p>A commitment of funding and an experience at a business happen on different clocks. Explore earlier funding alongside later sentiment, one quarter and one place at a time.</p></div>
