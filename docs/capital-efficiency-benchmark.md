@@ -175,10 +175,36 @@ The **Public Investment Efficiency Score (PIES)** translates unstructured digita
 
 ### 7.3 Policy Scorecard Across the Curated Cases
 
-| Project | Typology & City | Cost ($M) | Engagement Efficiency ($CE_{\text{abs}}$) | Business Expansion ($CE_{\text{biz}}$) | Lower-Income Gain ($CE_{\text{lower}}$) | PIES Rating | Primary Policy Takeaway |
+| Project | Typology & City | Cost ($M) | Engagement Efficiency ($CE_{\text{abs}}$) | Business Expansion ($CE_{\text{biz}}$) | Targeted Income Gain ($CE_{\text{income}}$) | PIES Rating | Primary Policy Takeaway |
 |---|---|---:|---:|---:|---:|:---:|---|
-| **Lafitte Greenway** | Linear greenway / trail (New Orleans) | $9.1 | **+165.2** revs / $1M | **+1.93** biz / $1M | **+113.2** revs / $1M | **Tier 1 (High Efficiency)** | Exceptional return per dollar; highly effective at stimulating commercial reuse and pedestrian patronage in underserved corridors. |
-| **Riverfront / Ascend** | Riverfront park / venue (Nashville) | $52.0 | **+58.7** revs / $1M | **+0.03** biz / $1M | **+18.2** revs / $1M | **Tier 2 (Solid Event Anchor)** | High per-business activity surge (+35.9 revs/pair), but high metro background growth diluted relative business creation. |
-| **Dilworth Park** | Civic plaza / transit hub (Philadelphia) | $55.0 | **+67.9** revs / $1M | **−4.51** biz / $1M | **+0.09** revs / $1M | **Tier 2 (Core Volume Anchor)** | Large raw volume generator (+3,733 reviews), but heavily concentrated in established middle-income core; business creation lagged city. |
-| **Sun Link** | Streetcar / fixed rail (Tucson) | $196.5 | **−0.92** revs / $1M | **−0.55** biz / $1M | **−1.41** revs / $1M | **Tier 3 (Capital Inefficient)** | High outlay ($196.5M) failed to accelerate local commercial interaction faster than wider Tucson; demonstrates fixed rail does not automatically crowd in foot traffic. |
-| **Water Works Park** | Riverfront / spring restoration (Tampa) | $7.4 | *−14.19* revs / $1M | *+1.16* biz / $1M | — | **Suppressed** | Matched baseline support critically depleted ($N=2$ pairs); requires physical sensors or tax data rather than Yelp review matching. |
+| **Lafitte Greenway** | Linear greenway / trail (New Orleans) | $9.1 | **+165.2** revs / $1M | **+1.93** biz / $1M | Lower: **+113.2** revs / $1M ($N=108$) | **Tier 1 (High Efficiency)** | Exceptional return per dollar; highly effective at stimulating commercial reuse and pedestrian patronage in underserved corridors. |
+| **Riverfront / Ascend** | Riverfront park / venue (Nashville) | $52.0 | **+58.7** revs / $1M | **+0.03** biz / $1M | Lower: **+18.2** revs / $1M ($N=25$) | **Tier 2 (Solid Event Anchor)** | High per-business activity surge (+35.9 revs/pair), but high metro background growth diluted relative business creation. |
+| **Dilworth Park** | Civic plaza / transit hub (Philadelphia) | $55.0 | **+67.9** revs / $1M | **−4.51** biz / $1M | Middle: **+65.4** revs / $1M ($N=171$); Lower: *+0.09* [FLAG, $N=1$] | **Tier 2 (Core Volume Anchor)** | Large raw volume generator (+3,733 reviews), but heavily concentrated in established middle-income core; business creation lagged city. |
+| **Sun Link** | Streetcar / fixed rail (Tucson) | $196.5 | **−0.92** revs / $1M | **−0.55** biz / $1M | Lower: **−1.41** revs / $1M ($N=140$) | **Tier 3 (Capital Inefficient)** | High outlay ($196.5M) failed to accelerate local commercial interaction faster than wider Tucson; demonstrates fixed rail does not automatically crowd in foot traffic. |
+| **Water Works Park** | Riverfront / spring restoration (Tampa) | $7.4 | *−14.19* revs / $1M | *+1.16* biz / $1M | Higher: *−14.2* [FLAG, $N=2$] | **Suppressed** | Matched baseline support critically depleted ($N=2$ pairs); requires physical sensors or tax data rather than Yelp review matching. |
+
+> **Descriptive Instrument Disclaimer:** PIES evaluates past projects on Yelp-observed commercial engagement; it is a descriptive case-study instrument and reference-class benchmark, not a calibrated black-box predictive model. Tiers are illustrative bins across curated cases.
+
+### 7.4 Prospective Tool: Scenario Planning via Reference Class Forecasting
+
+To assist policymakers planning future capital investments, we can translate these retrospective benchmarks into an interactive **Project Efficiency Estimator**:
+
+1. **Why Pure Machine Learning Fails Here:**
+   With $N=5$ retrospective case studies, training a supervised ML regression model (e.g. Random Forest, Ridge) would overfit catastrophically ($N=5$ samples with 3+ features gives zero statistical degrees of freedom).
+2. **The Valid Alternative: Reference Class Forecasting (Flyvbjerg Framework):**
+   Rather than an uncalibrated black-box curve, the tool uses **empirical reference class matching**:
+   - **User Inputs:**
+     - Proposed Capital Outlay ($C$, in \$M)
+     - Proposed Infrastructure Typology (Linear Greenway, Civic Plaza, Riverfront Event Park, Fixed-Rail Transit)
+     - Target Neighborhood / Corridor (Selected from our 277 mapped ZCTAs, which auto-populates baseline business density $N_{\text{biz}}$, baseline annual reviews per business $\bar{Y}_{\text{pre}}$, and income tercile).
+   - **Mechanism Engine:**
+     The tool draws the empirical difference-in-differences bounds ($\Delta \bar{Y}_{\text{type}}$) established from the corresponding reference class:
+     - Linear Greenway: $\Delta \bar{Y} \approx +10$ to $+20$ reviews/business
+     - Civic Plaza: $\Delta \bar{Y} \approx +5$ to $+8$ reviews/business
+     - Riverfront Event Park: $\Delta \bar{Y} \approx +30$ to $+40$ reviews/business
+     - Fixed-Rail Transit: $\Delta \bar{Y} \approx -1.5$ to $+0.5$ reviews/business
+   - **Projected Outputs:**
+     $$\widehat{\Delta \text{Reviews}} = N_{\text{biz, local}} \times \Delta \bar{Y}_{\text{type}}$$
+     $$\widehat{CE_{\text{abs}}} = \frac{\widehat{\Delta \text{Reviews}}}{C}$$
+   - **Over-Capitalization Risk Warning:**
+     The estimator flags an **Over-Capitalization Alert** when the proposed dollar investment exceeds the commercial carrying capacity of the local catchment (e.g. proposing a \$100M investment in a corridor with only 25 baseline establishments, predicting $\widehat{CE_{\text{abs}}} < 2.0$).

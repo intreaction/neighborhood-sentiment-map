@@ -175,5 +175,6 @@ flowchart TD
 
 ### Phase 4: Final Synthesis & Coursework Artifacts
 - **Objective:** Produce final notebook and presentation materials meeting CIS 509 final requirements.
-  - End-to-end reproducible Jupyter Notebook incorporating the Public Investment Efficiency Score (PIES).
+- **Deliverables:**
+  - End-to-end reproducible Jupyter Notebook incorporating the Public Investment Efficiency Score (PIES) and Scenario Estimator.
   - Final slide deck structure summarizing the Three Hypotheses, 4-stage transmission mechanism, PIES policy scorecard, and municipal capital allocation recommendations.
