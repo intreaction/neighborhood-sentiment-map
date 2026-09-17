@@ -148,6 +148,31 @@ def compute_capital_efficiency(reg_df: pd.DataFrame, eng: pd.DataFrame, bg: pd.D
             })
 
     return pd.DataFrame(rows)
+def extract_expansion_candidates(reg_df: pd.DataFrame, data_dir: Path) -> pd.DataFrame:
+    """Extract candidate expansion projects and summarize their catchment density."""
+    is_candidate = reg_df["funding_note"].fillna("").str.contains("Candidate status")
+    candidates = reg_df[is_candidate].copy()
+    rows = []
+    for _, r in candidates.iterrows():
+        pre_str = f"{r['pre'][0]}-{r['pre'][1]}" if isinstance(r.get('pre'), list) else ""
+        post_str = f"{r['post'][0]}-{r['post'][1]}" if isinstance(r.get('post'), list) else ""
+        rows.append({
+            "project": r["project"],
+            "city": r["city"],
+            "project_type": r["project_type"],
+            "cost_millions": r["cost_millions"],
+            "opening_milestone": r["opening"],
+            "pre_window": pre_str,
+            "post_window": post_str,
+            "geometry_note": r["geometry_note"],
+            "funding_source": r.get("source", ""),
+            "status": "Candidate pending full matching extraction",
+        })
+    cand_df = pd.DataFrame(rows)
+    cand_path = data_dir / "expansion_candidates.csv"
+    cand_df.to_csv(cand_path, index=False)
+    return cand_df
+
 
 
 def print_summary_benchmark(df: pd.DataFrame):
@@ -191,6 +216,8 @@ def main():
 
     reg_df, eng, bg = load_data(args.data_dir)
     res = compute_capital_efficiency(reg_df, eng, bg)
+    cand_df = extract_expansion_candidates(reg_df, args.data_dir)
+    print(f"Wrote {len(cand_df)} expansion candidates to {args.data_dir / 'expansion_candidates.csv'}")
 
     args.output.parent.mkdir(parents=True, exist_ok=True)
     res.to_csv(args.output, index=False)
