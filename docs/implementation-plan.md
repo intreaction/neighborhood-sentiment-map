@@ -6,16 +6,16 @@
 
 ---
 
-## 1. Executive Thesis and Empirical Foundation
+## 1. Empirical Hypotheses and Analytical Foundation
 
-### 1.1 The Reformulated Thesis
+### 1.1 The Reformulated Hypotheses
 The Milestone 2 Exploratory Data Analysis (EDA) demonstrated that customer sentiment and star ratings do not systematically track public capital expenditure ($r \approx 0.00$, failed temporal placebo test). However, public investment strongly moves **commercial participation and review volume**.
 
 The project pivots from an evaluation of customer satisfaction to an evaluation of **civic engagement and capital efficiency**:
 
-1. **Thesis 1 (Community Voice):** People engage with public reviews/comments because they care about the improvement of their community. Unstructured reviews contain substantive discourse on public amenities, physical surroundings, walkability, cleanliness, and accessibility, alongside commercial evaluations.
-2. **Thesis 2 (Engagement Generation):** Publicly funded projects catalyze higher local engagement across business catchments, accelerating review volume, unique reviewer density, and active business participation relative to matched comparison areas.
-3. **Thesis 3 (Descriptive Capital Efficiency Across Curated Cases):** Capital efficiency—measured as community engagement generated per public dollar spent—exhibits stark descriptive contrasts across our five curated projects. With $N=5$ cases (one project per city/typology), project type is collinear with geography, cost scale, and local baseline density; this is strictly a descriptive comparison of specific capital investments, not a generalizable causal claim across project classes.
+1. **Hypothesis 1 (Community Voice):** People engage with public reviews/comments in part because they care about the improvement of their community. Unstructured reviews contain substantive discourse on public amenities, physical surroundings, walkability, cleanliness, and accessibility, alongside commercial evaluations.
+2. **Hypothesis 2 (Engagement Generation):** Publicly funded projects catalyze higher local engagement across business catchments, accelerating review volume, unique reviewer density, and active business participation relative to matched comparison areas.
+3. **Hypothesis 3 (Descriptive Capital Efficiency Across Curated Cases):** Capital efficiency—measured as community engagement generated per public dollar spent—exhibits stark descriptive contrasts across our five curated projects. With $N=5$ cases (one project per city/typology), project type is collinear with geography, cost scale, and local baseline density; this is strictly a descriptive comparison of specific capital investments, not a generalizable causal claim across project classes.
 
 ### 1.2 Grounding in EDA Evidence
 
@@ -48,9 +48,9 @@ Alongside log-transformed contrast to mitigate extreme skew:
 $$\Delta E_{\log} = \frac{1}{|\mathcal{P}|} \sum_{(i, j) \in \mathcal{P}} \left[ \big(\ln(1 + Y_{i, \text{post}}) - \ln(1 + Y_{i, \text{pre}})\big) - \big(\ln(1 + Y_{j, \text{post}}) - \ln(1 + Y_{j, \text{pre}})\big) \right]$$
 
 ### 2.3 Capital Efficiency Estimands ($CE$)
-Because absolute review gains are inflated by dense baselines (e.g., Center City Philadelphia) while percentage gains are inflated by sparse baselines (e.g., Water Works Park), we lock in a dual-reporting framework and a baseline-normalized rate:
+Because absolute review gains are inflated by dense baselines (e.g., Center City Philadelphia) while percentage gains are inflated by sparse baselines (e.g., Water Works Park), we designate a **single primary ranking metric** ($CE_{\text{abs}}$) alongside secondary context columns ($CE_{\text{rel}}$, $CE_{\text{norm}}$, $CE_{\text{biz}}$):
 
-1. **Absolute Matched Gain per \$1M Capital Outlay ($CE_{\text{abs}}$):**
+1. **Primary Headline Metric: Absolute Matched Gain per \$1M Capital Outlay ($CE_{\text{abs}}$):**
    Measures net reviewer traffic added to the matched business sample per million dollars invested:
    $$CE_{\text{abs}} = \frac{\sum_{i \in \mathcal{N}} (Y_{i, \text{post}} - Y_{i, \text{pre}}) - \sum_{j \in \mathcal{C}} (Y_{j, \text{post}} - Y_{j, \text{pre}})}{\text{Cost (\$M)}} = \frac{|\mathcal{P}| \times \Delta \bar{Y}_{\text{DiD}}}{\text{Cost (\$M)}}$$
 
@@ -68,8 +68,9 @@ Because absolute review gains are inflated by dense baselines (e.g., Center City
 
 5. **Support and Display Invariant:**
    Ratios with $N_{\text{pairs}} < 20$ (specifically Water Works Park primary 500m with $N=2$) MUST be marked `low_support = True` and suppressed from ranking comparisons. No ratio may be presented without its underlying baseline counts.
+
 ### 2.4 Community Voice Share ($CVS$)
-To test Thesis 1, text is partitioned into Community Aspects ($\mathcal{A}_{\text{community}}$) vs. Transactional Aspects ($\mathcal{A}_{\text{commercial}}$):
+To test Hypothesis 1, text is partitioned into Community Aspects ($\mathcal{A}_{\text{community}}$) vs. Transactional Aspects ($\mathcal{A}_{\text{commercial}}$):
 - $\mathcal{A}_{\text{community}}$: Surroundings & Streetscape, Accessibility & Transit, Walkability & Bikeability, Cleanliness & Public Safety.
 - $\mathcal{A}_{\text{commercial}}$: Food & Taste, Service & Speed, Product Quality, Price & Value.
 

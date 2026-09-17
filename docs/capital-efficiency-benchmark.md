@@ -8,10 +8,10 @@
 
 ## 1. Executive Summary
 
-This benchmark provides the empirical test of the Three Theses formulated after the Milestone 2 EDA:
-1. **Thesis 1 (Community Voice):** Supported by keyword tagging; human audit pending. Across the 3,073,181-review study panel, community-oriented conditions (cleanliness, access/parking, surroundings) account for 456,970 tagged reviews (14.9% overall mention rate across place themes). In the theme-balanced qualitative reservoir (1,794 excerpts), 52.1% of sampled excerpts discuss physical surroundings, pedestrian access, transit, cleanliness, or public space amenities.
-2. **Thesis 2 (Engagement Generation):** Supported for specific public space investments (Lafitte Greenway, Riverfront / Ascend, Dilworth Park), which stimulated substantial local review volume, while contradicted for heavy fixed rail (Sun Link streetcar).
-3. **Thesis 3 (Descriptive Capital Efficiency Across Curated Cases):** Supported as a descriptive contrast. Net engagement generated per public dollar varies by two orders of magnitude across the five investments.
+This benchmark provides the empirical test of the Three Hypotheses formulated after the Milestone 2 EDA:
+1. **Hypothesis 1 (Community Voice):** Supported by keyword tagging; human audit pending. Across the 3,073,181-review study panel, community-oriented conditions (cleanliness, access/parking, surroundings) account for 456,970 place-theme mentions (14.9% overall mention rate across place themes, with multi-theme reviews counted once per theme). In the theme-balanced qualitative reservoir (1,794 excerpts), 52.1% of sampled excerpts discuss physical surroundings, pedestrian access, transit, cleanliness, or public space amenities.
+2. **Hypothesis 2 (Engagement Generation):** Supported for specific public space investments (Lafitte Greenway, Riverfront / Ascend, Dilworth Park), which stimulated substantial local review volume, while contradicted for heavy fixed rail (Sun Link streetcar).
+3. **Hypothesis 3 (Descriptive Capital Efficiency Across Curated Cases):** Supported as a descriptive contrast. Net engagement generated per public dollar varies by two orders of magnitude across the five investments.
 
 > **Methodological Invariant:** With $N=5$ cases (one project per city/typology), project type is collinear with geography, cost scale, and local baseline density. These results are descriptive evaluations of specific capital outlays, not a generalizable causal regression across project classes.
 
