@@ -8,15 +8,23 @@
 
 ## 1. Empirical Hypotheses and Analytical Foundation
 
-### 1.1 The Reformulated Hypotheses
-The Milestone 2 Exploratory Data Analysis (EDA) demonstrated that customer sentiment and star ratings do not systematically track public capital expenditure ($r \approx 0.00$, failed temporal placebo test). However, public investment strongly moves **commercial participation and review volume**.
+### 1.1 The Causal Transmission Chain and Reformulated Hypotheses
+The Milestone 2 Exploratory Data Analysis (EDA) demonstrated that customer sentiment and star ratings do not systematically track public capital expenditure ($r \approx 0.00$, failed temporal placebo test). Yelp reviews are not a survey of resident happiness or a direct measure of municipal policy approval. Rather, **reviews are an observable digital proxy for commercial and foot-traffic interaction**.
 
-The project pivots from an evaluation of customer satisfaction to an evaluation of **civic engagement and capital efficiency**:
+The underlying economic and behavioral mechanism follows a 4-stage transmission chain:
 
-1. **Hypothesis 1 (Community Voice):** People engage with public reviews/comments in part because they care about the improvement of their community. Unstructured reviews contain substantive discourse on public amenities, physical surroundings, walkability, cleanliness, and accessibility, alongside commercial evaluations.
-2. **Hypothesis 2 (Engagement Generation):** Publicly funded projects catalyze higher local engagement across business catchments, accelerating review volume, unique reviewer density, and active business participation relative to matched comparison areas.
-3. **Hypothesis 3 (Descriptive Capital Efficiency Across Curated Cases):** Capital efficiency—measured as community engagement generated per public dollar spent—exhibits stark descriptive contrasts across our five curated projects. With $N=5$ cases (one project per city/typology), project type is collinear with geography, cost scale, and local baseline density; this is strictly a descriptive comparison of specific capital investments, not a generalizable causal claim across project classes.
+$$\text{Public Capital Project} \;\xrightarrow{\text{crowding-in}}\; \text{Surrounding Commercial Investment} \;\xrightarrow{\text{foot traffic}}\; \text{Human Interaction} \;\xrightarrow{\text{behavioral trace}}\; \text{Review Engagement}$$
 
+1. **Stage 1 (Public Capital Outlay):** A public entity commits place-based capital (e.g., greenway trail, civic plaza, riverfront park, transit line).
+2. **Stage 2 (Spillover & Surrounding Investment):** The public amenity encourages private and commercial investment in the immediate catchment (adaptive reuse of buildings, new storefronts, cafes, outdoor seating, park activation).
+3. **Stage 3 (Physical Interaction & Foot Traffic):** More people visit, walk through, recreate in, and patronize the outcomes of those public and private investments.
+4. **Stage 4 (Observable Digital Voice & Engagement):** As foot traffic and patron interactions increase, a fraction of those interacting leave behavioral traces (reviews, tips, check-ins, photos) and articulate their experience of the surrounding neighborhood conditions.
+
+Under this transmission mechanism, we test three operational hypotheses (reformulated post-EDA to replace the falsified direct spending $\rightarrow$ sentiment link):
+
+1. **Hypothesis 1 (Community Voice):** Because reviews are behavioral traces of people interacting with places, unstructured text contains substantive commentary on physical surroundings, walkability, transit, cleanliness, and public space, alongside transactional food/service evaluations. Reviews capture citizen care for their community environment.
+2. **Hypothesis 2 (Engagement Generation):** Publicly funded projects catalyze general investment and foot traffic in their surrounding catchment, generating measurable net increases in active reviewed businesses and review volume relative to matched counterfactual areas.
+3. **Hypothesis 3 (Descriptive Capital Efficiency Across Curated Cases):** The efficiency of this transmission chain—net engagement generated per public dollar invested—varies starkly across infrastructure typologies. With $N=5$ cases (one project per city/typology), project type is collinear with geography, cost scale, and baseline density; this is strictly a descriptive comparison of specific capital outlays, not a generalizable causal regression across project classes.
 ### 1.2 Grounding in EDA Evidence
 
 | Project | Typology | Reported Cost ($M) | Relative Review Growth (500m) | Relative Business Growth (500m) | Baseline Local Income Contrast |
@@ -162,4 +170,4 @@ flowchart TD
 - **Objective:** Produce final notebook and presentation materials meeting CIS 509 final requirements.
 - **Deliverables:**
   - End-to-end reproducible Jupyter Notebook.
-  - Final slide deck structure summarizing the Three Theses, methodology, and capital efficiency policy recommendations.
+  - Final slide deck structure summarizing the Three Hypotheses, transmission mechanism, methodology, and capital efficiency policy recommendations.

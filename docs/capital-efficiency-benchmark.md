@@ -8,9 +8,14 @@
 
 ## 1. Executive Summary
 
-This benchmark provides the empirical test of the Three Hypotheses formulated after the Milestone 2 EDA:
-1. **Hypothesis 1 (Community Voice):** Supported by keyword tagging; human audit pending. Across the 3,073,181-review study panel, community-oriented conditions (cleanliness, access/parking, surroundings) account for 456,970 place-theme mentions (14.9% overall mention rate across place themes, with multi-theme reviews counted once per theme). In the theme-balanced qualitative reservoir (1,794 excerpts), 52.1% of sampled excerpts discuss physical surroundings, pedestrian access, transit, cleanliness, or public space amenities.
-2. **Hypothesis 2 (Engagement Generation):** Supported for specific public space investments (Lafitte Greenway, Riverfront / Ascend, Dilworth Park), which stimulated substantial local review volume, while contradicted for heavy fixed rail (Sun Link streetcar).
+This benchmark evaluates the empirical performance of the Three Hypotheses formulated after the Milestone 2 EDA, centered on a 4-stage causal transmission chain:
+
+$$\text{Public Capital Project} \;\xrightarrow{\text{crowding-in}}\; \text{Surrounding Commercial Investment} \;\xrightarrow{\text{foot traffic}}\; \text{Human Interaction} \;\xrightarrow{\text{behavioral trace}}\; \text{Review Engagement}$$
+
+Reviews are not a direct measure of resident welfare or municipal satisfaction; **reviews are an observable digital stand-in for foot-traffic interaction and commercial engagement**. Public projects encourage general investment in surrounding areas; more people interact with the outcomes of those investments (new cafes, outdoor patios, parks); and the more people interact, the more people engage in reviews.
+
+1. **Hypothesis 1 (Community Voice in Reviews):** Supported by keyword tagging; human audit pending. Reviews capture behavioral traces of citizens caring for and reacting to physical surroundings, streetscape conditions, pedestrian access, transit, cleanliness, and public space amenities (456,970 place-theme mentions across 3,073,181 reviews in the study panel; 14.9% overall mention rate across place themes).
+2. **Hypothesis 2 (Engagement Generation / Spillover):** Supported for specific public space investments (Lafitte Greenway, Riverfront / Ascend, Dilworth Park), which stimulated substantial local commercial interaction and review volume, while contradicted for heavy fixed rail (Sun Link streetcar).
 3. **Hypothesis 3 (Descriptive Capital Efficiency Across Curated Cases):** Supported as a descriptive contrast. Net engagement generated per public dollar varies by two orders of magnitude across the five investments.
 
 > **Methodological Invariant:** With $N=5$ cases (one project per city/typology), project type is collinear with geography, cost scale, and local baseline density. These results are descriptive evaluations of specific capital outlays, not a generalizable causal regression across project classes.
