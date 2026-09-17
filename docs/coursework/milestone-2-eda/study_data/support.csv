@@ -1,0 +1,61 @@
+project,radius_m,income_group,eligible_near,matched_pairs,distinct_controls,low_support
+Lafitte,250,All,40,40,32,False
+Lafitte,250,Lower,34,34,26,False
+Lafitte,250,Middle,5,5,5,True
+Lafitte,250,Higher,1,1,1,True
+Lafitte,500,All,142,142,80,False
+Lafitte,500,Lower,108,108,55,False
+Lafitte,500,Middle,32,32,23,False
+Lafitte,500,Higher,2,2,2,True
+Lafitte,1000,All,641,641,286,False
+Lafitte,1000,Lower,237,237,70,False
+Lafitte,1000,Middle,182,182,55,False
+Lafitte,1000,Higher,222,222,161,False
+Sun Link,250,All,132,130,78,False
+Sun Link,250,Lower,121,121,72,False
+Sun Link,250,Middle,11,9,6,True
+Sun Link,250,Higher,0,0,0,True
+Sun Link,500,All,151,149,86,False
+Sun Link,500,Lower,140,140,80,False
+Sun Link,500,Middle,11,9,6,True
+Sun Link,500,Higher,0,0,0,True
+Sun Link,1000,All,178,176,96,False
+Sun Link,1000,Lower,166,166,89,False
+Sun Link,1000,Middle,12,10,7,True
+Sun Link,1000,Higher,0,0,0,True
+Dilworth Park,250,All,95,95,73,False
+Dilworth Park,250,Lower,1,1,1,True
+Dilworth Park,250,Middle,21,21,20,False
+Dilworth Park,250,Higher,73,73,52,False
+Dilworth Park,500,All,498,498,272,False
+Dilworth Park,500,Lower,1,1,1,True
+Dilworth Park,500,Middle,171,171,85,False
+Dilworth Park,500,Higher,326,326,186,False
+Dilworth Park,1000,All,1013,1013,431,False
+Dilworth Park,1000,Lower,1,1,1,True
+Dilworth Park,1000,Middle,413,413,147,False
+Dilworth Park,1000,Higher,599,599,283,False
+Water Works Park,250,All,1,1,1,True
+Water Works Park,250,Lower,0,0,0,True
+Water Works Park,250,Middle,0,0,0,True
+Water Works Park,250,Higher,1,1,1,True
+Water Works Park,500,All,2,2,2,True
+Water Works Park,500,Lower,0,0,0,True
+Water Works Park,500,Middle,0,0,0,True
+Water Works Park,500,Higher,2,2,2,True
+Water Works Park,1000,All,23,23,20,False
+Water Works Park,1000,Lower,0,0,0,True
+Water Works Park,1000,Middle,0,0,0,True
+Water Works Park,1000,Higher,23,23,20,False
+Riverfront / Ascend,250,All,21,21,20,False
+Riverfront / Ascend,250,Lower,3,3,3,True
+Riverfront / Ascend,250,Middle,0,0,0,True
+Riverfront / Ascend,250,Higher,18,18,17,True
+Riverfront / Ascend,500,All,85,85,69,False
+Riverfront / Ascend,500,Lower,25,25,24,False
+Riverfront / Ascend,500,Middle,2,2,2,True
+Riverfront / Ascend,500,Higher,58,58,43,False
+Riverfront / Ascend,1000,All,154,154,112,False
+Riverfront / Ascend,1000,Lower,45,45,41,False
+Riverfront / Ascend,1000,Middle,42,42,23,False
+Riverfront / Ascend,1000,Higher,67,67,48,False

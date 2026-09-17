@@ -1,0 +1,153 @@
+[
+  {
+    "project": "Lafitte",
+    "folder": "Pilot Lafitte",
+    "city": "New Orleans",
+    "project_type": "Greenway / public space",
+    "cost_millions": 9.1,
+    "opening": "2015-11-06",
+    "pre": [
+      2012,
+      2013
+    ],
+    "post": [
+      2016,
+      2017
+    ],
+    "early": [
+      2010,
+      2011
+    ],
+    "late": [
+      2018,
+      2019
+    ],
+    "acs": 2012,
+    "source": "https://lafittegreenway.org/blog/lafitte-greenway-opening-friday-november-6/",
+    "geometry_note": "Current OSM trail segments; 3.70km mapped versus 4.18km advertised. Historical footprint incomplete.",
+    "funding_note": "Reported project cost; public expenditure not reconciled."
+  },
+  {
+    "project": "Sun Link",
+    "folder": "Pilot Sun Link",
+    "city": "Tucson",
+    "project_type": "Streetcar / transit",
+    "cost_millions": 196.5,
+    "opening": "2014-07-25",
+    "pre": [
+      2010,
+      2011
+    ],
+    "post": [
+      2015,
+      2016
+    ],
+    "early": [
+      2008,
+      2009
+    ],
+    "late": [
+      2017,
+      2018
+    ],
+    "acs": 2011,
+    "source": "https://www.transit.dot.gov/about/news/us-department-transportation-celebrates-grand-opening-tucson-streetcar-further-expanding",
+    "geometry_note": "Official city streetcar route polygon; current geometry used as historical proxy.",
+    "funding_note": "Reported capital project cost, including federal funding; expenditure not reconciled."
+  },
+  {
+    "project": "Dilworth Park",
+    "folder": "Five Project Study/Dilworth Park",
+    "city": "Philadelphia",
+    "project_type": "Civic plaza / transit access",
+    "cost_millions": 55.0,
+    "opening": "2014-09-04",
+    "pre": [
+      2010,
+      2011
+    ],
+    "post": [
+      2015,
+      2016
+    ],
+    "early": [
+      2008,
+      2009
+    ],
+    "late": [
+      2017,
+      2018
+    ],
+    "acs": 2011,
+    "epsg": 32618,
+    "source": "https://centercityphila.org/press-release/dilworth-park-celebrates-10th-anniversary/",
+    "construction_source": "https://centercityphila.org/press-release/dilworth-park-celebrates-10th-anniversary/",
+    "geometry_source": "https://www.openstreetmap.org/way/410095875",
+    "geometry_note": "Current OSM park polygon, historical footprint proxy; construction began January 2012, opening phased in 2014.",
+    "funding_note": "Headline $55m mixed public/private project. CCD capital ledger uses a different scope; not verified public outlay."
+  },
+  {
+    "project": "Water Works Park",
+    "folder": "Five Project Study/Water Works Park",
+    "city": "Tampa",
+    "project_type": "Riverfront park / spring restoration",
+    "cost_millions": 7.4,
+    "opening": "2014-08",
+    "pre": [
+      2011,
+      2012
+    ],
+    "post": [
+      2015,
+      2016
+    ],
+    "early": [
+      2009,
+      2010
+    ],
+    "late": [
+      2017,
+      2018
+    ],
+    "acs": 2012,
+    "epsg": 32617,
+    "source": "https://83degreesmedia.com/waterworks100813/",
+    "construction_source": "https://www.tampa.gov/sites/default/files/content/files/migrated/2013-annual-sustainability-report-final.PDF",
+    "opening_source": "https://www.tampa.gov/sites/default/files/document/migrated/FY15BudgetBook_part1.pdf",
+    "geometry_source": "https://www.openstreetmap.org/way/190127200",
+    "geometry_note": "Current OSM park polygon, historical proxy; construction October 2013. Adjacent Ulele redevelopment and wider Riverwalk construction confound attribution.",
+    "funding_note": "Reported $7.4m project, $6.5m Community Investment Tax plus grants. Interview reporting, not audited expenditure."
+  },
+  {
+    "project": "Riverfront / Ascend",
+    "folder": "Five Project Study/Riverfront Ascend",
+    "city": "Nashville",
+    "project_type": "Riverfront park / performance venue",
+    "cost_millions": 52.0,
+    "opening": "2015-07-30",
+    "pre": [
+      2011,
+      2012
+    ],
+    "post": [
+      2016,
+      2017
+    ],
+    "early": [
+      2009,
+      2010
+    ],
+    "late": [
+      2018,
+      2019
+    ],
+    "acs": 2012,
+    "epsg": 32616,
+    "source": "https://www.nashvillescene.com/music/slideshow-take-a-look-inside-ascend-amphitheater/article_f535a107-e8bc-5138-b3aa-3afb4f7e2ae0.html",
+    "opening_source": "https://www.nashville.gov/sites/default/files/2021-04/2016AnnualReport-Final_v6_web.pdf",
+    "construction_source": "https://www.wbbjtv.com/2015/07/16/final-touches-being-added-to-nashvilles-new-amphitheater/",
+    "geometry_source": "https://services2.arcgis.com/HdTo6HJqh92wn4D8/arcgis/rest/services/Park_Boundary_View/FeatureServer/6",
+    "geometry_note": "Southern component of official Riverfront polygon containing Ascend: 12.53 current mapped acres versus 11-acre 2015 addition; excludes older northern component. Euclidean distance can cross river.",
+    "funding_note": "Reported $52m city-funded combined development; no audited expenditure ledger."
+  }
+]

@@ -1,0 +1,16 @@
+project,income_group,acs_year,lower_edge,upper_edge,ZIPs
+Lafitte,Lower,2012,17300.0,31735.0,6
+Lafitte,Middle,2012,31735.0,41455.666666666664,6
+Lafitte,Higher,2012,41455.666666666664,71944.0,6
+Sun Link,Lower,2011,25350.0,42423.0,10
+Sun Link,Middle,2011,42423.0,55904.0,9
+Sun Link,Higher,2011,55904.0,83314.0,9
+Dilworth Park,Lower,2011,14586.0,31557.0,13
+Dilworth Park,Middle,2011,31557.0,45619.0,12
+Dilworth Park,Higher,2011,45619.0,93222.0,12
+Water Works Park,Lower,2012,26537.0,34317.0,9
+Water Works Park,Middle,2012,34317.0,55514.0,8
+Water Works Park,Higher,2012,55514.0,96498.0,8
+Riverfront / Ascend,Lower,2012,21415.0,38808.33333333333,7
+Riverfront / Ascend,Middle,2012,38808.33333333333,49347.666666666664,7
+Riverfront / Ascend,Higher,2012,49347.666666666664,197750.0,7
