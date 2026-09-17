@@ -8,7 +8,7 @@
 
 ## 1. Executive Summary
 
-This benchmark evaluates the empirical performance of the Three Hypotheses formulated after the Milestone 2 EDA, centered on a 4-stage causal transmission chain:
+This benchmark evaluates the empirical performance of the Three Hypotheses formulated after the Milestone 2 EDA (reformulated post-EDA following the rejection of Milestone 2's direct spending-to-sentiment hypothesis), centered on a 4-stage causal transmission chain:
 
 $$\text{Public Capital Project} \;\xrightarrow{\text{crowding-in}}\; \text{Surrounding Commercial Investment} \;\xrightarrow{\text{foot traffic}}\; \text{Human Interaction} \;\xrightarrow{\text{behavioral trace}}\; \text{Review Engagement}$$
 

@@ -32,8 +32,17 @@ Under this transmission mechanism, we test three operational hypotheses (reformu
 2. **Hypothesis 2 (Engagement Generation):** Publicly funded projects catalyze general investment and foot traffic in their surrounding catchment, generating measurable net increases in active reviewed businesses and review volume relative to matched counterfactual areas.
 3. **Hypothesis 3 (Capital Non-Linearity: "More Dollars ≠ More Engagement"):** Public investment can encourage local interaction, but engagement outcomes do not scale with the dollar magnitude of the capital outlay. Higher expenditure does not guarantee higher engagement per dollar or greater absolute engagement. Across our five curated cases, the most expensive project (Sun Link at $196.5M) produced the lowest engagement contrast (−1.22 reviews/pair DiD, −18.7% business expansion contrast), while the low-cost greenway (Lafitte at $9.1M) produced the highest capital efficiency (+165.16 net reviews/$M, +5.4% business expansion). With $N=5$ cases, project type is collinear with geography, cost scale, and density; this is strictly a descriptive comparison of specific capital outlays, not a generalizable causal regression across project classes.
 
-### 1.2 Grounding in EDA Evidence
+### 1.2 Reconciliation with Milestone 2 EDA Hypothesis Scheme
+The earlier Milestone 2 EDA deliverable (`ProjectEDA_Team4.ipynb` and `EDA_Evaluation.md`) evaluated an exploratory hypothesis scheme based on direct spending-to-sentiment correlations:
+- **Milestone 2 H1:** Nearby business engagement increases after public investment.
+- **Milestone 2 H2:** Review sentiment and star ratings improve near public investments.
+- **Milestone 2 H3:** Benefits differ across local income groups.
 
+The EDA and subsequent empirical checks decisively **rejected Milestone 2 H2** (the specification curve showed correlation $r$ was bounded near zero and failed the temporal placebo test, while customer stars showed no consistent shift across the five cases).
+
+Consequently, the post-EDA framework **reformulated the hypothesis structure** around the 4-stage transmission mechanism ($H_1$ Community Voice in reviews, $H_2$ Engagement Generation / commercial spillover, $H_3$ Capital Non-Linearity: "More Dollars $\ne$ More Engagement"). Milestone 2 H3's equity analysis is preserved as Dimension 3 of the Public Investment Efficiency Score ($CE_{\text{lower}}$).
+
+### 1.3 Grounding in EDA Evidence
 | Project | Typology | Reported Cost ($M) | Relative Review Growth (500m) | Relative Business Growth (500m) | Baseline Local Income Contrast |
 |---|---|---:|---:|---:|---|
 | **Lafitte Greenway** (New Orleans) | Greenway / linear park | $9.1 | +34.5% (Main) / +26.3% (Lower band) | +5.4% | Robust positive growth concentrated in lower-income ZIPs (+26.3%). |
