@@ -98,7 +98,14 @@ function renderCapitalEfficiency(){
     $('efficiencyRows').innerHTML = '<tr><td colspan="10" style="text-align:center; padding:18px; color:var(--muted);">No matched data available for this radius and income tier combination.</td></tr>';
     return;
   }
-  rows.sort((a, b) => (parseFloat(b.ce_abs_per_million) || 0) - (parseFloat(a.ce_abs_per_million) || 0));
+  // Plan invariant: Flagged rows (low_support = true, N < 20) MUST be suppressed from ranking comparisons.
+  // Sort supported (non-flagged) rows descending by CE_abs; append flagged rows at the bottom.
+  rows.sort((a, b) => {
+    const flagA = a.low_support === true || a.low_support === 'True';
+    const flagB = b.low_support === true || b.low_support === 'True';
+    if (flagA !== flagB) return flagA ? 1 : -1;
+    return (parseFloat(b.ce_abs_per_million) || 0) - (parseFloat(a.ce_abs_per_million) || 0);
+  });
   $('efficiencyRows').innerHTML = rows.map(r => {
     const isFlag = r.low_support === true || r.low_support === 'True';
     const flagHtml = isFlag ? '<span style="color:#b66740; font-weight:600;">FLAG (N&lt;20)</span>' : '<span style="color:#146e64;">OK</span>';
@@ -120,9 +127,9 @@ function renderCapitalEfficiency(){
       <td>${r.pairs}</td>
       <td style="color:${did < 0 ? 'var(--orange)' : 'inherit'};">${didStr}</td>
       <td style="color:${netVol < 0 ? 'var(--orange)' : 'inherit'};">${netVolStr}</td>
-      <td><strong>${ceAbsStr}</strong></td>
-      <td>${ceRelStr}</td>
-      <td>${ceNormStr}</td>
+      <td><strong>${isFlag ? '<span style="color:var(--muted);">' + ceAbsStr + '</span>' : ceAbsStr}</strong></td>
+      <td>${isFlag ? '<span style="color:var(--muted);">' + ceRelStr + '</span>' : ceRelStr}</td>
+      <td>${isFlag ? '<span style="color:var(--muted);">' + ceNormStr + '</span>' : ceNormStr}</td>
       <td>${flagHtml}</td>
     </tr>`;
   }).join('');

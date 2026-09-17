@@ -54,6 +54,37 @@ class TestEngagementEfficiency(unittest.TestCase):
         # Sun link had negative matched contrast
         self.assertLess(sl["ce_abs_per_million"], 0)
 
+    def test_independent_external_anchors(self):
+        # Independent anchor 1: Lafitte 500m/All/Main matches engagement.csv raw values
+        lafitte = self.results[
+            (self.results["project"] == "Lafitte") &
+            (self.results["radius_m"] == 500) &
+            (self.results["metric"] == "reviews") &
+            (self.results["income_group"] == "All")
+        ].iloc[0]
+        self.assertEqual(lafitte["pairs"], 142)
+        self.assertAlmostEqual(lafitte["near_pre_mean"], 23.613, places=2)
+        self.assertAlmostEqual(lafitte["near_post_mean"], 38.993, places=2)
+        self.assertAlmostEqual(lafitte["control_pre_mean"], 21.085, places=2)
+        self.assertAlmostEqual(lafitte["control_post_mean"], 25.880, places=2)
+        self.assertAlmostEqual(lafitte["relative_growth_pct"], 34.54, places=1)
+        self.assertAlmostEqual(lafitte["net_volume_gain"], 1503.0, places=0)
+        self.assertAlmostEqual(lafitte["ce_abs_per_million"], 165.16, places=1)
+
+        # Independent anchor 2: Lafitte CE_biz matches business_growth.csv net gain
+        self.assertAlmostEqual(lafitte["biz_500m_net_gain"], 17.53, places=1)
+        self.assertAlmostEqual(lafitte["ce_biz_per_million"], 1.926, places=2)
+
+        # Independent anchor 3: Water Works Park at 1,000m has pairs=23 and low_support=False
+        ww_1000 = self.results[
+            (self.results["project"] == "Water Works Park") &
+            (self.results["radius_m"] == 1000) &
+            (self.results["metric"] == "reviews") &
+            (self.results["income_group"] == "All")
+        ].iloc[0]
+        self.assertEqual(ww_1000["pairs"], 23)
+        self.assertFalse(ww_1000["low_support"])
+
 
 if __name__ == "__main__":
     unittest.main()

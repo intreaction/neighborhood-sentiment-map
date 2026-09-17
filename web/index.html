@@ -45,7 +45,7 @@ dialog{width:min(900px,92vw);border:1px solid var(--line);border-radius:10px;pad
       <div class="eyebrow">02 / Capital Efficiency &amp; Community Voice</div>
       <h2 id="efficiency-title">Engagement per Public Dollar.</h2>
     </div>
-    <p>Customer satisfaction (stars and sentiment) did not systematically track public spending ($r \approx 0.00$, failed placebo test). We evaluate where public capital actually moved commercial participation and review volume. Compare net review gains and active business expansion across project investments.</p>
+    <p>Customer satisfaction (stars and sentiment) did not systematically track public spending (r ≈ 0.00, failed placebo test). We evaluate where public capital actually moved commercial participation and review volume. Compare net review gains and active business expansion across project investments.</p>
   </div>
 
   <div class="scope-strip">
@@ -93,17 +93,17 @@ dialog{width:min(900px,92vw);border:1px solid var(--line);border-radius:10px;pad
 
   <div class="population-stats">
     <div class="data-card">
-      <div class="eyebrow">Highest Efficiency</div>
+      <div class="eyebrow">Primary 500m Benchmark · Highest Efficiency</div>
       <div class="number" style="font-size:22px; color:var(--teal);">Lafitte Greenway</div>
       <p class="method-note">+165.2 net reviews / $1M (+3.80% / $1M). Linear trail in New Orleans; gains concentrated in lower-income ZIPs.</p>
     </div>
     <div class="data-card">
-      <div class="eyebrow">Highest Raw Volume</div>
+      <div class="eyebrow">Primary 500m Benchmark · Highest Raw Volume</div>
       <div class="number" style="font-size:22px; color:var(--ink);">Dilworth Park</div>
       <p class="method-note">+67.9 net reviews / $1M (+0.43% / $1M). Dense Center City Philadelphia civic plaza; driven by established commercial core.</p>
     </div>
     <div class="data-card">
-      <div class="eyebrow">Lowest Return</div>
+      <div class="eyebrow">Primary 500m Benchmark · Lowest Return</div>
       <div class="number" style="font-size:22px; color:var(--orange);">Sun Link Streetcar</div>
       <p class="method-note">−0.92 net reviews / $1M (−0.02% / $1M). $196.5M fixed rail in Tucson lagged matched citywide review growth.</p>
     </div>
@@ -111,7 +111,7 @@ dialog{width:min(900px,92vw);border:1px solid var(--line);border-radius:10px;pad
 </section>
 
 <section class="chapter" id="lag-lab" aria-labelledby="lag-title">
-  <div class="chapter-head"><div><div class="eyebrow">02 / Funding &amp; timing</div><h2 id="lag-title">What if change takes time?</h2></div><p>A commitment of funding and an experience at a business happen on different clocks. Explore earlier funding alongside later sentiment, one quarter and one place at a time.</p></div>
+  <div class="chapter-head"><div><div class="eyebrow">03 / Funding &amp; timing</div><h2 id="lag-title">What if change takes time?</h2></div><p>A commitment of funding and an experience at a business happen on different clocks. Explore earlier funding alongside later sentiment, one quarter and one place at a time.</p></div>
   <div class="scope-strip"><strong class="analysis-scope"></strong><a href="#map-section">Change city or quarter ↑</a></div>
   <div class="population-controls"><label for="fundingBasis">Compare funding as</label><select id="fundingBasis"><option value="total">Total dollars</option><option value="resident">Dollars per 2020 resident</option></select><label for="populationMinimum">Minimum population <output id="populationMinimumValue">500</output></label><input id="populationMinimum" type="range" min="0" max="5000" step="100" value="500" aria-label="Minimum population"><span>Per-resident views only; changes included ZIPs.</span></div>
   <div class="lab-controls">
@@ -137,7 +137,7 @@ dialog{width:min(900px,92vw);border:1px solid var(--line);border-radius:10px;pad
 </section>
 
 <section class="chapter" id="review-lab" aria-labelledby="review-title">
-  <div class="chapter-head"><div><div class="eyebrow">03 / Inside the reviews</div><h2 id="review-title">What are people talking about?</h2></div><p>Overall sentiment mixes many experiences. Separate reviews mentioning parking or surroundings from reviews about service, price and products, then carry that lens back to the map.</p></div>
+  <div class="chapter-head"><div><div class="eyebrow">04 / Inside the reviews</div><h2 id="review-title">What are people talking about?</h2></div><p>Overall sentiment mixes many experiences. Separate reviews mentioning parking or surroundings from reviews about service, price and products, then carry that lens back to the map.</p></div>
   <div class="scope-strip"><strong id="reviewScope"></strong><span>Selected quarter · overlapping text tags</span></div>
   <div id="topicUnavailable" class="method-note" hidden>Text categories have not been built. Run the review-topic pipeline to enable this section.</div>
   <div class="review-grid"><div class="data-card"><div class="card-heading"><div><h3>Mentions, not conclusions</h3><p>Share of all reviews in this area and quarter. Select a theme to filter sentiment throughout the page.</p></div><button id="clearTopic">All reviews</button></div><div id="topicBars"></div><p class="method-note">Rules search for words and phrases, and a review may match several themes. A cleanliness mention can be praise or a complaint; it may refer to a bathroom, not a street. Theme sentiment is the score of the whole review, not the sentiment of that specific aspect.</p></div><div class="data-card"><div class="card-heading"><div><h3>Look beyond the average</h3><p>Star ratings for all reviews in the selected area and quarter, regardless of theme.</p></div></div><div id="ratingBars"></div><div id="ratingSummary" class="method-note"></div><p class="method-note">Stars and text sentiment measure different things. Yelp reviews are self-selected, and business or reviewer composition can change over time.</p></div></div>
@@ -146,7 +146,7 @@ dialog{width:min(900px,92vw);border:1px solid var(--line);border-radius:10px;pad
 </section>
 
 <section class="chapter" id="area-ledger" aria-labelledby="ledger-title">
-  <div class="chapter-head"><div><div class="eyebrow">04 / Compare places</div><h2 id="ledger-title">Follow a pattern back to its place.</h2></div><p>Inspect the observations behind the scatterplot. Choose a ZIP to update its map outline, history and review detail, or download the current comparison.</p></div>
+  <div class="chapter-head"><div><div class="eyebrow">05 / Compare places</div><h2 id="ledger-title">Follow a pattern back to its place.</h2></div><p>Inspect the observations behind the scatterplot. Choose a ZIP to update its map outline, history and review detail, or download the current comparison.</p></div>
   <div class="scope-strip"><strong class="analysis-scope"></strong><button id="downloadComparison">Export comparison CSV</button></div>
   <div class="table-wrap"><table><thead><tr><th>ZIP area</th><th><button id="sortFunding">Funding window ↓</button></th><th>Population (2020)</th><th><button id="sortRate">Funding / resident ↕</button></th><th>Review sentiment</th><th><button id="sortChange">Annual change ↕</button></th><th>Reviews</th><th>Coverage</th></tr></thead><tbody id="areaRows"></tbody></table></div>
   <p class="method-note">Amounts are nominal net obligations in the chosen window. Missing history stays unavailable rather than becoming zero. The export includes the city, review theme, quarter, window dates, lag, coverage threshold and inclusion status.</p>
@@ -352,7 +352,14 @@ function renderCapitalEfficiency(){
     $('efficiencyRows').innerHTML = '<tr><td colspan="10" style="text-align:center; padding:18px; color:var(--muted);">No matched data available for this radius and income tier combination.</td></tr>';
     return;
   }
-  rows.sort((a, b) => (parseFloat(b.ce_abs_per_million) || 0) - (parseFloat(a.ce_abs_per_million) || 0));
+  // Plan invariant: Flagged rows (low_support = true, N < 20) MUST be suppressed from ranking comparisons.
+  // Sort supported (non-flagged) rows descending by CE_abs; append flagged rows at the bottom.
+  rows.sort((a, b) => {
+    const flagA = a.low_support === true || a.low_support === 'True';
+    const flagB = b.low_support === true || b.low_support === 'True';
+    if (flagA !== flagB) return flagA ? 1 : -1;
+    return (parseFloat(b.ce_abs_per_million) || 0) - (parseFloat(a.ce_abs_per_million) || 0);
+  });
   $('efficiencyRows').innerHTML = rows.map(r => {
     const isFlag = r.low_support === true || r.low_support === 'True';
     const flagHtml = isFlag ? '<span style="color:#b66740; font-weight:600;">FLAG (N&lt;20)</span>' : '<span style="color:#146e64;">OK</span>';
@@ -374,9 +381,9 @@ function renderCapitalEfficiency(){
       <td>${r.pairs}</td>
       <td style="color:${did < 0 ? 'var(--orange)' : 'inherit'};">${didStr}</td>
       <td style="color:${netVol < 0 ? 'var(--orange)' : 'inherit'};">${netVolStr}</td>
-      <td><strong>${ceAbsStr}</strong></td>
-      <td>${ceRelStr}</td>
-      <td>${ceNormStr}</td>
+      <td><strong>${isFlag ? '<span style="color:var(--muted);">' + ceAbsStr + '</span>' : ceAbsStr}</strong></td>
+      <td>${isFlag ? '<span style="color:var(--muted);">' + ceRelStr + '</span>' : ceRelStr}</td>
+      <td>${isFlag ? '<span style="color:var(--muted);">' + ceNormStr + '</span>' : ceNormStr}</td>
       <td>${flagHtml}</td>
     </tr>`;
   }).join('');
