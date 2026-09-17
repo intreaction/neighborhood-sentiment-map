@@ -152,3 +152,33 @@ The offline exploration interface embeds 1,794 short excerpts sampled into a see
 - *Cleanliness & Surroundings:* "Outdoor patio sits right on the park with clean landscaping and great city views."
 
 *Status:* Supported by keyword tagging and rule-based mention detection. The synthetic benchmark sentences in `tests/test_community_voice_nlp.py` verify parser mechanics; formal human audit across stratified review lengths and star ratings remains pending.
+
+---
+
+## 7. The Public Investment Efficiency Score (PIES)
+
+### 7.1 Policy Objective and Rationale
+Municipal budget directors, transportation authorities, and civic stakeholders currently lack standardized, observable metrics to evaluate past place-based capital investments. Headline expenditure numbers (e.g., "$196.5M streetcar" vs. "$9.1M greenway") report financial inputs, not community outcomes.
+
+The **Public Investment Efficiency Score (PIES)** translates unstructured digital engagement data into an auditable evaluation framework. It tests how effectively capital projects encouraged local commercial interaction, expanded active business participation, and delivered civic engagement across neighborhood income bands.
+
+### 7.2 Score Dimensions and Metric Formulas
+
+1. **Visitor Engagement Efficiency ($CE_{\text{abs}}$):** Net reviews generated across the matched business sample per $1M invested:
+   $$CE_{\text{abs}} = \frac{N_{\text{pairs}} \times \Delta \bar{Y}_{\text{DiD}}}{\text{Cost (\$M)}}$$
+2. **Commercial Capacity Expansion ($CE_{\text{biz}}$):** Net active businesses added to the commercial catchment relative to counterfactual metro growth per $1M invested:
+   $$CE_{\text{biz}} = \frac{\Delta N_{\mathcal{N}}^{\text{active}} - \left(N_{\mathcal{N}, \text{pre}}^{\text{active}} \times \text{Growth}_{\mathcal{C}}^{\text{biz}}\right)}{\text{Cost (\$M)}}$$
+3. **Equity & Income Distribution ($E_{\text{equity}}$):** Absolute review gains generated in lower- and middle-income neighborhood terciles:
+   $$CE_{\text{equity}} = CE_{\text{abs, lower}} + CE_{\text{abs, middle}}$$
+4. **Audit & Data Quality Guardrail:**
+   A project score is labeled **Suppressed / Inconclusive** if baseline matched pairs $N < 20$. Unreliable small-sample ratios cannot be used for policy comparisons.
+
+### 7.3 Policy Scorecard Across the Curated Cases
+
+| Project | Typology & City | Cost ($M) | Engagement Efficiency ($CE_{\text{abs}}$) | Business Expansion ($CE_{\text{biz}}$) | Lower-Income Gain ($CE_{\text{lower}}$) | PIES Rating | Primary Policy Takeaway |
+|---|---|---:|---:|---:|---:|:---:|---|
+| **Lafitte Greenway** | Linear greenway / trail (New Orleans) | $9.1 | **+165.2** revs / $1M | **+1.93** biz / $1M | **+113.2** revs / $1M | **Tier 1 (High Efficiency)** | Exceptional return per dollar; highly effective at stimulating commercial reuse and pedestrian patronage in underserved corridors. |
+| **Riverfront / Ascend** | Riverfront park / venue (Nashville) | $52.0 | **+58.7** revs / $1M | **+0.03** biz / $1M | **+18.2** revs / $1M | **Tier 2 (Solid Event Anchor)** | High per-business activity surge (+35.9 revs/pair), but high metro background growth diluted relative business creation. |
+| **Dilworth Park** | Civic plaza / transit hub (Philadelphia) | $55.0 | **+67.9** revs / $1M | **−4.51** biz / $1M | **+0.09** revs / $1M | **Tier 2 (Core Volume Anchor)** | Large raw volume generator (+3,733 reviews), but heavily concentrated in established middle-income core; business creation lagged city. |
+| **Sun Link** | Streetcar / fixed rail (Tucson) | $196.5 | **−0.92** revs / $1M | **−0.55** biz / $1M | **−1.41** revs / $1M | **Tier 3 (Capital Inefficient)** | High outlay ($196.5M) failed to accelerate local commercial interaction faster than wider Tucson; demonstrates fixed rail does not automatically crowd in foot traffic. |
+| **Water Works Park** | Riverfront / spring restoration (Tampa) | $7.4 | *−14.19* revs / $1M | *+1.16* biz / $1M | — | **Suppressed** | Matched baseline support critically depleted ($N=2$ pairs); requires physical sensors or tax data rather than Yelp review matching. |
