@@ -16,15 +16,22 @@ The underlying economic and behavioral mechanism follows a 4-stage transmission 
 $$\text{Public Capital Project} \;\xrightarrow{\text{crowding-in}}\; \text{Surrounding Commercial Investment} \;\xrightarrow{\text{foot traffic}}\; \text{Human Interaction} \;\xrightarrow{\text{behavioral trace}}\; \text{Review Engagement}$$
 
 1. **Stage 1 (Public Capital Outlay):** A public entity commits place-based capital (e.g., greenway trail, civic plaza, riverfront park, transit line).
+   - *Observed Metric:* Reported project capital cost in millions ($M) from official project accounts and FTA grants.
+   - *Measurement Caveat:* Headline figures conflate federal grants, municipal bonds, and private match funds; public expenditures are not reconciled to audited contractor outlays.
 2. **Stage 2 (Spillover & Surrounding Investment):** The public amenity encourages private and commercial investment in the immediate catchment (adaptive reuse of buildings, new storefronts, cafes, outdoor seating, park activation).
+   - *Observed Metric:* Net active reviewed business participation contrast within 500m (`business_growth.csv`).
+   - *Empirical Evidence:* Mixed across projects (Lafitte +5.4%, Riverfront +0.7%, Dilworth −17.6%, Sun Link −18.7%).
 3. **Stage 3 (Physical Interaction & Foot Traffic):** More people visit, walk through, recreate in, and patronize the outcomes of those public and private investments.
+   - *Measurement Caveat:* **Unobserved directly** in Yelp data (no pedestrian counter or cellular mobility telemetry). Check-in counts serve as the closest observable foot-traffic proxy; the conversion of visits into Yelp reviews is a structural behavioral assumption of this research design.
 4. **Stage 4 (Observable Digital Voice & Engagement):** As foot traffic and patron interactions increase, a fraction of those interacting leave behavioral traces (reviews, tips, check-ins, photos) and articulate their experience of the surrounding neighborhood conditions.
+   - *Observed Metric:* Matched difference-in-differences in review volume, unique reviewer counts, check-ins, and community voice topic shares.
 
 Under this transmission mechanism, we test three operational hypotheses (reformulated post-EDA to replace the falsified direct spending $\rightarrow$ sentiment link):
 
-1. **Hypothesis 1 (Community Voice):** Because reviews are behavioral traces of people interacting with places, unstructured text contains substantive commentary on physical surroundings, walkability, transit, cleanliness, and public space, alongside transactional food/service evaluations. Reviews capture citizen care for their community environment.
+1. **Hypothesis 1 (Community Voice):** Because reviews are behavioral traces of people interacting with places, unstructured text contains substantive commentary on physical surroundings, walkability, transit, cleanliness, and public space, alongside transactional food/service evaluations.
 2. **Hypothesis 2 (Engagement Generation):** Publicly funded projects catalyze general investment and foot traffic in their surrounding catchment, generating measurable net increases in active reviewed businesses and review volume relative to matched counterfactual areas.
-3. **Hypothesis 3 (Descriptive Capital Efficiency Across Curated Cases):** The efficiency of this transmission chain—net engagement generated per public dollar invested—varies starkly across infrastructure typologies. With $N=5$ cases (one project per city/typology), project type is collinear with geography, cost scale, and baseline density; this is strictly a descriptive comparison of specific capital outlays, not a generalizable causal regression across project classes.
+3. **Hypothesis 3 (Capital Non-Linearity: "More Dollars ≠ More Engagement"):** Public investment can encourage local interaction, but engagement outcomes do not scale with the dollar magnitude of the capital outlay. Higher expenditure does not guarantee higher engagement per dollar or greater absolute engagement. Across our five curated cases, the most expensive project (Sun Link at $196.5M) produced the lowest engagement contrast (−1.22 reviews/pair DiD, −18.7% business expansion contrast), while the low-cost greenway (Lafitte at $9.1M) produced the highest capital efficiency (+165.16 net reviews/$M, +5.4% business expansion). With $N=5$ cases, project type is collinear with geography, cost scale, and density; this is strictly a descriptive comparison of specific capital outlays, not a generalizable causal regression across project classes.
+
 ### 1.2 Grounding in EDA Evidence
 
 | Project | Typology | Reported Cost ($M) | Relative Review Growth (500m) | Relative Business Growth (500m) | Baseline Local Income Contrast |
