@@ -219,12 +219,11 @@ Tests cover outcome arithmetic, deterministic sampling, leakage checks,
 Python/JavaScript model parity, geographic selection, support rules, data exports
 and the local server. Server tests need permission to bind localhost.
 
-- [Presentation slides](docs/presentation/Public-Investment-Evidence.pptx)
-- [PDF slides](output/pdf/Public-Investment-Evidence.pdf)
+- [Google Slides — project overview](https://docs.google.com/presentation/d/1sg0G4LGOqI1nrnQCK6E-p9zHme1tHvJlLT3XWMzv2ME/edit)
 - [Presenter guide](docs/presentation/Presenter-Guide.md)
 - [Source/model browser validation](docs/qa/validation.md)
 
-The presentation currently demonstrates the historical-project workflow; Place
-Lab adds ZIP exploration. Independent human label validation remains unfinished.
+The presentation explains ZIP exploration, the notebook-to-JSON pipeline, historical
+project analysis and model limitations. Independent human label validation remains unfinished.
 OpenAI Codex assisted with code, analysis checks, debugging, visuals and drafting;
 the team remains responsible for the submitted work and its interpretation.

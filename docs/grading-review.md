@@ -1,8 +1,10 @@
 # Rubric-based project review
 
-Reviewed 2026-10-02. **Estimated score: 84.5/100.** This is a repository-based
+Reviewed 2026-10-02. **Prior estimated score: 84.5/100.** This is a repository-based
 assessment, not an instructor grade. No course letter-grade scale was supplied.
 Live presentation delivery and engagement cannot be graded from stored files.
+The presentation was subsequently revised against the rubric; the estimate below
+has not been recalculated or increased on that basis.
 
 The source is the course's **Final Project Deliverables – Grading Rubric**
 (`139228374-Final Project Deliverables - Grading Rubric.pdf`, supplied in the local
@@ -19,7 +21,7 @@ Needs Improvement. Half-points below are reviewer estimates between those bands.
 | Exploratory data analysis | 10% | 8.5 | 8.5 | Coverage, missingness, denominators, ZIP distributions and project comparisons are visible. Earlier coursework adds text diagnostics. The primary path could show more cleaning examples, review-length/star distributions and coverage bias directly. |
 | Methodology | 25% | 8 | 20 | VADER, target-aware clause rules, TF-IDF/NMF and fold-isolated challenger evaluation are appropriate and explained. Shared reviews are excluded from representation training. Independent annotation and topic-quality evaluation remain incomplete; five-topic selection has limited comparative justification. |
 | Results and business insights | 25% | 8.5 | 21.25 | Raw versus adjusted growth, food/service dominance, negative predictive NLP results and timing sensitivity are interpreted honestly. More explicit examples of how a planner changes an investigation or evidence request would strengthen the business connection. |
-| Presentation and communication | 10% | 8 | 8 | Thirteen consistent slides, readable core charts and a logical narrative. Embedded UI captures are small and show the earlier scenario flow. Current ZIP interface and notebook export need explicit demo coverage. Delivery is unobserved. |
+| Presentation and communication | 10% | 8 | 8 | Prior deck assessment. The current 15-slide deck adds data preparation, actual NMF terms and planning implications, with current ZIP/notebook coverage. Delivery is unobserved. |
 | Code clarity and quality | 15% | 8.5 | 12.75 | Executed primary notebook, modular transformations, hashes, static JSON contract and meaningful tests. Legacy/current entry points and compressed older modules add reading cost. Prepared-data reproduction is stronger than full raw-source replication. |
 | **Total** | **100%** | | **84.5** | Strong submission, with the largest remaining opportunity in validating and interpreting the NLP contribution. |
 
@@ -42,8 +44,10 @@ positive result. A small project sample is a limitation, not evidence of bad cod
   including train-only representation fitting and held-out review exclusion.
 - [Project source audit](project-source-audit.md), prepared input manifests,
   `src/place_pipeline.py`, and the current model/evidence artifacts.
-- [PowerPoint](presentation/Public-Investment-Evidence.pptx) text and all thirteen
-  rendered pages of [the PDF slides](../output/pdf/Public-Investment-Evidence.pdf).
+- The prior PowerPoint/PDF reviewed for this assessment has been retired. Its
+  replacement is the [15-slide Google Slides course presentation](https://docs.google.com/presentation/d/1sg0G4LGOqI1nrnQCK6E-p9zHme1tHvJlLT3XWMzv2ME/edit), rebuilt on
+  October 2, 2026 with the ZIP workflow, data pipeline and current findings.
+  The replacement was rendered and visually checked; delivery remains ungraded.
 - [Presenter guide](presentation/Presenter-Guide.md), README, data acquisition
   documentation, CI configuration and repository publication checks.
 - Clean-copy execution: copied only tracked/non-ignored candidate files into a
@@ -58,12 +62,12 @@ positive result. A small project sample is a limitation, not evidence of bad cod
 
 | Requirement | Status |
 |---|---|
-| Presentation slides | Present as PPTX and PDF; visual review completed |
+| Presentation slides | Native Google Slides in CIS 509 Group; visual review completed |
 | Python notebook(s) or GitHub repository | Present; the new executed walkthrough is the primary entry point |
 | Clean, documented implementation | Substantially met; reusable functions and tests support the notebook |
 | Clear connection between problem, NLP and business interpretation | Present, with room for more concrete decision examples |
 | Approximately 12–15 minutes | Presenter guide updated to a 13-minute plan; timed rehearsal still needed |
-| Accessible submission | Repository was private at audit time; instructor access or a later visibility change must be arranged before submitting the link |
+| Accessible submission | GitHub repository is public; verify instructor access to the separate Google Slides deck |
 
 Raw datasets do not need to be checked in under the supplied rubric. Compact
 research results and documented acquisition are appropriate. The exact archive
@@ -91,8 +95,7 @@ See [data setup](data-setup.md).
    prepared-data notebook already works without the raw corpus; this is the
    separate upstream reproducibility gap.
 5. **Rehearse and refresh the demo evidence.** Use the updated 13-minute guide,
-   enlarge or replace tiny UI captures, and show the latest ZIP focus controls and
-   notebook-to-JSON path. Do not infer an excellent delivery score from slide design.
+   use the current ZIP demonstration and notebook-to-JSON explanation. Do not infer an excellent delivery score from slide design.
 
 These changes could improve the score, but no point increase is guaranteed.
 They remain outstanding; this review does not claim to have performed human
