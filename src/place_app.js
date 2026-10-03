@@ -40,8 +40,9 @@ function renderProjectCard(focus) {
     access:'Investigate the access and parking reviews, then assess walking, transit and accessibility improvements. Mentions include praise and complaints.',
     none:'Choose a focus to connect this project with the existing area analysis.'
   };
-  $('projectCardTitle').textContent=state.project_type;
-  $('projectMeta').textContent=`$${number(state.cost_millions,1)}M · ${zip?'ZIP '+zip:'Outside mapped ZIP areas'} · ${selectedZip?"ZIP-level proposal":"500 m study radius"}`;
+  const focusTitles={activity:'Business activity',income:'Household income',poverty:'Poverty rate',decline:'Declining activity',experience:'Worsening experiences',access:'Access concerns',none:'Area overview'};
+  $('projectCardTitle').textContent=`${focusTitles[focus]}${zip?' · ZIP '+zip:''}`;
+  $('projectMeta').textContent=`Proposal budget: $${number(state.cost_millions,1)}M · ${selectedZip?"ZIP-level proposal":"500 m study radius"}`;
   $('projectSignal').textContent=focus==='none'?number(latest.profile.baseline_reviewed):formatAreaValue(value,focus);
   $('projectSignalLabel').textContent=focus==='none'?'Nearby businesses with baseline reviews':`${spec.title}${spec.unit?" · "+spec.unit:""} · ${spec.period}`;
   $('projectOpportunity').textContent=(focus!=='none'&&value===null?'This area has limited evidence for this focus. ':'')+opportunities[focus];
