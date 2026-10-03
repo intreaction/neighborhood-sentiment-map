@@ -32,6 +32,7 @@ function renderProjectCard(focus) {
   $('projectSignal').style.color=areaTextColor(value,focus);
   $('projectSignal').style.borderLeft=`5px solid ${signalColor}`;
   const opportunities={
+    combined:'Compare these historical signals when deciding where to investigate further. Their overlap does not establish a cause or predict the benefit of a project.',
     activity:'Explore public space and connections that help people reach nearby businesses.',
     income:'Explore affordable public amenities and connections with residents; prioritize who benefits and whether access remains affordable.',
     poverty:'Explore affordable public amenities and connections with residents; prioritize who benefits and whether access remains affordable.',
@@ -40,10 +41,17 @@ function renderProjectCard(focus) {
     access:'Investigate the access and parking reviews, then assess walking, transit and accessibility improvements. Mentions include praise and complaints.',
     none:'Choose a focus to connect this project with the existing area analysis.'
   };
-  const focusTitles={activity:'Business activity',income:'Household income',poverty:'Poverty rate',decline:'Declining activity',experience:'Worsening experiences',access:'Access concerns',none:'Area overview'};
+  const focusTitles={combined:'Poverty + activity',activity:'Business activity',income:'Household income',poverty:'Poverty rate',decline:'Declining activity',experience:'Worsening experiences',access:'Access concerns',none:'Area overview'};
   $('projectCardTitle').textContent=`${focusTitles[focus]}${zip?' · ZIP '+zip:''}`;
   $('projectMeta').textContent=`Proposal budget: $${number(state.cost_millions,1)}M · ${selectedZip?"ZIP-level proposal":"500 m study radius"}`;
   $('projectSignal').textContent=focus==='none'?number(latest.profile.baseline_reviewed):formatAreaValue(value,focus);
+  $('projectSignal').classList.toggle('combined-signal',focus==='combined');
+  $('combinedValues').hidden=focus!=='combined';
+  $('combinedValues').replaceChildren();
+  if(focus==='combined'){
+    const measures=[['Population below poverty',formatAreaValue(area?.poverty_pct,'poverty'),area?.acs_year?`ACS ${area.acs_year-4}–${area.acs_year}`:'Baseline ACS unavailable'],['Review activity change',formatAreaValue(area?.growth_pct,'decline'),'2012–2014 → 2019–2021']];
+    for(const [label,value,period] of measures){const block=document.createElement('div');for(const [tag,text] of [['span',label],['strong',value],['small',period]]){const element=document.createElement(tag);element.textContent=text;block.append(element);}$('combinedValues').append(block);}
+  }
   $('projectSignalLabel').textContent=focus==='none'?'Nearby businesses with baseline reviews':`${spec.title}${spec.unit?" · "+spec.unit:""} · ${spec.period}`;
   $('projectOpportunity').textContent=(focus!=='none'&&value===null?'This area has limited evidence for this focus. ':'')+opportunities[focus];
   $('projectReach').textContent=selectedZip?`${number(area?.business_inventory)} Yelp listings across ZIP ${zip}. The detailed model below uses a 500 m sample at a fixed reference point within the ZIP; it does not estimate a ZIP-wide impact.`:`${number(latest.profile.baseline_reviewed)} businesses with baseline reviews within 500 m. This is the local study footprint, not a count of guaranteed beneficiaries.`;

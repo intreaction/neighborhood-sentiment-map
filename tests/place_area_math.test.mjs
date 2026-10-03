@@ -35,3 +35,13 @@ test('stable ZIP anchors stay inside every shipped boundary, including holes',as
  const feature={properties:{zip:'hole'},geometry:{type:'Polygon',coordinates:[ring,hole]}};
  assert.equal(areaAt(areaAnchor(feature),[feature]),'hole');
 });
+
+test('combined categories preserve both signals and explicit boundary rules',()=>{
+ const cases=[[19.9,0,0],[0,-1,1],[20,1,2],[20,-.01,3]];
+ for(const [poverty_pct,growth_pct,category] of cases)assert.equal(areaValue({poverty_pct,growth_pct},'combined'),category);
+ assert.equal(new Set(cases.map(([, ,category])=>areaColor(category,'combined'))).size,4);
+ assert.equal(formatAreaValue(3,'combined'),'Higher poverty · declining');
+ for(const row of [{poverty_pct:null,growth_pct:-5},{poverty_pct:25,growth_pct:null},{poverty_pct:NaN,growth_pct:0},{}])assert.equal(areaValue(row,'combined'),null);
+ assert.equal(areaValue({poverty_pct:0,growth_pct:0},'combined'),0);
+ assert.notEqual(areaColor(null,'combined'),areaColor(0,'combined'));
+});

@@ -49,3 +49,8 @@ main{max-width:none;padding:0}.workspace{display:block;border:0;border-radius:0}
 .floating-controls{background:rgba(255,253,246,.86);backdrop-filter:blur(14px) saturate(110%);-webkit-backdrop-filter:blur(14px) saturate(110%);border-color:rgba(255,255,255,.72);box-shadow:0 8px 32px rgba(24,62,53,.14),inset 0 1px 0 rgba(255,255,255,.7)}
 @supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){.floating-controls{background:rgba(255,253,246,.96)}}
 @media(prefers-reduced-transparency:reduce){.floating-controls{background:var(--paper);backdrop-filter:none;-webkit-backdrop-filter:none}}
+
+/* Two independent measures, with an explicit categorical legend. */
+.combined-legend{width:100%}.combined-legend table{table-layout:fixed;width:100%;border-spacing:4px;font-size:10px;text-align:center}.combined-legend caption{text-align:right;font-size:10px;margin-bottom:4px}.combined-legend th{font-weight:500;line-height:1.5}.combined-legend tbody th{text-align:left}.combined-legend td{height:38px;border-radius:3px;font-weight:600}.combined-legend thead td{height:auto}.floating-controls .project-signal.combined-signal,.area-metric.combined-signal{font-size:23px;line-height:1.3;letter-spacing:-.4px}.combined-values{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0}.combined-values span,.combined-values small{display:block;font-size:10px}.combined-values strong{display:block;font:27px/1.5 Georgia,serif}.combined-values small{color:var(--muted)}
+
+.combined-legend>p{font-size:10px;color:var(--muted);margin:6px 0 0}

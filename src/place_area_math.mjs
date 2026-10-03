@@ -1,5 +1,14 @@
 // Area colors describe the existing ZIP analysis, never inferred block-level values.
+export const COMBINED_POVERTY_THRESHOLD=20;
+// Category IDs are color lookups, not an ordered need score.
+export const COMBINED_CATEGORIES=[
+  {label:'Lower poverty · stable / growing',color:'#e3e5e6'},
+  {label:'Lower poverty · declining',color:'#d98b39'},
+  {label:'Higher poverty · stable / growing',color:'#5992b5'},
+  {label:'Higher poverty · declining',color:'#75578a'}
+];
 export const FOCUSES={
+  combined:{label:'Compare poverty + activity',title:'Poverty + activity change',period:'Baseline ACS · 2007–2011 / 2008–2012; Yelp · 2012–2014 → 2019–2021',note:'Purple marks higher baseline poverty with declining review activity. The 20% poverty cutoff is an exploratory display choice, not a designation of neighborhood need. Review counts are not visits or business closures; the later period includes COVID-19. Both review periods need 100 reviews.',ends:['',''],palette:'categorical'},
   activity:{label:'Reach active business areas',field:'annual_review_density',title:'Review activity',unit:'reviews / km² / year',period:'2019–2021 · annual average',note:'Recorded Yelp activity per square kilometre, including water inside the boundary. It does not measure visits or revenue.',range:[0,3000],log:true,ends:['0','3,000+'],palette:'sequential'},
   income:{label:'Support lower-income areas',field:'median_income',title:'Median household income',unit:'historical dollars',period:'Baseline ACS · 2007–2011 / 2008–2012',note:'Warmer areas have lower baseline household income. These are historical ZIP/ZCTA estimates, not reviewer incomes or current conditions.',range:[20000,100000],reverse:true,ends:['$100k+','$20k or less'],palette:'sequential'},
   poverty:{label:'Support lower-income areas',field:'poverty_pct',title:'Population below poverty',unit:'% of poverty-status population',period:'Baseline ACS · 2007–2011 / 2008–2012',note:'Warmer areas have a higher baseline poverty rate. The estimates describe the area, not individual Yelp reviewers.',range:[0,50],ends:['0%','50%+'],palette:'sequential'},
@@ -8,9 +17,15 @@ export const FOCUSES={
   access:{label:'Investigate access concerns',field:'access_share_pct',title:'Access & parking discussion',unit:'% of reviews mentioning access',period:'2019–2021 · existing keyword analysis',note:'Parking, walking, transit and accessibility mentions include praise and complaints. This is discussion frequency, not a validated complaint rate. At least 100 reviews required.',range:[0,15],ends:['0%','15%+'],palette:'sequential'},
   none:{label:'No heatmap',title:'Street map',note:'Choose a focus to explore existing area evidence.',period:'',range:[0,1],ends:['',''],palette:'sequential'}
 };
-export function areaValue(area,focus){const value=area?.[FOCUSES[focus]?.field];return Number.isFinite(value)?value:null;}
+export function areaValue(area,focus){
+  if(focus==='combined'){
+    if(!Number.isFinite(area?.poverty_pct)||!Number.isFinite(area?.growth_pct))return null;
+    return (area.poverty_pct>=COMBINED_POVERTY_THRESHOLD?2:0)+(area.growth_pct<0?1:0);
+  }
+  const value=area?.[FOCUSES[focus]?.field];return Number.isFinite(value)?value:null;}
 export function formatAreaValue(value,focus){
   if(!Number.isFinite(value))return 'Limited data';
+  if(focus==='combined')return COMBINED_CATEGORIES[value]?.label??'Limited data';
   if(focus==='income')return '$'+Math.round(value).toLocaleString('en-US');
   if(['poverty','access','decline'].includes(focus))return `${focus==='decline'&&value>0?'+':''}${value.toFixed(1)}%`;
   if(focus==='experience')return `${value>0?'+':''}${value.toFixed(3)}`;
@@ -18,6 +33,7 @@ export function formatAreaValue(value,focus){
 }
 export function areaColor(value,focus){
   if(!Number.isFinite(value))return '#929d9b';
+  if(focus==='combined')return COMBINED_CATEGORIES[value]?.color??'#929d9b';
   const spec=FOCUSES[focus],f=spec.log?Math.log1p:x=>x;
   let t=Math.max(0,Math.min(1,(f(value)-f(spec.range[0]))/(f(spec.range[1])-f(spec.range[0]))));
   if(spec.reverse)t=1-t;
@@ -28,6 +44,7 @@ export function areaColor(value,focus){
 // Text uses a darker directional hue so small changes remain readable.
 export function areaTextColor(value,focus){
   if(!Number.isFinite(value)||focus==='none'||value===0&&FOCUSES[focus].palette==='diverging')return '#5a6d68';
+  if(focus==='combined')return ['#465351','#86511c','#295e7e','#684779'][value];
   if(FOCUSES[focus].palette==='diverging')return value>0?'#23767a':'#a63824';
   return `color-mix(in srgb, ${areaColor(value,focus)} 55%, #30251d)`;
 }
