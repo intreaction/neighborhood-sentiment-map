@@ -1,222 +1,230 @@
-# neighborhood-sentiment-map
+# Public Investment Evidence
 
-**CIS 509 — Analytics for Unstructured Data** · Fall 2026 · Canvas course `264495` (Xiao Liu)
+**CIS 509 — Analytics for Unstructured Data · Team 4**
 
-An evidence explorer and experimental proposal tool for public investments, combining
-project outcomes with unstructured Yelp review analysis.
+John Wheeler, Ryan Wolff, Cameron Anthony
 
-**Team 4** — John Wheeler, Ryan Wolff, Cameron Anthony
+**Publication status:** locally prepared; the owner has confirmed permission for
+public release of the included Yelp excerpts and business-level records. Read the
+[public-release audit](docs/publication-audit.md) and
+[data and third-party notices](DATA_AND_LICENSES.md) for scope and checks before changing repository
+visibility or deploying. This repository is an academic research submission;
+public access does not grant permission to redistribute its source data.
 
-## Where things live
+We combine historical Yelp reviews, public-project records, and Census context to
+help a planner inspect area conditions and evidence around past investments.
+The project asks what those observations can tell us—and what they cannot justify
+about a new project or budget.
 
-This is the course's **final project**, so it sits at the course root rather than under
-`Work/`. Course material is mirrored at `../Mirror/` (read-only, regenerated) and lab
-drafts live in `../Work/<Canvas assignment title>/`. This repo holds the course-project
-code and durable project docs — not the weekly lab write-ups.
+[Submission reading guide](docs/SUBMISSION_GUIDE.md) · [Rubric-based review](docs/grading-review.md)
 
-CIS 509 has its own `.venv` at the course-folder level; use it for this course's Python.
+## Start here: the research and data-build notebook
 
-## Presenting the demo
+**[Open the executed research walkthrough](output/jupyter-notebook/Project_Research_Walkthrough.ipynb).**
 
-Double-click [`start-demo.command`](start-demo.command) to open the prepared local
-site. It selects a free loopback port and needs only Python 3, the bundled `web/`
-files and a browser. Keep the launcher Terminal open while presenting.
+This is the primary reading path for the GitHub submission. It explains the source
+data, displays the datasets, derives ZIP measures, checks project outcomes,
+reproduces baseline model evaluation, interprets the results, and exports the
+five JSON files consumed by Place Lab. Saved tables and charts can be read on
+GitHub without running Python.
 
-- [Editable presentation](docs/presentation/Public-Investment-Evidence.pptx): ten main slides, three backup slides, and speaker notes.
-- [PDF viewing copy](output/pdf/Public-Investment-Evidence.pdf).
-- [Presenter guide](docs/presentation/Presenter-Guide.md): ten-minute story, key points and anticipated questions.
-- [Three-minute demo runbook](docs/demo-runbook.md): exact clicks and fallback plan.
+The notebook calls small, tested Python functions. It explains the analytical
+choices; `src/` contains reusable implementation. The browser reads the exported
+data files, not the notebook itself.
 
-New prototype: **Place Lab**, a location-to-proposal tool with direct controls and
-an interactive 2D map. Placement is limited to covered regions with at least one
-business with 2018–2019 reviews within 500 m. Double-click [`start-place.command`](start-place.command), or
-run `python3 src/serve_place.py --port 8766`, then open
-`http://127.0.0.1:8766/place.html`. Map selection, project type, budget, actual nearby-business profiles and estimates
-run in the browser without an API backend. Optional browser tools use the same validated controls. See the
-[implementation and demo guide](docs/plan/conversational-ar.md).
-
-Original development plan: [Three.js 3D map](docs/plan/threejs-3d-map.md).
-
-## Current product
-
-Live site: [Public Investment Map](https://intreaction.github.io/neighborhood-sentiment-map/)
-and [Place Lab](https://intreaction.github.io/neighborhood-sentiment-map/place.html).
-GitHub Actions publishes the prepared `web/` directory when its files change on
-`main`. The **Deploy GitHub Pages** workflow can also be run manually. Only the
-static web files are published; raw data and local Python launchers are not needed
-by visitors. After changing Place Lab sources, run `python3 src/build_place_site.py`
-and `npm run build:place`, then commit the updated `web/` files.
-
-Open `web/index.html`, or serve `web/` with `python -m http.server 8765 --directory web`.
-The original self-contained pages use embedded data, SVG, CSS and JavaScript.
-Place Lab uses a local 2D canvas map, bundled shadcn/Recharts graphs and JSON assets and must be served over
-HTTP. Neither UI needs external fonts or map tiles. Local profile imports remain
-in the browser. The prepared web assets can be hosted on a static site service such as GitHub Pages.
-
-- **Explore projects** (`index.html` / `projects.html`): 11 historical projects in
-  seven cities, one harmonized outcome, near/comparison counts, footprint diagrams,
-  text topics, sentiment, excerpts, source notes and coverage limitations.
-- **Analyze a proposal** (`model.html`): start with a historical example or enter/import
-  a measured baseline profile; change cost and local activity, inspect comparables,
-  export inputs and the resulting estimate. Unsupported inputs withhold the estimate.
-  Missing provenance is labeled an assumption-only scenario.
-- **Area atlas** (`atlas.html`): the earlier five-city ZIP map, review themes,
-  funding lag exploration and population context. Its optional Legacy CE layer uses
-  different methods and is preserved for comparison, not mixed into primary outcomes.
-- **Place Lab** (`place.html`): pick a point, choose type and budget, count businesses
-  within 500 m and run the existing model. A fixed 2018–2019 baseline covers five
-  metros. Placement requires nearby baseline-reviewed businesses. Optional browser tools are
-  available through the browser adapter.
-- **Archived reference calculator** (`reference.html`) and **earlier coursework report**
-  (`report.html`) retain prior research results and their original definitions.
-
-Capital efficiency here means **growth-adjusted excess Yelp reviews per $1 million
-of reported project cost**, over two post-opening years. It is an online-activity
-proxy, not financial return, public benefit, or a causal effect. Costs are nominal
-reported totals with inconsistent public/private scope; the January 2022 Yelp archive
-cannot describe current conditions.
-
-### Coverage and model evidence
-
-The project extraction scored **1,063,956 unique reviews**, yielding 1,420,312
-project/period memberships. Overlapping catchments share 292,924 reviews. Ten of 11
-projects meet baseline support requirements; Water Works Park remains visible with
-its outcome withheld. Six projects have mapped footprints and five use explicit
-center proxies. Mapped geometry is not necessarily a verified historical footprint.
-
-Text extraction records topic, whole-review sentiment, place versus business target,
-and provisional clause-level polarity for parking, transit, walking/accessibility,
-public space, safety, construction, cleanliness/maintenance, neighborhood and
-food/service/value. Pre-opening place discussion, access friction and public-realm
-complaints form model challenger features. Rule labels remain provisional: the
-local annotation task is prepared, but no independent human accuracy estimate exists.
-
-The advanced text layer learns **TF-IDF unigram/bigram features and five NMF topics**
-from baseline review language. It uses 23,691 sampled nearby baseline/post reviews
-(10,971 unique baseline reviews fit the descriptive topic basis), then exposes
-pre/post topic mixtures, normalized topic entropy, lexical diversity, review length
-and negation frequency. The prediction challenger refits its text representation
-inside every held-out fold, using a separate versioned basis. See
-[advanced text methods](docs/advanced-text-method.md) for sampling, leakage controls
-and interpretation. These learned topics often reflect food and service language;
-they are not automatically civic-satisfaction labels.
-
-On the refreshed common ten-project sample, the three-input baseline (reported cost,
-baseline reviewed businesses, reviews per reviewed business) has project-held-out MAE
-49.33 and city-held-out MAE 45.61 reviews/$1M. Rule-text, early-trend and learned-text challengers did not
-improve both errors, so the baseline remains selected. Its advantage over a mean-only
-comparator disappears when timing-sensitive cases are excluded. The displayed error
-envelope is historical error, not a calibrated confidence interval. This is a research
-prototype for exploring assumptions and evidence, not a validated budget recommender.
-
-### Rebuild the current product
-
-Python dependencies are pinned in `requirements.txt`; this workspace uses `../.venv`.
-The raw Yelp archive and business file are required for extraction, but the checked-in
-aggregate evidence/model artifacts suffice to rebuild the site.
-
-```sh
-../.venv/bin/python src/build_project_evidence.py --workers 4
-../.venv/bin/python src/build_advanced_text.py
-../.venv/bin/python src/train_project_model.py
-../.venv/bin/python src/build_evidence_site.py
-```
-
-The extractor reuses a versioned local cache under ignored `data/interim/project_evidence/`.
-Use `--rebuild-cache` when required. `src/fetch_project_geometry.py` refreshes the
-sourced Rail Park footprint with provenance; it requires network access. See
-[the source audit](docs/project-source-audit.md) and
-[implementation plan](docs/product-improvement-plan.md),
-[browser/test validation](docs/qa/validation.md), and
-[demo walkthrough](docs/demo-walkthrough.md).
-
-```sh
-../.venv/bin/python -m unittest discover -s tests -p 'test_*.py'
-node --test tests/*.test.cjs
-```
-
-Legacy outputs remain reproducible with `src/build_map_page.py` (`atlas.html`) and
-`src/build_model_page.py` (`reference.html`). Their earlier aggregate inputs and
-pipelines are documented in [atlas exploration](docs/atlas-exploration.md).
-
-## Data pipeline
-
-Raw data is gitignored. Regenerate it from scratch with:
-
-```
-../.venv/bin/python src/build_zip_universe.py    # Yelp business file -> 1,202 US ZIPs
-../.venv/bin/python src/fetch_usaspending.py     # one bulk download per year x award group
-../.venv/bin/python src/build_award_panel.py     # -> slim transactions + ZIP-year panel
-```
-
-| Path | What |
+| Read in order | What it establishes |
 |---|---|
-| `Yelp JSON/yelp_dataset.tar` | Yelp Open Dataset v4 (Jan 2022), 150,346 businesses / 6.99M reviews. Not redistributable — see the ToS PDF beside it. |
-| `data/raw/yelp_academic_dataset_business.json` | extracted from the tar |
-| `data/raw/usaspending/*.zip` | bulk-download CSVs, one per year x award group |
-| `data/interim/yelp_zips.txt` | the 1,202-ZIP study universe |
-| `data/interim/award_transactions.csv` | harmonized assistance + contract transactions |
-| `data/interim/zip_year_awards.csv` | obligations rolled up to ZIP x year |
+| Notebook §§1–2 | Source lineage, evolution of the research question, units and coverage |
+| Notebook §3 | The ZIP dataset, missingness, formulas and distributions |
+| Notebook §§4–5 | Historical outcomes and unstructured-text methods |
+| Notebook §§6–7 | Holdout evaluation, sensitivity and supported conclusions |
+| Notebook §8 | Validated dataset exports and page data contract |
+| [Source audit](docs/project-source-audit.md) | Project dates, costs, geometry and limitations |
+| [Advanced text method](docs/advanced-text-method.md) | Sampling, TF-IDF/NMF, leakage controls and pending validation |
 
-### Notes on the USASpending pull
+## What we found
 
-- The bulk-download API caps each request at **one year** of action dates, so the
-  fetcher issues one request per year. All 1,202 ZIP filters go in a single request.
-- Rows are **transactions**, not awards — each modification is its own row with its
-  own `action_date`, which is what a time series needs.
-- Place of performance ZIP is the **administering entity's** ZIP, not where the money
-  was physically spent. Statewide formula programs book to one office address.
-- Group programs on `cfda_number`, never `cfda_title` — the titles are inconsistently
-  truncated in the source (`MEDICAL ASSISTANCE PROGRAM (MEDICAID)` vs
-  `MEDICAL ASSISTANCE PROGRAM`).
+- The current extraction scores **1,063,956 unique reviews** across **11 projects**
+  in seven cities. **Ten project outcomes** meet model support rules. Reviews are
+  measurements, not a million independent project training examples.
+- Raw review growth can coexist with negative comparison-adjusted growth. Sun Link
+  illustrates why activity counts and adjusted outcomes must be shown together.
+- Learned topics often concern food and service. They cannot automatically be
+  interpreted as civic satisfaction. Place-targeting rules remain provisional;
+  independent human precision/recall has not been established.
+- Text challengers did not improve both project- and city-held-out errors.
+  The retained three-input baseline has MAE **49.33** and **45.61 reviews/$1M**, respectively.
+- The baseline's advantage over a mean predictor disappears after timing exclusions.
+  The useful result is an inspectable historical evidence workflow, not a validated
+  recommendation of a location, project type, or budget.
 
-## Analysis pipeline
+Capital efficiency (CE) means **growth-adjusted excess Yelp reviews per $1 million
+of nominal reported project cost over two post-opening years**. It is not revenue,
+financial return, public benefit, or a causal effect. The archive and income data
+are historical. Costs have inconsistent public/private scope. The displayed error
+range is a historical error envelope, not a calibrated confidence interval.
 
+## Source datasets stay outside Git
+
+Full Yelp archives, Census downloads and intermediate data are excluded from the
+repository. Readers obtain source data from the original providers when running
+raw extraction. [Data setup and replication](docs/data-setup.md) documents source
+links, historical versions, expected paths and the remaining raw-bootstrap limits.
+
+We retain compact prepared research inputs and notebook-generated JSON so the
+notebook and static site work from a fresh clone. CI rejects source-data paths,
+common raw-download filenames, and individual files over 10 MiB.
+
+## Run the notebook from a fresh clone
+
+Use Python 3.12. The checked-in prepared inputs are sufficient; this workflow needs
+no raw Yelp archive, API key, network data request, or sibling course directory.
+
+```sh
+python3.12 -m venv .venv
+.venv/bin/python -m pip install -r requirements.txt -r requirements-notebook.txt
+.venv/bin/python -m ipykernel install --user --name cis509-project --display-name "CIS 509 Project"
+.venv/bin/jupyter nbconvert --to notebook --execute --inplace --ExecutePreprocessor.kernel_name=cis509-project output/jupyter-notebook/Project_Research_Walkthrough.ipynb
 ```
-../.venv/bin/python src/build_sentiment_panel.py   # 3.07M reviews -> VADER, ZIP-quarter panel
-../.venv/bin/python src/fetch_map_context.py       # water, roads, county outlines
-../.venv/bin/python src/simplify_context.py        # 8.07 MB -> 0.37 MB
-../.venv/bin/python src/fetch_map_furniture.py     # state borders, place labels, metro extents
-../.venv/bin/python src/build_map_page.py          # -> web/atlas.html   (historical ZIP context)
 
-../.venv/bin/python src/lag_analysis.py            # naive lag cross-correlation (null)
-../.venv/bin/python src/case_studies.py            # per-award difference-in-differences
-../.venv/bin/python src/build_lag_model.py         # 48-kernel surface + permutation + bootstrap
-../.venv/bin/python src/build_lag_page.py          # -> web/lag.html     (earlier research explorer)
+Alternatively open the notebook in Jupyter or VS Code, select this environment,
+and use **Restart Kernel and Run All**. The notebook locates the repository from
+its own directory or the repository root. The existing course workspace can use
+`../.venv` instead of creating `.venv`.
+
+Execution rebuilds the page's data and six readable CSV tables. It does **not**
+rerun raw-review extraction or fit the advanced text challenger: those require the
+original local corpus. The notebook labels saved results and recomputed results
+separately and verifies that current evidence, model and text artifacts agree.
+
+## Data lineage and exported datasets
+
+```text
+Yelp archive + project sources + Census inputs
+                  ↓  upstream extraction / analysis in src/
+checked-in historical aggregates + model artifacts
+                  ↓  research notebook + tested Python transformations
+ZIP / project / text / model tables → web/place-*.json
+                                              ↓
+                                      Place Lab browser UI
 ```
 
-`build_lag_model.py` is the slow one (~6 min): 48 kernels x 5 control regimes, plus a
-400-draw permutation null and a 300-draw ZIP-clustered bootstrap.
+| Location | Role |
+|---|---|
+| `data/derived/place_inputs/` | Frozen, prepared page inputs; manifest records upstream origins and SHA-256 hashes |
+| `data/derived/project_evidence.json` | Current historical project counts, text measures, source notes and outcomes |
+| `data/derived/advanced_text.json` | Saved descriptive TF-IDF/NMF results and coverage |
+| `data/derived/project_model.json` | Current fitted model, holdouts and sensitivities |
+| [ZIP evidence CSV](data/derived/notebook_dataset/zip_evidence.csv) | All 196 mapped areas, activity/sentiment/access and ACS fields |
+| [Historical projects CSV](data/derived/notebook_dataset/historical_projects.csv) | All 11 projects, raw outcome components, eligibility and exclusion reasons |
+| [Project text CSV](data/derived/notebook_dataset/project_text_results.csv) | Near/comparison, period-specific sentiment and text rates |
+| [Learned topic terms](data/derived/notebook_dataset/learned_topic_terms.csv) | Five descriptive topic vocabularies |
+| [Model comparison](data/derived/notebook_dataset/model_comparison.csv) | Mean predictor and four candidate evaluations |
+| [Timing sensitivity](data/derived/notebook_dataset/timing_sensitivity.csv) | How exclusions change the baseline comparison |
+| `web/place-build-manifest.json` | Notebook-source, code, source-artifact and output hashes |
 
-### Earlier ZIP-funding research result
+Prepared inputs are **derived datasets, not original raw data**. The business
+profiles and boundaries were frozen from the previous published extraction;
+subsequent notebook runs read those inputs rather than their own `web/` outputs.
+The access snapshot retains counts and denominators, without review excerpts.
+Full raw Yelp archives and original review/user identifiers remain outside Git.
+Other evidence artifacts and generated pages contain short review excerpts and
+hashed review keys; the map inputs contain business-level coordinates and counts.
+These are tracked separately in the publication audit. CSV ZIP identifiers should
+be read as strings; blank numeric values mean unavailable/unsupported, not zero.
+Column units and time windows are explained in the notebook's relevant sections.
 
-No weighting of twelve years of place-based obligations correlates detectably with
-ZIP-quarter review sentiment once ZIP and quarter fixed effects are applied. Best of
-48 kernels is |r| = 0.0115; shuffling award histories across ZIPs beats it 94% of the
-time; the ZIP-clustered 95% CI at the default kernel is -0.054 to +0.059. Five
-independent specifications and 256 event studies agree.
+The map's ZIP dataset compares **2012–2014 with 2019–2021**. Its optional point
+model uses a separate **2018–2019, 500 m sample** at a fixed interior reference
+point. That sample is not a ZIP-wide impact estimate. ACS estimates are 2007–2011
+for Philadelphia/Tucson and 2008–2012 for other study metros. ZCTA polygons include
+water, and the later review window includes COVID-19. Access mentions include
+praise and complaints.
 
-Two ways the analysis manufactures a false positive, both reproducible in `web/lag.html`:
+## Run the application
 
-| Trap | Reads | Corrected |
+```sh
+python3 src/serve_place.py --port 8766
+```
+
+Open [Place Lab locally](http://127.0.0.1:8766/place.html), or double-click
+`start-place.command`. The prepared `web/` files run without Python analysis at
+view time. Street tiles require internet; **ZIP boundaries · offline** uses bundled
+geometry. A single floating panel contains city, ZIP, focus, proposal settings,
+legend and evidence. ZIP selection highlights the boundary; there is no project
+marker or automatic relocation to another area.
+
+Other views provide supporting evidence:
+
+- `projects.html` / `index.html`: historical project evidence and learned topics.
+- `model.html`: historical-profile proposal scenarios and model comparisons.
+- `atlas.html`, `lag.html`, `reference.html`, `report.html`: earlier research views;
+  their definitions/results must not be mixed with the current model.
+
+UI-only builds are deliberately separate from data builds:
+
+```sh
+python3 src/build_place_site.py
+npm ci
+npm run build:place
+```
+
+These commands rebuild HTML/CSS/JavaScript without overwriting notebook-exported
+data. GitHub Pages serves the committed `web/` directory. A local edit is not a
+published update until committed and deployed. Pages deployment is manual so publication remains deliberate. Configured repository site:
+[Public Investment Map](https://intreaction.github.io/neighborhood-sentiment-map/).
+
+## Upstream rebuilds and research history
+
+The original raw archive is `Yelp JSON/yelp_dataset.tar`; business JSON is under
+`data/raw/`. These files are not distributed with this repository. Original
+extraction is intentionally separate from the grader-friendly prepared-data run.
+
+| Stage | Main implementation | Interpretation / audit |
 |---|---|---|
-| No fixed effects (cross-sectional density confound) | +0.151 | +0.004 |
-| Kernel padded with fabricated pre-2010 zeros | +0.039 | -0.003 |
+| Earlier ZIP funding and sentiment study | `build_sentiment_panel.py`, `fetch_usaspending.py`, `build_lag_model.py` | [Atlas exploration](docs/atlas-exploration.md), [preregistration](analysis/PREREGISTRATION.md) |
+| Named-project cohorts and text extraction | `project_registry.py`, `build_project_evidence.py`, `project_text.py` | [Source audit](docs/project-source-audit.md) |
+| Learned text and model comparison | `build_advanced_text.py`, `project_advanced_model.py`, `train_project_model.py` | [Text method](docs/advanced-text-method.md) |
+| Prepared local profiles and geometry | `build_place_data.py` | Full archive counts, fixed 2018–2019 baseline |
+| Snapshot refresh | `prepare_place_inputs.py` | Explicit refresh after upstream rebuilding; requires local intermediate files |
+| Page data transformation/export | `place_pipeline.py`, `build_place_areas.py`, research notebook | Hash checks, denominator checks and missing-data rules |
 
-The design is blind below about \|r\| = 0.09 with honest clustered errors, so this is
-"not detectable", never "no effect".
+All implementation names in the table are under `src/`. Raw rebuilds need the
+original corpus and upstream intermediate files; the notebook does not download
+or regenerate them. Rebuilding the historical pipeline uses:
 
-### USASpending inventory
+```sh
+python src/build_project_evidence.py --workers 4
+python src/build_advanced_text.py
+python src/train_project_model.py
+python src/build_evidence_site.py
+```
 
-| Group | Location filter | Years | Files |
-|---|---|---|---|
-| `assistance_*` | place of performance | 2010-2021 + Jan 2022 | 13 |
-| `assistance_recipient_*` | recipient | 2019-2021 + Jan 2022 | 4 |
-| `loans_*` (PPP, EIDL) | recipient | 2019-2021 + Jan 2022 | 4 |
-| `contracts_*` | place of performance | 2010-2013 only | 4 |
+Refresh baseline profile snapshots only after running `build_place_data.py` and
+the required ZIP analysis stages. Then run `prepare_place_inputs.py` and rerun the
+notebook. Snapshot hashes make this refresh explicit rather than silent.
 
-633 MB total. PPP and EIDL are recorded at the **recipient's** address, not place of
-performance - filtering PPP on place of performance returns 4 loans where recipient
-location returns 13,215 across five test ZIPs. Contracts 2014-2021 were deliberately
-skipped: in these ZIPs 75% of contract dollars are defense procurement and only ~7% is
-construction.
+The earlier [final report notebook](docs/coursework/final-project/Final_Submission_Report.ipynb)
+is retained as a **prior analysis** using `ce-project-ridge-v2`. Its results are not
+the current submission's model. The primary notebook above uses `project-ce-v2`.
+
+## Verification and presentation
+
+```sh
+python -m unittest discover -s tests -p 'test_*.py'
+node --test tests/*.test.cjs tests/*.test.mjs
+```
+
+Tests cover outcome arithmetic, deterministic sampling, leakage checks,
+Python/JavaScript model parity, geographic selection, support rules, data exports
+and the local server. Server tests need permission to bind localhost.
+
+- [Presentation slides](docs/presentation/Public-Investment-Evidence.pptx)
+- [PDF slides](output/pdf/Public-Investment-Evidence.pdf)
+- [Presenter guide](docs/presentation/Presenter-Guide.md)
+- [Source/model browser validation](docs/qa/validation.md)
+
+The presentation currently demonstrates the historical-project workflow; Place
+Lab adds ZIP exploration. Independent human label validation remains unfinished.
+OpenAI Codex assisted with code, analysis checks, debugging, visuals and drafting;
+the team remains responsible for the submitted work and its interpretation.

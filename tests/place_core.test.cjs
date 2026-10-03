@@ -2,12 +2,22 @@ const test = require('node:test');
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
-const {distanceMeters,placeProfile,updateProposal,inspectProposal,parseCommand} = require('../src/place_core.cjs');
+const {distanceMeters,placeProfile,updateProposal,inspectProposal,selectMapPoint,parseCommand} = require('../src/place_core.cjs');
 const {projectEstimate} = require('../src/project_model_math.js');
 const data = JSON.parse(fs.readFileSync(path.join(__dirname,'../web/place-data.json'),'utf8'));
 const model = JSON.parse(fs.readFileSync(path.join(__dirname,'../data/derived/project_model.json'),'utf8'));
 const initial = {city:'Tucson',longitude:-110.97,latitude:32.22,project_type:'Civic park',cost_millions:25,project_id:null};
 const located = id => updateProposal(initial,{project_id:id},data);
+
+test('ZIP samples without reviews allow scenario edits while point placement remains guarded',()=>{
+  const fixture={cities:[{id:'test',bounds:[-1,-1,1,1],businesses:[]}]};
+  const state={...initial,city:'test',longitude:0,latitude:0};
+  assert.throws(()=>updateProposal(state,{cost_millions:50},fixture),/Placement requires/);
+  const next=updateProposal(state,{cost_millions:50},fixture,{allowEmptyProfile:true});
+  assert.equal(next.cost_millions,50);
+  assert.equal(placeProfile(fixture,next).baseline_reviewed,0);
+  assert.throws(()=>updateProposal(state,{longitude:5,latitude:5},fixture,{allowEmptyProfile:true}),/coverage/);
+});
 
 test('500 m boundary includes the boundary and excludes a point beyond it',()=>{
   const latitudeFor = meters => meters/6371008.8*180/Math.PI;
@@ -157,4 +167,56 @@ test('every city shortcut starts in a catchment with baseline business data',()=
     const state=updateProposal(initial,{city:city.id},data);
     assert.equal(placeProfile(data,state).status,'available',city.id);
   }
+});
+
+
+test('map selection keeps supported clicks exact and preserves budget and type',()=>{
+  const state=located('sun-link'), before={...state};
+  const selection=selectMapPoint(state,state,data,model);
+  assert.equal(selection.relocation,null);
+  assert.equal(selection.state.longitude,state.longitude);
+  assert.equal(selection.state.latitude,state.latitude);
+  assert.equal(selection.state.cost_millions,25);
+  assert.deepEqual(state,before);
+});
+
+test('dense and empty map clicks relocate to supported measured profiles in the same city',()=>{
+  const dense=located('dilworth-park');
+  const points=[dense,...data.cities.map(c=>({city:c.id,longitude:c.bounds[0],latitude:c.bounds[1]}))];
+  for(const point of points){
+    const state={...initial,city:point.city};
+    const selection=selectMapPoint(state,point,data,model);
+    assert.equal(selection.state.city,point.city);
+    assert.equal(selection.state.cost_millions,25);
+    assert.equal(selection.state.project_type,state.project_type);
+    assert.equal(selection.relocation.estimate_available,true);
+    assert.ok(selection.relocation.distance_meters>0);
+    assert.deepEqual(selection.relocation.requested,[point.longitude,point.latitude]);
+    const measured=inspectProposal(selection.state,data,model);
+    assert.equal(measured.result.status,'ok',point.city);
+    assert.deepEqual(measured.result,projectEstimate(model,measured.inputs));
+    const city=data.cities.find(c=>c.id===point.city);
+    const near=city.businesses.filter(b=>distanceMeters([selection.state.longitude,selection.state.latitude],b)<=500);
+    assert.equal(measured.profile.inventoried_businesses,near.length);
+    assert.equal(measured.profile.reviews,near.reduce((sum,b)=>sum+b[2],0));
+  }
+});
+
+test('map snapping picks the nearest supported candidate rather than the first business',()=>{
+  const state=located('dilworth-park');
+  const selected=selectMapPoint(state,state,data,model);
+  const city=data.cities.find(c=>c.id===state.city);
+  const closer=city.businesses.filter(b=>b[2]>0&&distanceMeters([state.longitude,state.latitude],b)<selected.relocation.distance_meters);
+  for(const b of closer) assert.equal(inspectProposal({...state,longitude:b[0],latitude:b[1]},data,model).result.status,'unsupported');
+});
+
+test('unsupported budget still shows real location data without changing budget or inventing an estimate',()=>{
+  const state={...located('sun-link'),cost_millions:1};
+  const selected=selectMapPoint(state,{longitude:-111,latitude:32},data,model);
+  assert.equal(selected.state.cost_millions,1);
+  assert.equal(selected.relocation.estimate_available,false);
+  const snapshot=inspectProposal(selected.state,data,model);
+  assert.equal(snapshot.profile.status,'available');
+  assert.equal(snapshot.result.estimate,null);
+  assert.ok(snapshot.result.errors.cost_millions);
 });

@@ -1,6 +1,11 @@
 # Tomorrow: a Three.js map worth demoing
 
-Planned session: September 26, 2026. This is an implementation plan, not completed work.
+Planned session: September 26, 2026. This is the original implementation plan.
+
+The subsequent product direction prioritizes location selection, project type and
+budget through direct controls, with optional LLM tools and AR. See the implemented
+[Place Lab plan](conversational-ar.md). Its schematic ZIP extrusion is not the
+quarterly review-height layer proposed below; timeline work remains deferred.
 
 ## Goal
 

@@ -1,0 +1,31 @@
+{
+  "version": "place-notebook-inputs-v1",
+  "description": "Prepared historical aggregates, not original raw data. Frozen from the existing course analysis.",
+  "upstream_sources_sha256": {
+    "web/place-data.json": "124b3925da1ea2788c88fa890e058b2d58b883fb06414b85edb0e7f447e045dc",
+    "web/place-map.json": "a1a7c4712fc18f8f3e25a753ec0c2e4d2f0dbae00140d3a45f39fd31cb3f6bae",
+    "data/interim/metro_zips.json": "3f7b3d1d45dde6be8d39b9e127f5b043a0c149f49971959be83b06155cbde6ae",
+    "data/interim/sentiment_zip_quarter.csv": "6b3d133e4042a5713d2e1e1654383f92573a03bdcc31701316f6454597e0a1ef",
+    "data/interim/yelp_zip_summary.csv": "1e3e1cecd03d4a017854d19f576a861d0c2c8dfe2e24b26b0ff1bd2a98a01e56",
+    "data/derived/place_area_income.csv": "8a48f5344dbff47bd974858815b0c97633531b534a7c4fbba0770022cbabc715",
+    "data/interim/review_topics.json": "4a290699859fef7cedd82fca200ac1d5157de0eab827c3b8c5207046daf06ccc"
+  },
+  "files_sha256": {
+    "baseline_profiles.json": "124b3925da1ea2788c88fa890e058b2d58b883fb06414b85edb0e7f447e045dc",
+    "map_geometry.json": "a1a7c4712fc18f8f3e25a753ec0c2e4d2f0dbae00140d3a45f39fd31cb3f6bae",
+    "metro_zips.json": "3f7b3d1d45dde6be8d39b9e127f5b043a0c149f49971959be83b06155cbde6ae",
+    "sentiment_zip_quarter.csv": "6b3d133e4042a5713d2e1e1654383f92573a03bdcc31701316f6454597e0a1ef",
+    "yelp_zip_summary.csv": "1e3e1cecd03d4a017854d19f576a861d0c2c8dfe2e24b26b0ff1bd2a98a01e56",
+    "income.csv": "8a48f5344dbff47bd974858815b0c97633531b534a7c4fbba0770022cbabc715",
+    "access_quarters.json": "adc17914fa51c2a281eb00b27a58c78f5b41511a849f821b04070372ed9e0969"
+  },
+  "lineage": {
+    "baseline_profiles.json": "build_place_data.py: full Yelp January 2022 archive, business coordinates and 2018\u20132019 review counts; copied from its existing published output.",
+    "map_geometry.json": "build_place_data.py: existing simplified Census ZCTA polygons; copied from its existing published output.",
+    "sentiment_zip_quarter.csv": "build_sentiment_panel.py: Yelp review text scored with VADER, aggregated by ZIP and quarter.",
+    "access_quarters.json": "build_review_topics.py: existing keyword-rule counts. Includes positive and negative mentions; not a complaint classifier.",
+    "income.csv": "Earlier course ACS extracts: 2007\u20132011 Philadelphia/Tucson, 2008\u20132012 other metros. Historical estimates, not current incomes.",
+    "metro_zips.json": "Existing atlas study ZIP membership; retained to compute comparison against the rest of each study metro.",
+    "yelp_zip_summary.csv": "build_zip_universe.py: business inventory from the January 2022 Yelp archive."
+  }
+}

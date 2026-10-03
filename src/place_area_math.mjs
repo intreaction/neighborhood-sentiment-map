@@ -1,0 +1,66 @@
+// Area colors describe the existing ZIP analysis, never inferred block-level values.
+export const FOCUSES={
+  activity:{label:'Reach active business areas',field:'annual_review_density',title:'Review activity',unit:'reviews / km² / year',period:'2019–2021 · annual average',note:'Recorded Yelp activity per square kilometre, including water inside the boundary. It does not measure visits or revenue.',range:[0,3000],log:true,ends:['0','3,000+'],palette:'sequential'},
+  income:{label:'Support lower-income areas',field:'median_income',title:'Median household income',unit:'historical dollars',period:'Baseline ACS · 2007–2011 / 2008–2012',note:'Warmer areas have lower baseline household income. These are historical ZIP/ZCTA estimates, not reviewer incomes or current conditions.',range:[20000,100000],reverse:true,ends:['$100k+','$20k or less'],palette:'sequential'},
+  poverty:{label:'Support lower-income areas',field:'poverty_pct',title:'Population below poverty',unit:'% of poverty-status population',period:'Baseline ACS · 2007–2011 / 2008–2012',note:'Warmer areas have a higher baseline poverty rate. The estimates describe the area, not individual Yelp reviewers.',range:[0,50],ends:['0%','50%+'],palette:'sequential'},
+  decline:{label:'Explore declining activity',field:'growth_pct',title:'Change in review activity',unit:'% change in review count',period:'2012–2014 → 2019–2021',note:'Warm = decline; teal = growth. Both three-year periods need 100 reviews. The later period includes COVID-19. First or absent reviews do not establish business openings or closures.',range:[-100,100],reverse:true,ends:['Growth +100% or more','Decline −100%'],palette:'diverging'},
+  experience:{label:'Explore worsening experiences',field:'relative_sentiment_change',title:'Sentiment change vs. the city',unit:'VADER score difference',period:'2012–2014 → 2019–2021',note:'Warm = sentiment changed less favorably than the rest of the study metro. This is whole-review business sentiment. Relative improvement can occur even when absolute sentiment falls.',range:[-.15,.15],reverse:true,ends:['Better +0.15 or more','Worse −0.15 or less'],palette:'diverging'},
+  access:{label:'Investigate access concerns',field:'access_share_pct',title:'Access & parking discussion',unit:'% of reviews mentioning access',period:'2019–2021 · existing keyword analysis',note:'Parking, walking, transit and accessibility mentions include praise and complaints. This is discussion frequency, not a validated complaint rate. At least 100 reviews required.',range:[0,15],ends:['0%','15%+'],palette:'sequential'},
+  none:{label:'No heatmap',title:'Street map',note:'Choose a focus to explore existing area evidence.',period:'',range:[0,1],ends:['',''],palette:'sequential'}
+};
+export function areaValue(area,focus){const value=area?.[FOCUSES[focus]?.field];return Number.isFinite(value)?value:null;}
+export function formatAreaValue(value,focus){
+  if(!Number.isFinite(value))return 'Limited data';
+  if(focus==='income')return '$'+Math.round(value).toLocaleString('en-US');
+  if(['poverty','access','decline'].includes(focus))return `${focus==='decline'&&value>0?'+':''}${value.toFixed(1)}%`;
+  if(focus==='experience')return `${value>0?'+':''}${value.toFixed(3)}`;
+  return Math.round(value).toLocaleString('en-US');
+}
+export function areaColor(value,focus){
+  if(!Number.isFinite(value))return '#929d9b';
+  const spec=FOCUSES[focus],f=spec.log?Math.log1p:x=>x;
+  let t=Math.max(0,Math.min(1,(f(value)-f(spec.range[0]))/(f(spec.range[1])-f(spec.range[0]))));
+  if(spec.reverse)t=1-t;
+  const stops=spec.palette==='diverging'?[[35,118,122],[248,239,212],[177,58,36]]:[[247,231,175],[227,158,74],[153,53,37]];
+  const i=t<=.5?0:1,u=i===0?t*2:(t-.5)*2;
+  return `rgb(${stops[i].map((a,j)=>Math.round(a+(stops[i+1][j]-a)*u)).join(',')})`;
+}
+// Text uses a darker directional hue so small changes remain readable.
+export function areaTextColor(value,focus){
+  if(!Number.isFinite(value)||focus==='none'||value===0&&FOCUSES[focus].palette==='diverging')return '#5a6d68';
+  if(FOCUSES[focus].palette==='diverging')return value>0?'#23767a':'#a63824';
+  return `color-mix(in srgb, ${areaColor(value,focus)} 55%, #30251d)`;
+}
+export function pointInRing([x,y],ring){
+  let inside=false;
+  for(let i=0,j=ring.length-1;i<ring.length;j=i++){
+    const [xi,yi]=ring[i],[xj,yj]=ring[j];
+    if(((yi>y)!==(yj>y))&&(x<(xj-xi)*(y-yi)/(yj-yi)+xi))inside=!inside;
+  }
+  return inside;
+}
+export function areaAt(point,features){
+  return features.find(f=>{
+    const polys=f.geometry.type==='Polygon'?[f.geometry.coordinates]:f.geometry.coordinates;
+    return polys.some(rings=>pointInRing(point,rings[0])&&!rings.slice(1).some(r=>pointInRing(point,r)));
+  })?.properties.zip||null;
+}
+
+// Stable interior anchor: widest interior scanline segment in the largest polygon.
+// Scanline pairing respects holes and keeps the marker inside concave ZIPs.
+export function areaAnchor(feature){
+  const polys=feature.geometry.type==='Polygon'?[feature.geometry.coordinates]:feature.geometry.coordinates;
+  const size=r=>Math.abs(r.reduce((s,p,i)=>{const q=r[(i+1)%r.length];return s+p[0]*q[1]-q[0]*p[1];},0));
+  const rings=polys.slice().sort((a,b)=>size(b[0])-size(a[0]))[0];
+  const ys=rings[0].map(p=>p[1]),lo=Math.min(...ys),hi=Math.max(...ys);
+  let best=null,width=-1;
+  for(let k=1;k<40;k++){
+    const y=lo+(hi-lo)*k/40,xs=[];
+    for(const ring of rings)for(let i=0,j=ring.length-1;i<ring.length;j=i++){
+      const a=ring[j],b=ring[i];if((a[1]>y)!==(b[1]>y))xs.push(a[0]+(y-a[1])*(b[0]-a[0])/(b[1]-a[1]));
+    }
+    xs.sort((a,b)=>a-b);
+    for(let i=0;i+1<xs.length;i+=2)if(xs[i+1]-xs[i]>width){width=xs[i+1]-xs[i];best=[(xs[i]+xs[i+1])/2,y];}
+  }
+  return best||rings[0][0];
+}

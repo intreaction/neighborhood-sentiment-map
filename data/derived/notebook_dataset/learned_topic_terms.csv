@@ -1,0 +1,6 @@
+topic,leading_terms,basis
+topic_1,"chicken, good, food, ordered, fried, sauce, cheese, menu, salad, restaurant, delicious, pork",tfidf-bigram-nmf5-v1
+topic_2,"just, like, time, room, don, people, hotel, did, really, place, way, know",tfidf-bigram-nmf5-v1
+topic_3,"great, food, good, place, service, bar, friendly, atmosphere, beer, love, staff, drinks",tfidf-bigram-nmf5-v1
+topic_4,"pizza, crust, slice, best, ny, place, best pizza, garlic, cheese, delicious, new, pizza delicious",tfidf-bigram-nmf5-v1
+topic_5,"ice, cream, ice cream, coffee, tea, chocolate, flavors, shop, love, try, cake, place",tfidf-bigram-nmf5-v1

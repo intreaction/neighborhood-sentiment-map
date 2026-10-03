@@ -2,30 +2,46 @@
 <html lang="en">
 <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#173c35"><title>Place Lab · Public Investment Map</title><link rel="stylesheet" href="place-chart.css"><link rel="stylesheet" href="place.css"></head>
 <body>
-<a class="skip" href="#proposalControls">Skip to proposal controls</a>
+<a class="skip" href="#toggleControls">Skip to proposal controls</a>
 <div id="placeApp">
 <header class="masthead"><a class="wordmark" href="projects.html"><span class="brand-symbol" aria-hidden="true">◈</span> Public Investment Map</a><nav aria-label="Main navigation"><a href="projects.html">Evidence library</a><a href="model.html">Proposal model</a><span class="version-tag">EXPERIMENT 01 / PLACE LAB</span></nav></header>
 <main>
-<div class="intro"><div><p class="eyebrow">Explore your next public project</p><h1>What could happen <em>here?</em></h1></div><p>Pick a place. Propose a project.<br>Explore nearby business engagement.</p></div>
-<div class="workspace">
-<section class="map-panel" aria-labelledby="mapTitle">
-<div class="map-toolbar"><div><span class="eyebrow">01 / The place</span><h2 id="mapTitle">Philadelphia</h2></div><label class="city-label"><span class="sr-only">Map city</span><select id="citySelect" disabled></select></label></div>
-<div id="scene" class="scene" role="img" aria-label="Interactive 2D city map. Tap the map to select a location, or use the location controls below."><p class="loading-note">Preparing your city…</p></div>
-<div class="map-float"><span class="live-dot" aria-hidden="true"></span><span id="selectionLabel">Choose a spot on the map</span></div>
-<div class="map-actions"><button id="zoomIn" type="button" aria-label="Zoom in">+</button><button id="zoomOut" type="button" aria-label="Zoom out">−</button><button id="resetView" type="button">City view ↗</button><button id="focusLocation" type="button">Focus location</button><a class="atlas-link" href="atlas.html">2D atlas ↗</a></div>
-<p id="sceneStatus" class="scene-status" role="status">Map loading. Choose a location near reviewed businesses.</p>
-<div class="map-legend"><span><i></i>ZIP boundaries</span><span><i class="legend-ring"></i>500 m study radius</span><span><i class="legend-business"></i>Reviewed businesses</span></div>
-<details class="location-details"><summary>Enter exact coordinates</summary><div class="location-fields"><form id="coordinateForm"><label>Longitude<input id="longitude" type="number" step="any" min="-180" max="180" required></label><label>Latitude<input id="latitude" type="number" step="any" min="-90" max="90" required></label><button type="submit">Set location</button></form></div></details>
-</section>
-<section class="planner-panel" id="proposalControls" aria-labelledby="proposalTitle">
+<div class="workspace"><section class="map-panel" aria-labelledby="mapTitle">
+<div id="scene" class="scene" role="group" aria-label="Interactive 2D city map. Click a ZIP to select its boundary, or choose a ZIP in the left panel."><p class="loading-note">Preparing your city…</p></div>
+<aside id="proposalControls" class="floating-controls" aria-label="Map and project controls">
+<div class="panel-heading"><div><p class="eyebrow">Place Lab / ZIP explorer</p><h1 id="mapTitle">Philadelphia</h1></div><button id="toggleControls" type="button" aria-expanded="true" aria-controls="panelBody" aria-label="Collapse controls">−</button></div>
+<div id="panelBody">
+<div class="panel-places"><label class="drawer-city">Map city<select id="citySelect" disabled></select></label><div><label for="areaSelect">Project ZIP</label><select id="areaSelect"><option value="">Choose an area</option></select></div></div>
+<div class="focus-controls"><label for="focusSelect">Your focus</label><select id="focusSelect"><option value="activity">Reach active business areas</option><option value="income">Support lower-income areas</option><option value="decline">Explore declining activity</option><option value="experience">Explore worsening experiences</option><option value="access">Investigate access concerns</option><option value="none">No heatmap</option></select><label id="economicControl" hidden>Measure<select id="economicMeasure"><option value="income">Household income</option><option value="poverty">Poverty rate</option></select></label><span id="heatPeriod" class="heat-period"></span></div>
+<div class="map-actions"><button id="zoomIn" type="button" aria-label="Zoom in">+</button><button id="zoomOut" type="button" aria-label="Zoom out">−</button><button id="resetView" type="button">City view ↗</button><button id="focusLocation" type="button">Selected ZIP ↗</button></div>
+<div id="heatLegend" class="heat-legend"><strong id="heatLegendTitle"></strong><div class="heat-scale"><div id="heatRamp" class="heat-ramp"></div><div class="heat-scale-labels"><span id="heatLegendLow"></span><span id="heatLegendHigh"></span></div></div><span class="missing-key"><i></i> Limited data</span></div>
+<details class="proposal-fold"><summary>Budget &amp; proposal <span>Model uses a 500 m sample</span></summary>
 <div class="planner-heading"><p class="eyebrow">02 / Your proposal</p><h2 id="proposalTitle">Shape the next project.</h2><p>Choose a location, project type and budget. Your analysis updates automatically.</p></div>
-<label class="landmark-field" for="landmarkSelect">Location shortcut</label><select id="landmarkSelect" aria-describedby="landmarkHelp"><option value="">Custom point on map</option></select><p class="field-help" id="landmarkHelp">Choose a historical location or a point within 500 m of a business with 2018–2019 reviews. Placement is limited to the covered regions.</p>
+<label class="landmark-field" for="landmarkSelect">Location shortcut</label><select id="landmarkSelect" aria-describedby="landmarkHelp"><option value="">Custom point on map</option></select><p class="field-help" id="landmarkHelp">Choose a historical location or click the map. Map clicks select the entire ZIP area. Exact coordinate entries keep your requested location.</p>
 <div class="proposal-controls"><label>Project type<select id="projectType"></select><small>Changes comparable cases, not the estimate.</small></label><label>Estimated budget · $ million<input id="budget" aria-describedby="formStatus" type="number" step="any" min="0.01" max="1000000" value="25" required><small>Historical model cost support: $9.1M–$380M.</small></label></div>
 <p class="form-status" id="formStatus" role="status"></p>
+<p class="field-help" id="locationAdjustment" role="status"></p>
 <div class="planner-actions"><a class="dark-button button-link" href="#results">View analysis ↓</a><button id="resetProposal" type="button" class="text-button">Reset scenario</button></div>
-<p class="no-ai-note">Runs in your browser. No account needed.</p>
-</section>
-</div>
+<p class="no-ai-note">The budget changes the point estimate. Heatmap colors show observed area conditions.</p>
+</details>
+<details class="map-settings"><summary>Map settings &amp; evidence notes</summary>
+<div class="map-layer-controls"><label>Map detail<select id="basemapSelect"><option value="streets">Streets · online</option><option value="offline">ZIP boundaries · offline</option></select></label><label class="business-toggle"><input id="showBusinesses" type="checkbox"> Business dots</label></div>
+<div class="heat-explanation"><p id="heatExplanation"></p><p id="heatCoverage"></p><span>Area colors follow ZIP/ZCTA boundaries, including at street-level zoom.</span></div>
+<div class="map-legend"><span><i></i>ZIP/ZCTA areas</span><span><i class="legend-ring"></i>500 m model sample</span><span><i class="legend-business"></i>Reviewed businesses</span></div>
+<details class="location-details"><summary>Enter exact coordinates</summary><div class="location-fields"><form id="coordinateForm"><label>Longitude<input id="longitude" type="number" step="any" min="-180" max="180" required></label><label>Latitude<input id="latitude" type="number" step="any" min="-90" max="90" required></label><button type="submit">Set location</button></form></div></details>
+<p id="basemapStatus" class="scene-status" role="status">Loading street detail…</p>
+<p id="sceneStatus" class="scene-status" role="status">Map loading. Click anywhere to explore the nearest supported location.</p>
+</details>
+<article class="project-card" aria-labelledby="projectCardTitle" aria-live="polite">
+<div class="project-card-top"><span class="eyebrow">ZIP project proposal</span><button id="toggleProjectCard" aria-expanded="true" aria-controls="projectCardBody" aria-label="Collapse project details">−</button></div>
+<h2 id="projectCardTitle">Your project</h2><p id="projectMeta"></p>
+<div id="projectCardBody"><div id="projectSignal" class="project-signal">—</div><p id="projectSignalLabel"></p><p id="projectOpportunity"></p><p id="projectReach"></p><p id="projectEstimate"></p><p id="projectMove"></p><a href="#results">Explore the full analysis ↓</a></div>
+</article>
+<details class="area-notes"><summary>More ZIP evidence</summary><div class="area-inspector"><p class="eyebrow">Area evidence</p><div class="area-inspector-heading"><h2 id="areaHeading">Explore an area</h2><button type="button" class="text-button" id="areaFocusButton">Zoom to area ↗</button></div><div id="areaMetric" class="area-metric">—</div><p id="areaMetricLabel"></p><div id="areaEvidence" aria-live="polite"></div></div>
+</details>
+<p id="selectionLabel" class="panel-selection"></p>
+</div></aside>
+</section></div>
 
 <section id="results" class="results-grid" aria-label="Location profile and estimate" aria-live="polite">
 <div class="metric-card"><p class="eyebrow">Within 500 meters</p><div class="metric" id="businessCount">—</div><h3>Businesses with baseline reviews</h3><p id="inventoryNote">Measuring the selected place…</p></div>

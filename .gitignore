@@ -1,6 +1,14 @@
 .DS_Store
 .env
 .env.local
+.env.*
+!.env.example
+*.pem
+*.key
+.aws/
+.codex/
+.agents/
+.omp/
 node_modules/
 __pycache__/
 *.pyc
@@ -12,13 +20,29 @@ venv/
 dist/
 build/
 
-# Raw data — large, redistributable only under Yelp ToS
+# Raw data and local review-level artifacts must not be published
 Yelp JSON/
 data/raw/
 data/interim/
+data/external/
+data/downloads/
+# Catch source downloads even when saved outside the expected raw directories.
+yelp_academic_dataset_*.json
+yelp_academic_dataset_*.json.gz
+yelp_dataset*.tar*
+tl_*.zip
+cb_*.zip
+*.shp
+*.shx
+*.dbf
+*.prj
+*.cpg
 data/derived/review_text_weak_labels.json.gz
 *.tar
 *.tar.gz
+data/derived/*label*.csv
+data/derived/*label*.jsonl
+data/derived/*review*.jsonl
 
 # Private presentation drafts and validation intermediates
 .presentation-build/

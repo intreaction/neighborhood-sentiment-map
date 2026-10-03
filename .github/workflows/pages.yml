@@ -1,11 +1,8 @@
 name: Deploy GitHub Pages
 
 on:
-  push:
-    branches: [main]
-    paths:
-      - 'web/**'
-      - '.github/workflows/pages.yml'
+  # Publication is deliberate; the owner has confirmed the data permission.
+  # Review docs/publication-audit.md before manually deploying.
   workflow_dispatch:
 
 permissions:

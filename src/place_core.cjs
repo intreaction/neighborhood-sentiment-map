@@ -11,6 +11,30 @@ function distanceMeters(a, b) {
 function inBounds(point, bounds) {
   return bounds && point[0] >= bounds[0] && point[0] <= bounds[2] && point[1] >= bounds[1] && point[1] <= bounds[3];
 }
+// Bucket the immutable archive so searching nearby supported points stays interactive.
+const businessIndexes = new WeakMap();
+function nearbyBusinesses(city, point) {
+  let buckets = businessIndexes.get(city);
+  if (!buckets) {
+    buckets = new Map();
+    for (const business of city.businesses) {
+      const key = `${Math.floor(business[0] * 100)},${Math.floor(business[1] * 100)}`;
+      if (!buckets.has(key)) buckets.set(key, []);
+      buckets.get(key).push(business);
+    }
+    businessIndexes.set(city, buckets);
+  }
+  const latDelta = 500 / 110000;
+  const cosine = Math.cos((Math.abs(point[1]) + latDelta) * Math.PI / 180);
+  if (cosine < .01) return city.businesses.filter(b => distanceMeters(point, b) <= 500);
+  const lonDelta = latDelta / cosine, near = [];
+  for (let x = Math.floor((point[0] - lonDelta) * 100); x <= Math.floor((point[0] + lonDelta) * 100); x++) {
+    for (let y = Math.floor((point[1] - latDelta) * 100); y <= Math.floor((point[1] + latDelta) * 100); y++) {
+      for (const b of buckets.get(`${x},${y}`) || []) if (distanceMeters(point, b) <= 500) near.push(b);
+    }
+  }
+  return near;
+}
 function placeProfile(data, state) {
   const city = data.cities.find(c => c.id === state.city);
   const point = [state.longitude, state.latitude];
@@ -18,7 +42,7 @@ function placeProfile(data, state) {
     return {status:'outside_coverage', inventoried_businesses:null, baseline_reviewed:null,
       pre_reviews_per_business:null, reviews:null, radius_meters:500, baseline_years:data.baseline_years};
   }
-  const near = city.businesses.filter(b => distanceMeters(point, b) <= 500);
+  const near = nearbyBusinesses(city, point);
   const reviewed = near.filter(b => b[2] > 0);
   const reviews = reviewed.reduce((sum, b) => sum + b[2], 0);
   return {status: reviewed.length ? 'available' : 'no_reviews', inventoried_businesses:near.length,
@@ -36,7 +60,7 @@ function normalizeType(value, data) {
   if (/park|public space/i.test(value)) return TYPES[0];
   throw new Error('Choose a park, plaza, greenway, streetscape, or transit project.');
 }
-function updateProposal(state, changes, data) {
+function updateProposal(state, changes, data, {allowEmptyProfile=false}={}) {
   if (!changes || typeof changes !== 'object' || Array.isArray(changes)) throw new Error('Proposal changes must be an object.');
   for (const k of Object.keys(changes)) if (!ALLOWED.has(k)) throw new Error('Unknown proposal field: '+k);
   const next = {...state};
@@ -71,7 +95,7 @@ function updateProposal(state, changes, data) {
   }
   const profile = placeProfile(data,next);
   if (profile.status === 'outside_coverage') throw new Error('Choose a location inside the mapped business-data coverage.');
-  if (profile.status !== 'available') throw new Error('Placement requires a business with 2018–2019 reviews within 500 m. Choose a point near the business dots.');
+  if (!allowEmptyProfile && profile.status !== 'available') throw new Error('Placement requires a business with 2018–2019 reviews within 500 m. Choose a point near the business dots.');
   return next;
 }
 function inspectProposal(state,data,model) {
@@ -82,6 +106,33 @@ function inspectProposal(state,data,model) {
   if(profile.status==='outside_coverage') result.errors.coverage='This point is outside the available geographic coverage.';
   return {proposal:{...state},profile,inputs,result,model_version:model.version,
     target:model.target, interpretation:'Retrospective scenario using a 2018–2019 Yelp baseline from the January 2022 archive. A two-post-year activity proxy, not annual activity, financial ROI, or a causal budget effect. Point-radius catchments may differ from historical project footprints. Project type changes comparables, not the fitted estimate.'};
+}
+// Map clicks may relocate; exact coordinate and browser-tool updates remain exact.
+function selectMapPoint(state, point, data, model) {
+  if (!Number.isFinite(point.longitude) || !Number.isFinite(point.latitude) || Math.abs(point.longitude) > 180 || Math.abs(point.latitude) > 90) throw new Error('Enter valid longitude and latitude.');
+  const city = data.cities.find(c => c.id === state.city);
+  if (!city) throw new Error('Choose a covered city.');
+  const requested = [point.longitude, point.latitude];
+  const at = center => ({...state, longitude:center[0], latitude:center[1], project_id:null});
+  const exact = at(requested), snapshot = inspectProposal(exact, data, model);
+  if (snapshot.result.status === 'ok') return {state:exact, relocation:null};
+  const candidates = [
+    ...city.businesses.filter(b => b[2] > 0 && inBounds(b, city.bounds)),
+    ...(data.projects || []).filter(p => p.city_id === city.id).map(p => p.center)
+  ].map(center => ({center, distance:distanceMeters(requested, center)})).sort((a,b) => a.distance-b.distance);
+  let nearestData = snapshot.profile.status === 'available' ? {center:requested, distance:0} : null;
+  for (const candidate of candidates) {
+    const measured = inspectProposal(at(candidate.center), data, model);
+    if (!nearestData) nearestData = candidate;
+    if (measured.result.status === 'ok') return {
+      state:at(candidate.center),
+      relocation:{requested, selected:candidate.center.slice(0,2), distance_meters:candidate.distance, estimate_available:true}
+    };
+    // No location can repair a budget outside the fitted range.
+    if (measured.result.errors.cost_millions || measured.result.errors.model) break;
+  }
+  if (!nearestData) throw new Error('No reviewed business locations are available in this city.');
+  return {state:at(nearestData.center), relocation:{requested, selected:nearestData.center.slice(0,2), distance_meters:nearestData.distance, estimate_available:false}};
 }
 // Offline command mode intentionally supports a bounded grammar; it is not an AI chat model.
 function parseCommand(text,data) {
@@ -107,4 +158,4 @@ function parseCommand(text,data) {
   if(/\b(business|businesses|nearby|estimate|efficiency|review|reviews|how many|what is|what's|summary)\b/.test(lower)) return {action:'inspect'};
   throw new Error('Command mode understands places, project types and budgets. Try “Show Dilworth Park”, “Build a plaza here for $25 million”, or “How many businesses are nearby?”');
 }
-module.exports={TYPES,distanceMeters,inBounds,placeProfile,normalizeType,updateProposal,inspectProposal,parseCommand};
+module.exports={TYPES,distanceMeters,inBounds,placeProfile,normalizeType,updateProposal,inspectProposal,selectMapPoint,parseCommand};

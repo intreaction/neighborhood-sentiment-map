@@ -1,0 +1,3 @@
+# Preserve exported CSV bytes because the provenance manifest hashes source files.
+# CRLF is a standard CSV line ending, not trailing whitespace.
+*.csv -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol

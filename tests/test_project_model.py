@@ -4,6 +4,7 @@ import hashlib
 import json
 import sys
 import unittest
+from numeric_assertions import assert_numeric_tree
 from pathlib import Path
 
 import numpy as np
@@ -43,7 +44,7 @@ class ProjectModelTests(unittest.TestCase):
         self.assertEqual(rebuilt["selected_model"], self.model["selected_model"])
         for key, candidate in rebuilt["candidates"].items():
             for field in ("coefficients", "intercept", "project_metrics", "city_metrics"):
-                self.assertEqual(candidate[field], self.model["candidates"][key][field])
+                assert_numeric_tree(self, candidate[field], self.model["candidates"][key][field], f"{key}.{field}")
         names = set(self.model["candidates"])
         self.assertEqual(names, {"baseline", "text", "trend", "advanced_text"})
         for candidate in self.model["candidates"].values():

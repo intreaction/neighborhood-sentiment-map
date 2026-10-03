@@ -1,0 +1,4 @@
+sample,projects,baseline_city_MAE,mean_city_MAE
+All eligible projects,10,45.60895559427488,58.48466332883153
+exclude_pandemic_post_windows,8,60.29378651117161,59.53111201752796
+exclude_pandemic_and_construction_overlap,7,70.20808582653746,61.64539355343807

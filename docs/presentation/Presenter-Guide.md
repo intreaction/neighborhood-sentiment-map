@@ -1,6 +1,6 @@
 # Public Investment Evidence: presenter guide
 
-Working format: a ten-minute course presentation, including a three-minute live demo,
+Working format: a thirteen-minute course presentation, including a three-minute live demo,
 with three appendix slides for questions. Audience and timing can be revised when
 confirmed. The presentation uses the site's cream/green visual style and current
 project artifacts, rather than the archived coursework calculations.
@@ -37,17 +37,20 @@ independent validation before relying on the forecast for budget decisions.
 
 | Slide | Time | Purpose |
 |---|---|---|
-| 1. Public Investment Evidence | 0:00–0:30 | Establish the question and product |
-| 2. Goal | 0:30–1:15 | Connect historical analysis to proposal exploration |
-| 3. Data coverage | 1:15–1:55 | Distinguish review volume from ten model outcomes |
-| 4. Place-specific text | 1:55–2:40 | Explain sentiment, topic and target with one excerpt |
-| 5. Learned topics | 2:40–3:30 | Make the advanced unstructured-data contribution concrete |
-| 6. Sun Link | 3:30–4:15 | Explain why raw growth and adjusted CE differ |
-| 7. Model comparison | 4:15–5:10 | Show the honest evaluation result |
-| 8. Live demo | 5:10–8:10 | Demonstrate the two workflows |
-| 9. Evidence limits | 8:10–9:15 | Make timing sensitivity explicit |
-| 10. Closing | 9:15–10:00 | State present value and the next pilot |
+| 1. Public Investment Evidence | 0:00–0:45 | Establish the question and product |
+| 2. Goal | 0:45–1:45 | Name the planning decision and limits of the proxy |
+| 3. Data coverage | 1:45–3:00 | Explain cleaning, missingness and why reviews are not independent project outcomes |
+| 4. Place-specific text | 3:00–4:15 | Explain sentiment, topic and target; distinguish an example from validation |
+| 5. Learned topics | 4:15–5:30 | Explain TF-IDF/NMF, frozen baseline topics and food/service dominance |
+| 6. Sun Link | 5:30–6:30 | Explain raw growth versus comparison-adjusted activity |
+| 7. Model comparison | 6:30–7:45 | Explain both holdouts, shared-review exclusion and the negative NLP result |
+| 8. Live demo | 7:45–10:45 | Demonstrate historical evidence and a ZIP-level exploration |
+| 9. Evidence limits | 10:45–12:00 | Explain sensitivity and what additional evidence a decision needs |
+| 10. Closing | 12:00–13:00 | State present value and the next validation steps |
 | 11–13. Appendix | Questions only | Model details and browser-failure fallback |
+
+The rubric recommends approximately 12–15 minutes. This is a rehearsal plan,
+not a measured delivery time. Rehearse with a timer and adjust to actual speakers.
 
 For three presenters, a natural handoff is slides 1–4, slides 5–7, and the live demo
 plus closing. Assign names during rehearsal. One person should operate the browser
@@ -55,14 +58,23 @@ throughout the demo.
 
 ## Three-minute live demo
 
-Use the exact route in [the demo runbook](../demo-runbook.md). Double-click
-[start-demo.command](../../start-demo.command) before presenting. Keep its Terminal
-window open, and use the URL it prints if the preferred port is occupied.
+Use [the historical demo runbook](../demo-runbook.md) for the evidence view.
+For the current ZIP interface, start `python3 src/serve_place.py --port 8766` and
+open `/place.html`. Keep the server running. The ZIP demo supplements the older
+proposal screenshot already embedded in slide 8; it is not pictured in that slide.
 
-The reliable path is Dilworth Park evidence, learned topics, proposal preset,
-$55M to $80M, Reset, uncertainty/model comparisons, then Export. Water Works is an
-optional final check. Avoid importing a new file live or exploring the legacy atlas.
-The exported JSON and screenshots are available for discussion afterward.
+- First minute: show Dilworth Park's historical outcome and learned terms. Explain
+  that food/service topics are not automatically civic satisfaction.
+- Second minute: open Place Lab, select Philadelphia ZIP 19123, and switch focus
+  from activity to access. Explain the actual units and that mentions include
+  praise and complaints. Use the map to form a question for local investigation.
+- Third minute: open budget/proposal controls and show the fixed 500 m model
+  sample, historical error range and support rules. Separate ZIP evidence from a
+  project benefit forecast. Close with the notebook and its static-data export.
+
+Avoid new imports or arbitrary locations during the live demo. Rehearse the values
+against the committed dataset before presenting. The following historical-model
+values remain useful if the team chooses the older scenario flow instead.
 
 Recorded values to rehearse:
 
