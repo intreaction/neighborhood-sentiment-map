@@ -1,4 +1,4 @@
-import {FOCUSES,areaValue,areaColor,formatAreaValue,areaAt} from './place_area_math.mjs';
+import {COMBINED_VIEWS,combinedEvidence,FOCUSES,areaValue,areaColor,formatAreaValue,areaAt} from './place_area_math.mjs';
 import {createStreetTiles} from './place_street_tiles.mjs';
 import {projectPoint,unprojectPoint,polygonParts,fitView,fitUnobscuredView,constrainCityView,screenPoint,worldPoint} from './place_map_math.mjs';
 
@@ -43,7 +43,7 @@ export async function createPlaceMap({container,onPick=()=>{},onStatus=()=>{},on
       const zip=city.features[index].properties.zip,value=areaValue(heatAreas.get(zip),heatFocus);
       ctx.beginPath();
       for(const rings of parts)for(const ring of rings){ring.forEach((point,i)=>{const [x,y]=screen(point);if(i)ctx.lineTo(x,y);else ctx.moveTo(x,y);});ctx.closePath();}
-      ctx.save();ctx.globalAlpha=value===null?.25:heatFocus==='combined'?.7:.5;ctx.fillStyle=areaColor(value,heatFocus);ctx.fill('evenodd');ctx.restore();
+      ctx.save();ctx.globalAlpha=value===null?.25:COMBINED_VIEWS[heatFocus]?.7:.5;ctx.fillStyle=areaColor(value,heatFocus);ctx.fill('evenodd');ctx.restore();
       if(value===null&&missingPattern){ctx.fillStyle=missingPattern;ctx.fill('evenodd');}
       ctx.strokeStyle=zip===selectedArea?'#173c35':'#6d625075';ctx.lineWidth=zip===selectedArea?2.5:.8;ctx.stroke();
     });
@@ -84,7 +84,7 @@ export async function createPlaceMap({container,onPick=()=>{},onStatus=()=>{},on
       if(heatFocus==='none'){tooltip.hidden=true;return;}
       const p=eventPoint(e),geo=unprojectPoint(worldPoint(p,view,width,height),city.center),zip=areaAt(geo,city.features||[]);
       tooltip.hidden=!zip;
-      if(zip){tooltip.textContent=`ZIP ${zip} · ${FOCUSES[heatFocus].title}: ${formatAreaValue(areaValue(heatAreas.get(zip),heatFocus),heatFocus)}${heatFocus==='combined'?` · Poverty ${formatAreaValue(heatAreas.get(zip)?.poverty_pct,'poverty')} · Activity ${formatAreaValue(heatAreas.get(zip)?.growth_pct,'decline')}`:''}`;tooltip.style.left=Math.max(8,Math.min(p[0]+12,width-240))+'px';tooltip.style.top=Math.max(8,Math.min(p[1]+12,height-65))+'px';}
+      if(zip){tooltip.textContent=`ZIP ${zip} · ${FOCUSES[heatFocus].title}: ${formatAreaValue(areaValue(heatAreas.get(zip),heatFocus),heatFocus)}${COMBINED_VIEWS[heatFocus]?' · '+combinedEvidence(heatAreas.get(zip),heatFocus).map(m=>`${m.label}: ${m.value}`).join(' · '):''}`;tooltip.style.left=Math.max(8,Math.min(p[0]+12,width-240))+'px';tooltip.style.top=Math.max(8,Math.min(p[1]+12,height-65))+'px';}
       return;
     }
     tooltip.hidden=true;

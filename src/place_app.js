@@ -1,4 +1,4 @@
-import {FOCUSES,areaAt,areaAnchor,areaValue,areaColor,areaTextColor,formatAreaValue} from './place_area_math.mjs';
+import {COMBINED_VIEWS,combinedEvidence,FOCUSES,areaAt,areaAnchor,areaValue,areaColor,areaTextColor,formatAreaValue} from './place_area_math.mjs';
 import {createAreaExplorer} from './place_area_ui.js';
 import {createPlaceMap} from './place_map.js';
 import core from './place_core.cjs';
@@ -28,6 +28,7 @@ function renderProjectCard(focus) {
   const zip=areaAt([state.longitude,state.latitude],geometry.features);
   const area=areaData.cities.find(c=>c.id===state.city).areas.find(a=>a.zip===zip);
   const value=areaValue(area,focus),spec=FOCUSES[focus];
+  const isCombined=!!COMBINED_VIEWS[focus];
   const signalColor=focus==='none'?'#929d9b':areaColor(value,focus);
   $('projectSignal').style.color=areaTextColor(value,focus);
   $('projectSignal').style.borderLeft=`5px solid ${signalColor}`;
@@ -42,18 +43,18 @@ function renderProjectCard(focus) {
     none:'Choose a focus to connect this project with the existing area analysis.'
   };
   const focusTitles={combined:'Poverty + activity',activity:'Business activity',income:'Household income',poverty:'Poverty rate',decline:'Declining activity',experience:'Worsening experiences',access:'Access concerns',none:'Area overview'};
-  $('projectCardTitle').textContent=`${focusTitles[focus]}${zip?' · ZIP '+zip:''}`;
+  $('projectCardTitle').textContent=`${COMBINED_VIEWS[focus]?.title??focusTitles[focus]}${zip?' · ZIP '+zip:''}`;
   $('projectMeta').textContent=`Proposal budget: $${number(state.cost_millions,1)}M · ${selectedZip?"ZIP-level proposal":"500 m study radius"}`;
   $('projectSignal').textContent=focus==='none'?number(latest.profile.baseline_reviewed):formatAreaValue(value,focus);
-  $('projectSignal').classList.toggle('combined-signal',focus==='combined');
-  $('combinedValues').hidden=focus!=='combined';
+  $('projectSignal').classList.toggle('combined-signal',isCombined);
+  $('combinedValues').hidden=!isCombined;
   $('combinedValues').replaceChildren();
-  if(focus==='combined'){
-    const measures=[['Population below poverty',formatAreaValue(area?.poverty_pct,'poverty'),area?.acs_year?`ACS ${area.acs_year-4}–${area.acs_year}`:'Baseline ACS unavailable'],['Review activity change',formatAreaValue(area?.growth_pct,'decline'),'2012–2014 → 2019–2021']];
+  if(isCombined){
+    const measures=combinedEvidence(area,focus).map(m=>[m.label,m.value,m.period]);
     for(const [label,value,period] of measures){const block=document.createElement('div');for(const [tag,text] of [['span',label],['strong',value],['small',period]]){const element=document.createElement(tag);element.textContent=text;block.append(element);}$('combinedValues').append(block);}
   }
   $('projectSignalLabel').textContent=focus==='none'?'Nearby businesses with baseline reviews':`${spec.title}${spec.unit?" · "+spec.unit:""} · ${spec.period}`;
-  $('projectOpportunity').textContent=(focus!=='none'&&value===null?'This area has limited evidence for this focus. ':'')+opportunities[focus];
+  $('projectOpportunity').textContent=(focus!=='none'&&value===null?'This area has limited evidence for this focus. ':'')+(isCombined?opportunities.combined:opportunities[focus]);
   $('projectReach').textContent=selectedZip?`${number(area?.business_inventory)} Yelp listings across ZIP ${zip}. The detailed model below uses a 500 m sample at a fixed reference point within the ZIP; it does not estimate a ZIP-wide impact.`:`${number(latest.profile.baseline_reviewed)} businesses with baseline reviews within 500 m. This is the local study footprint, not a count of guaranteed beneficiaries.`;
   $('projectEstimate').textContent=latest.result.status==='ok'?`Model association: ${number(latest.result.estimate.ce*state.cost_millions)} excess reviews over two post years. Historical error range: ${number(latest.result.empirical_error.low*state.cost_millions)} to ${number(latest.result.empirical_error.high*state.cost_millions)}. This does not predict improvement in the selected focus.`:'Measured local data is shown. This proposal falls outside model support, so an engagement estimate is unavailable.';
   $('projectMove').textContent=relocation?.distance_meters>0?`Marker moved ${number(relocation.distance_meters/1000,2)} km to a nearby data-supported candidate. This card describes the marker location.`:'';

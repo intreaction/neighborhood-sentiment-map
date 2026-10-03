@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {areaAt,areaColor,areaValue,formatAreaValue,FOCUSES} from '../src/place_area_math.mjs';
+import {areaAt,areaColor,areaValue,formatAreaValue,FOCUSES,COMBINED_VIEWS,combinedMeasures,combinedEvidence} from '../src/place_area_math.mjs';
 test('map selection respects polygon holes and multipart areas',()=>{
  const ring=[[0,0],[4,0],[4,4],[0,4],[0,0]],hole=[[1,1],[2,1],[2,2],[1,2],[1,1]];
  const features=[{properties:{zip:'a'},geometry:{type:'Polygon',coordinates:[ring,hole]}},{properties:{zip:'b'},geometry:{type:'MultiPolygon',coordinates:[[[[5,0],[6,0],[6,1],[5,1],[5,0]]]]}}];
@@ -40,8 +40,24 @@ test('combined categories preserve both signals and explicit boundary rules',()=
  const cases=[[19.9,0,0],[0,-1,1],[20,1,2],[20,-.01,3]];
  for(const [poverty_pct,growth_pct,category] of cases)assert.equal(areaValue({poverty_pct,growth_pct},'combined'),category);
  assert.equal(new Set(cases.map(([, ,category])=>areaColor(category,'combined'))).size,4);
- assert.equal(formatAreaValue(3,'combined'),'Higher poverty · declining');
+ assert.equal(formatAreaValue(3,'combined'),'Higher poverty · Declining');
  for(const row of [{poverty_pct:null,growth_pct:-5},{poverty_pct:25,growth_pct:null},{poverty_pct:NaN,growth_pct:0},{}])assert.equal(areaValue(row,'combined'),null);
  assert.equal(areaValue({poverty_pct:0,growth_pct:0},'combined'),0);
  assert.notEqual(areaColor(null,'combined'),areaColor(0,'combined'));
+});
+
+
+test('all combined views classify four quadrants and export their actual measures',()=>{
+ for(const focus of Object.keys(COMBINED_VIEWS)){
+  const measures=combinedMeasures(focus);
+  for(let category=0;category<4;category++){
+   const row={acs_year:2011};
+   measures.forEach((m,i)=>{const high=!!(category&(i===0?2:1));row[m.field]=m.threshold+(m.operator==='>='?(high?0:-1):(high?-1:0));});
+   assert.equal(areaValue(row,focus),category,focus);
+   const evidence=combinedEvidence(row,focus);
+   assert.equal(evidence.length,2);
+   evidence.forEach((e,i)=>{assert.equal(e.raw_value,row[measures[i].field]);assert.equal(e.threshold,measures[i].threshold);assert.ok(e.period);});
+   for(const m of measures)assert.equal(areaValue({...row,[m.field]:null},focus),null);
+  }
+ }
 });
