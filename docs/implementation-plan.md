@@ -30,7 +30,7 @@ Under this transmission mechanism, we test three operational hypotheses (reformu
 
 1. **Hypothesis 1 (Community Voice):** Because reviews are behavioral traces of people interacting with places, unstructured text contains substantive commentary on physical surroundings, walkability, transit, cleanliness, and public space, alongside transactional food/service evaluations.
 2. **Hypothesis 2 (Engagement Generation):** Publicly funded projects catalyze general investment and foot traffic in their surrounding catchment, generating measurable net increases in active reviewed businesses and review volume relative to matched counterfactual areas.
-3. **Hypothesis 3 (Capital Non-Linearity: "More Dollars ≠ More Engagement"):** Public investment can encourage local interaction, but engagement outcomes do not scale with the dollar magnitude of the capital outlay. Higher expenditure does not guarantee higher engagement per dollar or greater absolute engagement. Across our five curated cases, the most expensive project (Sun Link at $196.5M) produced the lowest engagement contrast (−1.22 reviews/pair DiD, −18.7% business expansion contrast), while the low-cost greenway (Lafitte at $9.1M) produced the highest capital efficiency (+165.16 net reviews/$M, +5.4% business expansion). With $N=5$ cases, project type is collinear with geography, cost scale, and density; this is strictly a descriptive comparison of specific capital outlays, not a generalizable causal regression across project classes.
+3. **Hypothesis 3 (Capital Non-Linearity: "More Dollars ≠ More Engagement"):** The four matched samples and Sun Link's full-route comparison show different descriptive review contrasts per dollar. Sun Link's 717-listing corridor has a −11.23 growth-adjusted reviews/$M score at 500m, while Lafitte's matched sample has +165.16 reviews/$M. Their methods differ, so they cannot support a common project ranking. With $N=5$ cases, project type is intertwined with geography, cost scale, and density.
 
 ### 1.2 Reconciliation with Milestone 2 EDA Hypothesis Scheme
 The earlier Milestone 2 EDA deliverable (`ProjectEDA_Team4.ipynb` and `EDA_Evaluation.md`) evaluated an exploratory hypothesis scheme based on direct spending-to-sentiment correlations:
@@ -49,7 +49,7 @@ Consequently, the post-EDA framework **reformulated the hypothesis structure** a
 | **Riverfront / Ascend** (Nashville) | Riverfront park / venue | $52.0 | +64.2% (Unmatched) / +59.7% (Lower band) | +0.7% | High activity growth, but matched citywide growth leaves business participation flat (+0.7%). |
 | **Dilworth Park** (Philadelphia) | Civic plaza / transit hub | $55.0 | +23.7% (All) / −4.1% (250m) | −17.6% | Sensitive to radius; driven by top 5% busiest establishments (contrast drops to +5.8% without them). |
 | **Water Works Park** (Tampa) | Riverfront / spring restoration | $7.4 | Suppressed at 500m (2 pairs) / −44.8% at 1km | +69.2% (Raw) | Severe baseline sparsity (only 2 matched pairs); percentage contrasts uninterpretable without support indicators. |
-| **Sun Link** (Tucson) | Streetcar / fixed transit | $196.5 | −3.4% (All) / −6.5% (Lower band) | −18.7% | Highest cost by 3.5x, yet shows negative relative engagement and lagging business participation. |
+| **Sun Link** (Tucson) | Streetcar / fixed transit | $196.5 | −16.8% full-route review-growth contrast (unmatched) | −18.7% | Reviews increased in absolute terms, but slower than the farther Tucson comparison. |
 
 ---
 
@@ -72,7 +72,7 @@ Alongside log-transformed contrast to mitigate extreme skew:
 $$\Delta E_{\log} = \frac{1}{|\mathcal{P}|} \sum_{(i, j) \in \mathcal{P}} \left[ \big(\ln(1 + Y_{i, \text{post}}) - \ln(1 + Y_{i, \text{pre}})\big) - \big(\ln(1 + Y_{j, \text{post}}) - \ln(1 + Y_{j, \text{pre}})\big) \right]$$
 
 ### 2.3 Capital Efficiency Estimands ($CE$)
-Because absolute review gains are inflated by dense baselines (e.g., Center City Philadelphia) while percentage gains are inflated by sparse baselines (e.g., Water Works Park), we designate a **single primary ranking metric** ($CE_{\text{abs}}$) alongside secondary context columns ($CE_{\text{rel}}$, $CE_{\text{norm}}$, $CE_{\text{biz}}$):
+Because absolute review differences depend on baseline density while percentage differences can be unstable with sparse baselines, the app shows $CE_{\text{abs}}$ alongside support and comparison method. Rankings are meaningful only within a common method and adequately supported cohort.
 
 1. **Primary Headline Metric: Absolute Matched Gain per \$1M Capital Outlay ($CE_{\text{abs}}$):**
    Measures net reviewer traffic added to the matched business sample per million dollars invested:
@@ -92,6 +92,8 @@ Because absolute review gains are inflated by dense baselines (e.g., Center City
 
 5. **Support and Display Invariant:**
    Ratios with $N_{\text{pairs}} < 20$ (specifically Water Works Park primary 500m with $N=2$) MUST be marked `low_support = True` and suppressed from ranking comparisons. No ratio may be presented without its underlying baseline counts.
+
+Sun Link uses a separate full-route estimand: $\text{CE}_{\text{corridor}} = [Y_{\text{near,post}} - Y_{\text{near,pre}}(Y_{\text{far,post}}/Y_{\text{far,pre}})]/\text{cost}$. At 500m it uses all 717 Yelp listings and a farther 1.5–8 km area. The result is unmatched and must be labeled separately.
 
 ### 2.4 Community Voice Share ($CVS$)
 To test Hypothesis 1, text is partitioned into Community Aspects ($\mathcal{A}_{\text{community}}$) vs. Transactional Aspects ($\mathcal{A}_{\text{commercial}}$):
@@ -144,25 +146,30 @@ flowchart TD
     4. Enforces visual support guards (graying out or hatching under-supported estimates like Water Works Park).
 
 ### 3.3 Prospective Planning Tool: Reference-Case Scenario Explorer
-To assist policymakers planning future capital investments without making unconstrained statistical claims, the system implements a **Reference-Case Scenario Explorer**:
 
-1. **Methodological Framing (Adopted RCF Spirit):**
-   Supervised machine learning cannot be trained on $N=5$ retrospective case studies (zero degrees of freedom; catastrophic overfitting). Instead, we adopt the principles of Reference Class Forecasting (Kahneman & Flyvbjerg): evaluating proposed investments against the empirical distributions of observed past projects rather than unconstrained regressions. Because our reference class contains 5 cases ($N=1$ per typology), outputs are presented strictly as **illustrative scenario ranges**, never point-estimate predictions.
+The separate Capital Efficiency Studio (`web/model.html`) now shows a trained
+research estimate from ten supported project outcomes, with leave-one-project-out
+error beside it. It also applies one observed project as a transparent reference
+case. Five projects supply the scenario types; the six expansion projects are used
+only in the uniformly defined trained outcome table, with center-proxy geometry
+explicitly flagged. The trained model is not accurate enough for budget or site
+recommendations.
 
-2. **Single-Case Sourced Bounds (Derived from Distance Sensitivities):**
-   Each typology maps to a single empirical reference project, displaying its $N=1$ evidentiary weight directly in the UI. Rather than fabricated symmetric error bands, scenario bounds reflect the project's actual observed sensitivity across radii (250m, 500m, 1,000m):
-   - **Linear Greenway ($N=1$, Lafitte):** DiD $+10.59$ to $+23.26$ reviews/pair (500m: $+10.59$, 250m: $+19.68$, 1000m: $+23.26$). Consistently positive.
-   - **Civic Plaza / Transit Hub ($N=1$, Dilworth):** DiD **$-1.27$ to $+7.50$** reviews/pair (250m immediate footprint: **$-1.27$**, 500m catchment: $+7.50$, 1000m: $+6.39$). Highlights footprint sign-flip and radius sensitivity.
-   - **Riverfront Event Park ($N=1$, Riverfront / Ascend):** DiD $+12.55$ to $+44.48$ reviews/pair (1000m: $+12.55$, 500m: $+35.93$, 250m: $+44.48$). Concentrated near core.
-   - **Fixed-Rail Transit ($N=1$, Sun Link):** DiD $-1.36$ to $-0.92$ reviews/pair (250m: $-1.36$, 500m: $-1.22$, 1000m: $-0.92$). Consistently negative relative to matched controls.
+The user selects a reference project type, catchment radius (250, 500, or 1,000 m),
+income group, proposed cost, target ZIP, and a local business count. Four references
+use the observed matched review difference per business. Sun Link uses a full-route,
+unmatched difference per Yelp listing after adjusting for farther-area growth. Scenario arithmetic is:
 
-3. **Scenario Formulation:**
-   For proposed budget $C$ (\$M) and target ZCTA with baseline active businesses $N_{\text{biz}}$:
-   $$\widehat{\Delta \text{Reviews}} = \big[ N_{\text{biz}} \times \Delta \bar{Y}_{\text{low}}, \; N_{\text{biz}} \times \Delta \bar{Y}_{\text{high}} \big]$$
-   $$\widehat{CE}_{\text{abs}} = \left[ \frac{N_{\text{biz}} \times \Delta \bar{Y}_{\text{low}}}{C}, \; \frac{N_{\text{biz}} \times \Delta \bar{Y}_{\text{high}}}{C} \right]$$
+$$\text{Illustrative net review difference} = N_{\text{businesses}} \times \Delta \bar{Y}_{\text{DiD}}$$
+$$\text{Illustrative CE}_{\text{abs}} = \frac{N_{\text{businesses}} \times \Delta \bar{Y}_{\text{DiD}}}{\text{proposed cost (\$M)}}$$
 
-4. **Over-Capitalization Risk Warning:**
-   Compares proposed capital expenditure against the commercial carrying capacity of the local catchment. Flags an alert if proposed cost per baseline business exceeds empirical thresholds, preventing over-capitalization in sparse corridors (the "Sun Link trap").
+A ZIP selection displays Census population and all-ZIP Yelp listing/review context.
+It does not automatically alter the score: the full-ZIP count is not a measured
+project catchment, and five cases cannot isolate an independent location effect.
+Adequate matched or baseline support must exist for the selected subgroup; otherwise
+no score is displayed. The page also shows how the same proposed cost and business
+count would score under each available reference radius. These are sensitivity
+comparisons, not confidence intervals.
 
 ---
 
@@ -174,7 +181,7 @@ To assist policymakers planning future capital investments without making uncons
 | **Skew and Top-5% Outliers** | Dilworth Park growth is dominated by high-volume Center City restaurants; contrast drops from +23.7% to +5.8% without them. | Report log-transformed contrasts ($\Delta E_{\log}$) alongside raw arithmetic sums; compute Winsorized and trimmed bounds. |
 | **Yelp Population vs. Business Openings** | An increase in active Yelp listings does not guarantee new business births (could be Yelp platform adoption). | Strictly define metric as *reviewed business participation on Yelp*, not *business formation*. |
 | **Unreconciled Cost Scopes** | Headline costs conflate public grants with private match funding (e.g. Dilworth $55M mixed, Sun Link $196.5M FTA+local). | Document source ledgers in registry; run sensitivity against public-only funding shares. |
-| **Confounding with Wider Metro Growth** | Nashville review volume grew citywide across 2012–2017. | All primary engagement and efficiency indices MUST be difference-in-differences against matched local control pools. |
+| **Confounding with Wider Metro Growth** | Review volume grew across study cities. | Use matched controls for four original cases. Label Sun Link's full-route growth adjustment as unmatched and descriptive. |
 | **Scenario Extrapolation Overreach** | Applying a single project's observed DiD spread to a hypothetical corridor assumes transferable commercial elasticity. | Strictly label tool as an illustrative *Scenario Explorer* based on $N=5$ cases; display source project $N=1$ badge and report ranges, never point forecasts. |
 
 ---
@@ -201,28 +208,30 @@ To assist policymakers planning future capital investments without making uncons
 - **Objective:** Deliver interactive exploration of project efficiency, catchments, and community discourse.
 - **Deliverables:**
   - Updated `web/index.html` featuring project locator, efficiency rankings, and voice excerpts.
-  - Self-contained, offline-renderable build artifact ($\le 4$ MB, current 3.35 MB).
+  - Self-contained, offline-renderable map artifact ($\le 4$ MB, current 3.60 MB).
 - **Verification:** Headless Puppeteer render check; verified offline rendering; dynamic FLAG badge assignment; zero broken assets.
 
-### Phase 4: Reference-Case Scenario Explorer (`src/exploration.js`, `web/index.html`)
-- **Objective:** Provide policymakers with an interactive scenario planning calculator based on empirical reference classes.
+### Phase 4: Trained CE Prototype and Reference Scenario (`src/train_ce_model.py`, `src/build_model_page.py`, `web/model.html`)
+- **Objective:** Show the fitted CE research estimate and its held-out error beside transparent source-project arithmetic.
 - **Deliverables:**
-  - Interactive UI controls: proposed budget slider ($M), project typology selector, and target corridor dropdown (drawing from 277 mapped ZCTAs).
-  - Reference class calculation engine applying single-case radius sensitivity bounds with visible $N=1$ evidentiary weight.
-  - Over-Capitalization Risk Alert warning when proposed capital outlays exceed commercial catchment capacity.
-- **Verification:** Browser smoke tests verifying dynamic scenario recalculation and over-capitalization threshold triggers.
+  - Interactive controls for proposed cost ($M), five project types, 196 mapped target ZCTAs, radius, income group, a user-entered local business or route-listing count, and editable near/comparison review trends.
+  - Single-case reference arithmetic with the selected method, source reset, break-even growth control, support guard, and a three-radius sensitivity comparison.
+  - Companion observed reviewed-listing participation and review-language diagnostics, kept separate from CE because they use different cohorts and units.
+  - Explicit distinction between target ZIP context and the local business count used in the calculation.
+- Ridge regression trained on ten supported project outcomes with only pre-opening Yelp activity and proposed cost as inputs. The 717-listing Sun Link full-route outcome is retained. One project with only six baseline-reviewed businesses is excluded.
+- **Verification:** Leave-one-project-out CE mean absolute error is 56.3 reviews/$1M versus 69.0 for a mean-only baseline; CE direction is correct for six of ten projects. Generated-page and numerical checks pass, and the page was inspected in the local browser. The model remains unsuitable for budget or site recommendations.
 
 ### Phase 5: Final Synthesis & Coursework Artifacts
-- **Objective:** Produce final notebook and presentation materials meeting CIS 509 final requirements.
+- **Objective:** Produce a reproducible course notebook that reports both findings and model limits.
 - **Deliverables:**
-  - End-to-end reproducible Jupyter Notebook incorporating the Public Investment Efficiency Score (PIES) and Reference-Case Scenario Explorer.
-  - Final slide deck structure summarizing the Three Hypotheses, 4-stage transmission mechanism, PIES policy scorecard, and municipal capital allocation recommendations.
+  - Executed [Final Submission Report](coursework/final-project/Final_Submission_Report.ipynb) with 11-project EDA, project-held-out CE regression, and a business-held-out TF–IDF sentiment classification comparison.
+  - Rendered HTML report available from the local studio. A presentation should emphasize observed patterns and held-out failures rather than municipal capital allocation recommendations.
 
 ---
 
-## 6. Dataset Expansion Roadmap: Candidate Cases and Verification Protocol
+## 6. Dataset Expansion: Candidate Cases, Verification Protocol, and Executed Metrics
 
-To move beyond the initial $N=5$ cases and establish multi-observation reference classes, the system defines an empirical expansion roadmap utilizing existing workstation datasets (`data/raw/yelp_academic_dataset_business.json`, `data/interim/reviews_5metro.csv`, and `Yelp JSON/yelp_dataset.tar`):
+To move beyond the initial $N=5$ cases and establish multi-observation reference classes, the system executed a single-pass streaming extraction over all 6,990,280 reviews in `Yelp JSON/yelp_dataset.tar` (`src/extract_expansion_projects.py`), computing business growth and capital efficiency for six expanded investments (`study_data/expansion_projects_metrics.csv`):
 
 ### 6.1 Tier 1 Expansion: Existing 5-Metro Panel (Zero New Raw Extraction)
 These candidates sit inside the already extracted 277 study ZIPs and 5-metro review panel (`reviews_5metro.csv`). They require only spatial boundary definition and registry verification:

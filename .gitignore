@@ -16,5 +16,12 @@ build/
 Yelp JSON/
 data/raw/
 data/interim/
+data/derived/review_text_weak_labels.json.gz
 *.tar
 *.tar.gz
+
+# Private presentation drafts and validation intermediates
+.presentation-build/
+
+# Presentation finalizer chart-data intermediates
+.chart-data-*/

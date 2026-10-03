@@ -44,7 +44,7 @@ def load_data(data_dir: Path):
     return reg_df, eng, bg
 
 
-def compute_capital_efficiency(reg_df: pd.DataFrame, eng: pd.DataFrame, bg: pd.DataFrame) -> pd.DataFrame:
+def compute_capital_efficiency(reg_df: pd.DataFrame, eng: pd.DataFrame, bg: pd.DataFrame, data_dir: Path = STUDY_DATA) -> pd.DataFrame:
     """Compute matched engagement efficiency and business participation efficiency."""
     rows = []
 
@@ -57,6 +57,11 @@ def compute_capital_efficiency(reg_df: pd.DataFrame, eng: pd.DataFrame, bg: pd.D
 
     for _, reg_row in reg_df.iterrows():
         proj = reg_row["project"]
+        # The historical Sun Link matched extract covered only a restricted
+        # subset of the corridor. Current analysis uses the full-route cohort
+        # in sun_link_corridor_efficiency.csv instead.
+        if proj == "Sun Link":
+            continue
         cost = float(reg_row["cost_millions"])
         city = reg_row["city"]
         ptype = reg_row["project_type"]
@@ -118,6 +123,7 @@ def compute_capital_efficiency(reg_df: pd.DataFrame, eng: pd.DataFrame, bg: pd.D
 
             rows.append({
                 "project": proj,
+                "comparison_method": "matched_pairs",
                 "city": city,
                 "project_type": ptype,
                 "cost_millions": cost,
@@ -145,6 +151,45 @@ def compute_capital_efficiency(reg_df: pd.DataFrame, eng: pd.DataFrame, bg: pd.D
                 "biz_500m_net_gain": round(net_biz_gain, 2) if pd.notna(net_biz_gain) else np.nan,
                 "biz_500m_rel_growth_pct": round(bg_rel_growth, 2) if pd.notna(bg_rel_growth) else np.nan,
                 "ce_biz_per_million": round(ce_biz, 3) if pd.notna(ce_biz) else np.nan,
+            })
+    # Append expansion projects from expansion_projects_metrics.csv if present
+    exp_path = data_dir / "expansion_projects_metrics.csv"
+    if exp_path.exists():
+        exp_df = pd.read_csv(exp_path)
+        for _, er in exp_df.iterrows():
+            cost_val = float(er["cost_millions"])
+            pairs_val = int(er["pairs"])
+            near_post_val = float(er["near_post_mean"])
+            ce_rel_val = float(er["ce_rel_pct_per_million"])
+            rows.append({
+                "project": er["project"],
+                "comparison_method": "cohort_mean",
+                "city": er["city"],
+                "project_type": er["project_type"],
+                "cost_millions": cost_val,
+                "radius_m": 500,
+                "income_group": "All",
+                "metric": "reviews",
+                "pairs": pairs_val,
+                "distinct_controls": np.nan,
+                "low_support": bool(er["low_support"]),
+                "near_pre_mean": float(er["near_pre_mean"]),
+                "near_post_mean": near_post_val,
+                "control_pre_mean": float(er["control_pre_mean"]),
+                "control_post_mean": float(er["control_post_mean"]),
+                "did_per_pair": float(er["did_per_pair"]),
+                "total_baseline_near_vol": float(er["total_baseline_near_vol"]),
+                "total_post_near_vol": round(near_post_val * pairs_val, 1),
+                "net_volume_gain": float(er["net_volume_gain"]),
+                "relative_growth_pct": round(ce_rel_val * cost_val, 2),
+                "ce_abs_per_million": float(er["ce_abs_per_million"]),
+                "ce_rel_pct_per_million": ce_rel_val,
+                "ce_norm_pct_per_million": float(er["ce_norm_pct_per_million"]),
+                "biz_500m_pre": int(er["biz_500m_pre"]) if pd.notna(er.get("biz_500m_pre")) else None,
+                "biz_500m_post": int(er["biz_500m_post"]) if pd.notna(er.get("biz_500m_post")) else None,
+                "biz_500m_net_gain": float(er["biz_500m_net_gain"]) if pd.notna(er.get("biz_500m_net_gain")) else np.nan,
+                "biz_500m_rel_growth_pct": float(er["biz_500m_rel_growth_pct"]) if pd.notna(er.get("biz_500m_rel_growth_pct")) else np.nan,
+                "ce_biz_per_million": float(er["ce_biz_per_million"]) if pd.notna(er.get("ce_biz_per_million")) else np.nan,
             })
 
     return pd.DataFrame(rows)
@@ -176,15 +221,16 @@ def extract_expansion_candidates(reg_df: pd.DataFrame, data_dir: Path) -> pd.Dat
 
 
 def print_summary_benchmark(df: pd.DataFrame):
-    """Print primary comparison table at 500m buffer for all reviews."""
+    """Print 500m descriptive comparisons with method and support visible."""
     primary = df[(df["radius_m"] == 500) & (df["metric"] == "reviews") & (df["income_group"] == "All")].copy()
-    primary = primary.sort_values(by="ce_abs_per_million", ascending=False)
+    primary["method_order"] = primary["comparison_method"].map({"matched_pairs": 0, "cohort_mean": 1})
+    primary = primary.sort_values(by=["method_order", "low_support", "ce_abs_per_million"], ascending=[True, True, False])
 
     print("\n" + "=" * 105)
-    print("PRIMARY CAPITAL EFFICIENCY BENCHMARK: 500m Buffer, Review Volume (Main 2-Year Window)")
+    print("DESCRIPTIVE CAPITAL EFFICIENCY: 500m Buffer, Review Volume (Main 2-Year Window)")
     print("=" * 105)
     header = (
-        f"{'Project':<20} {'Type':<26} {'Cost ($M)':>10} {'Pairs':>6} "
+        f"{'Project':<28} {'Method':<14} {'Cost ($M)':>10} {'Sample':>6} "
         f"{'DiD/Pair':>9} {'Net Vol':>9} {'CE_abs':>9} {'CE_rel':>9} {'CE_norm':>9} {'Support':>8}"
     )
     print(header)
@@ -192,19 +238,24 @@ def print_summary_benchmark(df: pd.DataFrame):
 
     for _, r in primary.iterrows():
         supp_str = "FLAG" if r["low_support"] else "OK"
-        ce_rel_str = f"{r['ce_rel_pct_per_million']:+.2f}%" if pd.notna(r["ce_rel_pct_per_million"]) else "N/A"
-        ce_norm_str = f"{r['ce_norm_pct_per_million']:+.2f}%" if pd.notna(r["ce_norm_pct_per_million"]) else "N/A"
+        did_str = "—" if r["low_support"] else f"{r['did_per_pair']:+.2f}"
+        net_str = "—" if r["low_support"] else f"{r['net_volume_gain']:+.1f}"
+        ce_abs_str = "—" if r["low_support"] else f"{r['ce_abs_per_million']:+.2f}"
+        ce_rel_str = "—" if r["low_support"] else f"{r['ce_rel_pct_per_million']:+.2f}%" if pd.notna(r["ce_rel_pct_per_million"]) else "N/A"
+        ce_norm_str = "—" if r["low_support"] else f"{r['ce_norm_pct_per_million']:+.2f}%" if pd.notna(r["ce_norm_pct_per_million"]) else "N/A"
+        method = "Matched pairs" if r["comparison_method"] == "matched_pairs" else "Cohort mean"
         print(
-            f"{r['project']:<20} {r['project_type']:<26} {r['cost_millions']:>10.1f} {r['pairs']:>6} "
-            f"{r['did_per_pair']:>+9.2f} {r['net_volume_gain']:>+9.1f} {r['ce_abs_per_million']:>+9.2f} "
+            f"{r['project']:<28} {method:<14} {r['cost_millions']:>10.1f} {r['pairs']:>6} "
+            f"{did_str:>9} {net_str:>9} {ce_abs_str:>9} "
             f"{ce_rel_str:>9} {ce_norm_str:>9} {supp_str:>8}"
         )
     print("=" * 105)
     print("Notes:")
-    print("  CE_abs   = Net Matched Reviews Generated per $1M Invested (Net Vol / Cost)")
+    print("  CE_abs   = Descriptive net reviews per reported $1M project cost (Net Vol / Cost)")
     print("  CE_rel   = Relative Review Growth Rate per $1M Invested (Rel Growth % / Cost)")
     print("  CE_norm  = Baseline-Normalized Net Volume Generated per $1M Invested (Net Vol / [Baseline Vol * Cost] * 100)")
-    print("  Support  = Low support flag (pairs < 20). Water Works Park is suppressed from rankings due to N=2.")
+    print("  Sample   = Matched pairs for original cases; baseline nearby businesses for cohort-mean expansions.")
+    print("  Support  = Difference and efficiency estimates suppressed when sample size is below 20.")
     print("=" * 105 + "\n")
 
 
@@ -215,7 +266,7 @@ def main():
     args = parser.parse_args()
 
     reg_df, eng, bg = load_data(args.data_dir)
-    res = compute_capital_efficiency(reg_df, eng, bg)
+    res = compute_capital_efficiency(reg_df, eng, bg, args.data_dir)
     cand_df = extract_expansion_candidates(reg_df, args.data_dir)
     print(f"Wrote {len(cand_df)} expansion candidates to {args.data_dir / 'expansion_candidates.csv'}")
 

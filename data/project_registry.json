@@ -1,0 +1,549 @@
+{
+  "version": "project-registry-v1",
+  "projects": [
+    {
+      "project": "Lafitte",
+      "folder": "Pilot Lafitte",
+      "city": "New Orleans",
+      "project_type": "Greenway / public space",
+      "cost_millions": 9.1,
+      "opening": "2015-11-06",
+      "late": [
+        2018,
+        2019
+      ],
+      "acs": 2012,
+      "source": "https://lafittegreenway.org/blog/lafitte-greenway-opening-friday-november-6/",
+      "geometry_note": "Current OSM trail segments; 3.70km mapped versus 4.18km advertised. Historical footprint incomplete.",
+      "funding_note": "Reported project cost; public expenditure not reconciled.",
+      "state": "LA",
+      "geometry_quality": "mapped_footprint",
+      "id": "lafitte",
+      "pre_years": [
+        2012,
+        2013
+      ],
+      "post_years": [
+        2016,
+        2017
+      ],
+      "early_years": [
+        2010,
+        2011
+      ],
+      "cost_status": "reported_project_cost_not_audited",
+      "cost_scope": "Reported combined project cost; public/private scope not reconciled",
+      "sources": [
+        {
+          "url": "https://lafittegreenway.org/blog/lafitte-greenway-opening-friday-november-6/",
+          "role": "source"
+        }
+      ],
+      "geometry": {
+        "kind": "mapped_footprint",
+        "path": "docs/coursework/milestone-2-eda/study_data/Lafitte.geojson"
+      }
+    },
+    {
+      "project": "Sun Link",
+      "folder": "Pilot Sun Link",
+      "city": "Tucson",
+      "project_type": "Streetcar / transit",
+      "cost_millions": 196.5,
+      "opening": "2014-07-25",
+      "late": [
+        2017,
+        2018
+      ],
+      "acs": 2011,
+      "source": "https://www.transit.dot.gov/about/news/us-department-transportation-celebrates-grand-opening-tucson-streetcar-further-expanding",
+      "geometry_note": "Official city streetcar route polygon; current geometry used as historical proxy.",
+      "funding_note": "Reported capital project cost, including federal funding; expenditure not reconciled.",
+      "state": "AZ",
+      "geometry_quality": "mapped_footprint",
+      "id": "sun-link",
+      "pre_years": [
+        2010,
+        2011
+      ],
+      "post_years": [
+        2015,
+        2016
+      ],
+      "early_years": [
+        2008,
+        2009
+      ],
+      "cost_status": "reported_project_cost_not_audited",
+      "cost_scope": "Reported combined project cost; public/private scope not reconciled",
+      "sources": [
+        {
+          "url": "https://www.transit.dot.gov/about/news/us-department-transportation-celebrates-grand-opening-tucson-streetcar-further-expanding",
+          "role": "source"
+        }
+      ],
+      "geometry": {
+        "kind": "mapped_footprint",
+        "path": "docs/coursework/milestone-2-eda/study_data/Sun_Link.geojson"
+      },
+      "cohort_fixture": "data/derived/sun_link_full_route_cohorts.csv"
+    },
+    {
+      "project": "Dilworth Park",
+      "folder": "Five Project Study/Dilworth Park",
+      "city": "Philadelphia",
+      "project_type": "Civic plaza / transit access",
+      "cost_millions": 55.0,
+      "opening": "2014-09-04",
+      "late": [
+        2017,
+        2018
+      ],
+      "acs": 2011,
+      "epsg": 32618,
+      "source": "https://centercityphila.org/press-release/dilworth-park-celebrates-10th-anniversary/",
+      "construction_source": "https://centercityphila.org/press-release/dilworth-park-celebrates-10th-anniversary/",
+      "geometry_source": "https://www.openstreetmap.org/way/410095875",
+      "geometry_note": "Current OSM park polygon, historical footprint proxy; construction began January 2012, opening phased in 2014.",
+      "funding_note": "Headline $55m mixed public/private project. CCD capital ledger uses a different scope; not verified public outlay.",
+      "state": "PA",
+      "geometry_quality": "mapped_footprint",
+      "id": "dilworth-park",
+      "pre_years": [
+        2010,
+        2011
+      ],
+      "post_years": [
+        2015,
+        2016
+      ],
+      "early_years": [
+        2008,
+        2009
+      ],
+      "cost_status": "reported_project_cost_not_audited",
+      "cost_scope": "Reported combined project cost; public/private scope not reconciled",
+      "sources": [
+        {
+          "url": "https://centercityphila.org/press-release/dilworth-park-celebrates-10th-anniversary/",
+          "role": "source"
+        },
+        {
+          "url": "https://centercityphila.org/press-release/dilworth-park-celebrates-10th-anniversary/",
+          "role": "construction_source"
+        },
+        {
+          "url": "https://www.openstreetmap.org/way/410095875",
+          "role": "geometry_source"
+        }
+      ],
+      "geometry": {
+        "kind": "mapped_footprint",
+        "path": "docs/coursework/milestone-2-eda/study_data/Dilworth_Park.geojson"
+      }
+    },
+    {
+      "project": "Water Works Park",
+      "folder": "Five Project Study/Water Works Park",
+      "city": "Tampa",
+      "project_type": "Riverfront park / spring restoration",
+      "cost_millions": 7.4,
+      "opening": "2014-08",
+      "late": [
+        2017,
+        2018
+      ],
+      "acs": 2012,
+      "epsg": 32617,
+      "source": "https://83degreesmedia.com/waterworks100813/",
+      "construction_source": "https://www.tampa.gov/sites/default/files/content/files/migrated/2013-annual-sustainability-report-final.PDF",
+      "opening_source": "https://www.tampa.gov/sites/default/files/document/migrated/FY15BudgetBook_part1.pdf",
+      "geometry_source": "https://www.openstreetmap.org/way/190127200",
+      "geometry_note": "Current OSM park polygon, historical proxy; construction October 2013. Adjacent Ulele redevelopment and wider Riverwalk construction confound attribution.",
+      "funding_note": "Reported $7.4m project, $6.5m Community Investment Tax plus grants. Interview reporting, not audited expenditure.",
+      "state": "FL",
+      "geometry_quality": "mapped_footprint",
+      "id": "water-works-park",
+      "pre_years": [
+        2011,
+        2012
+      ],
+      "post_years": [
+        2015,
+        2016
+      ],
+      "early_years": [
+        2009,
+        2010
+      ],
+      "cost_status": "reported_project_cost_not_audited",
+      "cost_scope": "Reported combined project cost; public/private scope not reconciled",
+      "sources": [
+        {
+          "url": "https://83degreesmedia.com/waterworks100813/",
+          "role": "source"
+        },
+        {
+          "url": "https://www.tampa.gov/sites/default/files/content/files/migrated/2013-annual-sustainability-report-final.PDF",
+          "role": "construction_source"
+        },
+        {
+          "url": "https://www.tampa.gov/sites/default/files/document/migrated/FY15BudgetBook_part1.pdf",
+          "role": "opening_source"
+        },
+        {
+          "url": "https://www.openstreetmap.org/way/190127200",
+          "role": "geometry_source"
+        }
+      ],
+      "geometry": {
+        "kind": "mapped_footprint",
+        "path": "docs/coursework/milestone-2-eda/study_data/Water_Works_Park.geojson"
+      }
+    },
+    {
+      "project": "Riverfront / Ascend",
+      "folder": "Five Project Study/Riverfront Ascend",
+      "city": "Nashville",
+      "project_type": "Riverfront park / performance venue",
+      "cost_millions": 52.0,
+      "opening": "2015-07-30",
+      "late": [
+        2018,
+        2019
+      ],
+      "acs": 2012,
+      "epsg": 32616,
+      "source": "https://www.nashvillescene.com/music/slideshow-take-a-look-inside-ascend-amphitheater/article_f535a107-e8bc-5138-b3aa-3afb4f7e2ae0.html",
+      "opening_source": "https://www.nashville.gov/sites/default/files/2021-04/2016AnnualReport-Final_v6_web.pdf",
+      "construction_source": "https://www.wbbjtv.com/2015/07/16/final-touches-being-added-to-nashvilles-new-amphitheater/",
+      "geometry_source": "https://services2.arcgis.com/HdTo6HJqh92wn4D8/arcgis/rest/services/Park_Boundary_View/FeatureServer/6",
+      "geometry_note": "Southern component of official Riverfront polygon containing Ascend: 12.53 current mapped acres versus 11-acre 2015 addition; excludes older northern component. Euclidean distance can cross river.",
+      "funding_note": "Reported $52m city-funded combined development; no audited expenditure ledger.",
+      "state": "TN",
+      "geometry_quality": "mapped_footprint",
+      "id": "riverfront-ascend",
+      "pre_years": [
+        2011,
+        2012
+      ],
+      "post_years": [
+        2016,
+        2017
+      ],
+      "early_years": [
+        2009,
+        2010
+      ],
+      "cost_status": "reported_project_cost_not_audited",
+      "cost_scope": "Reported combined project cost; public/private scope not reconciled",
+      "sources": [
+        {
+          "url": "https://www.nashvillescene.com/music/slideshow-take-a-look-inside-ascend-amphitheater/article_f535a107-e8bc-5138-b3aa-3afb4f7e2ae0.html",
+          "role": "source"
+        },
+        {
+          "url": "https://www.wbbjtv.com/2015/07/16/final-touches-being-added-to-nashvilles-new-amphitheater/",
+          "role": "construction_source"
+        },
+        {
+          "url": "https://www.nashville.gov/sites/default/files/2021-04/2016AnnualReport-Final_v6_web.pdf",
+          "role": "opening_source"
+        },
+        {
+          "url": "https://services2.arcgis.com/HdTo6HJqh92wn4D8/arcgis/rest/services/Park_Boundary_View/FeatureServer/6",
+          "role": "geometry_source"
+        }
+      ],
+      "geometry": {
+        "kind": "mapped_footprint",
+        "path": "docs/coursework/milestone-2-eda/study_data/Riverfront_Ascend.geojson"
+      }
+    },
+    {
+      "project": "Tampa Riverwalk",
+      "city": "Tampa",
+      "project_type": "Waterfront trail / linear promenade",
+      "cost_millions": 32.0,
+      "opening": "2015-03-27",
+      "late": [
+        2018,
+        2019
+      ],
+      "acs": 2012,
+      "epsg": 32617,
+      "source": "https://www.tampa.gov/parks-and-recreation/featured-parks/riverwalk",
+      "geometry_note": "500 m circle around a documented center point; this is not a mapped full project footprint. Counts are recalculated from coordinates and may differ from legacy city-filtered counts.",
+      "funding_note": "Reported ~$32M continuous trail, including $10.9M TIGER grant. Candidate status pending full ledger audit.",
+      "state": "FL",
+      "geometry_quality": "center_proxy",
+      "id": "tampa-riverwalk",
+      "pre_years": [
+        2012,
+        2013
+      ],
+      "post_years": [
+        2016,
+        2017
+      ],
+      "early_years": [
+        2010,
+        2011
+      ],
+      "cost_status": "reported_project_cost_not_audited",
+      "cost_scope": "Reported combined project cost; public/private scope not reconciled",
+      "sources": [
+        {
+          "url": "https://www.tampa.gov/parks-and-recreation/featured-parks/riverwalk",
+          "role": "source"
+        },
+        {
+          "url": "https://www.tampa.gov/planning-division/programs/invision-tampa",
+          "role": "phased_scope"
+        }
+      ],
+      "geometry": {
+        "kind": "center_proxy",
+        "latitude": 27.9461,
+        "longitude": -82.4599
+      },
+      "timing_note": "Phased corridor: Kennedy segment completed 2015 and Doyle Carlton segment 2016; whole-route cost/geometry do not isolate one opening.",
+      "legacy_geometry_note": "Central downtown Riverwalk alignment along Hillsborough River; 227 businesses in 500m catchment."
+    },
+    {
+      "project": "Schuylkill Boardwalk",
+      "city": "Philadelphia",
+      "project_type": "Over-water boardwalk / linear trail",
+      "cost_millions": 18.0,
+      "opening": "2014-10-02",
+      "late": [
+        2017,
+        2018
+      ],
+      "acs": 2011,
+      "epsg": 32618,
+      "source": "https://www.schuylkillbanks.org/projects/boardwalk",
+      "geometry_note": "500 m circle around a documented center point; this is not a mapped full project footprint. Counts are recalculated from coordinates and may differ from legacy city-filtered counts.",
+      "funding_note": "Reported $18.0M project cost, including $13.0M federal TIGER funds. Candidate status pending full audit.",
+      "state": "PA",
+      "geometry_quality": "center_proxy",
+      "id": "schuylkill-boardwalk",
+      "pre_years": [
+        2011,
+        2012
+      ],
+      "post_years": [
+        2015,
+        2016
+      ],
+      "early_years": [
+        2009,
+        2010
+      ],
+      "cost_status": "reported_project_cost_not_audited",
+      "cost_scope": "Reported combined project cost; public/private scope not reconciled",
+      "sources": [
+        {
+          "url": "https://www.schuylkillbanks.org/projects/boardwalk",
+          "role": "source"
+        },
+        {
+          "url": "https://www.schuylkillbanks.org/blog/schuylkill-banks-boardwalk-now-open",
+          "role": "opening"
+        }
+      ],
+      "geometry": {
+        "kind": "center_proxy",
+        "latitude": 39.9482,
+        "longitude": -75.1812
+      },
+      "legacy_geometry_note": "2,000-foot over-the-water boardwalk extending Schuylkill River Trail; 140 businesses in 500m."
+    },
+    {
+      "project": "The Rail Park",
+      "city": "Philadelphia",
+      "project_type": "Elevated viaduct linear greenway",
+      "cost_millions": 10.3,
+      "opening": "2018-06-14",
+      "late": [
+        2021,
+        2021
+      ],
+      "acs": 2015,
+      "epsg": 32618,
+      "source": "https://www.therailpark.org/about/history/",
+      "geometry_note": "Current operator-account mapped Phase One polygon; historical fidelity not independently verified. Future Phase Two excluded.",
+      "funding_note": "Reported $10.3M Phase 1 capital project. Candidate status pending full audit.",
+      "state": "PA",
+      "geometry_quality": "mapped_footprint",
+      "id": "the-rail-park",
+      "pre_years": [
+        2015,
+        2016
+      ],
+      "post_years": [
+        2019,
+        2020
+      ],
+      "early_years": [
+        2013,
+        2014
+      ],
+      "cost_status": "reported_project_cost_not_audited",
+      "cost_scope": "Reported combined project cost; public/private scope not reconciled",
+      "sources": [
+        {
+          "url": "https://www.therailpark.org/about/history/",
+          "role": "source"
+        },
+        {
+          "url": "https://www.centercityphila.org/ccd-services/streetscape/rail-park",
+          "role": "construction_opening"
+        },
+        {
+          "url": "https://services1.arcgis.com/TNz8x5gA9YhXLeFQ/arcgis/rest/services/Rail_Park/FeatureServer/0",
+          "role": "geometry_phase_one"
+        }
+      ],
+      "geometry": {
+        "kind": "mapped_footprint",
+        "path": "data/geometry/rail-park-phase-one.geojson"
+      },
+      "timing_note": "Construction began October 31 2016; baseline 2015/16 partially overlaps construction.",
+      "geometry_provenance": "data/geometry/rail-park-phase-one.provenance.json"
+    },
+    {
+      "project": "Crescent Park",
+      "city": "New Orleans",
+      "project_type": "Linear riverfront park",
+      "cost_millions": 31.2,
+      "opening": "2015-07-02",
+      "late": [
+        2017,
+        2018
+      ],
+      "acs": 2012,
+      "epsg": 32616,
+      "source": "https://crescentparknola.org/",
+      "geometry_note": "500 m circle around a documented center point; this is not a mapped full project footprint. Counts are recalculated from coordinates and may differ from legacy city-filtered counts.",
+      "funding_note": "Reported $31.2M capital project cost. Candidate status pending full audit.",
+      "state": "LA",
+      "geometry_quality": "center_proxy",
+      "id": "crescent-park",
+      "pre_years": [
+        2011,
+        2012
+      ],
+      "post_years": [
+        2016,
+        2017
+      ],
+      "early_years": [
+        2009,
+        2010
+      ],
+      "cost_status": "reported_project_cost_not_audited",
+      "cost_scope": "Reported combined project cost; public/private scope not reconciled",
+      "sources": [
+        {
+          "url": "https://crescentparknola.org/",
+          "role": "source"
+        },
+        {
+          "url": "https://content.govdelivery.com/accounts/LANOLA/bulletins/1c0763a",
+          "role": "opening_scope"
+        },
+        {
+          "url": "https://www.hargreaves.com/newsitem/crescent-park-opens-in-new-orleans/",
+          "role": "opening"
+        }
+      ],
+      "geometry": {
+        "kind": "center_proxy",
+        "latitude": 29.9631,
+        "longitude": -90.0452
+      },
+      "timing_note": "Full 1.4-mile project opened July 2015; older 2014 date may reflect partial opening. Baseline 2011/12 retained.",
+      "legacy_geometry_note": "1.4-mile linear riverfront park in Bywater/Marigny; 57 businesses in 500m, 207 in 1000m."
+    },
+    {
+      "city": "Indianapolis",
+      "state": "IN",
+      "cost_millions": 63.0,
+      "project_type": "Urban trail",
+      "opening": "2013-05-10",
+      "project": "Indianapolis Cultural Trail",
+      "geometry_quality": "center_proxy",
+      "id": "indianapolis-cultural-trail",
+      "pre_years": [
+        2010,
+        2011
+      ],
+      "post_years": [
+        2014,
+        2015
+      ],
+      "early_years": [
+        2008,
+        2009
+      ],
+      "cost_status": "reported_project_cost_not_audited",
+      "cost_scope": "$63M reported total: $27.5M private and $35.5M federal funding; not solely public outlay",
+      "sources": [
+        {
+          "url": "https://indyculturaltrail.org/about/faq/",
+          "role": "cost_construction"
+        }
+      ],
+      "geometry": {
+        "kind": "center_proxy",
+        "latitude": 39.7684,
+        "longitude": -86.1581
+      },
+      "source_status": "Operator FAQ verifies cost split and construction start; geometry remains provisional",
+      "timing_note": "Construction began spring 2007; baseline 2010/11 is pre-opening but overlaps construction.",
+      "legacy_geometry_note": "",
+      "geometry_note": "500 m circle around a documented center point; this is not a mapped full project footprint. Counts are recalculated from coordinates and may differ from legacy city-filtered counts."
+    },
+    {
+      "city": "Saint Louis",
+      "state": "MO",
+      "cost_millions": 380.0,
+      "project_type": "Civic park",
+      "opening": "2018-07-03",
+      "project": "Gateway Arch Park",
+      "geometry_quality": "center_proxy",
+      "id": "gateway-arch-park",
+      "pre_years": [
+        2012,
+        2013
+      ],
+      "post_years": [
+        2019,
+        2020
+      ],
+      "early_years": [
+        2010,
+        2011
+      ],
+      "cost_status": "reported_project_cost_not_audited",
+      "cost_scope": "Reported combined project cost; public/private scope not reconciled",
+      "sources": [
+        {
+          "url": "https://home.nps.gov/jeff/learn/news/grand-opening-events-for-new-gateway-arch-national-park-experience.htm",
+          "role": "opening_scope"
+        }
+      ],
+      "geometry": {
+        "kind": "center_proxy",
+        "latitude": 38.6247,
+        "longitude": -90.1848
+      },
+      "source_status": "Official opening and scope verified; baseline timing and cost ledger pending",
+      "timing_note": "Entire reported $380M renovation opened July 2018. Legacy 2015 date described an earlier phase. Baseline 2012/13 retained pending construction-timing verification; post period includes COVID-19.",
+      "scope_note": "Reported cost covers national park, riverfront and Kiener Plaza; center proxy does not represent this full scope.",
+      "legacy_geometry_note": "",
+      "geometry_note": "500 m circle around a documented center point; this is not a mapped full project footprint. Counts are recalculated from coordinates and may differ from legacy city-filtered counts."
+    }
+  ]
+}

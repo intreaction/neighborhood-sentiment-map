@@ -1,0 +1,22 @@
+{
+  "project": "The Rail Park",
+  "source_url": "https://services1.arcgis.com/TNz8x5gA9YhXLeFQ/arcgis/rest/services/Rail_Park/FeatureServer/0",
+  "item_url": "https://www.arcgis.com/sharing/rest/content/items/ca95766207934d409c481634b26fcd79",
+  "item_owner": "jbrain_ccdphila",
+  "retrieved_date": "2026-09-25",
+  "query": {
+    "f": "geojson",
+    "where": "OBJECTID = 11",
+    "outFields": "*",
+    "outSR": 4326
+  },
+  "selected_object_ids": [
+    11
+  ],
+  "excluded_future_phase_object_ids": [
+    13
+  ],
+  "sha256": "bfb0cfe84be1dc221dd513339ac926637684c1e854f6e383e68af8f4541f6d32",
+  "quality": "Current operator-account mapped polygon; historical fidelity not independently surveyed",
+  "source_description": "Rail Park layer published by jbrain_ccdphila; future Phase 2 is a separate feature."
+}

@@ -1,0 +1,2758 @@
+{
+  "version": "project-ce-v2",
+  "status": "exploratory_retrospective_model",
+  "target": "Two-post-year growth-adjusted excess Yelp reviews per $1M nominal reported project cost",
+  "selected_model": "baseline",
+  "feature_schema": {
+    "pre_reviews_per_business": {
+      "label": "Baseline reviews per reviewed business",
+      "unit": "reviews over two baseline years",
+      "transform": "log1p",
+      "min": 12.494318181818182,
+      "max": 38.116883116883116,
+      "required": true
+    },
+    "cost_millions": {
+      "label": "Reported or proposed capital cost",
+      "unit": "$ million, nominal reported basis",
+      "transform": "log1p",
+      "min": 9.1,
+      "max": 380.0,
+      "required": true
+    },
+    "baseline_reviewed": {
+      "label": "Businesses with baseline reviews",
+      "unit": "businesses within 500 m",
+      "transform": "log1p",
+      "min": 28.0,
+      "max": 859.0,
+      "required": true
+    },
+    "place_share": {
+      "label": "Place-discussion share",
+      "unit": "fraction of baseline reviews",
+      "transform": "identity",
+      "min": 0.04020442930153322,
+      "max": 0.16501650165016502,
+      "required": false
+    },
+    "access_negative_share": {
+      "label": "Access-friction share",
+      "unit": "fraction of baseline reviews",
+      "transform": "identity",
+      "min": 0.0033003300330033004,
+      "max": 0.027932960893854747,
+      "required": false
+    },
+    "publicrealm_negative_share": {
+      "label": "Public-realm complaint share",
+      "unit": "fraction of baseline reviews",
+      "transform": "identity",
+      "min": 0.0035207268597387846,
+      "max": 0.028052805280528052,
+      "required": false
+    },
+    "early_relative_trend": {
+      "label": "Baseline relative activity trend",
+      "unit": "near minus farther log growth, early to pre",
+      "transform": "identity",
+      "min": -0.37561945861564094,
+      "max": 0.3894394848907471,
+      "required": false
+    },
+    "topic_1": {
+      "label": "Predictive topic: chicken / ordered / good",
+      "unit": "fraction in fitted topic basis",
+      "transform": "identity",
+      "min": 0.18815007044529844,
+      "max": 0.41643198295419187,
+      "required": false
+    },
+    "topic_2": {
+      "label": "Predictive topic: room / hotel / arch",
+      "unit": "fraction in fitted topic basis",
+      "transform": "identity",
+      "min": 0.13170205871285895,
+      "max": 0.5405400623005157,
+      "required": false
+    },
+    "topic_3": {
+      "label": "Predictive topic: great / food / good",
+      "unit": "fraction in fitted topic basis",
+      "transform": "identity",
+      "min": 0.19745197459197458,
+      "max": 0.3993740980821229,
+      "required": false
+    },
+    "topic_4": {
+      "label": "Predictive topic: pizza / crust / slice",
+      "unit": "fraction in fitted topic basis",
+      "transform": "identity",
+      "min": 0.025035611511265394,
+      "max": 0.14820475501290234,
+      "required": false
+    },
+    "topic_5": {
+      "label": "Predictive topic: tour / new / orleans",
+      "unit": "fraction in fitted topic basis",
+      "transform": "identity",
+      "min": 0.04882228115094593,
+      "max": 0.2618432009563125,
+      "required": false
+    },
+    "topic_diversity": {
+      "label": "Learned topic diversity",
+      "unit": "normalized entropy of project topic mixture",
+      "transform": "identity",
+      "min": 0.7498884529753815,
+      "max": 0.975471157472539,
+      "required": false
+    },
+    "review_length_log": {
+      "label": "Mean log review length",
+      "unit": "mean log(1 + word tokens)",
+      "transform": "identity",
+      "min": 4.228442880045635,
+      "max": 4.635075903916912,
+      "required": false
+    },
+    "lexical_diversity": {
+      "label": "Mean lexical diversity",
+      "unit": "unique words / total words per review; length-dependent",
+      "transform": "identity",
+      "min": 0.7285704109559132,
+      "max": 0.773635593257121,
+      "required": false
+    }
+  },
+  "candidates": {
+    "baseline": {
+      "feature_names": [
+        "pre_reviews_per_business",
+        "cost_millions",
+        "baseline_reviewed"
+      ],
+      "feature_means": [
+        2.978153208259357,
+        3.8033315789863615,
+        4.9252964055082025
+      ],
+      "feature_scales": [
+        0.287524209208501,
+        1.0974011952831406,
+        0.9595917646881237
+      ],
+      "coefficients": [
+        9.484577580303093,
+        -10.367581618821053,
+        12.087192788123241
+      ],
+      "intercept": 33.42384612665627,
+      "alpha": 10.0,
+      "project_metrics": {
+        "n": 10,
+        "mae": 49.32809999424271,
+        "median_absolute_error": 37.34221683063424,
+        "max_absolute_error": 106.51003977074434,
+        "sign_accuracy": 0.6
+      },
+      "city_metrics": {
+        "n": 10,
+        "mae": 45.60895559427488,
+        "median_absolute_error": 33.560501605507426,
+        "max_absolute_error": 102.8524100118128,
+        "sign_accuracy": 0.6
+      },
+      "similarity_threshold": 1.540388166773354,
+      "empirical_error_radius": 102.8524100118128,
+      "held_out": [
+        {
+          "id": "lafitte",
+          "project": "Lafitte",
+          "city": "New Orleans",
+          "observed_ce": 127.29480541478402,
+          "project_prediction": 20.784765644039677,
+          "city_prediction": 24.442395402971236,
+          "project_absolute_error": 106.51003977074434,
+          "city_absolute_error": 102.8524100118128
+        },
+        {
+          "id": "sun-link",
+          "project": "Sun Link",
+          "city": "Tucson",
+          "observed_ce": -11.233294003911482,
+          "project_prediction": 27.93689176924682,
+          "city_prediction": 27.93689176924682,
+          "project_absolute_error": 39.1701857731583,
+          "city_absolute_error": 39.1701857731583
+        },
+        {
+          "id": "dilworth-park",
+          "project": "Dilworth Park",
+          "city": "Philadelphia",
+          "observed_ce": 60.0066621734512,
+          "project_prediction": 62.4591798723023,
+          "city_prediction": 62.30485986038781,
+          "project_absolute_error": 2.4525176988511035,
+          "city_absolute_error": 2.2981976869366108
+        },
+        {
+          "id": "riverfront-ascend",
+          "project": "Riverfront / Ascend",
+          "city": "Nashville",
+          "observed_ce": 124.24117329243072,
+          "project_prediction": 21.87343459245496,
+          "city_prediction": 21.87343459245496,
+          "project_absolute_error": 102.36773869997576,
+          "city_absolute_error": 102.36773869997576
+        },
+        {
+          "id": "tampa-riverwalk",
+          "project": "Tampa Riverwalk",
+          "city": "Tampa",
+          "observed_ce": 5.417479797111412,
+          "project_prediction": 29.680346130993822,
+          "city_prediction": 29.680346130993822,
+          "project_absolute_error": 24.26286633388241,
+          "city_absolute_error": 24.26286633388241
+        },
+        {
+          "id": "schuylkill-boardwalk",
+          "project": "Schuylkill Boardwalk",
+          "city": "Philadelphia",
+          "observed_ce": -42.569325266350056,
+          "project_prediction": 48.860050298752526,
+          "city_prediction": 45.70035009269432,
+          "project_absolute_error": 91.42937556510259,
+          "city_absolute_error": 88.26967535904438
+        },
+        {
+          "id": "the-rail-park",
+          "project": "The Rail Park",
+          "city": "Philadelphia",
+          "observed_ce": 99.4240418778178,
+          "project_prediction": 66.92234595283703,
+          "city_prediction": 89.57870952535745,
+          "project_absolute_error": 32.501695924980766,
+          "city_absolute_error": 9.845332352460346
+        },
+        {
+          "id": "crescent-park",
+          "project": "Crescent Park",
+          "city": "New Orleans",
+          "observed_ce": -7.265071642951182,
+          "project_prediction": 28.249176245158996,
+          "city_prediction": 20.685745794905365,
+          "project_absolute_error": 35.51424788811018,
+          "city_absolute_error": 27.950817437856546
+        },
+        {
+          "id": "indianapolis-cultural-trail",
+          "project": "Indianapolis Cultural Trail",
+          "city": "Indianapolis",
+          "observed_ce": -20.25841032930585,
+          "project_prediction": 29.789135426572738,
+          "city_prediction": 29.789135426572738,
+          "project_absolute_error": 50.04754575587859,
+          "city_absolute_error": 50.04754575587859
+        },
+        {
+          "id": "gateway-arch-park",
+          "project": "Gateway Arch Park",
+          "city": "Saint Louis",
+          "observed_ce": -0.8196000465137313,
+          "project_prediction": -9.844386578256831,
+          "city_prediction": -9.844386578256831,
+          "project_absolute_error": 9.0247865317431,
+          "city_absolute_error": 9.0247865317431
+        }
+      ],
+      "parity_cases": [
+        {
+          "id": "lafitte",
+          "inputs": {
+            "cost_millions": 9.1,
+            "baseline_reviewed": 243.0,
+            "pre_reviews_per_business": 14.62551440329218,
+            "place_share": 0.14997186268992685,
+            "access_negative_share": 0.010410804727068092,
+            "publicrealm_negative_share": 0.015756893640967922,
+            "early_relative_trend": 0.05260070633607894,
+            "topic_1": 0.2416940136028548,
+            "topic_2": 0.22831661857921273,
+            "topic_3": 0.2234954876522128,
+            "topic_4": 0.04465067920940721,
+            "topic_5": 0.2618432009563125,
+            "topic_diversity": 0.9351202470937139,
+            "review_length_log": 4.503103296052413,
+            "lexical_diversity": 0.7462223706129978,
+            "topic_basis_version": "ce-nmf5-d0e0325b7a612797"
+          },
+          "ce": 47.149166730531796
+        },
+        {
+          "id": "sun-link",
+          "inputs": {
+            "cost_millions": 196.5,
+            "baseline_reviewed": 278.0,
+            "pre_reviews_per_business": 13.694244604316546,
+            "place_share": 0.050696086157079066,
+            "access_negative_share": 0.006566850538481744,
+            "publicrealm_negative_share": 0.005253480430785396,
+            "early_relative_trend": -0.2880538685586418,
+            "topic_1": 0.26716177341685177,
+            "topic_2": 0.2287901722281179,
+            "topic_3": 0.3380535300748676,
+            "topic_4": 0.10368177614488805,
+            "topic_5": 0.06231274813527475,
+            "topic_diversity": 0.9100440511297727,
+            "review_length_log": 4.547740856487008,
+            "lexical_diversity": 0.7445807818241837,
+            "topic_basis_version": "ce-nmf5-d0e0325b7a612797"
+          },
+          "ce": 18.72155264166952
+        },
+        {
+          "id": "dilworth-park",
+          "inputs": {
+            "cost_millions": 55.0,
+            "baseline_reviewed": 859.0,
+            "pre_reviews_per_business": 20.09313154831199,
+            "place_share": 0.047508690614136734,
+            "access_negative_share": 0.004055619930475087,
+            "publicrealm_negative_share": 0.004692931633835458,
+            "early_relative_trend": 0.03409278173674246,
+            "topic_1": 0.3145912015888254,
+            "topic_2": 0.27909080751216137,
+            "topic_3": 0.2893670853822672,
+            "topic_4": 0.06656020085366109,
+            "topic_5": 0.05039070466308495,
+            "topic_diversity": 0.8759278299274903,
+            "review_length_log": 4.553901060817128,
+            "lexical_diversity": 0.7466890370925804,
+            "topic_basis_version": "ce-nmf5-d0e0325b7a612797"
+          },
+          "ce": 56.73324967864704
+        },
+        {
+          "id": "riverfront-ascend",
+          "inputs": {
+            "cost_millions": 52.0,
+            "baseline_reviewed": 123.0,
+            "pre_reviews_per_business": 19.84552845528455,
+            "place_share": 0.05366653011061041,
+            "access_negative_share": 0.007374027038099139,
+            "publicrealm_negative_share": 0.006964358869315854,
+            "early_relative_trend": -0.10813781826005087,
+            "topic_1": 0.255591715223229,
+            "topic_2": 0.24449238033359244,
+            "topic_3": 0.3993740980821229,
+            "topic_4": 0.03156040340482043,
+            "topic_5": 0.06898140295623534,
+            "topic_diversity": 0.8407552611368055,
+            "review_length_log": 4.418326570599457,
+            "lexical_diversity": 0.7585253445708451,
+            "topic_basis_version": "ce-nmf5-d0e0325b7a612797"
+          },
+          "ce": 32.46950293190868
+        },
+        {
+          "id": "tampa-riverwalk",
+          "inputs": {
+            "cost_millions": 32.0,
+            "baseline_reviewed": 98.0,
+            "pre_reviews_per_business": 15.408163265306122,
+            "place_share": 0.1152317880794702,
+            "access_negative_share": 0.011920529801324504,
+            "publicrealm_negative_share": 0.00728476821192053,
+            "early_relative_trend": 0.10853200136874408,
+            "topic_1": 0.27383214940768474,
+            "topic_2": 0.23872547041659883,
+            "topic_3": 0.3191356022511025,
+            "topic_4": 0.11675018667930177,
+            "topic_5": 0.05155659124531198,
+            "topic_diversity": 0.9101012888514448,
+            "review_length_log": 4.465177702436327,
+            "lexical_diversity": 0.7503948093302956,
+            "topic_basis_version": "ce-nmf5-d0e0325b7a612797"
+          },
+          "ce": 26.21355416527996
+        },
+        {
+          "id": "schuylkill-boardwalk",
+          "inputs": {
+            "cost_millions": 18.0,
+            "baseline_reviewed": 81.0,
+            "pre_reviews_per_business": 18.666666666666668,
+            "place_share": 0.1349206349206349,
+            "access_negative_share": 0.007936507936507936,
+            "publicrealm_negative_share": 0.01455026455026455,
+            "early_relative_trend": -0.12396882352909616,
+            "topic_1": 0.3132574157092782,
+            "topic_2": 0.244655586190139,
+            "topic_3": 0.29583294109242403,
+            "topic_4": 0.07894611240188566,
+            "topic_5": 0.06730794460627328,
+            "topic_diversity": 0.9012114858684239,
+            "review_length_log": 4.472122803388577,
+            "lexical_diversity": 0.7578643594025345,
+            "topic_basis_version": "ce-nmf5-d0e0325b7a612797"
+          },
+          "ce": 35.03151488361913
+        },
+        {
+          "id": "the-rail-park",
+          "inputs": {
+            "cost_millions": 10.3,
+            "baseline_reviewed": 231.0,
+            "pre_reviews_per_business": 38.116883116883116,
+            "place_share": 0.04020442930153322,
+            "access_negative_share": 0.004202157864849517,
+            "publicrealm_negative_share": 0.0035207268597387846,
+            "early_relative_trend": 0.21265098154508738,
+            "topic_1": 0.41643198295419187,
+            "topic_2": 0.1835233391190604,
+            "topic_3": 0.29647784384041653,
+            "topic_4": 0.045419578192285474,
+            "topic_5": 0.058147255894045756,
+            "topic_diversity": 0.8339887696615821,
+            "review_length_log": 4.228442880045635,
+            "lexical_diversity": 0.773635593257121,
+            "topic_basis_version": "ce-nmf5-d0e0325b7a612797"
+          },
+          "ce": 75.72383890636831
+        },
+        {
+          "id": "crescent-park",
+          "inputs": {
+            "cost_millions": 31.2,
+            "baseline_reviewed": 28.0,
+            "pre_reviews_per_business": 21.642857142857142,
+            "place_share": 0.16501650165016502,
+            "access_negative_share": 0.0033003300330033004,
+            "publicrealm_negative_share": 0.028052805280528052,
+            "early_relative_trend": 0.3894394848907471,
+            "topic_1": 0.28989078401966023,
+            "topic_2": 0.13170205871285895,
+            "topic_3": 0.21560409094629565,
+            "topic_4": 0.14820475501290234,
+            "topic_5": 0.21459831130828289,
+            "topic_diversity": 0.975471157472539,
+            "review_length_log": 4.635075903916912,
+            "lexical_diversity": 0.7381168620622622,
+            "topic_basis_version": "ce-nmf5-d0e0325b7a612797"
+          },
+          "ce": 21.603500757428613
+        },
+        {
+          "id": "indianapolis-cultural-trail",
+          "inputs": {
+            "cost_millions": 63.0,
+            "baseline_reviewed": 176.0,
+            "pre_reviews_per_business": 12.494318181818182,
+            "place_share": 0.06366530241018645,
+            "access_negative_share": 0.009549795361527967,
+            "publicrealm_negative_share": 0.0036380172805820826,
+            "early_relative_trend": -0.37561945861564094,
+            "topic_1": 0.3083391098355903,
+            "topic_2": 0.24451589766841106,
+            "topic_3": 0.32349696778350323,
+            "topic_4": 0.0640906872465144,
+            "topic_5": 0.05955733746598098,
+            "topic_diversity": 0.8800256414260315,
+            "review_length_log": 4.4651956801232995,
+            "lexical_diversity": 0.7545361304590466,
+            "topic_basis_version": "ce-nmf5-d0e0325b7a612797"
+          },
+          "ce": 20.825282037289178
+        },
+        {
+          "id": "gateway-arch-park",
+          "inputs": {
+            "cost_millions": 380.0,
+            "baseline_reviewed": 34.0,
+            "pre_reviews_per_business": 21.058823529411764,
+            "place_share": 0.15363128491620112,
+            "access_negative_share": 0.027932960893854747,
+            "publicrealm_negative_share": 0.027932960893854747,
+            "early_relative_trend": 0.12319144044420133,
+            "topic_1": 0.18815007044529844,
+            "topic_2": 0.5405400623005157,
+            "topic_3": 0.19745197459197458,
+            "topic_4": 0.025035611511265394,
+            "topic_5": 0.04882228115094593,
+            "topic_diversity": 0.7498884529753815,
+            "review_length_log": 4.5863787807019625,
+            "lexical_diversity": 0.7285704109559132,
+            "topic_basis_version": "ce-nmf5-d0e0325b7a612797"
+          },
+          "ce": -0.23270146617945642
+        }
+      ]
+    },
+    "text": {
+      "feature_names": [
+        "pre_reviews_per_business",
+        "cost_millions",
+        "baseline_reviewed",
+        "place_share",
+        "access_negative_share",
+        "publicrealm_negative_share"
+      ],
+      "feature_means": [
+        2.978153208259357,
+        3.8033315789863615,
+        4.9252964055082025,
+        0.0974513110849944,
+        0.009324958412519204,
+        0.011764720765179338
+      ],
+      "feature_scales": [
+        0.287524209208501,
+        1.0974011952831406,
+        0.9595917646881237,
+        0.048182851374897986,
+        0.006766613692608125,
+        0.00905503744303196
+      ],
+      "coefficients": [
+        9.177644782890749,
+        -11.038500908105394,
+        10.218993083874992,
+        -4.401587599331891,
+        1.4904380492254337,
+        -1.3540061812680735
+      ],
+      "intercept": 33.42384612665627,
+      "alpha": 10.0,
+      "project_metrics": {
+        "n": 10,
+        "mae": 53.0957684051878,
+        "median_absolute_error": 42.03335533105425,
+        "max_absolute_error": 129.42045502540347,
+        "sign_accuracy": 0.5
+      },
+      "city_metrics": {
+        "n": 10,
+        "mae": 48.18929295065209,
+        "median_absolute_error": 35.8815476766897,
+        "max_absolute_error": 129.21550692388874,
+        "sign_accuracy": 0.5
+      },
+      "similarity_threshold": 1.7523311581253362,
+      "empirical_error_radius": 129.21550692388874,
+      "held_out": [
+        {
+          "id": "lafitte",
+          "project": "Lafitte",
+          "city": "New Orleans",
+          "observed_ce": 127.29480541478402,
+          "project_prediction": -2.125649610619444,
+          "city_prediction": -1.9207015091047168,
+          "project_absolute_error": 129.42045502540347,
+          "city_absolute_error": 129.21550692388874
+        },
+        {
+          "id": "sun-link",
+          "project": "Sun Link",
+          "city": "Tucson",
+          "observed_ce": -11.233294003911482,
+          "project_prediction": 34.48167273151331,
+          "city_prediction": 34.48167273151331,
+          "project_absolute_error": 45.71496673542479,
+          "city_absolute_error": 45.71496673542479
+        },
+        {
+          "id": "dilworth-park",
+          "project": "Dilworth Park",
+          "city": "Philadelphia",
+          "observed_ce": 60.0066621734512,
+          "project_prediction": 62.36513823229198,
+          "city_prediction": 62.76489760035368,
+          "project_absolute_error": 2.358476058840786,
+          "city_absolute_error": 2.7582354269024805
+        },
+        {
+          "id": "riverfront-ascend",
+          "project": "Riverfront / Ascend",
+          "city": "Nashville",
+          "observed_ce": 124.24117329243072,
+          "project_prediction": 20.78188731791737,
+          "city_prediction": 20.78188731791737,
+          "project_absolute_error": 103.45928597451335,
+          "city_absolute_error": 103.45928597451335
+        },
+        {
+          "id": "tampa-riverwalk",
+          "project": "Tampa Riverwalk",
+          "city": "Tampa",
+          "observed_ce": 5.417479797111412,
+          "project_prediction": 31.465608415066022,
+          "city_prediction": 31.465608415066022,
+          "project_absolute_error": 26.04812861795461,
+          "city_absolute_error": 26.04812861795461
+        },
+        {
+          "id": "schuylkill-boardwalk",
+          "project": "Schuylkill Boardwalk",
+          "city": "Philadelphia",
+          "observed_ce": -42.569325266350056,
+          "project_prediction": 47.598291510080095,
+          "city_prediction": 45.53110000338734,
+          "project_absolute_error": 90.16761677643015,
+          "city_absolute_error": 88.1004252697374
+        },
+        {
+          "id": "the-rail-park",
+          "project": "The Rail Park",
+          "city": "Philadelphia",
+          "observed_ce": 99.4240418778178,
+          "project_prediction": 73.74836588299128,
+          "city_prediction": 91.88587724319603,
+          "project_absolute_error": 25.67567599482652,
+          "city_absolute_error": 7.538164634621765
+        },
+        {
+          "id": "crescent-park",
+          "project": "Crescent Park",
+          "city": "New Orleans",
+          "observed_ce": -7.265071642951182,
+          "project_prediction": 31.08667228373253,
+          "city_prediction": 2.031809338725875,
+          "project_absolute_error": 38.35174392668371,
+          "city_absolute_error": 9.296880981677056
+        },
+        {
+          "id": "indianapolis-cultural-trail",
+          "project": "Indianapolis Cultural Trail",
+          "city": "Indianapolis",
+          "observed_ce": -20.25841032930585,
+          "project_prediction": 38.455974014625085,
+          "city_prediction": 38.455974014625085,
+          "project_absolute_error": 58.71438434393093,
+          "city_absolute_error": 58.71438434393093
+        },
+        {
+          "id": "gateway-arch-park",
+          "project": "Gateway Arch Park",
+          "city": "Saint Louis",
+          "observed_ce": -0.8196000465137313,
+          "project_prediction": -11.866550644383459,
+          "city_prediction": -11.866550644383459,
+          "project_absolute_error": 11.046950597869728,
+          "city_absolute_error": 11.046950597869728
+        }
+      ],
+      "parity_cases": [
+        {
+          "id": "lafitte",
+          "inputs": {
+            "cost_millions": 9.1,
+            "baseline_reviewed": 243.0,
+            "pre_reviews_per_business": 14.62551440329218,
+            "place_share": 0.14997186268992685,
+            "access_negative_share": 0.010410804727068092,
+            "publicrealm_negative_share": 0.015756893640967922,
+            "early_relative_trend": 0.05260070633607894,
+            "topic_1": 0.2416940136028548,
+            "topic_2": 0.22831661857921273,
+            "topic_3": 0.2234954876522128,
+            "topic_4": 0.04465067920940721,
+            "topic_5": 0.2618432009563125,
+            "topic_diversity": 0.9351202470937139,
+            "review_length_log": 4.503103296052413,
+            "lexical_diversity": 0.7462223706129978,
+            "topic_basis_version": "ce-nmf5-d0e0325b7a612797"
+          },
+          "ce": 42.03633531342107
+        },
+        {
+          "id": "sun-link",
+          "inputs": {
+            "cost_millions": 196.5,
+            "baseline_reviewed": 278.0,
+            "pre_reviews_per_business": 13.694244604316546,
+            "place_share": 0.050696086157079066,
+            "access_negative_share": 0.006566850538481744,
+            "publicrealm_negative_share": 0.005253480430785396,
+            "early_relative_trend": -0.2880538685586418,
+            "topic_1": 0.26716177341685177,
+            "topic_2": 0.2287901722281179,
+            "topic_3": 0.3380535300748676,
+            "topic_4": 0.10368177614488805,
+            "topic_5": 0.06231274813527475,
+            "topic_diversity": 0.9100440511297727,
+            "review_length_log": 4.547740856487008,
+            "lexical_diversity": 0.7445807818241837,
+            "topic_basis_version": "ce-nmf5-d0e0325b7a612797"
+          },
+          "ce": 21.388538425214293
+        },
+        {
+          "id": "dilworth-park",
+          "inputs": {
+            "cost_millions": 55.0,
+            "baseline_reviewed": 859.0,
+            "pre_reviews_per_business": 20.09313154831199,
+            "place_share": 0.047508690614136734,
+            "access_negative_share": 0.004055619930475087,
+            "publicrealm_negative_share": 0.004692931633835458,
+            "early_relative_trend": 0.03409278173674246,
+            "topic_1": 0.3145912015888254,
+            "topic_2": 0.27909080751216137,
+            "topic_3": 0.2893670853822672,
+            "topic_4": 0.06656020085366109,
+            "topic_5": 0.05039070466308495,
+            "topic_diversity": 0.8759278299274903,
+            "review_length_log": 4.553901060817128,
+            "lexical_diversity": 0.7466890370925804,
+            "topic_basis_version": "ce-nmf5-d0e0325b7a612797"
+          },
+          "ce": 57.415136454413144
+        },
+        {
+          "id": "riverfront-ascend",
+          "inputs": {
+            "cost_millions": 52.0,
+            "baseline_reviewed": 123.0,
+            "pre_reviews_per_business": 19.84552845528455,
+            "place_share": 0.05366653011061041,
+            "access_negative_share": 0.007374027038099139,
+            "publicrealm_negative_share": 0.006964358869315854,
+            "early_relative_trend": -0.10813781826005087,
+            "topic_1": 0.255591715223229,
+            "topic_2": 0.24449238033359244,
+            "topic_3": 0.3993740980821229,
+            "topic_4": 0.03156040340482043,
+            "topic_5": 0.06898140295623534,
+            "topic_diversity": 0.8407552611368055,
+            "review_length_log": 4.418326570599457,
+            "lexical_diversity": 0.7585253445708451,
+            "topic_basis_version": "ce-nmf5-d0e0325b7a612797"
+          },
+          "ce": 36.7968091447994
+        },
+        {
+          "id": "tampa-riverwalk",
+          "inputs": {
+            "cost_millions": 32.0,
+            "baseline_reviewed": 98.0,
+            "pre_reviews_per_business": 15.408163265306122,
+            "place_share": 0.1152317880794702,
+            "access_negative_share": 0.011920529801324504,
+            "publicrealm_negative_share": 0.00728476821192053,
+            "early_relative_trend": 0.10853200136874408,
+            "topic_1": 0.27383214940768474,
+            "topic_2": 0.23872547041659883,
+            "topic_3": 0.3191356022511025,
+            "topic_4": 0.11675018667930177,
+            "topic_5": 0.05155659124531198,
+            "topic_diversity": 0.9101012888514448,
+            "review_length_log": 4.465177702436327,
+            "lexical_diversity": 0.7503948093302956,
+            "topic_basis_version": "ce-nmf5-d0e0325b7a612797"
+          },
+          "ce": 26.85382052413354
+        },
+        {
+          "id": "schuylkill-boardwalk",
+          "inputs": {
+            "cost_millions": 18.0,
+            "baseline_reviewed": 81.0,
+            "pre_reviews_per_business": 18.666666666666668,
+            "place_share": 0.1349206349206349,
+            "access_negative_share": 0.007936507936507936,
+            "publicrealm_negative_share": 0.01455026455026455,
+            "early_relative_trend": -0.12396882352909616,
+            "topic_1": 0.3132574157092782,
+            "topic_2": 0.244655586190139,
+            "topic_3": 0.29583294109242403,
+            "topic_4": 0.07894611240188566,
+            "topic_5": 0.06730794460627328,
+            "topic_diversity": 0.9012114858684239,
+            "review_length_log": 4.472122803388577,
+            "lexical_diversity": 0.7578643594025345,
+            "topic_basis_version": "ce-nmf5-d0e0325b7a612797"
+          },
+          "ce": 32.420157337519925
+        },
+        {
+          "id": "the-rail-park",
+          "inputs": {
+            "cost_millions": 10.3,
+            "baseline_reviewed": 231.0,
+            "pre_reviews_per_business": 38.116883116883116,
+            "place_share": 0.04020442930153322,
+            "access_negative_share": 0.004202157864849517,
+            "publicrealm_negative_share": 0.0035207268597387846,
+            "early_relative_trend": 0.21265098154508738,
+            "topic_1": 0.41643198295419187,
+            "topic_2": 0.1835233391190604,
+            "topic_3": 0.29647784384041653,
+            "topic_4": 0.045419578192285474,
+            "topic_5": 0.058147255894045756,
+            "topic_diversity": 0.8339887696615821,
+            "review_length_log": 4.228442880045635,
+            "lexical_diversity": 0.773635593257121,
+            "topic_basis_version": "ce-nmf5-d0e0325b7a612797"
+          },
+          "ce": 80.15055126769737
+        },
+        {
+          "id": "crescent-park",
+          "inputs": {
+            "cost_millions": 31.2,
+            "baseline_reviewed": 28.0,
+            "pre_reviews_per_business": 21.642857142857142,
+            "place_share": 0.16501650165016502,
+            "access_negative_share": 0.0033003300330033004,
+            "publicrealm_negative_share": 0.028052805280528052,
+            "early_relative_trend": 0.3894394848907471,
+            "topic_1": 0.28989078401966023,
+            "topic_2": 0.13170205871285895,
+            "topic_3": 0.21560409094629565,
+            "topic_4": 0.14820475501290234,
+            "topic_5": 0.21459831130828289,
+            "topic_diversity": 0.975471157472539,
+            "review_length_log": 4.635075903916912,
+            "lexical_diversity": 0.7381168620622622,
+            "topic_basis_version": "ce-nmf5-d0e0325b7a612797"
+          },
+          "ce": 14.75328273473831
+        },
+        {
+          "id": "indianapolis-cultural-trail",
+          "inputs": {
+            "cost_millions": 63.0,
+            "baseline_reviewed": 176.0,
+            "pre_reviews_per_business": 12.494318181818182,
+            "place_share": 0.06366530241018645,
+            "access_negative_share": 0.009549795361527967,
+            "publicrealm_negative_share": 0.0036380172805820826,
+            "early_relative_trend": -0.37561945861564094,
+            "topic_1": 0.3083391098355903,
+            "topic_2": 0.24451589766841106,
+            "topic_3": 0.32349696778350323,
+            "topic_4": 0.0640906872465144,
+            "topic_5": 0.05955733746598098,
+            "topic_diversity": 0.8800256414260315,
+            "review_length_log": 4.4651956801232995,
+            "lexical_diversity": 0.7545361304590466,
+            "topic_basis_version": "ce-nmf5-d0e0325b7a612797"
+          },
+          "ce": 24.87191313268017
+        },
+        {
+          "id": "gateway-arch-park",
+          "inputs": {
+            "cost_millions": 380.0,
+            "baseline_reviewed": 34.0,
+            "pre_reviews_per_business": 21.058823529411764,
+            "place_share": 0.15363128491620112,
+            "access_negative_share": 0.027932960893854747,
+            "publicrealm_negative_share": 0.027932960893854747,
+            "early_relative_trend": 0.12319144044420133,
+            "topic_1": 0.18815007044529844,
+            "topic_2": 0.5405400623005157,
+            "topic_3": 0.19745197459197458,
+            "topic_4": 0.025035611511265394,
+            "topic_5": 0.04882228115094593,
+            "topic_diversity": 0.7498884529753815,
+            "review_length_log": 4.5863787807019625,
+            "lexical_diversity": 0.7285704109559132,
+            "topic_basis_version": "ce-nmf5-d0e0325b7a612797"
+          },
+          "ce": -2.448083068054437
+        }
+      ]
+    },
+    "trend": {
+      "feature_names": [
+        "pre_reviews_per_business",
+        "cost_millions",
+        "baseline_reviewed",
+        "early_relative_trend"
+      ],
+      "feature_means": [
+        2.978153208259357,
+        3.8033315789863615,
+        4.9252964055082025,
+        0.0024727427358171516
+      ],
+      "feature_scales": [
+        0.287524209208501,
+        1.0974011952831406,
+        0.9595917646881237,
+        0.21882274836009363
+      ],
+      "coefficients": [
+        7.933046634931032,
+        -9.686070617660206,
+        13.11603382662031,
+        5.274501331110767
+      ],
+      "intercept": 33.42384612665627,
+      "alpha": 10.0,
+      "project_metrics": {
+        "n": 10,
+        "mae": 51.51986575720516,
+        "median_absolute_error": 41.31271518394672,
+        "max_absolute_error": 107.71985136914671,
+        "sign_accuracy": 0.6
+      },
+      "city_metrics": {
+        "n": 10,
+        "mae": 46.25517387874852,
+        "median_absolute_error": 38.07120401095135,
+        "max_absolute_error": 107.71985136914671,
+        "sign_accuracy": 0.6
+      },
+      "similarity_threshold": 1.5224357682347687,
+      "empirical_error_radius": 107.71985136914671,
+      "held_out": [
+        {
+          "id": "lafitte",
+          "project": "Lafitte",
+          "city": "New Orleans",
+          "observed_ce": 127.29480541478402,
+          "project_prediction": 22.122137476644994,
+          "city_prediction": 29.29689906333168,
+          "project_absolute_error": 105.17266793813903,
+          "city_absolute_error": 97.99790635145234
+        },
+        {
+          "id": "sun-link",
+          "project": "Sun Link",
+          "city": "Tucson",
+          "observed_ce": -11.233294003911482,
+          "project_prediction": 24.24337580164174,
+          "city_prediction": 24.24337580164174,
+          "project_absolute_error": 35.47666980555322,
+          "city_absolute_error": 35.47666980555322
+        },
+        {
+          "id": "dilworth-park",
+          "project": "Dilworth Park",
+          "city": "Philadelphia",
+          "observed_ce": 60.0066621734512,
+          "project_prediction": 67.41729208924134,
+          "city_prediction": 62.61011578919297,
+          "project_absolute_error": 7.410629915790146,
+          "city_absolute_error": 2.6034536157417705
+        },
+        {
+          "id": "riverfront-ascend",
+          "project": "Riverfront / Ascend",
+          "city": "Nashville",
+          "observed_ce": 124.24117329243072,
+          "project_prediction": 16.521321923284003,
+          "city_prediction": 16.521321923284003,
+          "project_absolute_error": 107.71985136914671,
+          "city_absolute_error": 107.71985136914671
+        },
+        {
+          "id": "tampa-riverwalk",
+          "project": "Tampa Riverwalk",
+          "city": "Tampa",
+          "observed_ce": 5.417479797111412,
+          "project_prediction": 33.56025666300619,
+          "city_prediction": 33.56025666300619,
+          "project_absolute_error": 28.14277686589478,
+          "city_absolute_error": 28.14277686589478
+        },
+        {
+          "id": "schuylkill-boardwalk",
+          "project": "Schuylkill Boardwalk",
+          "city": "Philadelphia",
+          "observed_ce": -42.569325266350056,
+          "project_prediction": 47.802435009095916,
+          "city_prediction": 45.29727526805067,
+          "project_absolute_error": 90.37176027544598,
+          "city_absolute_error": 87.86660053440073
+        },
+        {
+          "id": "the-rail-park",
+          "project": "The Rail Park",
+          "city": "Philadelphia",
+          "observed_ce": 99.4240418778178,
+          "project_prediction": 66.0111113837538,
+          "city_prediction": 89.58289092526584,
+          "project_absolute_error": 33.412930494064,
+          "city_absolute_error": 9.841150952551956
+        },
+        {
+          "id": "crescent-park",
+          "project": "Crescent Park",
+          "city": "New Orleans",
+          "observed_ce": -7.265071642951182,
+          "project_prediction": 47.988708188672355,
+          "city_prediction": 33.40066657339829,
+          "project_absolute_error": 55.25377983162354,
+          "city_absolute_error": 40.665738216349474
+        },
+        {
+          "id": "indianapolis-cultural-trail",
+          "project": "Indianapolis Cultural Trail",
+          "city": "Indianapolis",
+          "observed_ce": -20.25841032930585,
+          "project_prediction": 26.890350233034383,
+          "city_prediction": 26.890350233034383,
+          "project_absolute_error": 47.14876056234023,
+          "city_absolute_error": 47.14876056234023
+        },
+        {
+          "id": "gateway-arch-park",
+          "project": "Gateway Arch Park",
+          "city": "Saint Louis",
+          "observed_ce": -0.8196000465137313,
+          "project_prediction": -5.908430560567737,
+          "city_prediction": -5.908430560567737,
+          "project_absolute_error": 5.088830514054006,
+          "city_absolute_error": 5.088830514054006
+        }
+      ],
+      "parity_cases": [
+        {
+          "id": "lafitte",
+          "inputs": {
+            "cost_millions": 9.1,
+            "baseline_reviewed": 243.0,
+            "pre_reviews_per_business": 14.62551440329218,
+            "place_share": 0.14997186268992685,
+            "access_negative_share": 0.010410804727068092,
+            "publicrealm_negative_share": 0.015756893640967922,
+            "early_relative_trend": 0.05260070633607894,
+            "topic_1": 0.2416940136028548,
+            "topic_2": 0.22831661857921273,
+            "topic_3": 0.2234954876522128,
+            "topic_4": 0.04465067920940721,
+            "topic_5": 0.2618432009563125,
+            "topic_diversity": 0.9351202470937139,
+            "review_length_log": 4.503103296052413,
+            "lexical_diversity": 0.7462223706129978,
+            "topic_basis_version": "ce-nmf5-d0e0325b7a612797"
+          },
+          "ce": 49.28183644444525
+        },
+        {
+          "id": "sun-link",
+          "inputs": {
+            "cost_millions": 196.5,
+            "baseline_reviewed": 278.0,
+            "pre_reviews_per_business": 13.694244604316546,
+            "place_share": 0.050696086157079066,
+            "access_negative_share": 0.006566850538481744,
+            "publicrealm_negative_share": 0.005253480430785396,
+            "early_relative_trend": -0.2880538685586418,
+            "topic_1": 0.26716177341685177,
+            "topic_2": 0.2287901722281179,
+            "topic_3": 0.3380535300748676,
+            "topic_4": 0.10368177614488805,
+            "topic_5": 0.06231274813527475,
+            "topic_diversity": 0.9100440511297727,
+            "review_length_log": 4.547740856487008,
+            "lexical_diversity": 0.7445807818241837,
+            "topic_basis_version": "ce-nmf5-d0e0325b7a612797"
+          },
+          "ce": 14.964822031170492
+        },
+        {
+          "id": "dilworth-park",
+          "inputs": {
+            "cost_millions": 55.0,
+            "baseline_reviewed": 859.0,
+            "pre_reviews_per_business": 20.09313154831199,
+            "place_share": 0.047508690614136734,
+            "access_negative_share": 0.004055619930475087,
+            "publicrealm_negative_share": 0.004692931633835458,
+            "early_relative_trend": 0.03409278173674246,
+            "topic_1": 0.3145912015888254,
+            "topic_2": 0.27909080751216137,
+            "topic_3": 0.2893670853822672,
+            "topic_4": 0.06656020085366109,
+            "topic_5": 0.05039070466308495,
+            "topic_diversity": 0.8759278299274903,
+            "review_length_log": 4.553901060817128,
+            "lexical_diversity": 0.7466890370925804,
+            "topic_basis_version": "ce-nmf5-d0e0325b7a612797"
+          },
+          "ce": 59.21509671649984
+        },
+        {
+          "id": "riverfront-ascend",
+          "inputs": {
+            "cost_millions": 52.0,
+            "baseline_reviewed": 123.0,
+            "pre_reviews_per_business": 19.84552845528455,
+            "place_share": 0.05366653011061041,
+            "access_negative_share": 0.007374027038099139,
+            "publicrealm_negative_share": 0.006964358869315854,
+            "early_relative_trend": -0.10813781826005087,
+            "topic_1": 0.255591715223229,
+            "topic_2": 0.24449238033359244,
+            "topic_3": 0.3993740980821229,
+            "topic_4": 0.03156040340482043,
+            "topic_5": 0.06898140295623534,
+            "topic_diversity": 0.8407552611368055,
+            "review_length_log": 4.418326570599457,
+            "lexical_diversity": 0.7585253445708451,
+            "topic_basis_version": "ce-nmf5-d0e0325b7a612797"
+          },
+          "ce": 29.476139806310968
+        },
+        {
+          "id": "tampa-riverwalk",
+          "inputs": {
+            "cost_millions": 32.0,
+            "baseline_reviewed": 98.0,
+            "pre_reviews_per_business": 15.408163265306122,
+            "place_share": 0.1152317880794702,
+            "access_negative_share": 0.011920529801324504,
+            "publicrealm_negative_share": 0.00728476821192053,
+            "early_relative_trend": 0.10853200136874408,
+            "topic_1": 0.27383214940768474,
+            "topic_2": 0.23872547041659883,
+            "topic_3": 0.3191356022511025,
+            "topic_4": 0.11675018667930177,
+            "topic_5": 0.05155659124531198,
+            "topic_diversity": 0.9101012888514448,
+            "review_length_log": 4.465177702436327,
+            "lexical_diversity": 0.7503948093302956,
+            "topic_basis_version": "ce-nmf5-d0e0325b7a612797"
+          },
+          "ce": 29.19878789135737
+        },
+        {
+          "id": "schuylkill-boardwalk",
+          "inputs": {
+            "cost_millions": 18.0,
+            "baseline_reviewed": 81.0,
+            "pre_reviews_per_business": 18.666666666666668,
+            "place_share": 0.1349206349206349,
+            "access_negative_share": 0.007936507936507936,
+            "publicrealm_negative_share": 0.01455026455026455,
+            "early_relative_trend": -0.12396882352909616,
+            "topic_1": 0.3132574157092782,
+            "topic_2": 0.244655586190139,
+            "topic_3": 0.29583294109242403,
+            "topic_4": 0.07894611240188566,
+            "topic_5": 0.06730794460627328,
+            "topic_diversity": 0.9012114858684239,
+            "review_length_log": 4.472122803388577,
+            "lexical_diversity": 0.7578643594025345,
+            "topic_basis_version": "ce-nmf5-d0e0325b7a612797"
+          },
+          "ce": 30.890210857946506
+        },
+        {
+          "id": "the-rail-park",
+          "inputs": {
+            "cost_millions": 10.3,
+            "baseline_reviewed": 231.0,
+            "pre_reviews_per_business": 38.116883116883116,
+            "place_share": 0.04020442930153322,
+            "access_negative_share": 0.004202157864849517,
+            "publicrealm_negative_share": 0.0035207268597387846,
+            "early_relative_trend": 0.21265098154508738,
+            "topic_1": 0.41643198295419187,
+            "topic_2": 0.1835233391190604,
+            "topic_3": 0.29647784384041653,
+            "topic_4": 0.045419578192285474,
+            "topic_5": 0.058147255894045756,
+            "topic_diversity": 0.8339887696615821,
+            "review_length_log": 4.228442880045635,
+            "lexical_diversity": 0.773635593257121,
+            "topic_basis_version": "ce-nmf5-d0e0325b7a612797"
+          },
+          "ce": 76.77821432230795
+        },
+        {
+          "id": "crescent-park",
+          "inputs": {
+            "cost_millions": 31.2,
+            "baseline_reviewed": 28.0,
+            "pre_reviews_per_business": 21.642857142857142,
+            "place_share": 0.16501650165016502,
+            "access_negative_share": 0.0033003300330033004,
+            "publicrealm_negative_share": 0.028052805280528052,
+            "early_relative_trend": 0.3894394848907471,
+            "topic_1": 0.28989078401966023,
+            "topic_2": 0.13170205871285895,
+            "topic_3": 0.21560409094629565,
+            "topic_4": 0.14820475501290234,
+            "topic_5": 0.21459831130828289,
+            "topic_diversity": 0.975471157472539,
+            "review_length_log": 4.635075903916912,
+            "lexical_diversity": 0.7381168620622622,
+            "topic_basis_version": "ce-nmf5-d0e0325b7a612797"
+          },
+          "ce": 28.29013304542199
+        },
+        {
+          "id": "indianapolis-cultural-trail",
+          "inputs": {
+            "cost_millions": 63.0,
+            "baseline_reviewed": 176.0,
+            "pre_reviews_per_business": 12.494318181818182,
+            "place_share": 0.06366530241018645,
+            "access_negative_share": 0.009549795361527967,
+            "publicrealm_negative_share": 0.0036380172805820826,
+            "early_relative_trend": -0.37561945861564094,
+            "topic_1": 0.3083391098355903,
+            "topic_2": 0.24451589766841106,
+            "topic_3": 0.32349696778350323,
+            "topic_4": 0.0640906872465144,
+            "topic_5": 0.05955733746598098,
+            "topic_diversity": 0.8800256414260315,
+            "review_length_log": 4.4651956801232995,
+            "lexical_diversity": 0.7545361304590466,
+            "topic_basis_version": "ce-nmf5-d0e0325b7a612797"
+          },
+          "ce": 14.229851657418202
+        },
+        {
+          "id": "gateway-arch-park",
+          "inputs": {
+            "cost_millions": 380.0,
+            "baseline_reviewed": 34.0,
+            "pre_reviews_per_business": 21.058823529411764,
+            "place_share": 0.15363128491620112,
+            "access_negative_share": 0.027932960893854747,
+            "publicrealm_negative_share": 0.027932960893854747,
+            "early_relative_trend": 0.12319144044420133,
+            "topic_1": 0.18815007044529844,
+            "topic_2": 0.5405400623005157,
+            "topic_3": 0.19745197459197458,
+            "topic_4": 0.025035611511265394,
+            "topic_5": 0.04882228115094593,
+            "topic_diversity": 0.7498884529753815,
+            "review_length_log": 4.5863787807019625,
+            "lexical_diversity": 0.7285704109559132,
+            "topic_basis_version": "ce-nmf5-d0e0325b7a612797"
+          },
+          "ce": 1.9133684936842243
+        }
+      ]
+    },
+    "advanced_text": {
+      "feature_names": [
+        "pre_reviews_per_business",
+        "cost_millions",
+        "baseline_reviewed",
+        "topic_1",
+        "topic_2",
+        "topic_3",
+        "topic_4",
+        "topic_5",
+        "topic_diversity",
+        "review_length_log",
+        "lexical_diversity"
+      ],
+      "feature_means": [
+        2.978153208259357,
+        3.8033315789863615,
+        4.9252964055082025,
+        0.2868940216203465,
+        0.2564352393060668,
+        0.2898289621697187,
+        0.07248999906569319,
+        0.09435177783817485,
+        0.8812534185543186,
+        4.4875465534568715,
+        0.7499135699567782
+      ],
+      "feature_scales": [
+        0.287524209208501,
+        1.0974011952831406,
+        0.9595917646881237,
+        0.05660771614819469,
+        0.10217403879739334,
+        0.05902677139294853,
+        0.03774519028145021,
+        0.07298800545321008,
+        0.059159710480245854,
+        0.10628496793845132,
+        0.01169985345441425
+      ],
+      "coefficients": [
+        8.22963355052633,
+        -7.268807128963371,
+        10.439902012487428,
+        -5.541008219977731,
+        -2.9703024222572862,
+        3.786857931958574,
+        -13.544896584380107,
+        12.397657824418909,
+        -3.042994400661138,
+        -6.526428653966353,
+        2.3020605466781587
+      ],
+      "intercept": 33.423846126656315,
+      "alpha": 10.0,
+      "project_metrics": {
+        "n": 10,
+        "mae": 53.04310281641905,
+        "median_absolute_error": 36.80382519444544,
+        "max_absolute_error": 121.56067798482582,
+        "sign_accuracy": 0.6
+      },
+      "city_metrics": {
+        "n": 10,
+        "mae": 46.670651532921795,
+        "median_absolute_error": 36.80382519444544,
+        "max_absolute_error": 117.03789477874048,
+        "sign_accuracy": 0.6
+      },
+      "similarity_threshold": 1.8193856181416088,
+      "empirical_error_radius": 117.03789477874048,
+      "held_out": [
+        {
+          "id": "lafitte",
+          "project": "Lafitte",
+          "city": "New Orleans",
+          "observed_ce": 127.29480541478402,
+          "project_prediction": 5.7341274299582,
+          "city_prediction": 10.256910636043536,
+          "project_absolute_error": 121.56067798482582,
+          "city_absolute_error": 117.03789477874048
+        },
+        {
+          "id": "sun-link",
+          "project": "Sun Link",
+          "city": "Tucson",
+          "observed_ce": -11.233294003911482,
+          "project_prediction": 24.03606395781119,
+          "city_prediction": 24.03606395781119,
+          "project_absolute_error": 35.269357961722676,
+          "city_absolute_error": 35.269357961722676
+        },
+        {
+          "id": "dilworth-park",
+          "project": "Dilworth Park",
+          "city": "Philadelphia",
+          "observed_ce": 60.0066621734512,
+          "project_prediction": 33.8733037163103,
+          "city_prediction": 29.68385348098789,
+          "project_absolute_error": 26.133358457140893,
+          "city_absolute_error": 30.32280869246331
+        },
+        {
+          "id": "riverfront-ascend",
+          "project": "Riverfront / Ascend",
+          "city": "Nashville",
+          "observed_ce": 124.24117329243072,
+          "project_prediction": 21.05499945226617,
+          "city_prediction": 21.05499945226617,
+          "project_absolute_error": 103.18617384016454,
+          "city_absolute_error": 103.18617384016454
+        },
+        {
+          "id": "tampa-riverwalk",
+          "project": "Tampa Riverwalk",
+          "city": "Tampa",
+          "observed_ce": 5.417479797111412,
+          "project_prediction": 11.833237113726142,
+          "city_prediction": 11.833237113726142,
+          "project_absolute_error": 6.41575731661473,
+          "city_absolute_error": 6.41575731661473
+        },
+        {
+          "id": "schuylkill-boardwalk",
+          "project": "Schuylkill Boardwalk",
+          "city": "Philadelphia",
+          "observed_ce": -42.569325266350056,
+          "project_prediction": 64.08725548095646,
+          "city_prediction": 37.80258618582751,
+          "project_absolute_error": 106.65658074730652,
+          "city_absolute_error": 80.37191145217756
+        },
+        {
+          "id": "the-rail-park",
+          "project": "The Rail Park",
+          "city": "Philadelphia",
+          "observed_ce": 99.4240418778178,
+          "project_prediction": 66.94695331214665,
+          "city_prediction": 98.40151100001732,
+          "project_absolute_error": 32.47708856567115,
+          "city_absolute_error": 1.0225308778004774
+        },
+        {
+          "id": "crescent-park",
+          "project": "Crescent Park",
+          "city": "New Orleans",
+          "observed_ce": -7.265071642951182,
+          "project_prediction": -1.2921268673925042,
+          "city_prediction": -6.944079748602551,
+          "project_absolute_error": 5.972944775558678,
+          "city_absolute_error": 0.32099189434863096
+        },
+        {
+          "id": "indianapolis-cultural-trail",
+          "project": "Indianapolis Cultural Trail",
+          "city": "Indianapolis",
+          "observed_ce": -20.25841032930585,
+          "project_prediction": 34.16238575871143,
+          "city_prediction": 34.16238575871143,
+          "project_absolute_error": 54.42079608801728,
+          "city_absolute_error": 54.42079608801728
+        },
+        {
+          "id": "gateway-arch-park",
+          "project": "Gateway Arch Park",
+          "city": "Saint Louis",
+          "observed_ce": -0.8196000465137313,
+          "project_prediction": 37.51869238065446,
+          "city_prediction": 37.51869238065446,
+          "project_absolute_error": 38.33829242716819,
+          "city_absolute_error": 38.33829242716819
+        }
+      ],
+      "parity_cases": [
+        {
+          "id": "lafitte",
+          "inputs": {
+            "cost_millions": 9.1,
+            "baseline_reviewed": 243.0,
+            "pre_reviews_per_business": 14.62551440329218,
+            "place_share": 0.14997186268992685,
+            "access_negative_share": 0.010410804727068092,
+            "publicrealm_negative_share": 0.015756893640967922,
+            "early_relative_trend": 0.05260070633607894,
+            "topic_1": 0.2416940136028548,
+            "topic_2": 0.22831661857921273,
+            "topic_3": 0.2234954876522128,
+            "topic_4": 0.04465067920940721,
+            "topic_5": 0.2618432009563125,
+            "topic_diversity": 0.9351202470937139,
+            "review_length_log": 4.503103296052413,
+            "lexical_diversity": 0.7462223706129978,
+            "topic_basis_version": "ce-nmf5-d0e0325b7a612797"
+          },
+          "ce": 77.93239656898415
+        },
+        {
+          "id": "sun-link",
+          "inputs": {
+            "cost_millions": 196.5,
+            "baseline_reviewed": 278.0,
+            "pre_reviews_per_business": 13.694244604316546,
+            "place_share": 0.050696086157079066,
+            "access_negative_share": 0.006566850538481744,
+            "publicrealm_negative_share": 0.005253480430785396,
+            "early_relative_trend": -0.2880538685586418,
+            "topic_1": 0.26716177341685177,
+            "topic_2": 0.2287901722281179,
+            "topic_3": 0.3380535300748676,
+            "topic_4": 0.10368177614488805,
+            "topic_5": 0.06231274813527475,
+            "topic_diversity": 0.9100440511297727,
+            "review_length_log": 4.547740856487008,
+            "lexical_diversity": 0.7445807818241837,
+            "topic_basis_version": "ce-nmf5-d0e0325b7a612797"
+          },
+          "ce": 5.931730587324083
+        },
+        {
+          "id": "dilworth-park",
+          "inputs": {
+            "cost_millions": 55.0,
+            "baseline_reviewed": 859.0,
+            "pre_reviews_per_business": 20.09313154831199,
+            "place_share": 0.047508690614136734,
+            "access_negative_share": 0.004055619930475087,
+            "publicrealm_negative_share": 0.004692931633835458,
+            "early_relative_trend": 0.03409278173674246,
+            "topic_1": 0.3145912015888254,
+            "topic_2": 0.27909080751216137,
+            "topic_3": 0.2893670853822672,
+            "topic_4": 0.06656020085366109,
+            "topic_5": 0.05039070466308495,
+            "topic_diversity": 0.8759278299274903,
+            "review_length_log": 4.553901060817128,
+            "lexical_diversity": 0.7466890370925804,
+            "topic_basis_version": "ce-nmf5-d0e0325b7a612797"
+          },
+          "ce": 40.733231613689334
+        },
+        {
+          "id": "riverfront-ascend",
+          "inputs": {
+            "cost_millions": 52.0,
+            "baseline_reviewed": 123.0,
+            "pre_reviews_per_business": 19.84552845528455,
+            "place_share": 0.05366653011061041,
+            "access_negative_share": 0.007374027038099139,
+            "publicrealm_negative_share": 0.006964358869315854,
+            "early_relative_trend": -0.10813781826005087,
+            "topic_1": 0.255591715223229,
+            "topic_2": 0.24449238033359244,
+            "topic_3": 0.3993740980821229,
+            "topic_4": 0.03156040340482043,
+            "topic_5": 0.06898140295623534,
+            "topic_diversity": 0.8407552611368055,
+            "review_length_log": 4.418326570599457,
+            "lexical_diversity": 0.7585253445708451,
+            "topic_basis_version": "ce-nmf5-d0e0325b7a612797"
+          },
+          "ce": 61.70907734134315
+        },
+        {
+          "id": "tampa-riverwalk",
+          "inputs": {
+            "cost_millions": 32.0,
+            "baseline_reviewed": 98.0,
+            "pre_reviews_per_business": 15.408163265306122,
+            "place_share": 0.1152317880794702,
+            "access_negative_share": 0.011920529801324504,
+            "publicrealm_negative_share": 0.00728476821192053,
+            "early_relative_trend": 0.10853200136874408,
+            "topic_1": 0.27383214940768474,
+            "topic_2": 0.23872547041659883,
+            "topic_3": 0.3191356022511025,
+            "topic_4": 0.11675018667930177,
+            "topic_5": 0.05155659124531198,
+            "topic_diversity": 0.9101012888514448,
+            "review_length_log": 4.465177702436327,
+            "lexical_diversity": 0.7503948093302956,
+            "topic_basis_version": "ce-nmf5-d0e0325b7a612797"
+          },
+          "ce": 7.207245067433345
+        },
+        {
+          "id": "schuylkill-boardwalk",
+          "inputs": {
+            "cost_millions": 18.0,
+            "baseline_reviewed": 81.0,
+            "pre_reviews_per_business": 18.666666666666668,
+            "place_share": 0.1349206349206349,
+            "access_negative_share": 0.007936507936507936,
+            "publicrealm_negative_share": 0.01455026455026455,
+            "early_relative_trend": -0.12396882352909616,
+            "topic_1": 0.3132574157092782,
+            "topic_2": 0.244655586190139,
+            "topic_3": 0.29583294109242403,
+            "topic_4": 0.07894611240188566,
+            "topic_5": 0.06730794460627328,
+            "topic_diversity": 0.9012114858684239,
+            "review_length_log": 4.472122803388577,
+            "lexical_diversity": 0.7578643594025345,
+            "topic_basis_version": "ce-nmf5-d0e0325b7a612797"
+          },
+          "ce": 26.21463750219158
+        },
+        {
+          "id": "the-rail-park",
+          "inputs": {
+            "cost_millions": 10.3,
+            "baseline_reviewed": 231.0,
+            "pre_reviews_per_business": 38.116883116883116,
+            "place_share": 0.04020442930153322,
+            "access_negative_share": 0.004202157864849517,
+            "publicrealm_negative_share": 0.0035207268597387846,
+            "early_relative_trend": 0.21265098154508738,
+            "topic_1": 0.41643198295419187,
+            "topic_2": 0.1835233391190604,
+            "topic_3": 0.29647784384041653,
+            "topic_4": 0.045419578192285474,
+            "topic_5": 0.058147255894045756,
+            "topic_diversity": 0.8339887696615821,
+            "review_length_log": 4.228442880045635,
+            "lexical_diversity": 0.773635593257121,
+            "topic_basis_version": "ce-nmf5-d0e0325b7a612797"
+          },
+          "ce": 84.37144754714504
+        },
+        {
+          "id": "crescent-park",
+          "inputs": {
+            "cost_millions": 31.2,
+            "baseline_reviewed": 28.0,
+            "pre_reviews_per_business": 21.642857142857142,
+            "place_share": 0.16501650165016502,
+            "access_negative_share": 0.0033003300330033004,
+            "publicrealm_negative_share": 0.028052805280528052,
+            "early_relative_trend": 0.3894394848907471,
+            "topic_1": 0.28989078401966023,
+            "topic_2": 0.13170205871285895,
+            "topic_3": 0.21560409094629565,
+            "topic_4": 0.14820475501290234,
+            "topic_5": 0.21459831130828289,
+            "topic_diversity": 0.975471157472539,
+            "review_length_log": 4.635075903916912,
+            "lexical_diversity": 0.7381168620622622,
+            "topic_basis_version": "ce-nmf5-d0e0325b7a612797"
+          },
+          "ce": -1.6769784239082242
+        },
+        {
+          "id": "indianapolis-cultural-trail",
+          "inputs": {
+            "cost_millions": 63.0,
+            "baseline_reviewed": 176.0,
+            "pre_reviews_per_business": 12.494318181818182,
+            "place_share": 0.06366530241018645,
+            "access_negative_share": 0.009549795361527967,
+            "publicrealm_negative_share": 0.0036380172805820826,
+            "early_relative_trend": -0.37561945861564094,
+            "topic_1": 0.3083391098355903,
+            "topic_2": 0.24451589766841106,
+            "topic_3": 0.32349696778350323,
+            "topic_4": 0.0640906872465144,
+            "topic_5": 0.05955733746598098,
+            "topic_diversity": 0.8800256414260315,
+            "review_length_log": 4.4651956801232995,
+            "lexical_diversity": 0.7545361304590466,
+            "topic_basis_version": "ce-nmf5-d0e0325b7a612797"
+          },
+          "ce": 22.89568114112852
+        },
+        {
+          "id": "gateway-arch-park",
+          "inputs": {
+            "cost_millions": 380.0,
+            "baseline_reviewed": 34.0,
+            "pre_reviews_per_business": 21.058823529411764,
+            "place_share": 0.15363128491620112,
+            "access_negative_share": 0.027932960893854747,
+            "publicrealm_negative_share": 0.027932960893854747,
+            "early_relative_trend": 0.12319144044420133,
+            "topic_1": 0.18815007044529844,
+            "topic_2": 0.5405400623005157,
+            "topic_3": 0.19745197459197458,
+            "topic_4": 0.025035611511265394,
+            "topic_5": 0.04882228115094593,
+            "topic_diversity": 0.7498884529753815,
+            "review_length_log": 4.5863787807019625,
+            "lexical_diversity": 0.7285704109559132,
+            "topic_basis_version": "ce-nmf5-d0e0325b7a612797"
+          },
+          "ce": 8.919992321231796
+        }
+      ]
+    }
+  },
+  "selection_policy": "Predefined ridge alpha=10 and baseline/text/trend feature sets. A challenger qualifies only if MAE improves on the current three-input model in both project and city holdouts; choose the lowest city MAE among qualifying challengers, else baseline. Advanced TF-IDF/NMF text is an additional exploratory challenger with fold-isolated preprocessing; it is not eligible for default promotion until reduced-case timing sensitivities are also evaluated. This exploratory model choice reuses validation data and is not independent confirmation.",
+  "advanced_text": {
+    "basis_version": "ce-nmf5-d0e0325b7a612797",
+    "representation_id": "ce-nmf5-d0e0325b7a612797",
+    "topics": [
+      {
+        "id": "topic_1",
+        "label": "chicken / ordered / good",
+        "terms": [
+          "chicken",
+          "ordered",
+          "good",
+          "food",
+          "like",
+          "salad",
+          "menu",
+          "cheese",
+          "delicious",
+          "sauce",
+          "try",
+          "restaurant"
+        ]
+      },
+      {
+        "id": "topic_2",
+        "label": "room / hotel / arch",
+        "terms": [
+          "room",
+          "hotel",
+          "arch",
+          "like",
+          "just",
+          "stay",
+          "time",
+          "don",
+          "people",
+          "view",
+          "parking",
+          "nice"
+        ]
+      },
+      {
+        "id": "topic_3",
+        "label": "great / food / good",
+        "terms": [
+          "great",
+          "food",
+          "good",
+          "place",
+          "bar",
+          "service",
+          "beer",
+          "friendly",
+          "atmosphere",
+          "drinks",
+          "love",
+          "nice"
+        ]
+      },
+      {
+        "id": "topic_4",
+        "label": "pizza / crust / slice",
+        "terms": [
+          "pizza",
+          "crust",
+          "slice",
+          "best",
+          "best pizza",
+          "pizza delicious",
+          "ny",
+          "garlic",
+          "cheese",
+          "place",
+          "delicious",
+          "love"
+        ]
+      },
+      {
+        "id": "topic_5",
+        "label": "tour / new / orleans",
+        "terms": [
+          "tour",
+          "new",
+          "orleans",
+          "new orleans",
+          "guide",
+          "bike",
+          "city",
+          "bob",
+          "history",
+          "recommend",
+          "quarter",
+          "great"
+        ]
+      }
+    ],
+    "method": "TF-IDF unigrams/bigrams (8,000 terms maximum) and five NMF topics; normalized per-review topic mixtures aggregated by project, normalized topic entropy, mean log token count and lexical diversity.",
+    "validation": "Vocabulary, IDF, NMF, scaling and ridge fitted inside every held-out fold. Every review with any held-out-project membership is excluded from both unsupervised fitting and training-project aggregation; city folds exclude all records with memberships in the held-out city.",
+    "topic_diversity_definition": "Normalized Shannon entropy of the project-aggregated topic mixture, not mean review entropy. Reviews with no basis vocabulary do not contribute topic mass.",
+    "lexical_diversity_caveat": "Mean per-review type/token ratio depends strongly on length; mean log review length enters the same challenger, but this does not make it a civic-quality measure.",
+    "sampling": {
+      "maximum_reviews_per_project": 500,
+      "selection": "lowest SHA256(review_id), near/pre only",
+      "seed": 42,
+      "unique_reviews": 5000,
+      "project_reviews": {
+        "lafitte": 500,
+        "sun-link": 500,
+        "dilworth-park": 500,
+        "riverfront-ascend": 500,
+        "tampa-riverwalk": 500,
+        "schuylkill-boardwalk": 500,
+        "the-rail-park": 500,
+        "crescent-park": 500,
+        "indianapolis-cultural-trail": 500,
+        "gateway-arch-park": 500
+      }
+    },
+    "corpus_metadata": {
+      "version": "tfidf-bigram-nmf5-v1",
+      "signature": "cf8e060adc83bf13789436e67ac7f04fcfc99d88d262afbb1d0f02c9fa70295c",
+      "sample_method": "Lowest SHA256 review-ID ranks independently within each nearby project/period; shared selected reviews deduplicated",
+      "max_reviews_per_project_period": 1200,
+      "source_reviews_scanned": 1063956,
+      "eligible_near_pre_post_unique_reviews": 136807,
+      "unique_selected_reviews": 23691,
+      "project_period_counts": {
+        "crescent-park|post": {
+          "available": 1473,
+          "selected": 1200
+        },
+        "crescent-park|pre": {
+          "available": 606,
+          "selected": 606
+        },
+        "dilworth-park|post": {
+          "available": 36648,
+          "selected": 1200
+        },
+        "dilworth-park|pre": {
+          "available": 17260,
+          "selected": 1200
+        },
+        "gateway-arch-park|post": {
+          "available": 735,
+          "selected": 735
+        },
+        "gateway-arch-park|pre": {
+          "available": 716,
+          "selected": 716
+        },
+        "indianapolis-cultural-trail|post": {
+          "available": 7331,
+          "selected": 1200
+        },
+        "indianapolis-cultural-trail|pre": {
+          "available": 2199,
+          "selected": 1200
+        },
+        "lafitte|post": {
+          "available": 8750,
+          "selected": 1200
+        },
+        "lafitte|pre": {
+          "available": 3554,
+          "selected": 1200
+        },
+        "riverfront-ascend|post": {
+          "available": 13276,
+          "selected": 1200
+        },
+        "riverfront-ascend|pre": {
+          "available": 2441,
+          "selected": 1200
+        },
+        "schuylkill-boardwalk|post": {
+          "available": 1750,
+          "selected": 1200
+        },
+        "schuylkill-boardwalk|pre": {
+          "available": 1512,
+          "selected": 1200
+        },
+        "sun-link|post": {
+          "available": 10943,
+          "selected": 1200
+        },
+        "sun-link|pre": {
+          "available": 3807,
+          "selected": 1200
+        },
+        "tampa-riverwalk|post": {
+          "available": 4633,
+          "selected": 1200
+        },
+        "tampa-riverwalk|pre": {
+          "available": 1510,
+          "selected": 1200
+        },
+        "the-rail-park|post": {
+          "available": 7922,
+          "selected": 1200
+        },
+        "the-rail-park|pre": {
+          "available": 8805,
+          "selected": 1200
+        },
+        "water-works-park|post": {
+          "available": 1198,
+          "selected": 1198
+        },
+        "water-works-park|pre": {
+          "available": 49,
+          "selected": 49
+        }
+      }
+    },
+    "fold_audit": [
+      {
+        "mode": "project",
+        "held_out_projects": [
+          "lafitte"
+        ],
+        "held_out_cities": [],
+        "training_unique_reviews": 4000,
+        "held_out_unique_reviews": 500,
+        "shared_review_overlap": 0,
+        "excluded_training_review_memberships": 500,
+        "training_projects_with_text_imputed": [
+          "crescent-park"
+        ],
+        "training_vocabulary_size": 8000,
+        "nmf_iterations": 319,
+        "training_review_id_sha256": "c0746791cbbb4846ee98ef5eac49ef9ae64b64f6ff4644286418aeaf0462f05a"
+      },
+      {
+        "mode": "project",
+        "held_out_projects": [
+          "sun-link"
+        ],
+        "held_out_cities": [],
+        "training_unique_reviews": 4500,
+        "held_out_unique_reviews": 500,
+        "shared_review_overlap": 0,
+        "excluded_training_review_memberships": 0,
+        "training_projects_with_text_imputed": [],
+        "training_vocabulary_size": 8000,
+        "nmf_iterations": 138,
+        "training_review_id_sha256": "6d3bedd0037a4414b3c6529ff9d7bcdd0714a4c3798f26f62c49cd2075d48d58"
+      },
+      {
+        "mode": "project",
+        "held_out_projects": [
+          "dilworth-park"
+        ],
+        "held_out_cities": [],
+        "training_unique_reviews": 4479,
+        "held_out_unique_reviews": 500,
+        "shared_review_overlap": 0,
+        "excluded_training_review_memberships": 21,
+        "training_projects_with_text_imputed": [],
+        "training_vocabulary_size": 8000,
+        "nmf_iterations": 112,
+        "training_review_id_sha256": "a91745db6654f2ed715b4df4321a49feefa75c9c4c8d44d5cbcbd9e58ead0ec3"
+      },
+      {
+        "mode": "project",
+        "held_out_projects": [
+          "riverfront-ascend"
+        ],
+        "held_out_cities": [],
+        "training_unique_reviews": 4500,
+        "held_out_unique_reviews": 500,
+        "shared_review_overlap": 0,
+        "excluded_training_review_memberships": 0,
+        "training_projects_with_text_imputed": [],
+        "training_vocabulary_size": 8000,
+        "nmf_iterations": 105,
+        "training_review_id_sha256": "786836ad100428f237d9aea6efa46baa73507ad6366c00105f1d16ff3cb864b0"
+      },
+      {
+        "mode": "project",
+        "held_out_projects": [
+          "tampa-riverwalk"
+        ],
+        "held_out_cities": [],
+        "training_unique_reviews": 4500,
+        "held_out_unique_reviews": 500,
+        "shared_review_overlap": 0,
+        "excluded_training_review_memberships": 0,
+        "training_projects_with_text_imputed": [],
+        "training_vocabulary_size": 8000,
+        "nmf_iterations": 123,
+        "training_review_id_sha256": "f6f6648c6b5fa799cb1e7caf1399295d161ca55ce8c2a8ed53e2616e4c3b43e3"
+      },
+      {
+        "mode": "project",
+        "held_out_projects": [
+          "schuylkill-boardwalk"
+        ],
+        "held_out_cities": [],
+        "training_unique_reviews": 3806,
+        "held_out_unique_reviews": 500,
+        "shared_review_overlap": 0,
+        "excluded_training_review_memberships": 694,
+        "training_projects_with_text_imputed": [
+          "the-rail-park"
+        ],
+        "training_vocabulary_size": 8000,
+        "nmf_iterations": 172,
+        "training_review_id_sha256": "d371a294699c6860d198558002e536fd285026169bc7997cad611b040fe515a5"
+      },
+      {
+        "mode": "project",
+        "held_out_projects": [
+          "the-rail-park"
+        ],
+        "held_out_cities": [],
+        "training_unique_reviews": 4500,
+        "held_out_unique_reviews": 500,
+        "shared_review_overlap": 0,
+        "excluded_training_review_memberships": 0,
+        "training_projects_with_text_imputed": [],
+        "training_vocabulary_size": 8000,
+        "nmf_iterations": 72,
+        "training_review_id_sha256": "dd3e40d9966f15547b47b3c4e8dd431d2ffc598dd27baf4f9262eee5696225ce"
+      },
+      {
+        "mode": "project",
+        "held_out_projects": [
+          "crescent-park"
+        ],
+        "held_out_cities": [],
+        "training_unique_reviews": 4281,
+        "held_out_unique_reviews": 500,
+        "shared_review_overlap": 0,
+        "excluded_training_review_memberships": 219,
+        "training_projects_with_text_imputed": [],
+        "training_vocabulary_size": 8000,
+        "nmf_iterations": 233,
+        "training_review_id_sha256": "caf91a3ce027fca8cafc91eab9abd90af982153f21fbfdc8570b72fa96e04e06"
+      },
+      {
+        "mode": "project",
+        "held_out_projects": [
+          "indianapolis-cultural-trail"
+        ],
+        "held_out_cities": [],
+        "training_unique_reviews": 4500,
+        "held_out_unique_reviews": 500,
+        "shared_review_overlap": 0,
+        "excluded_training_review_memberships": 0,
+        "training_projects_with_text_imputed": [],
+        "training_vocabulary_size": 8000,
+        "nmf_iterations": 111,
+        "training_review_id_sha256": "5fc93955e6ac8c0350f0c5563cc0bae54d9c8f73b2fc0d64a359f76fc1cbb570"
+      },
+      {
+        "mode": "project",
+        "held_out_projects": [
+          "gateway-arch-park"
+        ],
+        "held_out_cities": [],
+        "training_unique_reviews": 4500,
+        "held_out_unique_reviews": 500,
+        "shared_review_overlap": 0,
+        "excluded_training_review_memberships": 0,
+        "training_projects_with_text_imputed": [],
+        "training_vocabulary_size": 8000,
+        "nmf_iterations": 84,
+        "training_review_id_sha256": "77432cc0532ac2d589a327136c379c7c5d5091a7f031970da2b7632228195402"
+      },
+      {
+        "mode": "city",
+        "held_out_projects": [
+          "indianapolis-cultural-trail"
+        ],
+        "held_out_cities": [
+          "Indianapolis"
+        ],
+        "training_unique_reviews": 4500,
+        "held_out_unique_reviews": 500,
+        "shared_review_overlap": 0,
+        "excluded_training_review_memberships": 0,
+        "training_projects_with_text_imputed": [],
+        "training_vocabulary_size": 8000,
+        "nmf_iterations": 111,
+        "training_review_id_sha256": "5fc93955e6ac8c0350f0c5563cc0bae54d9c8f73b2fc0d64a359f76fc1cbb570"
+      },
+      {
+        "mode": "city",
+        "held_out_projects": [
+          "riverfront-ascend"
+        ],
+        "held_out_cities": [
+          "Nashville"
+        ],
+        "training_unique_reviews": 4500,
+        "held_out_unique_reviews": 500,
+        "shared_review_overlap": 0,
+        "excluded_training_review_memberships": 0,
+        "training_projects_with_text_imputed": [],
+        "training_vocabulary_size": 8000,
+        "nmf_iterations": 105,
+        "training_review_id_sha256": "786836ad100428f237d9aea6efa46baa73507ad6366c00105f1d16ff3cb864b0"
+      },
+      {
+        "mode": "city",
+        "held_out_projects": [
+          "crescent-park",
+          "lafitte"
+        ],
+        "held_out_cities": [
+          "New Orleans"
+        ],
+        "training_unique_reviews": 4000,
+        "held_out_unique_reviews": 1000,
+        "shared_review_overlap": 0,
+        "excluded_training_review_memberships": 0,
+        "training_projects_with_text_imputed": [],
+        "training_vocabulary_size": 8000,
+        "nmf_iterations": 319,
+        "training_review_id_sha256": "c0746791cbbb4846ee98ef5eac49ef9ae64b64f6ff4644286418aeaf0462f05a"
+      },
+      {
+        "mode": "city",
+        "held_out_projects": [
+          "dilworth-park",
+          "schuylkill-boardwalk",
+          "the-rail-park"
+        ],
+        "held_out_cities": [
+          "Philadelphia"
+        ],
+        "training_unique_reviews": 3500,
+        "held_out_unique_reviews": 1500,
+        "shared_review_overlap": 0,
+        "excluded_training_review_memberships": 0,
+        "training_projects_with_text_imputed": [],
+        "training_vocabulary_size": 8000,
+        "nmf_iterations": 85,
+        "training_review_id_sha256": "4ad3ef3381847aef38ae1e306b868426442e18434865aaf0051ffc5bcc05c047"
+      },
+      {
+        "mode": "city",
+        "held_out_projects": [
+          "gateway-arch-park"
+        ],
+        "held_out_cities": [
+          "Saint Louis"
+        ],
+        "training_unique_reviews": 4500,
+        "held_out_unique_reviews": 500,
+        "shared_review_overlap": 0,
+        "excluded_training_review_memberships": 0,
+        "training_projects_with_text_imputed": [],
+        "training_vocabulary_size": 8000,
+        "nmf_iterations": 84,
+        "training_review_id_sha256": "77432cc0532ac2d589a327136c379c7c5d5091a7f031970da2b7632228195402"
+      },
+      {
+        "mode": "city",
+        "held_out_projects": [
+          "tampa-riverwalk"
+        ],
+        "held_out_cities": [
+          "Tampa"
+        ],
+        "training_unique_reviews": 4500,
+        "held_out_unique_reviews": 500,
+        "shared_review_overlap": 0,
+        "excluded_training_review_memberships": 0,
+        "training_projects_with_text_imputed": [],
+        "training_vocabulary_size": 8000,
+        "nmf_iterations": 123,
+        "training_review_id_sha256": "f6f6648c6b5fa799cb1e7caf1399295d161ca55ce8c2a8ed53e2616e4c3b43e3"
+      },
+      {
+        "mode": "city",
+        "held_out_projects": [
+          "sun-link"
+        ],
+        "held_out_cities": [
+          "Tucson"
+        ],
+        "training_unique_reviews": 4500,
+        "held_out_unique_reviews": 500,
+        "shared_review_overlap": 0,
+        "excluded_training_review_memberships": 0,
+        "training_projects_with_text_imputed": [],
+        "training_vocabulary_size": 8000,
+        "nmf_iterations": 138,
+        "training_review_id_sha256": "6d3bedd0037a4414b3c6529ff9d7bcdd0714a4c3798f26f62c49cd2075d48d58"
+      }
+    ],
+    "input_contract": "Proposal topic values must be generated with this exact basis_version, not the descriptive topic basis. Global descriptive topics are never used for holdout evaluation.",
+    "empty_training_text": "Strict shared-review exclusions can remove all sampled text for a training project. Its advanced fields are then imputed from the means of other training projects inside that fold, retaining the same train/test project rows for every candidate.",
+    "interpretation": "Learned topics describe recurring review vocabulary, often food or service. They are not validated civic themes or causal project effects.",
+    "timing_sensitivity": "Not run: advanced text did not improve both primary held-out comparisons, so it was not considered for default promotion.",
+    "local_encoder_path": "data/interim/project_evidence/model_text_basis.joblib",
+    "imputation_summary": {
+      "folds_with_imputed_training_projects": 2,
+      "total_folds": 17,
+      "imputed_project_fold_memberships": 2,
+      "heldout_review_overlap_total": 0
+    },
+    "parameters": {
+      "ngram_range": [
+        1,
+        2
+      ],
+      "max_features": 8000,
+      "min_df": 2,
+      "max_df": 0.95,
+      "stop_words": "english",
+      "sublinear_tf": true,
+      "strip_accents": "unicode",
+      "nmf_components": 5,
+      "nmf_init": "nndsvda",
+      "nmf_max_iter": 500,
+      "random_state": 42
+    },
+    "promotion": {
+      "improves_both_primary_holdouts": false,
+      "eligible_for_default": false,
+      "reason": "Does not improve both primary holdouts; retain the better baseline"
+    }
+  },
+  "mean_baseline": {
+    "project_metrics": {
+      "n": 10,
+      "mae": 61.615844055968566,
+      "median_absolute_error": 54.63299810362771,
+      "max_absolute_error": 104.30106587569749,
+      "sign_accuracy": 0.5
+    },
+    "city_metrics": {
+      "n": 10,
+      "mae": 58.48466332883153,
+      "median_absolute_error": 54.63299810362771,
+      "max_absolute_error": 100.90814129530492,
+      "sign_accuracy": 0.5
+    },
+    "held_out": [
+      {
+        "id": "lafitte",
+        "project": "Lafitte",
+        "city": "New Orleans",
+        "observed_ce": 127.29480541478402,
+        "project_prediction": 22.993739539086537,
+        "city_prediction": 26.77609093684125,
+        "project_absolute_error": 104.30106587569749,
+        "city_absolute_error": 100.51871447794278
+      },
+      {
+        "id": "sun-link",
+        "project": "Sun Link",
+        "city": "Tucson",
+        "observed_ce": -11.233294003911482,
+        "project_prediction": 38.38575058560826,
+        "city_prediction": 38.38575058560826,
+        "project_absolute_error": 49.61904458951974,
+        "city_absolute_error": 49.61904458951974
+      },
+      {
+        "id": "dilworth-park",
+        "project": "Dilworth Park",
+        "city": "Philadelphia",
+        "observed_ce": 60.0066621734512,
+        "project_prediction": 30.47019989923463,
+        "city_prediction": 31.053868925949132,
+        "project_absolute_error": 29.536462274216568,
+        "city_absolute_error": 28.952793247502065
+      },
+      {
+        "id": "riverfront-ascend",
+        "project": "Riverfront / Ascend",
+        "city": "Nashville",
+        "observed_ce": 124.24117329243072,
+        "project_prediction": 23.333031997125794,
+        "city_prediction": 23.333031997125794,
+        "project_absolute_error": 100.90814129530492,
+        "city_absolute_error": 100.90814129530492
+      },
+      {
+        "id": "tampa-riverwalk",
+        "project": "Tampa Riverwalk",
+        "city": "Tampa",
+        "observed_ce": 5.417479797111412,
+        "project_prediction": 36.535664607716825,
+        "city_prediction": 36.535664607716825,
+        "project_absolute_error": 31.118184810605413,
+        "city_absolute_error": 31.118184810605413
+      },
+      {
+        "id": "schuylkill-boardwalk",
+        "project": "Schuylkill Boardwalk",
+        "city": "Philadelphia",
+        "observed_ce": -42.569325266350056,
+        "project_prediction": 41.86753183699032,
+        "city_prediction": 31.053868925949132,
+        "project_absolute_error": 84.43685710334037,
+        "city_absolute_error": 73.6231941922992
+      },
+      {
+        "id": "the-rail-park",
+        "project": "The Rail Park",
+        "city": "Philadelphia",
+        "observed_ce": 99.4240418778178,
+        "project_prediction": 26.090491043193893,
+        "city_prediction": 31.053868925949132,
+        "project_absolute_error": 73.3335508346239,
+        "city_absolute_error": 68.37017295186867
+      },
+      {
+        "id": "crescent-park",
+        "project": "Crescent Park",
+        "city": "New Orleans",
+        "observed_ce": -7.265071642951182,
+        "project_prediction": 37.944836989946,
+        "city_prediction": 26.77609093684125,
+        "project_absolute_error": 45.20990863289718,
+        "city_absolute_error": 34.041162579792434
+      },
+      {
+        "id": "indianapolis-cultural-trail",
+        "project": "Indianapolis Cultural Trail",
+        "city": "Indianapolis",
+        "observed_ce": -20.25841032930585,
+        "project_prediction": 39.38854128842985,
+        "city_prediction": 39.38854128842985,
+        "project_absolute_error": 59.646951617735695,
+        "city_absolute_error": 59.646951617735695
+      },
+      {
+        "id": "gateway-arch-park",
+        "project": "Gateway Arch Park",
+        "city": "Saint Louis",
+        "observed_ce": -0.8196000465137313,
+        "project_prediction": 37.22867347923073,
+        "city_prediction": 37.22867347923073,
+        "project_absolute_error": 38.04827352574446,
+        "city_absolute_error": 38.04827352574446
+      }
+    ]
+  },
+  "training_rows": [
+    {
+      "id": "lafitte",
+      "project": "Lafitte",
+      "city": "New Orleans",
+      "project_type": "Greenway / public space",
+      "geometry_quality": "mapped_footprint",
+      "cost_millions": 9.1,
+      "inputs": {
+        "cost_millions": 9.1,
+        "baseline_reviewed": 243.0,
+        "pre_reviews_per_business": 14.62551440329218,
+        "place_share": 0.14997186268992685,
+        "access_negative_share": 0.010410804727068092,
+        "publicrealm_negative_share": 0.015756893640967922,
+        "early_relative_trend": 0.05260070633607894,
+        "topic_1": 0.2416940136028548,
+        "topic_2": 0.22831661857921273,
+        "topic_3": 0.2234954876522128,
+        "topic_4": 0.04465067920940721,
+        "topic_5": 0.2618432009563125,
+        "topic_diversity": 0.9351202470937139,
+        "review_length_log": 4.503103296052413,
+        "lexical_diversity": 0.7462223706129978,
+        "topic_basis_version": "ce-nmf5-d0e0325b7a612797"
+      },
+      "observed_ce": 127.29480541478402
+    },
+    {
+      "id": "sun-link",
+      "project": "Sun Link",
+      "city": "Tucson",
+      "project_type": "Streetcar / transit",
+      "geometry_quality": "mapped_footprint",
+      "cost_millions": 196.5,
+      "inputs": {
+        "cost_millions": 196.5,
+        "baseline_reviewed": 278.0,
+        "pre_reviews_per_business": 13.694244604316546,
+        "place_share": 0.050696086157079066,
+        "access_negative_share": 0.006566850538481744,
+        "publicrealm_negative_share": 0.005253480430785396,
+        "early_relative_trend": -0.2880538685586418,
+        "topic_1": 0.26716177341685177,
+        "topic_2": 0.2287901722281179,
+        "topic_3": 0.3380535300748676,
+        "topic_4": 0.10368177614488805,
+        "topic_5": 0.06231274813527475,
+        "topic_diversity": 0.9100440511297727,
+        "review_length_log": 4.547740856487008,
+        "lexical_diversity": 0.7445807818241837,
+        "topic_basis_version": "ce-nmf5-d0e0325b7a612797"
+      },
+      "observed_ce": -11.233294003911482
+    },
+    {
+      "id": "dilworth-park",
+      "project": "Dilworth Park",
+      "city": "Philadelphia",
+      "project_type": "Civic plaza / transit access",
+      "geometry_quality": "mapped_footprint",
+      "cost_millions": 55.0,
+      "inputs": {
+        "cost_millions": 55.0,
+        "baseline_reviewed": 859.0,
+        "pre_reviews_per_business": 20.09313154831199,
+        "place_share": 0.047508690614136734,
+        "access_negative_share": 0.004055619930475087,
+        "publicrealm_negative_share": 0.004692931633835458,
+        "early_relative_trend": 0.03409278173674246,
+        "topic_1": 0.3145912015888254,
+        "topic_2": 0.27909080751216137,
+        "topic_3": 0.2893670853822672,
+        "topic_4": 0.06656020085366109,
+        "topic_5": 0.05039070466308495,
+        "topic_diversity": 0.8759278299274903,
+        "review_length_log": 4.553901060817128,
+        "lexical_diversity": 0.7466890370925804,
+        "topic_basis_version": "ce-nmf5-d0e0325b7a612797"
+      },
+      "observed_ce": 60.0066621734512
+    },
+    {
+      "id": "riverfront-ascend",
+      "project": "Riverfront / Ascend",
+      "city": "Nashville",
+      "project_type": "Riverfront park / performance venue",
+      "geometry_quality": "mapped_footprint",
+      "cost_millions": 52.0,
+      "inputs": {
+        "cost_millions": 52.0,
+        "baseline_reviewed": 123.0,
+        "pre_reviews_per_business": 19.84552845528455,
+        "place_share": 0.05366653011061041,
+        "access_negative_share": 0.007374027038099139,
+        "publicrealm_negative_share": 0.006964358869315854,
+        "early_relative_trend": -0.10813781826005087,
+        "topic_1": 0.255591715223229,
+        "topic_2": 0.24449238033359244,
+        "topic_3": 0.3993740980821229,
+        "topic_4": 0.03156040340482043,
+        "topic_5": 0.06898140295623534,
+        "topic_diversity": 0.8407552611368055,
+        "review_length_log": 4.418326570599457,
+        "lexical_diversity": 0.7585253445708451,
+        "topic_basis_version": "ce-nmf5-d0e0325b7a612797"
+      },
+      "observed_ce": 124.24117329243072
+    },
+    {
+      "id": "tampa-riverwalk",
+      "project": "Tampa Riverwalk",
+      "city": "Tampa",
+      "project_type": "Waterfront trail / linear promenade",
+      "geometry_quality": "center_proxy",
+      "cost_millions": 32.0,
+      "inputs": {
+        "cost_millions": 32.0,
+        "baseline_reviewed": 98.0,
+        "pre_reviews_per_business": 15.408163265306122,
+        "place_share": 0.1152317880794702,
+        "access_negative_share": 0.011920529801324504,
+        "publicrealm_negative_share": 0.00728476821192053,
+        "early_relative_trend": 0.10853200136874408,
+        "topic_1": 0.27383214940768474,
+        "topic_2": 0.23872547041659883,
+        "topic_3": 0.3191356022511025,
+        "topic_4": 0.11675018667930177,
+        "topic_5": 0.05155659124531198,
+        "topic_diversity": 0.9101012888514448,
+        "review_length_log": 4.465177702436327,
+        "lexical_diversity": 0.7503948093302956,
+        "topic_basis_version": "ce-nmf5-d0e0325b7a612797"
+      },
+      "observed_ce": 5.417479797111412
+    },
+    {
+      "id": "schuylkill-boardwalk",
+      "project": "Schuylkill Boardwalk",
+      "city": "Philadelphia",
+      "project_type": "Over-water boardwalk / linear trail",
+      "geometry_quality": "center_proxy",
+      "cost_millions": 18.0,
+      "inputs": {
+        "cost_millions": 18.0,
+        "baseline_reviewed": 81.0,
+        "pre_reviews_per_business": 18.666666666666668,
+        "place_share": 0.1349206349206349,
+        "access_negative_share": 0.007936507936507936,
+        "publicrealm_negative_share": 0.01455026455026455,
+        "early_relative_trend": -0.12396882352909616,
+        "topic_1": 0.3132574157092782,
+        "topic_2": 0.244655586190139,
+        "topic_3": 0.29583294109242403,
+        "topic_4": 0.07894611240188566,
+        "topic_5": 0.06730794460627328,
+        "topic_diversity": 0.9012114858684239,
+        "review_length_log": 4.472122803388577,
+        "lexical_diversity": 0.7578643594025345,
+        "topic_basis_version": "ce-nmf5-d0e0325b7a612797"
+      },
+      "observed_ce": -42.569325266350056
+    },
+    {
+      "id": "the-rail-park",
+      "project": "The Rail Park",
+      "city": "Philadelphia",
+      "project_type": "Elevated viaduct linear greenway",
+      "geometry_quality": "mapped_footprint",
+      "cost_millions": 10.3,
+      "inputs": {
+        "cost_millions": 10.3,
+        "baseline_reviewed": 231.0,
+        "pre_reviews_per_business": 38.116883116883116,
+        "place_share": 0.04020442930153322,
+        "access_negative_share": 0.004202157864849517,
+        "publicrealm_negative_share": 0.0035207268597387846,
+        "early_relative_trend": 0.21265098154508738,
+        "topic_1": 0.41643198295419187,
+        "topic_2": 0.1835233391190604,
+        "topic_3": 0.29647784384041653,
+        "topic_4": 0.045419578192285474,
+        "topic_5": 0.058147255894045756,
+        "topic_diversity": 0.8339887696615821,
+        "review_length_log": 4.228442880045635,
+        "lexical_diversity": 0.773635593257121,
+        "topic_basis_version": "ce-nmf5-d0e0325b7a612797"
+      },
+      "observed_ce": 99.4240418778178
+    },
+    {
+      "id": "crescent-park",
+      "project": "Crescent Park",
+      "city": "New Orleans",
+      "project_type": "Linear riverfront park",
+      "geometry_quality": "center_proxy",
+      "cost_millions": 31.2,
+      "inputs": {
+        "cost_millions": 31.2,
+        "baseline_reviewed": 28.0,
+        "pre_reviews_per_business": 21.642857142857142,
+        "place_share": 0.16501650165016502,
+        "access_negative_share": 0.0033003300330033004,
+        "publicrealm_negative_share": 0.028052805280528052,
+        "early_relative_trend": 0.3894394848907471,
+        "topic_1": 0.28989078401966023,
+        "topic_2": 0.13170205871285895,
+        "topic_3": 0.21560409094629565,
+        "topic_4": 0.14820475501290234,
+        "topic_5": 0.21459831130828289,
+        "topic_diversity": 0.975471157472539,
+        "review_length_log": 4.635075903916912,
+        "lexical_diversity": 0.7381168620622622,
+        "topic_basis_version": "ce-nmf5-d0e0325b7a612797"
+      },
+      "observed_ce": -7.265071642951182
+    },
+    {
+      "id": "indianapolis-cultural-trail",
+      "project": "Indianapolis Cultural Trail",
+      "city": "Indianapolis",
+      "project_type": "Urban trail",
+      "geometry_quality": "center_proxy",
+      "cost_millions": 63.0,
+      "inputs": {
+        "cost_millions": 63.0,
+        "baseline_reviewed": 176.0,
+        "pre_reviews_per_business": 12.494318181818182,
+        "place_share": 0.06366530241018645,
+        "access_negative_share": 0.009549795361527967,
+        "publicrealm_negative_share": 0.0036380172805820826,
+        "early_relative_trend": -0.37561945861564094,
+        "topic_1": 0.3083391098355903,
+        "topic_2": 0.24451589766841106,
+        "topic_3": 0.32349696778350323,
+        "topic_4": 0.0640906872465144,
+        "topic_5": 0.05955733746598098,
+        "topic_diversity": 0.8800256414260315,
+        "review_length_log": 4.4651956801232995,
+        "lexical_diversity": 0.7545361304590466,
+        "topic_basis_version": "ce-nmf5-d0e0325b7a612797"
+      },
+      "observed_ce": -20.25841032930585
+    },
+    {
+      "id": "gateway-arch-park",
+      "project": "Gateway Arch Park",
+      "city": "Saint Louis",
+      "project_type": "Civic park",
+      "geometry_quality": "center_proxy",
+      "cost_millions": 380.0,
+      "inputs": {
+        "cost_millions": 380.0,
+        "baseline_reviewed": 34.0,
+        "pre_reviews_per_business": 21.058823529411764,
+        "place_share": 0.15363128491620112,
+        "access_negative_share": 0.027932960893854747,
+        "publicrealm_negative_share": 0.027932960893854747,
+        "early_relative_trend": 0.12319144044420133,
+        "topic_1": 0.18815007044529844,
+        "topic_2": 0.5405400623005157,
+        "topic_3": 0.19745197459197458,
+        "topic_4": 0.025035611511265394,
+        "topic_5": 0.04882228115094593,
+        "topic_diversity": 0.7498884529753815,
+        "review_length_log": 4.5863787807019625,
+        "lexical_diversity": 0.7285704109559132,
+        "topic_basis_version": "ce-nmf5-d0e0325b7a612797"
+      },
+      "observed_ce": -0.8196000465137313
+    }
+  ],
+  "excluded_projects": [
+    {
+      "id": "water-works-park",
+      "project": "Water Works Park",
+      "reason": "Insufficient baseline support: at least 20 nearby reviewed businesses and positive near/comparison baseline counts required"
+    }
+  ],
+  "sensitivities": {
+    "exclude_pandemic_post_windows": {
+      "excluded": [
+        "The Rail Park",
+        "Gateway Arch Park"
+      ],
+      "n_projects": 8,
+      "n_cities": 6,
+      "candidates": {
+        "baseline": {
+          "project_metrics": {
+            "n": 8,
+            "mae": 60.51894394042648,
+            "median_absolute_error": 44.59327251645683,
+            "max_absolute_error": 125.96936296293401,
+            "sign_accuracy": 0.5
+          },
+          "city_metrics": {
+            "n": 8,
+            "mae": 60.29378651117161,
+            "median_absolute_error": 43.846200682425376,
+            "max_absolute_error": 123.7220291981989,
+            "sign_accuracy": 0.5
+          }
+        },
+        "text": {
+          "project_metrics": {
+            "n": 8,
+            "mae": 67.01237382370792,
+            "median_absolute_error": 53.01991634708838,
+            "max_absolute_error": 142.16766268173114,
+            "sign_accuracy": 0.375
+          },
+          "city_metrics": {
+            "n": 8,
+            "mae": 62.57155459854489,
+            "median_absolute_error": 46.692078216389746,
+            "max_absolute_error": 152.99281539346129,
+            "sign_accuracy": 0.5
+          }
+        },
+        "trend": {
+          "project_metrics": {
+            "n": 8,
+            "mae": 64.71219745438952,
+            "median_absolute_error": 57.16790355562414,
+            "max_absolute_error": 125.50341197040214,
+            "sign_accuracy": 0.5
+          },
+          "city_metrics": {
+            "n": 8,
+            "mae": 62.340814868289925,
+            "median_absolute_error": 50.20140481239214,
+            "max_absolute_error": 120.48299608291134,
+            "sign_accuracy": 0.5
+          }
+        }
+      },
+      "mean_baseline": {
+        "project_metrics": {
+          "n": 8,
+          "mae": 63.765681026412544,
+          "median_absolute_error": 51.65726239544688,
+          "max_absolute_error": 111.81777484043049,
+          "sign_accuracy": 0.5
+        },
+        "city_metrics": {
+          "n": 8,
+          "mae": 59.53111201752796,
+          "median_absolute_error": 51.65726239544688,
+          "max_absolute_error": 108.327909557741,
+          "sign_accuracy": 0.5
+        }
+      },
+      "status": "exploratory_sensitivity_not_model_selection"
+    },
+    "exclude_pandemic_and_construction_overlap": {
+      "excluded": [
+        "The Rail Park",
+        "Indianapolis Cultural Trail",
+        "Gateway Arch Park"
+      ],
+      "n_projects": 7,
+      "n_cities": 5,
+      "candidates": {
+        "baseline": {
+          "project_metrics": {
+            "n": 7,
+            "mae": 69.3631986977279,
+            "median_absolute_error": 75.95464536787061,
+            "max_absolute_error": 122.67318039751746,
+            "sign_accuracy": 0.5714285714285714
+          },
+          "city_metrics": {
+            "n": 7,
+            "mae": 70.20808582653746,
+            "median_absolute_error": 75.95464536787061,
+            "max_absolute_error": 120.70408374238339,
+            "sign_accuracy": 0.5714285714285714
+          }
+        },
+        "text": {
+          "project_metrics": {
+            "n": 7,
+            "mae": 74.40142842476851,
+            "median_absolute_error": 78.69345604545799,
+            "max_absolute_error": 137.89050194329744,
+            "sign_accuracy": 0.42857142857142855
+          },
+          "city_metrics": {
+            "n": 7,
+            "mae": 74.3206659905612,
+            "median_absolute_error": 78.69345604545799,
+            "max_absolute_error": 151.11258709642502,
+            "sign_accuracy": 0.5714285714285714
+          }
+        },
+        "trend": {
+          "project_metrics": {
+            "n": 7,
+            "mae": 75.65555100451299,
+            "median_absolute_error": 83.37540463105184,
+            "max_absolute_error": 123.05154357362845,
+            "sign_accuracy": 0.5714285714285714
+          },
+          "city_metrics": {
+            "n": 7,
+            "mae": 73.70557887424278,
+            "median_absolute_error": 83.37540463105184,
+            "max_absolute_error": 118.5462471860638,
+            "sign_accuracy": 0.5714285714285714
+          }
+        }
+      },
+      "mean_baseline": {
+        "project_metrics": {
+          "n": 7,
+          "mae": 67.29148556528419,
+          "median_absolute_error": 55.75424796532417,
+          "max_absolute_error": 105.86186802315392,
+          "sign_accuracy": 0.5714285714285714
+        },
+        "city_metrics": {
+          "n": 7,
+          "mae": 61.64539355343807,
+          "median_absolute_error": 55.75424796532417,
+          "max_absolute_error": 102.29929721374172,
+          "sign_accuracy": 0.5714285714285714
+        }
+      },
+      "status": "exploratory_sensitivity_not_model_selection"
+    }
+  },
+  "n_projects": 10,
+  "n_cities": 7,
+  "validation": {
+    "project": "Leave one entire project out",
+    "city": "Leave all projects in the same city out",
+    "scaling": "Fit only on training fold",
+    "hyperparameter_search": false
+  },
+  "uncertainty": "The displayed empirical error range uses the maximum absolute city-holdout error, symmetrically around the estimate. It is a historical error envelope, not a confidence or prediction interval and has no guaranteed coverage.",
+  "conditions": [
+    "Review activity measures online participation, not revenue, public benefit, or causal investment returns.",
+    "Project type filters comparable evidence only; it does not change the fitted prediction.",
+    "Costs remain nominal reported amounts with mixed historical scope and dollar years; present-day budget comparisons are provisional until costs are reconciled.",
+    "The archive describes historic conditions. A new proposal requires measured catchment inputs or explicitly declared assumptions.",
+    "Text signals are transparent clause-level rule measurements, not validated resident sentiment.",
+    "Some baseline years overlap construction; baseline means before opening, not always before intervention. Pandemic-window and construction-overlap exclusions are reported as sensitivities.",
+    "Shared cities and catchments reduce independence; city holdouts are a stronger stress test, not proof of transferability."
+  ],
+  "provenance": {
+    "evidence_version": "project-evidence-v1",
+    "evidence_method": {
+      "outcome": "Near post minus near pre multiplied by comparison post/pre, divided by reported project cost in $M",
+      "near_distance_m": 500,
+      "comparison_distance_m": [
+        1500,
+        8000
+      ],
+      "minimum_baseline_businesses": 20,
+      "sentiment": "Whole-review VADER plus provisional clause-level target-aware keyword rules",
+      "text_rule_version": "place-clause-rules-v1",
+      "polarity_unit": "negative fraction of reviews with nonempty text; topic negative counts require an area target",
+      "business_balanced": "Equal mean of each reviewed business text rate; business_reporting_share counts businesses with at least one mention. Excludes missing text.",
+      "feature_timing": "Only predefined baseline years enter prediction features; construction timing may overlap",
+      "identity": "Reviews scored once by review ID; shared project memberships aggregated separately"
+    },
+    "input_period": "Only early and pre periods",
+    "radius_m": 500,
+    "text_denominator": "All near-area baseline reviews; each review counts at most once per share. A negative topic clause counts only when its target is the area.",
+    "text_candidates": [
+      "place_share",
+      "access_negative_share",
+      "publicrealm_negative_share"
+    ],
+    "target_source": "project_evidence.projects[].primary.ce_reviews_per_million",
+    "evidence_sha256": "521b46eb76e626abee59417bbbcda1b81e10217dbafc76bbf2879b3b42cd8494"
+  }
+}

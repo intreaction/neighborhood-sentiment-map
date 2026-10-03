@@ -1,0 +1,870 @@
+{
+  "version": "tfidf-bigram-nmf5-v1",
+  "method": {
+    "representation": "TF-IDF unigrams and bigrams; English stop words; sublinear term frequency",
+    "decomposition": "Nonnegative matrix factorization, five topics, random_state42",
+    "vocabulary_max_features": 8000,
+    "minimum_document_frequency": 2,
+    "maximum_document_frequency": 0.95,
+    "fit_scope": "Unique sampled nearby baseline reviews only, across all projects; descriptive basis, not predictive validation",
+    "post_scope": "Post reviews transformed with the frozen baseline vocabulary and topic basis",
+    "topic_distribution": "Mean normalized review-topic weights; unmapped reviews excluded and counted",
+    "topic_entropy": "Shannon entropy of mean topic mixture divided by log(5); 0 concentrated to1 diffuse",
+    "lexical_diversity": "Mean per-review unique-word / word ratio; affected by review length",
+    "negation": "Lexical negation words per100 words; not sentiment",
+    "language_note": "English-centric stop words and lexical tokenization; language detection not performed.",
+    "selection_note": "Topics are unsupervised patterns, not validated civic-issue labels. Top terms are shown without invented names.",
+    "predictive_validation": "Any predictive challenger must refit TF-IDF and NMF inside each fold and exclude held-out/shared review IDs; never use these descriptive full-sample topic features as held-out evidence."
+  },
+  "coverage": {
+    "version": "tfidf-bigram-nmf5-v1",
+    "signature": "cf8e060adc83bf13789436e67ac7f04fcfc99d88d262afbb1d0f02c9fa70295c",
+    "sample_method": "Lowest SHA256 review-ID ranks independently within each nearby project/period; shared selected reviews deduplicated",
+    "max_reviews_per_project_period": 1200,
+    "source_reviews_scanned": 1063956,
+    "eligible_near_pre_post_unique_reviews": 136807,
+    "unique_selected_reviews": 23691,
+    "project_period_counts": {
+      "crescent-park|post": {
+        "available": 1473,
+        "selected": 1200
+      },
+      "crescent-park|pre": {
+        "available": 606,
+        "selected": 606
+      },
+      "dilworth-park|post": {
+        "available": 36648,
+        "selected": 1200
+      },
+      "dilworth-park|pre": {
+        "available": 17260,
+        "selected": 1200
+      },
+      "gateway-arch-park|post": {
+        "available": 735,
+        "selected": 735
+      },
+      "gateway-arch-park|pre": {
+        "available": 716,
+        "selected": 716
+      },
+      "indianapolis-cultural-trail|post": {
+        "available": 7331,
+        "selected": 1200
+      },
+      "indianapolis-cultural-trail|pre": {
+        "available": 2199,
+        "selected": 1200
+      },
+      "lafitte|post": {
+        "available": 8750,
+        "selected": 1200
+      },
+      "lafitte|pre": {
+        "available": 3554,
+        "selected": 1200
+      },
+      "riverfront-ascend|post": {
+        "available": 13276,
+        "selected": 1200
+      },
+      "riverfront-ascend|pre": {
+        "available": 2441,
+        "selected": 1200
+      },
+      "schuylkill-boardwalk|post": {
+        "available": 1750,
+        "selected": 1200
+      },
+      "schuylkill-boardwalk|pre": {
+        "available": 1512,
+        "selected": 1200
+      },
+      "sun-link|post": {
+        "available": 10943,
+        "selected": 1200
+      },
+      "sun-link|pre": {
+        "available": 3807,
+        "selected": 1200
+      },
+      "tampa-riverwalk|post": {
+        "available": 4633,
+        "selected": 1200
+      },
+      "tampa-riverwalk|pre": {
+        "available": 1510,
+        "selected": 1200
+      },
+      "the-rail-park|post": {
+        "available": 7922,
+        "selected": 1200
+      },
+      "the-rail-park|pre": {
+        "available": 8805,
+        "selected": 1200
+      },
+      "water-works-park|post": {
+        "available": 1198,
+        "selected": 1198
+      },
+      "water-works-park|pre": {
+        "available": 49,
+        "selected": 49
+      }
+    },
+    "unique_baseline_fit_reviews": 10971,
+    "learned_vocabulary_size": 8000,
+    "nmf_iterations": 125,
+    "nmf_reconstruction_error": 102.87267735763353,
+    "source_evidence_sha256": "521b46eb76e626abee59417bbbcda1b81e10217dbafc76bbf2879b3b42cd8494"
+  },
+  "topics": [
+    {
+      "id": "topic_1",
+      "top_terms": [
+        "chicken",
+        "good",
+        "food",
+        "ordered",
+        "fried",
+        "sauce",
+        "cheese",
+        "menu",
+        "salad",
+        "restaurant",
+        "delicious",
+        "pork"
+      ],
+      "term_weights": [
+        0.6663054260868606,
+        0.5845361376584086,
+        0.5283916675953736,
+        0.5273054097232261,
+        0.4399712768756574,
+        0.438619917524543,
+        0.4271024763733098,
+        0.41390845274190496,
+        0.41202171954734557,
+        0.39968904719196907,
+        0.39143067521225344,
+        0.362331724668086
+      ],
+      "representative_excerpts": [
+        {
+          "text": "\u2026hing spectacular, but good. THE MEAT 'N 3: Today's meat selection was chicken fried chicken and it was spot on. Served with Southern Greens, Mac and 3 Cheeses, and something I don't recall. The mac and cheese was strong with gruyere and nee\u2026",
+          "project_id": "riverfront-ascend",
+          "period": "pre",
+          "topic_weight": 0.8802195698706319,
+          "review_key": "28535c086361b859"
+        },
+        {
+          "text": "\u2026enough I didn't even use the butter. We ordered an appetizer of fried chicken livers w/ Elizabeth's pepper sauce, a sweetly hot addition to the livers. They were delicious, a portion generous enough to share among the 4 of us. Entrees come \u2026",
+          "project_id": "crescent-park",
+          "period": "pre",
+          "topic_weight": 0.9874357946154907,
+          "review_key": "7ea81723083e43e4"
+        },
+        {
+          "text": "We all had the White meat fried chicken with one side and upgraded to White meat for an additional $3 ($13 in all for the plate).I had the butter beans,my friend had the green beans and my partner had the French Fries. I also ordered the Sw\u2026",
+          "project_id": "lafitte",
+          "period": "pre",
+          "topic_weight": 1.0,
+          "review_key": "070efb0db29162f5"
+        }
+      ]
+    },
+    {
+      "id": "topic_2",
+      "top_terms": [
+        "just",
+        "like",
+        "time",
+        "room",
+        "don",
+        "people",
+        "hotel",
+        "did",
+        "really",
+        "place",
+        "way",
+        "know"
+      ],
+      "term_weights": [
+        0.4442491448468075,
+        0.43057439947791565,
+        0.4123164436958421,
+        0.3899031518698741,
+        0.353839619502145,
+        0.3501420806463938,
+        0.3315555977294986,
+        0.2853656604397273,
+        0.28126107854593646,
+        0.2762079593353958,
+        0.2748876807607368,
+        0.2748528739668226
+      ],
+      "representative_excerpts": [
+        {
+          "text": "We have tried different places in the French Quarter and like to try a new place every now and then. This was our first stay at Inn on St. Peter. Like the small Inns and hotels in \"The Quarter\" the building is old and the rooms are almost a\u2026",
+          "project_id": "lafitte",
+          "period": "pre",
+          "topic_weight": 0.9723732242043263,
+          "review_key": "31719c10af599d8b"
+        },
+        {
+          "text": "\u2026oubt. Finally the day arrives. I decided to drop in a little earlier (just 15 minutes) than 6:45, hoping to maybe speed up the process just in case it did take longer than expected. I told them I was there for a 6:45 appointment, and the tw\u2026",
+          "project_id": "schuylkill-boardwalk",
+          "period": "pre",
+          "topic_weight": 0.9446805444906747,
+          "review_key": "07b2a57e473be9ae"
+        },
+        {
+          "text": "Review for hotel stay on 12/31/11 and 2011 New Years Eve party. Sorry if this is long and in the wrong section. I didn't see any reviews on the NYE party so I wanted to make sure and cover it all. PARKING: There are 2 entrances to the garag\u2026",
+          "project_id": "gateway-arch-park",
+          "period": "pre",
+          "topic_weight": 0.8182056159746709,
+          "review_key": "db905223d05a1d54"
+        }
+      ]
+    },
+    {
+      "id": "topic_3",
+      "top_terms": [
+        "great",
+        "food",
+        "good",
+        "place",
+        "service",
+        "bar",
+        "friendly",
+        "atmosphere",
+        "beer",
+        "love",
+        "staff",
+        "drinks"
+      ],
+      "term_weights": [
+        1.2322319970609954,
+        0.8064770779915255,
+        0.6444974427601802,
+        0.6151581643737554,
+        0.5965150814126661,
+        0.4728538103784221,
+        0.46355760466437057,
+        0.4109540299412781,
+        0.3797991070207003,
+        0.36414519949736013,
+        0.3373687744514534,
+        0.3160863944437214
+      ],
+      "representative_excerpts": [
+        {
+          "text": "I love the Cup! Great food, great service, Tucson atmosphere and the patio is delightful!",
+          "project_id": "sun-link",
+          "period": "pre",
+          "topic_weight": 1.0,
+          "review_key": "23a2bcf1d2528cc6"
+        },
+        {
+          "text": "Great place to stop! Great food, great service, great staff. No hostess though, so if you're impatient and have to have someone hold your hand to find a seat it may not be for you. Was in Tampa for a show at the convention center, and some \u2026",
+          "project_id": "tampa-riverwalk",
+          "period": "pre",
+          "topic_weight": 0.9772592856658817,
+          "review_key": "a1bde9c2babdc0b6"
+        },
+        {
+          "text": "Wow....great beer selection, historic, cheap but tasty bar food, and good music. The service was friendly and quick. It was fun!",
+          "project_id": "dilworth-park",
+          "period": "pre",
+          "topic_weight": 1.0,
+          "review_key": "081c9f5247dd57e5"
+        }
+      ]
+    },
+    {
+      "id": "topic_4",
+      "top_terms": [
+        "pizza",
+        "crust",
+        "slice",
+        "best",
+        "ny",
+        "place",
+        "best pizza",
+        "garlic",
+        "cheese",
+        "delicious",
+        "new",
+        "pizza delicious"
+      ],
+      "term_weights": [
+        1.701310202902632,
+        0.3094517448482061,
+        0.3057453196733232,
+        0.21919924960101328,
+        0.19437829792750788,
+        0.1915043363925781,
+        0.19070275485630395,
+        0.1862645224447054,
+        0.17992194167731806,
+        0.17001525190506372,
+        0.16681472756859878,
+        0.1656777524376769
+      ],
+      "representative_excerpts": [
+        {
+          "text": "Good pizza, nice family restaurant. There has not been a pizza I haven't liked here. The only annoyance is that its cash only.",
+          "project_id": "schuylkill-boardwalk",
+          "period": "pre",
+          "topic_weight": 1.0,
+          "review_key": "3259491225ed17c2"
+        },
+        {
+          "text": "Amazing pizza! Amazing staff and it's BYOB. I put this with some of the top pizza places in Philly",
+          "project_id": "the-rail-park",
+          "period": "pre",
+          "topic_weight": 1.0,
+          "review_key": "07a29a496ce44876"
+        },
+        {
+          "text": "gosh this pizza is good. i can't have enough of it. i am a die-hard fan of toppings on pizza and think that a cheese pizza is kind of a waste of realty space, but pizza delicious's cheese pizza is amaze-balls. there's a slight oniony taste \u2026",
+          "project_id": "crescent-park",
+          "period": "pre",
+          "topic_weight": 1.0,
+          "review_key": "e2daa06734da6e4a"
+        }
+      ]
+    },
+    {
+      "id": "topic_5",
+      "top_terms": [
+        "ice",
+        "cream",
+        "ice cream",
+        "coffee",
+        "tea",
+        "chocolate",
+        "flavors",
+        "shop",
+        "love",
+        "try",
+        "cake",
+        "place"
+      ],
+      "term_weights": [
+        1.2399798548737464,
+        1.2108934237103572,
+        1.1815370468651099,
+        0.3520484609408437,
+        0.3472240950263528,
+        0.3025271083328063,
+        0.211571876806747,
+        0.18598726337030197,
+        0.16578491518638144,
+        0.16532651370797657,
+        0.1605855925400335,
+        0.16050076906187272
+      ],
+      "representative_excerpts": [
+        {
+          "text": "The ice cream rolls is so good. literally the best ice cream I've ever had. must try!",
+          "project_id": "the-rail-park",
+          "period": "pre",
+          "topic_weight": 1.0,
+          "review_key": "1426183a8afa3f72"
+        },
+        {
+          "text": "Delicious homemade ice cream. Had a scoop of the praline & creme. One of my favorite ice cream flavors and one of the best versions of it I have had.",
+          "project_id": "riverfront-ascend",
+          "period": "pre",
+          "topic_weight": 1.0,
+          "review_key": "1e09661db89350a1"
+        },
+        {
+          "text": "Delicious ice-cream ever !!! Workers are nice there!!! Must go when you are around!! Strawberry Shortcake, Must Try!!!",
+          "project_id": "the-rail-park",
+          "period": "pre",
+          "topic_weight": 1.0,
+          "review_key": "1d6a2722e2931c7e"
+        }
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "id": "lafitte",
+      "project": "Lafitte",
+      "pre": {
+        "n_reviews": 1200,
+        "n_businesses": 191,
+        "n_topic_mapped_reviews": 1200,
+        "topic_distribution": [
+          0.25709099643637257,
+          0.40494782991872164,
+          0.23181171410220325,
+          0.06362007181507259,
+          0.042529387727629535
+        ],
+        "topic_entropy": 0.8473178207956502,
+        "mean_word_count": 130.33333333333334,
+        "mean_lexical_diversity": 0.7341853888694266,
+        "negation_per_100_words": 1.588235294117647
+      },
+      "post": {
+        "n_reviews": 1200,
+        "n_businesses": 211,
+        "n_topic_mapped_reviews": 1200,
+        "topic_distribution": [
+          0.3096577679587303,
+          0.33426286508966796,
+          0.257938522220081,
+          0.05683548292229733,
+          0.041305361809223194
+        ],
+        "topic_entropy": 0.8533596649876501,
+        "mean_word_count": 97.43416666666667,
+        "mean_lexical_diversity": 0.763661379480158,
+        "negation_per_100_words": 1.597659958433472
+      },
+      "topic_change": [
+        0.052566771522357725,
+        -0.07068496482905368,
+        0.026126808117877764,
+        -0.0067845888927752646,
+        -0.0012240259184063407
+      ]
+    },
+    {
+      "id": "sun-link",
+      "project": "Sun Link",
+      "pre": {
+        "n_reviews": 1200,
+        "n_businesses": 220,
+        "n_topic_mapped_reviews": 1199,
+        "topic_distribution": [
+          0.22245142764715903,
+          0.31477032171788405,
+          0.2888649294050953,
+          0.09337699442660756,
+          0.08053632680325407
+        ],
+        "topic_entropy": 0.9203181482024283,
+        "mean_word_count": 132.445,
+        "mean_lexical_diversity": 0.7257486016015243,
+        "negation_per_100_words": 1.5767551310606918
+      },
+      "post": {
+        "n_reviews": 1200,
+        "n_businesses": 264,
+        "n_topic_mapped_reviews": 1199,
+        "topic_distribution": [
+          0.2260717628683845,
+          0.2729198800808355,
+          0.3434282120240165,
+          0.07908938977741262,
+          0.07849075524935116
+        ],
+        "topic_entropy": 0.9059109725815165,
+        "mean_word_count": 100.2,
+        "mean_lexical_diversity": 0.7630636707417505,
+        "negation_per_100_words": 1.677478376580173
+      },
+      "topic_change": [
+        0.0036203352212254847,
+        -0.04185044163704854,
+        0.05456328261892124,
+        -0.014287604649194943,
+        -0.0020455715539029057
+      ]
+    },
+    {
+      "id": "dilworth-park",
+      "project": "Dilworth Park",
+      "pre": {
+        "n_reviews": 1200,
+        "n_businesses": 393,
+        "n_topic_mapped_reviews": 1200,
+        "topic_distribution": [
+          0.24906643790479122,
+          0.37094767679150525,
+          0.23926233464627547,
+          0.06770507742993781,
+          0.07301847322749046
+        ],
+        "topic_entropy": 0.8883004246946836,
+        "mean_word_count": 132.21416666666667,
+        "mean_lexical_diversity": 0.7276338888802737,
+        "negation_per_100_words": 1.6538822743402435
+      },
+      "post": {
+        "n_reviews": 1200,
+        "n_businesses": 404,
+        "n_topic_mapped_reviews": 1200,
+        "topic_distribution": [
+          0.2920064112383674,
+          0.30137510803887385,
+          0.2785155449356782,
+          0.06306222700835706,
+          0.06504070877872392
+        ],
+        "topic_entropy": 0.88786567319973,
+        "mean_word_count": 108.92416666666666,
+        "mean_lexical_diversity": 0.7539982577858696,
+        "negation_per_100_words": 1.6425800824732804
+      },
+      "topic_change": [
+        0.04293997333357619,
+        -0.0695725687526314,
+        0.039253210289402735,
+        -0.0046428504215807465,
+        -0.007977764448766536
+      ]
+    },
+    {
+      "id": "water-works-park",
+      "project": "Water Works Park",
+      "pre": {
+        "n_reviews": 49,
+        "n_businesses": 7,
+        "n_topic_mapped_reviews": 49,
+        "topic_distribution": [
+          0.1857322677929144,
+          0.348435389571804,
+          0.27541477213012444,
+          0.0589399772119763,
+          0.131477593293181
+        ],
+        "topic_entropy": 0.9126157967925169,
+        "mean_word_count": 123.10204081632654,
+        "mean_lexical_diversity": 0.7525333218645361,
+        "negation_per_100_words": 1.4588859416445623
+      },
+      "post": {
+        "n_reviews": 1198,
+        "n_businesses": 23,
+        "n_topic_mapped_reviews": 1198,
+        "topic_distribution": [
+          0.2551558181457669,
+          0.2596007880353325,
+          0.34800520491607884,
+          0.03421145369026352,
+          0.10302673521255874
+        ],
+        "topic_entropy": 0.879543999834441,
+        "mean_word_count": 119.18030050083472,
+        "mean_lexical_diversity": 0.7461582687590793,
+        "negation_per_100_words": 1.478519099581168
+      },
+      "topic_change": [
+        0.06942355035285247,
+        -0.08883460153647149,
+        0.0725904327859544,
+        -0.02472852352171278,
+        -0.02845085808062227
+      ]
+    },
+    {
+      "id": "riverfront-ascend",
+      "project": "Riverfront / Ascend",
+      "pre": {
+        "n_reviews": 1200,
+        "n_businesses": 117,
+        "n_topic_mapped_reviews": 1200,
+        "topic_distribution": [
+          0.21576830769633457,
+          0.3331743932601964,
+          0.373319714716918,
+          0.028016965032121935,
+          0.04972061929442929
+        ],
+        "topic_entropy": 0.8166246546070887,
+        "mean_word_count": 118.62,
+        "mean_lexical_diversity": 0.7461747709757216,
+        "negation_per_100_words": 1.609481256673973
+      },
+      "post": {
+        "n_reviews": 1200,
+        "n_businesses": 138,
+        "n_topic_mapped_reviews": 1200,
+        "topic_distribution": [
+          0.24989615804940846,
+          0.27055453827467973,
+          0.3992930215484575,
+          0.040177374643796906,
+          0.04007890748365734
+        ],
+        "topic_entropy": 0.8231926881989137,
+        "mean_word_count": 95.78333333333333,
+        "mean_lexical_diversity": 0.7658398522537501,
+        "negation_per_100_words": 1.5634243953366973
+      },
+      "topic_change": [
+        0.03412785035307389,
+        -0.06261985498551664,
+        0.025973306831539533,
+        0.012160409611674972,
+        -0.009641711810771947
+      ]
+    },
+    {
+      "id": "tampa-riverwalk",
+      "project": "Tampa Riverwalk",
+      "pre": {
+        "n_reviews": 1200,
+        "n_businesses": 96,
+        "n_topic_mapped_reviews": 1200,
+        "topic_distribution": [
+          0.2413887595977184,
+          0.28380034607863425,
+          0.30541177411434905,
+          0.11466678687841254,
+          0.05473233333088572
+        ],
+        "topic_entropy": 0.9134474299704269,
+        "mean_word_count": 125.305,
+        "mean_lexical_diversity": 0.739980424582003,
+        "negation_per_100_words": 1.5721639200351143
+      },
+      "post": {
+        "n_reviews": 1200,
+        "n_businesses": 133,
+        "n_topic_mapped_reviews": 1200,
+        "topic_distribution": [
+          0.23109349160277484,
+          0.27404481628691085,
+          0.3294869001247761,
+          0.11394261145112004,
+          0.051432180534418115
+        ],
+        "topic_entropy": 0.9066487037294597,
+        "mean_word_count": 92.98833333333333,
+        "mean_lexical_diversity": 0.7725965665952507,
+        "negation_per_100_words": 1.5449966841718494
+      },
+      "topic_change": [
+        -0.010295267994943569,
+        -0.009755529791723394,
+        0.02407512601042705,
+        -0.0007241754272925005,
+        -0.003300152796467608
+      ]
+    },
+    {
+      "id": "schuylkill-boardwalk",
+      "project": "Schuylkill Boardwalk",
+      "pre": {
+        "n_reviews": 1200,
+        "n_businesses": 81,
+        "n_topic_mapped_reviews": 1200,
+        "topic_distribution": [
+          0.2598669454998906,
+          0.3529072457661209,
+          0.25996323479515776,
+          0.07289666789156803,
+          0.05436590604726201
+        ],
+        "topic_entropy": 0.8805557276094569,
+        "mean_word_count": 130.1025,
+        "mean_lexical_diversity": 0.7329493695478381,
+        "negation_per_100_words": 1.7191573310787007
+      },
+      "post": {
+        "n_reviews": 1200,
+        "n_businesses": 83,
+        "n_topic_mapped_reviews": 1199,
+        "topic_distribution": [
+          0.24082543183857738,
+          0.31809302643276716,
+          0.3024513103400013,
+          0.07326461830039292,
+          0.0653656130882614
+        ],
+        "topic_entropy": 0.8939021538420936,
+        "mean_word_count": 100.1225,
+        "mean_lexical_diversity": 0.7637774442262838,
+        "negation_per_100_words": 1.5622529068557685
+      },
+      "topic_change": [
+        -0.01904151366131321,
+        -0.03481421933335377,
+        0.04248807554484352,
+        0.0003679504088248964,
+        0.010999707040999389
+      ]
+    },
+    {
+      "id": "the-rail-park",
+      "project": "The Rail Park",
+      "pre": {
+        "n_reviews": 1200,
+        "n_businesses": 158,
+        "n_topic_mapped_reviews": 1198,
+        "topic_distribution": [
+          0.3601063684344638,
+          0.23873280938028182,
+          0.2541158271271636,
+          0.04605025129630961,
+          0.1009947437617812
+        ],
+        "topic_entropy": 0.8892439297015492,
+        "mean_word_count": 103.66583333333334,
+        "mean_lexical_diversity": 0.758350587245249,
+        "negation_per_100_words": 1.6583734595937267
+      },
+      "post": {
+        "n_reviews": 1200,
+        "n_businesses": 180,
+        "n_topic_mapped_reviews": 1199,
+        "topic_distribution": [
+          0.3754990839950387,
+          0.24000962759362185,
+          0.25499776396743673,
+          0.0440909078717256,
+          0.08540261657217706
+        ],
+        "topic_entropy": 0.8739201913519957,
+        "mean_word_count": 98.45,
+        "mean_lexical_diversity": 0.7658120822258083,
+        "negation_per_100_words": 1.643812425935331
+      },
+      "topic_change": [
+        0.015392715560574866,
+        0.0012768182133400252,
+        0.0008819368402731564,
+        -0.001959343424584009,
+        -0.015592127189604149
+      ]
+    },
+    {
+      "id": "crescent-park",
+      "project": "Crescent Park",
+      "pre": {
+        "n_reviews": 606,
+        "n_businesses": 28,
+        "n_topic_mapped_reviews": 606,
+        "topic_distribution": [
+          0.2855229084259999,
+          0.2657555400037708,
+          0.22797101730413508,
+          0.16430022143615264,
+          0.05645031282994138
+        ],
+        "topic_entropy": 0.9358033473829958,
+        "mean_word_count": 146.14851485148515,
+        "mean_lexical_diversity": 0.7239818762342096,
+        "negation_per_100_words": 1.601065871779238
+      },
+      "post": {
+        "n_reviews": 1200,
+        "n_businesses": 35,
+        "n_topic_mapped_reviews": 1200,
+        "topic_distribution": [
+          0.32454350058221615,
+          0.20592475664270696,
+          0.30273622643070336,
+          0.11911558936806176,
+          0.047679926976312056
+        ],
+        "topic_entropy": 0.9015002172118689,
+        "mean_word_count": 97.3975,
+        "mean_lexical_diversity": 0.7701254305940645,
+        "negation_per_100_words": 1.5358025958914072
+      },
+      "topic_change": [
+        0.03902059215621623,
+        -0.059830783361063816,
+        0.07476520912656828,
+        -0.04518463206809088,
+        -0.008770385853629326
+      ]
+    },
+    {
+      "id": "indianapolis-cultural-trail",
+      "project": "Indianapolis Cultural Trail",
+      "pre": {
+        "n_reviews": 1200,
+        "n_businesses": 159,
+        "n_topic_mapped_reviews": 1200,
+        "topic_distribution": [
+          0.29507286397840593,
+          0.3095000347367275,
+          0.28690528031452833,
+          0.05771860705544128,
+          0.05080321391489688
+        ],
+        "topic_entropy": 0.8682313995259111,
+        "mean_word_count": 132.77833333333334,
+        "mean_lexical_diversity": 0.7298732966908202,
+        "negation_per_100_words": 1.6230057614821696
+      },
+      "post": {
+        "n_reviews": 1200,
+        "n_businesses": 198,
+        "n_topic_mapped_reviews": 1200,
+        "topic_distribution": [
+          0.30210913596241035,
+          0.281986630882741,
+          0.3128805810798346,
+          0.05477016002855128,
+          0.04825349204646177
+        ],
+        "topic_entropy": 0.8620916017810886,
+        "mean_word_count": 110.52666666666667,
+        "mean_lexical_diversity": 0.7492291765371063,
+        "negation_per_100_words": 1.6594788587972737
+      },
+      "topic_change": [
+        0.007036271984004416,
+        -0.027513403853986484,
+        0.025975300765306242,
+        -0.002948447026890004,
+        -0.0025497218684351133
+      ]
+    },
+    {
+      "id": "gateway-arch-park",
+      "project": "Gateway Arch Park",
+      "pre": {
+        "n_reviews": 716,
+        "n_businesses": 34,
+        "n_topic_mapped_reviews": 716,
+        "topic_distribution": [
+          0.18262367334564886,
+          0.55104761384001,
+          0.2216866705326102,
+          0.025563851453088295,
+          0.01907819082864278
+        ],
+        "topic_entropy": 0.7096535327922945,
+        "mean_word_count": 137.5740223463687,
+        "mean_lexical_diversity": 0.716942980934665,
+        "negation_per_100_words": 1.7106077987472463
+      },
+      "post": {
+        "n_reviews": 735,
+        "n_businesses": 35,
+        "n_topic_mapped_reviews": 735,
+        "topic_distribution": [
+          0.16385533174823283,
+          0.5668361314788628,
+          0.21553397367534408,
+          0.03294705157938793,
+          0.02082751151817339
+        ],
+        "topic_entropy": 0.7095671883164281,
+        "mean_word_count": 103.33605442176871,
+        "mean_lexical_diversity": 0.7503368803933315,
+        "negation_per_100_words": 1.7682220349694544
+      },
+      "topic_change": [
+        -0.018768341597416027,
+        0.015788517638852806,
+        -0.006152696857266132,
+        0.007383200126299637,
+        0.0017493206895306083
+      ]
+    }
+  ]
+}

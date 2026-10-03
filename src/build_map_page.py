@@ -10,10 +10,11 @@ import json
 import statistics
 from collections import defaultdict
 from pathlib import Path
+from sun_link_corridor import compute as compute_sun_link_corridor, table_rows as sun_link_table_rows
 
 ROOT = Path(__file__).resolve().parent.parent
 INTERIM = ROOT / "data" / "interim"
-OUT = ROOT / "web" / "index.html"
+OUT = ROOT / "web" / "atlas.html"
 
 BOUNDARIES = INTERIM / "zcta_boundaries.min.geojson"
 CONTEXT = INTERIM / "map_context.min.geojson"
@@ -28,6 +29,14 @@ EVENTS = ROOT / "data" / "events.json"
 
 STUDY_DATA = ROOT / "docs" / "coursework" / "milestone-2-eda" / "study_data"
 MIN_REVIEWS = 30
+
+PROJECT_FOOTPRINTS = {
+    "Lafitte": ("Lafitte.geojson", "NewOrleans"),
+    "Sun Link": ("Sun_Link.geojson", "Tucson"),
+    "Dilworth Park": ("Dilworth_Park.geojson", "Philadelphia"),
+    "Water Works Park": ("Water_Works_Park.geojson", "TampaBay"),
+    "Riverfront / Ascend": ("Riverfront_Ascend.geojson", "Nashville"),
+}
 
 METRO_LABEL = {
     "Philadelphia": ("Philadelphia", "191", "PA"),
@@ -51,6 +60,35 @@ def read_csv(path):
 
 def load_json(path, default):
     return json.loads(path.read_text()) if path.exists() else default
+
+
+def load_project_footprints():
+    registry = {r["project"]: r for r in load_json(STUDY_DATA / "project_registry.json", [])}
+    projects = []
+    for name, (filename, metro) in PROJECT_FOOTPRINTS.items():
+        source = load_json(STUDY_DATA / filename, None)
+        if source is None or name not in registry:
+            continue
+        feature = source["features"][0] if source["type"] == "FeatureCollection" else source
+        geometry = feature["geometry"]
+        points = []
+
+        def visit(value):
+            if value and isinstance(value[0], (int, float)):
+                points.append(value)
+            else:
+                for item in value:
+                    visit(item)
+
+        visit(geometry["coordinates"])
+        if not points:
+            continue
+        center = [(min(p[0] for p in points) + max(p[0] for p in points)) / 2,
+                  (min(p[1] for p in points) + max(p[1] for p in points)) / 2]
+        projects.append({"name": name, "metro": metro, "opening": registry[name]["opening"],
+                         "pre": registry[name]["pre"], "post": registry[name]["post"],
+                         "geometry": geometry, "center": center})
+    return projects
 
 
 def main():
@@ -135,6 +173,7 @@ def main():
     for d in series.values():
         d["inv"] = [round(v) for v in d["inv"]]
 
+    sun_link_rows = compute_sun_link_corridor(STUDY_DATA)
     payload = {
         "quarters": QS,
         "metros": {k: {"label": v[0], "zip3": v[1], "st": v[2]}
@@ -149,7 +188,12 @@ def main():
         "nReviews": sum(sum(v) for v in nrev.values()),
         "zipMetro": metro_of,
         "population": load_json(ROOT / "data" / "population_2020.json", {"records": {}}),
-        "capitalEfficiency": read_csv(STUDY_DATA / "capital_efficiency.csv"),
+        "capitalEfficiency": read_csv(STUDY_DATA / "capital_efficiency.csv") + sun_link_table_rows(sun_link_rows),
+        "sunLinkCoverage": {r["radius_m"]: r for r in read_csv(STUDY_DATA / "sun_coverage.csv")},
+        "sunLinkCorridor": sun_link_rows,
+        "projectFootprints": load_project_footprints(),
+        "engagementScale": {"growthLow": -50, "growthHigh": 100,
+                             "countHigh": sorted(n for counts in nrev.values() for n in counts)[int(.95 * (sum(map(len, nrev.values())) - 1))]},
     }
 
     html = (TEMPLATE

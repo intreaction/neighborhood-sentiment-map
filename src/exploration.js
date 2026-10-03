@@ -27,7 +27,7 @@ function cityView(city){
   viewCache.set(key,result);return result;
 }
 function comparisonRows(lag=A.lag){
-  return cityFeatures.map(f=>{const z=f.properties.zip,a=zipView(z),population=populationOf(z),funding=fundingWindow(a.inv,S.q,lag,A.window),rate=perResident(funding,population,A.populationMinimum),xFunding=A.basis==='resident'?rate:funding,y=reviewOutcome(a.sent,S.q,A.outcome);return {zip:z,population,funding,rate,xFunding,y,n:a.n[S.q],sent:a.sent[S.q],change:reviewOutcome(a.sent,S.q,'change'),included:xFunding!=null&&y!=null,status:funding==null?'Funding history unavailable':A.basis==='resident'&&rate==null?'Population missing / zero / below minimum':y==null?'Insufficient review coverage':'Included'};});
+  return cityFeatures.map(f=>{const z=f.properties.zip,a=zipView(z),population=populationOf(z),funding=fundingWindow(a.inv,S.q,lag,A.window),rate=perResident(funding,population,A.populationMinimum),xFunding=A.basis==='resident'?rate:funding,y=engagementOutcome(a.n,S.q,A.outcome,A.minimum),growth=engagementGrowth(a.n,S.q,A.minimum);return {zip:z,population,funding,rate,xFunding,y,n:a.n[S.q],prior:S.q>=4?a.n[S.q-4]:null,growth,included:xFunding!=null&&y!=null,status:funding==null?'Funding history unavailable':A.basis==='resident'&&rate==null?'Population missing / zero / below minimum':y==null?'Insufficient review coverage':'Included'};});
 }
 
 function setTopic(topic){A.topic=topic;viewCache.clear();$('reviewLens').value=topic;if(topic!=='all'){A.example=topic;$('exampleTopic').value=topic;}render();}
@@ -40,13 +40,13 @@ function drawScatter(rows){
   const xs=data.map(r=>signedLog(r.xFunding)),ys=data.map(r=>r.y);let x0=Math.min(0,...xs),x1=Math.max(0,...xs),y0=Math.min(0,...ys),y1=Math.max(0,...ys);
   if(x0===x1){x0-=1;x1+=1;}if(y0===y1){y0-=.05;y1+=.05;}const yp=(y1-y0)*.15;y0-=yp;y1+=yp;
   const x=v=>L+(v-x0)/(x1-x0)*(w-L-R),y=v=>T+(y1-v)/(y1-y0)*(h-T-B);
-  for(let i=0;i<5;i++){const v=y0+(y1-y0)*i/4;svg.append(node('line',{x1:L,x2:w-R,y1:y(v),y2:y(v),stroke:'#e2e5dc'}));plotText(svg,L-8,y(v)+3,v.toFixed(2),{'text-anchor':'end'});}
+  for(let i=0;i<5;i++){const v=y0+(y1-y0)*i/4;svg.append(node('line',{x1:L,x2:w-R,y1:y(v),y2:y(v),stroke:'#e2e5dc'}));plotText(svg,L-8,y(v)+3,A.outcome==='change'?Math.round(v)+'%':v.toFixed(1),{'text-anchor':'end'});}
   svg.append(node('line',{x1:L,x2:w-R,y1:y(0),y2:y(0),stroke:'#9dab9e','stroke-dasharray':'4 4'}));
   for(let i=0;i<4;i++){const v=x0+(x1-x0)*i/3;plotText(svg,x(v),h-B+17,fundingFormat(Math.sign(v)*Math.expm1(Math.abs(v))),{'text-anchor':i===0?'start':i===3?'end':'middle'});}
   plotText(svg,w/2,h-3,fundingUnits()+' · signed log scale',{'text-anchor':'middle'});
-  plotText(svg,L,T-6,A.outcome==='change'?'Annual sentiment change':'Mean review sentiment');
-  for(const r of data){const circle=node('circle',{cx:x(signedLog(r.xFunding)),cy:y(r.y),r:r.zip===S.zip?7:5,fill:r.y<0&&A.outcome==='change'?'#b66740':'#146e64','fill-opacity':.65,stroke:r.zip===S.zip?'#243d3b':'#fffefa','stroke-width':r.zip===S.zip?2:1,class:'data-point','data-zip':r.zip,tabindex:0,role:'button','aria-label':`Select ZIP ${r.zip}, funding ${fundingFormat(r.xFunding)}, outcome ${score(r.y)}`});
-    const activate=()=>selectZip(r.zip);circle.addEventListener('click',activate);circle.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();activate();}});circle.addEventListener('pointermove',ev=>showTip(ev,`<b>ZIP ${r.zip}</b><br>${fundingFormat(r.xFunding)} ${A.basis==='resident'?'per 2020 resident':'earlier funding'}<br>${r.population==null?'No population count':fmt.format(r.population)+' residents (2020)'}<br>${score(r.y)} ${A.outcome==='change'?'annual change':'sentiment'}<br><small>${fmt.format(r.n)} matching reviews</small>`));circle.addEventListener('pointerleave',hideTip);svg.append(circle);
+  plotText(svg,L,T-6,A.outcome==='change'?'Review growth vs prior year (%)':'Log(1 + quarterly reviews)');
+  for(const r of data){const outcome=A.outcome==='change'?growthLabel(r.growth):fmt.format(r.n)+' reviews',circle=node('circle',{cx:x(signedLog(r.xFunding)),cy:y(r.y),r:r.zip===S.zip?7:5,fill:r.y<0&&A.outcome==='change'?'#b66740':'#146e64','fill-opacity':.65,stroke:r.zip===S.zip?'#243d3b':'#fffefa','stroke-width':r.zip===S.zip?2:1,class:'data-point','data-zip':r.zip,tabindex:0,role:'button','aria-label':`Select ZIP ${r.zip}, funding ${fundingFormat(r.xFunding)}, review outcome ${outcome}`});
+    const activate=()=>selectZip(r.zip);circle.addEventListener('click',activate);circle.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();activate();}});circle.addEventListener('pointermove',ev=>showTip(ev,`<b>ZIP ${r.zip}</b><br>${fundingFormat(r.xFunding)} ${A.basis==='resident'?'per 2020 resident':'earlier funding'}<br>${r.population==null?'No population count':fmt.format(r.population)+' residents (2020)'}<br>${outcome}<br><small>${fmt.format(r.n)} reviews this quarter</small>`));circle.addEventListener('pointerleave',hideTip);svg.append(circle);
   }
 }
 function drawLags(){
@@ -58,7 +58,7 @@ function drawLags(){
   [-1,0,1].forEach(v=>{svg.append(node('line',{x1:L,x2:w-R,y1:y(v),y2:y(v),stroke:v===0?'#9dab9e':'#e2e5dc'}));plotText(svg,L-10,y(v)+3,v.toFixed(1),{'text-anchor':'end'});});
   const bw=(w-L-R)/13*.65;
   rs.forEach((r,i)=>{const g=node('g',{role:'button',tabindex:0,'aria-label':`Set funding lag to ${i} quarters${r==null?', correlation unavailable':', correlation '+r.toFixed(3)}`,cursor:'pointer'});g.append(node('rect',{x:x(i)-bw/2-3,y:T,width:bw+6,height:h-T-B,fill:i===A.lag?'#e9eee4':'transparent',stroke:i===A.lag?'#91aa9c':'none',rx:3}));if(r!=null)g.append(node('rect',{x:x(i)-bw/2,y:Math.min(y(r),y(0)),width:bw,height:Math.max(1,Math.abs(y(r)-y(0))),fill:r<0?'#b66740':'#146e64'}));else plotText(g,x(i),y(0)-8,'—',{'text-anchor':'middle'});const activate=()=>{A.lag=i;$('lag').value=i;renderAnalysis();};g.addEventListener('click',activate);g.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();activate();}});g.addEventListener('pointermove',e=>showTip(e,`<b>${i} quarters lag</b><br>${r==null?'Correlation unavailable':'r = '+r.toFixed(3)}<br><small>${cohort.length} ZIPs in fixed cohort</small>`));g.addEventListener('pointerleave',hideTip);svg.append(g);if(w>450||i%4===0)plotText(svg,x(i),h-B+18,i+'q',{'text-anchor':'middle'});});
-  $('lagExplanation').textContent=`${cohort.length} ZIPs with complete history at all 13 lags. Correlations use signed-log ${A.basis==='resident'?'funding per 2020 resident':'total funding'} and ${A.outcome==='change'?'annual sentiment change':'sentiment level'}. ${cohort.length<3?'Move the review quarter later or lower the review threshold to obtain a comparable cohort.':'The vertical scale is fixed from −1 to +1.'}`;
+  $('lagExplanation').textContent=`${cohort.length} ZIPs with complete history at all 13 lags. Correlations use signed-log ${A.basis==='resident'?'funding per 2020 resident':'total funding'} and ${A.outcome==='change'?'year-over-year review growth':'log quarterly review count'}. ${cohort.length<3?'Move the review quarter later or lower the review threshold to obtain a comparable cohort.':'The vertical scale is fixed from −1 to +1.'}`;
 }
 function topicSnapshot(){const zips=S.zip?[S.zip]:Object.keys(D.zipMetro).filter(z=>D.zipMetro[z]===S.city),topics=Object.fromEntries(Object.keys(REV?.topics||{}).map(k=>[k,[0,0,0]])),stars=[0,0,0,0,0];for(const z of zips){const c=REV?.panel[z]?.[D.quarters[S.q]];if(!c)continue;c.stars.forEach((v,i)=>stars[i]+=v);for(const [t,v] of Object.entries(c.topics))v.forEach((n,i)=>topics[t][i]+=n);}return {topics,stars,total:stars.reduce((a,b)=>a+b,0)};}
 function renderReviews(){
@@ -71,20 +71,56 @@ function renderReviews(){
   renderExamples();
 }
 function renderExamples(){if(!REV)return;const year=D.quarters[S.q].slice(0,4);$('excerptScope').textContent=`${D.metros[S.city].label} · ${year} · ${REV.topics[A.example].label}. Citywide examples from the whole year, regardless of selected ZIP or quarter.`;const candidates=REV.examples.filter(e=>e.metro===S.city&&e.quarter.startsWith(year)&&e.topic===A.example),picked=[];for(const p of ['negative','neutral','positive']){const e=candidates.find(e=>e.polarity===p);if(e)picked.push(e);}$('examples').replaceChildren();if(!picked.length){$('examples').innerHTML='<p class="empty-panel">No sampled excerpts for this city, year and theme.</p>';return;}for(const e of picked){const card=document.createElement('article');card.className='quote-card';card.innerHTML=`<span class="pill">${safe(e.polarity)} whole-review score</span><blockquote></blockquote><div class="quote-meta">ZIP ${safe(e.zip)} · ${safe(e.quarter)} · ${e.stars} star${e.stars===1?'':'s'}<br>VADER ${score(e.compound)}</div>`;card.querySelector('blockquote').textContent=e.text;$('examples').append(card);}}
-function renderLedger(rows){const sorted=rows.slice().sort((a,b)=>(b[A.sort==='funding'?'funding':A.sort==='rate'?'rate':'change']??-Infinity)-(a[A.sort==='funding'?'funding':A.sort==='rate'?'rate':'change']??-Infinity)||a.zip.localeCompare(b.zip));$('areaRows').innerHTML=sorted.map(r=>`<tr data-selected="${r.zip===S.zip}"><td><button data-select-zip="${r.zip}">ZIP ${r.zip}</button></td><td>${r.funding==null?'Unavailable':money(r.funding)}</td><td>${r.population==null?'Unavailable':fmt.format(r.population)}</td><td>${residentMoney(r.rate)}</td><td>${r.sent==null?'Unavailable':score(r.sent)}</td><td>${r.change==null?'Unavailable':score(r.change)}</td><td>${fmt.format(r.n)}</td><td>${r.status}</td></tr>`).join('');$('sortFunding').textContent='Funding window '+(A.sort==='funding'?'↓':'↕');$('sortChange').textContent='Annual change '+(A.sort==='change'?'↓':'↕');$('sortRate').textContent='Funding / resident '+(A.sort==='rate'?'↓':'↕');}
+function renderLedger(rows){const sorted=rows.slice().sort((a,b)=>(b[A.sort==='funding'?'funding':A.sort==='rate'?'rate':'growth']??-Infinity)-(a[A.sort==='funding'?'funding':A.sort==='rate'?'rate':'growth']??-Infinity)||a.zip.localeCompare(b.zip));$('areaRows').innerHTML=sorted.map(r=>`<tr data-selected="${r.zip===S.zip}"><td><button data-select-zip="${r.zip}">ZIP ${r.zip}</button></td><td>${r.funding==null?'Unavailable':money(r.funding)}</td><td>${r.population==null?'Unavailable':fmt.format(r.population)}</td><td>${residentMoney(r.rate)}</td><td>${fmt.format(r.n)}</td><td>${growthLabel(r.growth)}</td><td>${r.prior==null?'Unavailable':fmt.format(r.prior)}</td><td>${r.status}</td></tr>`).join('');$('sortFunding').textContent='Funding window '+(A.sort==='funding'?'↓':'↕');$('sortChange').textContent='Review growth '+(A.sort==='change'?'↓':'↕');$('sortRate').textContent='Funding / resident '+(A.sort==='rate'?'↓':'↕');}
 function renderAnalysis(){
   const scope=`${D.metros[S.city].label} · ${qlabel(S.q)} · ${themeName()} · ${fundingUnits()}`;document.querySelectorAll('.analysis-scope').forEach(e=>e.textContent=scope);
-  $('lensNote').textContent=A.topic==='all'?`All business reviews · ${A.minimum}+ reviews per sentiment quarter`:`Keyword mentions of ${themeName().toLowerCase()} · whole-review sentiment · ${A.minimum}+ matching reviews`;
+  $('lensNote').textContent=S.metric==='ce'?`ZIP colors: ${themeName().toLowerCase()} this quarter · CE uses all reviews in matched project businesses.`:A.topic==='all'?`All business reviews · ${A.minimum}+ reviews required in each compared quarter`:`Keyword mentions of ${themeName().toLowerCase()} · ${A.minimum}+ matching reviews required in each compared quarter`;
   for(const [id,value] of [['lag',A.lag],['window',A.window],['minimum',A.minimum]]){$(id).setAttribute('aria-valuetext',value+(id==='minimum'?' reviews':' quarters'));}
   $('lagReadout').textContent=A.lag+' quarters';$('windowReadout').textContent=A.window+' quarter'+(A.window===1?'':'s');$('minimumReadout').textContent=A.minimum;
   const end=S.q-A.lag,start=end-A.window+1,complete=start>=0;
   $('fundingDates').textContent=complete?D.quarters[start]+(end!==start?' → '+D.quarters[end]:''):'Before available history';
-  const amount=fundingWindow(selected().inv,S.q,A.lag,A.window);$('windowAmount').textContent=amount==null?'Full window is unavailable':money(amount)+' · '+(S.zip?'selected ZIP':'entire city study area');$('gapLabel').textContent=A.lag?A.lag+' quarters later':'Same quarter';$('outcomeDates').textContent=D.quarters[S.q];$('outcomeDefinition').textContent=A.outcome==='level'?'Mean sentiment this quarter':S.q>=4?'Change from '+D.quarters[S.q-4]:'Prior-year comparison unavailable';
+  const amount=fundingWindow(selected().inv,S.q,A.lag,A.window);$('windowAmount').textContent=amount==null?'Full window is unavailable':money(amount)+' · '+(S.zip?'selected ZIP':'entire city study area');$('gapLabel').textContent=A.lag?A.lag+' quarters later':'Same quarter';$('outcomeDates').textContent=D.quarters[S.q];$('outcomeDefinition').textContent=A.outcome==='level'?'Log of review count this quarter':S.q>=4?'Review growth from '+D.quarters[S.q-4]:'Prior-year comparison unavailable';
   const rows=comparisonRows(),included=rows.filter(r=>r.included),r=correlation(included.map(r=>[signedLog(r.xFunding),r.y]));currentRows=rows;
   $('correlation').textContent=r==null?'—':(r>0?'+':'')+r.toFixed(3);$('eligibleCount').textContent=included.length;$('excludedCount').textContent=rows.length-included.length;
-  $('relationshipText').textContent=r==null?'Not enough usable variation to calculate a correlation. Adjust the quarter, funding window or review coverage.':`${Math.abs(r)<.1?'Little linear association appears':r>0?'Higher recorded funding aligns with higher outcomes':'Higher recorded funding aligns with lower outcomes'} in this snapshot, using signed-log ${A.basis==='resident'?'funding per 2020 resident':'total funding'} and ${A.outcome==='change'?'annual sentiment change':'sentiment level'}.${included.length<10?' Fewer than ten ZIPs are included; this comparison is especially sensitive to individual places.':''}`;
-  if(S.zip && $('scenZip') && $('scenZip').value !== S.zip) $('scenZip').value = S.zip;
-  drawScatter(rows);drawLags();renderReviews();renderLedger(rows);renderPopulation();renderScenarioExplorer();
+  $('relationshipText').textContent=r==null?'Not enough usable variation to calculate a correlation. Adjust the quarter, funding window or review coverage.':`${Math.abs(r)<.1?'Little linear association appears':r>0?'Higher recorded funding aligns with higher review activity':'Higher recorded funding aligns with lower review activity'} in this snapshot, using signed-log ${A.basis==='resident'?'funding per 2020 resident':'total funding'} and ${A.outcome==='change'?'year-over-year review growth':'log quarterly review count'}.${included.length<10?' Fewer than ten ZIPs are included; this comparison is especially sensitive to individual places.':''}`;
+  drawScatter(rows);drawLags();renderReviews();renderLedger(rows);renderPopulation();
+}
+const CE_COLUMN_HELP={
+  project:['Project & Typology','The documented investment and its broad project type. The smaller line identifies the comparison method used for this row.'],
+  city:['City','The city where the investment is located. The estimate concerns businesses near its footprint or route, not the entire city.'],
+  cost:['Cost ($M)','Reported capital project cost in millions of dollars. Cost scopes vary and may include both public and private funding; amounts are not adjusted for inflation.'],
+  sample:['Sample','The number used to scale the review contrast. Original matched projects show nearby business pairs; Sun Link shows all Yelp listings along the selected route buffer; expansion cases show nearby baseline businesses.'],
+  difference:['Difference / Listing','Adjusted review change per sampled business or listing. Matched rows subtract the matched control change; Sun Link applies farther-area growth to its corridor baseline; expansion rows compare unmatched cohort means.'],
+  net:['Net Reviews','Adjusted review difference across this row’s sample: Difference / Listing × Sample. It can be negative and is not the raw number of reviews added after opening.'],
+  ce:['CE (Revs / $1M)','Capital Efficiency in review-count units: Net Reviews ÷ reported project cost in $ millions. Positive values mean nearby review activity outpaced the comparison under this row’s method.'],
+  relative:['CE (Rel % / $1M)','Nearby review-growth advantage over the comparison, expressed as a percentage, divided by project cost in $ millions. Percentage growth can be unstable when baseline activity is sparse.'],
+  normalized:['CE (Norm % / $1M)','Net Reviews ÷ baseline reviews in the nearby sample × 100, then ÷ project cost in $ millions. This expresses the adjusted difference relative to starting activity.'],
+  support:['Support','Low support hides estimates with too little baseline evidence. OK means the minimum sample rule is met, not that the estimate is causal or precise. Unmatched identifies Sun Link’s separate comparison design.'],
+};
+let ceHelpTrigger=null;
+function closeCeColumnHelp(returnFocus=false){
+  const panel=$('ceColumnHelp');if(panel.hidden)return;
+  panel.hidden=true;
+  if(ceHelpTrigger){ceHelpTrigger.setAttribute('aria-expanded','false');if(returnFocus)ceHelpTrigger.focus();}
+  ceHelpTrigger=null;
+}
+function openCeColumnHelp(button){
+  const panel=$('ceColumnHelp'),entry=CE_COLUMN_HELP[button.dataset.ceHelp];if(!entry)return;
+  if(ceHelpTrigger===button&&!panel.hidden){closeCeColumnHelp(true);return;}
+  closeCeColumnHelp();ceHelpTrigger=button;button.setAttribute('aria-expanded','true');
+  $('ceColumnHelpTitle').textContent=entry[0];$('ceColumnHelpText').textContent=entry[1];panel.hidden=false;
+  const rect=button.getBoundingClientRect(),width=panel.offsetWidth,height=panel.offsetHeight;
+  panel.style.left=Math.max(12,Math.min(rect.left,window.innerWidth-width-12))+'px';
+  panel.style.top=Math.max(12,rect.bottom+8+height<=window.innerHeight-12?rect.bottom+8:rect.top-height-8)+'px';
+  panel.focus({preventScroll:true});
+}
+function initializeCeColumnHelp(){
+  document.querySelectorAll('[data-ce-help]').forEach(button=>button.addEventListener('click',()=>openCeColumnHelp(button)));
+  $('ceColumnHelpClose').addEventListener('click',()=>closeCeColumnHelp(true));
+  document.addEventListener('pointerdown',event=>{if(ceHelpTrigger&&!$('ceColumnHelp').contains(event.target)&&!event.target.closest('[data-ce-help]'))closeCeColumnHelp();});
+  document.addEventListener('keydown',event=>{if(event.key==='Escape'&&ceHelpTrigger){event.preventDefault();closeCeColumnHelp(true);}});
+  document.addEventListener('scroll',()=>closeCeColumnHelp(),true);
+  window.addEventListener('resize',()=>closeCeColumnHelp());
 }
 function renderCapitalEfficiency(){
   if(!$('efficiencyRows')) return;
@@ -99,17 +135,24 @@ function renderCapitalEfficiency(){
     $('efficiencyRows').innerHTML = '<tr><td colspan="10" style="text-align:center; padding:18px; color:var(--muted);">No matched data available for this radius and income tier combination.</td></tr>';
     return;
   }
-  // Plan invariant: Flagged rows (low_support = true, N < 20) MUST be suppressed from ranking comparisons.
-  // Sort supported (non-flagged) rows descending by CE_abs; append flagged rows at the bottom.
+  // Keep matched and unmatched estimates in separate blocks.
+  // Suppress efficiency ratios for under-supported rows.
   rows.sort((a, b) => {
     const flagA = a.low_support === true || a.low_support === 'True';
     const flagB = b.low_support === true || b.low_support === 'True';
+    const methodOrder = method => method === 'matched_pairs' ? 0 : method === 'unmatched_growth_adjusted_corridor' ? 1 : 2;
+    const methodA = methodOrder(a.comparison_method);
+    const methodB = methodOrder(b.comparison_method);
+    if (methodA !== methodB) return methodA - methodB;
     if (flagA !== flagB) return flagA ? 1 : -1;
     return (parseFloat(b.ce_abs_per_million) || 0) - (parseFloat(a.ce_abs_per_million) || 0);
   });
   $('efficiencyRows').innerHTML = rows.map(r => {
     const isFlag = r.low_support === true || r.low_support === 'True';
-    const flagHtml = isFlag ? '<span style="color:#b66740; font-weight:600;">FLAG (N&lt;20)</span>' : '<span style="color:#146e64;">OK</span>';
+    const isCohort = r.comparison_method === 'cohort_mean';
+    const isCorridor = r.comparison_method === 'unmatched_growth_adjusted_corridor';
+    const methodLabel = isCorridor ? 'Full route · growth adjusted, unmatched' : isCohort ? 'Unmatched cohort' : 'Matched pairs';
+    const flagHtml = isFlag ? '<span style="color:#b66740; font-weight:600;">Low support</span>' : isCorridor ? '<span style="color:#a54926;">Unmatched</span>' : '<span style="color:#146e64;">OK</span>';
     const did = parseFloat(r.did_per_pair) || 0;
     const didStr = (did > 0 ? '+' : '') + did.toFixed(2);
     const netVol = parseFloat(r.net_volume_gain) || 0;
@@ -121,130 +164,56 @@ function renderCapitalEfficiency(){
     const ceNorm = parseFloat(r.ce_norm_pct_per_million);
     const ceNormStr = isNaN(ceNorm) ? 'N/A' : (ceNorm > 0 ? '+' : '') + ceNorm.toFixed(2) + '%';
 
-    return `<tr>
-      <td><strong>${safe(r.project)}</strong><br><small style="color:var(--muted);">${safe(r.project_type)}</small></td>
+    return `<tr data-project="${safe(r.project)}" tabindex="-1">
+      <td><strong>${safe(r.project)}</strong><br><small style="color:var(--muted);">${safe(r.project_type)} · ${methodLabel}</small></td>
       <td>${safe(r.city)}</td>
       <td>$${parseFloat(r.cost_millions).toFixed(1)}M</td>
-      <td>${r.pairs}</td>
-      <td style="color:${did < 0 ? 'var(--orange)' : 'inherit'};">${didStr}</td>
-      <td style="color:${netVol < 0 ? 'var(--orange)' : 'inherit'};">${netVolStr}</td>
-      <td><strong>${isFlag ? '<span style="color:var(--muted);">' + ceAbsStr + '</span>' : ceAbsStr}</strong></td>
-      <td>${isFlag ? '<span style="color:var(--muted);">' + ceRelStr + '</span>' : ceRelStr}</td>
-      <td>${isFlag ? '<span style="color:var(--muted);">' + ceNormStr + '</span>' : ceNormStr}</td>
+      <td>${r.pairs} ${isCorridor ? 'route listings' : isCohort ? 'nearby baseline' : 'pairs'}</td>
+      <td style="color:${did < 0 ? 'var(--orange)' : 'inherit'};">${isFlag ? '—' : didStr}</td>
+      <td style="color:${netVol < 0 ? 'var(--orange)' : 'inherit'};">${isFlag ? '—' : netVolStr}</td>
+      <td><strong>${isFlag ? '—' : ceAbsStr}</strong></td>
+      <td>${isFlag ? '—' : ceRelStr}</td>
+      <td>${isFlag ? '—' : ceNormStr}</td>
       <td>${flagHtml}</td>
     </tr>`;
   }).join('');
 }
-const REFERENCE_CLASSES = {
-  greenway: {
-    name: 'Linear Greenway / Trail',
-    source: 'Lafitte Greenway (N=1)',
-    didLow: 10.59,
-    didHigh: 23.26,
-    spreadLabel: 'DiD Spread: +10.59 to +23.26 revs/biz (500m vs 1000m)',
-  },
-  plaza: {
-    name: 'Civic Plaza / Transit Hub',
-    source: 'Dilworth Park (N=1)',
-    didLow: -1.27,
-    didHigh: 7.50,
-    spreadLabel: 'DiD Spread: −1.27 (250m) to +7.50 (500m)',
-  },
-  riverfront: {
-    name: 'Riverfront Event Park',
-    source: 'Riverfront / Ascend (N=1)',
-    didLow: 12.55,
-    didHigh: 44.48,
-    spreadLabel: 'DiD Spread: +12.55 (1000m) to +44.48 (250m)',
-  },
-  transit: {
-    name: 'Fixed-Rail Transit / Streetcar',
-    source: 'Sun Link (N=1)',
-    didLow: -1.36,
-    didHigh: -0.92,
-    spreadLabel: 'DiD Spread: −1.36 (250m) to −0.92 (1000m)',
-  },
-};
-
-function renderScenarioExplorer() {
-  if (!$('scenBudget')) return;
-  const budget = parseFloat($('scenBudget').value) || 15.0;
-  if ($('scenBudgetValue')) $('scenBudgetValue').textContent = budget.toFixed(1);
-
-  const typKey = $('scenTypology') ? $('scenTypology').value : 'greenway';
-  const ref = REFERENCE_CLASSES[typKey] || REFERENCE_CLASSES.greenway;
-
-  if ($('scenRefName')) $('scenRefName').textContent = `Reference Case: ${ref.source}`;
-  if ($('scenRadiusSpread')) $('scenRadiusSpread').textContent = ref.spreadLabel;
-
-  const targetZip = $('scenZip') ? $('scenZip').value : S.zip;
-  const zInfo = features[targetZip]?.properties;
-  const metro = zInfo ? zInfo.metro : S.city;
-  const pop = populationOf(targetZip);
-  const reviewsAtQuarter = zInfo ? zInfo.n[S.q] : 50;
-
-  const estBiz = Math.max(12, Math.round((reviewsAtQuarter || 45) / 12));
-
-  if ($('scenContext')) {
-    $('scenContext').innerHTML = `<strong>ZIP ${safe(targetZip)} (${safe(metro)}):</strong> ~${estBiz} estimated baseline businesses in catchment · ${reviewsAtQuarter ? fmt.format(reviewsAtQuarter) : '0'} quarterly reviews · ${pop ? fmt.format(pop) + ' residents (2020)' : 'Population unavailable'}.`;
-  }
-
-  const revLow = Math.round(estBiz * ref.didLow);
-  const revHigh = Math.round(estBiz * ref.didHigh);
-  const formatRev = v => (v > 0 ? '+' : '') + fmt.format(v);
-
-  if ($('scenNetReviews')) {
-    $('scenNetReviews').textContent = `${formatRev(revLow)} to ${formatRev(revHigh)}`;
-  }
-
-  const effLow = revLow / budget;
-  const effHigh = revHigh / budget;
-  const formatEff = v => (v > 0 ? '+' : '') + v.toFixed(1);
-
-  if ($('scenEfficiency')) {
-    $('scenEfficiency').textContent = `${formatEff(effLow)} to ${formatEff(effHigh)}`;
-    $('scenEfficiency').style.color = effHigh < 0 ? 'var(--orange)' : 'var(--teal)';
-  }
-
-  const alertEl = $('scenAlert');
-  if (alertEl) {
-    if (effHigh < 10.0 && budget >= 25.0) {
-      alertEl.style.display = 'block';
-      alertEl.innerHTML = `<strong>Over-Capitalization Alert:</strong> Proposed $${budget.toFixed(1)}M outlay yields low projected return (${formatEff(effHigh)} revs/$M max). The capital footprint exceeds the commercial carrying capacity of this ~${estBiz}-business catchment. Consider scaling down expenditure or coordinating with pedestrian zoning to expand local storefront capacity.`;
-    } else {
-      alertEl.style.display = 'none';
-    }
-  }
+function focusProject(name){
+  const row=[...document.querySelectorAll('#efficiencyRows tr')].find(r=>r.dataset.project===name);
+  if(!row){$('capital-efficiency').scrollIntoView({behavior:'smooth'});return;}
+  document.querySelectorAll('#efficiencyRows tr').forEach(r=>r.classList.remove('focus-project'));
+  row.classList.add('focus-project');row.scrollIntoView({behavior:'smooth',block:'center'});
+  row.focus({preventScroll:true});
+}
+function setCeFilters(radius,income){
+  $('ceMapRadius').value=radius;$('effRadius').value=radius;
+  $('ceMapIncome').value=income;$('effIncome').value=income;
+  renderCapitalEfficiency();renderMap();renderLegend();renderCeSummary();renderProjectTimeline();
 }
 function initializeAnalysis(){
+  initializeCeColumnHelp();
   for(const [key,t] of Object.entries(REV?.topics||{})){$('reviewLens').add(new Option(t.label,key));$('exampleTopic').add(new Option(t.label,key));}
   $('reviewLens').onchange=e=>setTopic(e.target.value);$('exampleTopic').value=A.example;$('exampleTopic').onchange=e=>{A.example=e.target.value;renderExamples();};$('clearTopic').onclick=()=>setTopic('all');
   ['lag','window','minimum'].forEach(id=>$(id).addEventListener('input',e=>{A[id]=+e.target.value;hideTip();if(id==='minimum'){viewCache.clear();render();}else renderAnalysis();}));
   $('fundingBasis').onchange=e=>{A.basis=e.target.value;renderAnalysis();};$('populationMinimum').oninput=e=>{A.populationMinimum=+e.target.value;renderMap();renderLegend();renderAnalysis();};
   $('outcome').onchange=e=>{A.outcome=e.target.value;renderAnalysis();};$('sortFunding').onclick=()=>{A.sort='funding';renderLedger(currentRows);};$('sortRate').onclick=()=>{A.sort='rate';renderLedger(currentRows);};$('sortChange').onclick=()=>{A.sort='change';renderLedger(currentRows);};$('populationRows').onclick=e=>{const b=e.target.closest('[data-pop-city]');if(b)selectCity(b.dataset.popCity);};$('areaRows').onclick=e=>{const b=e.target.closest('[data-select-zip]');if(b)selectZip(b.dataset.selectZip);};
-  $('downloadComparison').onclick=()=>{const end=S.q-A.lag,start=end-A.window+1;const columns=['city','zip','review_theme','review_quarter','funding_start','funding_end','lag_quarters','window_quarters','minimum_reviews','net_obligations','population_2020','funding_per_2020_resident','funding_basis','minimum_population','mean_sentiment','annual_change','matching_reviews','outcome','included','status'];const data=currentRows.map(r=>[S.city,r.zip,themeName(),D.quarters[S.q],start>=0?D.quarters[start]:'',end>=0?D.quarters[end]:'',A.lag,A.window,A.minimum,r.funding,r.population,r.rate,A.basis,A.populationMinimum,r.sent,r.change,r.n,A.outcome,r.included,r.status]);const csv=[columns,...data].map(row=>row.map(v=>'"'+String(typeof v==='number'&&!Number.isInteger(v)?Number(v.toFixed(6)):v??'').replace(/"/g,'""')+'"').join(',')).join('\r\n');if(exportUrl)URL.revokeObjectURL(exportUrl);exportUrl=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'}));$('exportText').value=csv;$('exportSummary').textContent=`${currentRows.length} ZIPs · ${D.metros[S.city].label} · ${D.quarters[S.q]} · ${themeName()} · ${fundingUnits()}`;$('saveCSV').href=exportUrl;$('saveCSV').download=`${S.city}-${D.quarters[S.q]}-lag-${A.lag}-${A.basis}.csv`;$('copyStatus').textContent='';$('exportDialog').showModal();};
+  $('downloadComparison').onclick=()=>{const end=S.q-A.lag,start=end-A.window+1;const columns=['city','zip','review_theme','review_quarter','funding_start','funding_end','lag_quarters','window_quarters','minimum_reviews','net_obligations','population_2020','funding_per_2020_resident','funding_basis','minimum_population','reviews_this_quarter','reviews_prior_year','annual_review_growth_pct','outcome','included','status'];const data=currentRows.map(r=>[S.city,r.zip,themeName(),D.quarters[S.q],start>=0?D.quarters[start]:'',end>=0?D.quarters[end]:'',A.lag,A.window,A.minimum,r.funding,r.population,r.rate,A.basis,A.populationMinimum,r.n,r.prior,r.growth,A.outcome,r.included,r.status]);const csv=[columns,...data].map(row=>row.map(v=>'"'+String(typeof v==='number'&&!Number.isInteger(v)?Number(v.toFixed(6)):v??'').replace(/"/g,'""')+'"').join(',')).join('\r\n');if(exportUrl)URL.revokeObjectURL(exportUrl);exportUrl=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'}));$('exportText').value=csv;$('exportSummary').textContent=`${currentRows.length} ZIPs · ${D.metros[S.city].label} · ${D.quarters[S.q]} · ${themeName()} · ${fundingUnits()}`;$('saveCSV').href=exportUrl;$('saveCSV').download=`${S.city}-${D.quarters[S.q]}-lag-${A.lag}-${A.basis}.csv`;$('copyStatus').textContent='';$('exportDialog').showModal();};
   $('copyCSV').onclick=async()=>{try{await navigator.clipboard.writeText($('exportText').value);$('copyStatus').textContent='Copied.';}catch{$('exportText').focus();$('exportText').select();$('copyStatus').textContent='Text selected. Press your copy shortcut.';}};
 
-  if($('effRadius')) $('effRadius').onchange = renderCapitalEfficiency;
-  if($('effIncome')) $('effIncome').onchange = renderCapitalEfficiency;
+  $('ceMapRadius').onchange=()=>setCeFilters($('ceMapRadius').value,$('ceMapIncome').value);
+  $('ceMapIncome').onchange=()=>setCeFilters($('ceMapRadius').value,$('ceMapIncome').value);
+  $('effRadius').onchange=()=>setCeFilters($('effRadius').value,$('effIncome').value);
+  $('effIncome').onchange=()=>setCeFilters($('effRadius').value,$('effIncome').value);
   renderCapitalEfficiency();
-  if ($('scenZip')) {
-    const zips = GEO.features.map(f => f.properties.zip).sort();
-    $('scenZip').innerHTML = zips.map(z => `<option value="${z}" ${z === (S.zip || zips[0]) ? 'selected' : ''}>ZIP ${z} (${safe(features[z]?.properties.metro || '')})</option>`).join('');
-    $('scenZip').onchange = renderScenarioExplorer;
-  }
-  if ($('scenBudget')) $('scenBudget').oninput = renderScenarioExplorer;
-  if ($('scenTypology')) $('scenTypology').onchange = renderScenarioExplorer;
-  renderScenarioExplorer();
   renderAnalysis();
 }
 
 function populationStats(city,zip=null,lag=A.lag,width=A.window){
   const all=GEO.features.filter(f=>f.properties.metro===city&&(!zip||f.properties.zip===zip));
   const covered=all.filter(f=>perResident(0,populationOf(f.properties.zip),A.populationMinimum)!=null);
-  let population=0,funding=0,complete=covered.length>0,reviewSum=0,reviews=0;
-  for(const f of covered){const z=f.properties.zip,a=zipView(z);population+=populationOf(z);const amount=fundingWindow(a.inv,S.q,lag,width);if(amount==null)complete=false;else funding+=amount;if(a.sent[S.q]!=null){reviewSum+=a.sent[S.q]*a.n[S.q];reviews+=a.n[S.q];}}
-  return {population:covered.length?population:null,funding:complete?funding:null,rate:complete?perResident(funding,population):null,sent:reviews?reviewSum/reviews:null,covered:covered.length,total:all.length};
+  let population=0,funding=0,complete=covered.length>0,reviews=0,priorReviews=0;
+  for(const f of covered){const z=f.properties.zip,a=zipView(z);population+=populationOf(z);const amount=fundingWindow(a.inv,S.q,lag,width);if(amount==null)complete=false;else funding+=amount;if(S.q>=4&&a.n[S.q]>=A.minimum&&a.n[S.q-4]>=A.minimum){reviews+=a.n[S.q];priorReviews+=a.n[S.q-4];}}
+  return {population:covered.length?population:null,funding:complete?funding:null,rate:complete?perResident(funding,population):null,growth:priorReviews?100*(reviews/priorReviews-1):null,covered:covered.length,total:all.length};
 }
 function renderPopulation(){
   $('populationMinimumValue').textContent=fmt.format(A.populationMinimum);$('populationMinimum').setAttribute('aria-valuetext',A.populationMinimum+' residents (2020)');
@@ -253,6 +222,6 @@ function renderPopulation(){
   const s=populationStats(S.city,S.zip);$('populationScope').textContent=(S.zip?'ZIP '+S.zip:D.metros[S.city].label)+' · funding window follows lag controls';
   $('populationTotal').textContent=s.population==null?'Unavailable':fmt.format(s.population);$('populationFunding').textContent=s.funding==null?'Unavailable':money(s.funding);$('populationRate').textContent=residentMoney(s.rate);
   $('populationCoverage').textContent=`${s.covered} of ${s.total} mapped ZCTAs meet the ${fmt.format(A.populationMinimum)}-resident minimum.${S.zip&&populationOf(S.zip)!=null?' Selected ZIP population: '+fmt.format(populationOf(S.zip))+'.':''}`;
-  $('populationRows').innerHTML=Object.entries(D.metros).map(([city,m])=>{const r=populationStats(city);return `<tr data-selected="${city===S.city}"><td><button data-pop-city="${city}">${m.label}</button></td><td>${r.population==null?'Unavailable':fmt.format(r.population)}</td><td>${r.funding==null?'Unavailable':money(r.funding)}</td><td>${residentMoney(r.rate)}</td><td>${score(r.sent)}</td><td>${r.covered} / ${r.total}</td></tr>`;}).join('');
+  $('populationRows').innerHTML=Object.entries(D.metros).map(([city,m])=>{const r=populationStats(city);return `<tr data-selected="${city===S.city}"><td><button data-pop-city="${city}">${m.label}</button></td><td>${r.population==null?'Unavailable':fmt.format(r.population)}</td><td>${r.funding==null?'Unavailable':money(r.funding)}</td><td>${residentMoney(r.rate)}</td><td>${growthLabel(r.growth)}</td><td>${r.covered} / ${r.total}</td></tr>`;}).join('');
   if(A.basis==='resident')$('windowAmount').textContent=s.rate==null?'Per-resident window unavailable':residentMoney(s.rate)+' per 2020 resident · '+(S.zip?'selected ZIP':'covered mapped areas');
 }

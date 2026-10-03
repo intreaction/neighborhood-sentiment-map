@@ -1,0 +1,10 @@
+@import "tailwindcss" source(none);
+@source "./components/ui/chart.tsx";
+@source "./place_chart_components.tsx";
+@theme inline {
+  --color-background: #fffdf6;
+  --color-foreground: #173c35;
+  --color-muted: #e9ecdf;
+  --color-muted-foreground: #5b705d;
+  --color-border: #d4dcca;
+}

@@ -11,6 +11,20 @@ function reviewOutcome(values, quarter, mode) {
   if (mode === 'level') return values[quarter];
   return quarter >= 4 && values[quarter - 4] != null ? values[quarter] - values[quarter - 4] : null;
 }
+function engagementGrowth(counts, quarter, minimum = 30) {
+  if (quarter < 4 || counts[quarter] == null || counts[quarter - 4] == null) return null;
+  const current = counts[quarter], prior = counts[quarter - 4];
+  if (current < minimum || prior < minimum || prior <= 0) return null;
+  return 100 * (current / prior - 1);
+}
+function mapEngagementValue(counts, quarter, minimum = 30) {
+  const count = counts[quarter];
+  return Number.isFinite(count) && count >= minimum ? count : null;
+}
+function engagementOutcome(counts, quarter, mode, minimum = 30) {
+  if (mode === 'level') return counts[quarter] >= minimum ? Math.log1p(counts[quarter]) : null;
+  return engagementGrowth(counts, quarter, minimum);
+}
 function signedLog(value) { return Math.sign(value) * Math.log1p(Math.abs(value)); }
 function perResident(amount, population, minimum = 0) {
   return Number.isFinite(amount) && Number.isFinite(population) && population > 0 && population >= minimum

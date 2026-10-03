@@ -2,7 +2,8 @@
 
 **CIS 509 — Analytics for Unstructured Data** · Fall 2026 · Canvas course `264495` (Xiao Liu)
 
-Public investment (USASpending) vs Yelp review sentiment, rendered as a web map.
+An evidence explorer and experimental proposal tool for public investments, combining
+project outcomes with unstructured Yelp review analysis.
 
 **Team 4** — John Wheeler, Ryan Wolff, Cameron Anthony
 
@@ -15,52 +16,128 @@ code and durable project docs — not the weekly lab write-ups.
 
 CIS 509 has its own `.venv` at the course-folder level; use it for this course's Python.
 
-## Map application
+## Presenting the demo
 
-Open `web/index.html` directly, or serve `web/` locally. The page is self-contained:
-SVG geography, review sentiment and funding data are embedded, with no external
-map tiles, JavaScript libraries or font requests.
+Double-click [`start-demo.command`](start-demo.command) to open the prepared local
+site. It selects a free loopback port and needs only Python 3, the bundled `web/`
+files and a browser. Keep the launcher Terminal open while presenting.
 
-- Choose one of the five cities, then click a ZIP polygon or use the Area selector.
-- The quarterly slider and play/pause control sit directly beneath the map, inside
-  the map card. They synchronize the map, selected-area statistics and both charts.
-- Switch between sentiment, year-over-year sentiment change and signed funding.
-  The optional funding circles show positive net obligations at area centers, not
-  verified project locations. Negative adjustments remain in the funding view/chart.
-- The selected ZIP's sentiment history is compared with its city's review-weighted
-  history. Click either chart to select a quarter; drag to pan or use the zoom
-  buttons / Ctrl+scroll to zoom. Ordinary scrolling moves through the page. On narrow screens, details and charts stack below the map.
-- Hatching flags unavailable sentiment/comparisons; annual change needs both the
-  current quarter and the same quarter one year earlier to meet the chosen review
-  threshold (30 by default; adjustable from 10 to 200).
+- [Editable presentation](docs/presentation/Public-Investment-Evidence.pptx): ten main slides, three backup slides, and speaker notes.
+- [PDF viewing copy](output/pdf/Public-Investment-Evidence.pdf).
+- [Presenter guide](docs/presentation/Presenter-Guide.md): ten-minute story, key points and anticipated questions.
+- [Three-minute demo runbook](docs/demo-runbook.md): exact clicks and fallback plan.
 
-Scroll below the map for:
+New prototype: **Place Lab**, a location-to-proposal tool with direct controls and
+an interactive 2D map. Placement is limited to covered regions with at least one
+business with 2018–2019 reviews within 500 m. Double-click [`start-place.command`](start-place.command), or
+run `python3 src/serve_place.py --port 8766`, then open
+`http://127.0.0.1:8766/place.html`. Map selection, project type, budget, actual nearby-business profiles and estimates
+run in the browser without an API backend. Optional browser tools use the same validated controls. See the
+[implementation and demo guide](docs/plan/conversational-ar.md).
 
-- A funding timing lab with 0–12-quarter lags, 1–8-quarter funding windows, review
-  coverage controls, a linked ZIP scatterplot and a fixed-cohort view of all lags.
-- Six overlapping review themes, review-rating distributions and sampled excerpts.
-  Choosing a theme filters sentiment throughout the map and analysis.
-- Census 2020 population, a dollars-per-resident map, population normalization in
-  the lag lab, and a five-region population/funding/sentiment table. The population
-  denominator is a fixed 2020 snapshot; the default minimum is 500 residents.
-- A sortable ZIP comparison table and CSV preview with save/copy options.
+Original development plan: [Three.js 3D map](docs/plan/threejs-3d-map.md).
 
-Text tags cover all 3,073,181 study reviews, with 2,390,974 matching at least one
-rule. They are exploratory keyword mentions, not validated aspect classifications.
-See `docs/atlas-exploration.md` for definitions, provenance and limitations.
+## Current product
 
-Edit `src/map_template.html` and `src/exploration.{html,css,js}`. To build the
-review-tag aggregates once and regenerate the page:
+Live site: [Public Investment Map](https://intreaction.github.io/neighborhood-sentiment-map/)
+and [Place Lab](https://intreaction.github.io/neighborhood-sentiment-map/place.html).
+GitHub Actions publishes the prepared `web/` directory when its files change on
+`main`. The **Deploy GitHub Pages** workflow can also be run manually. Only the
+static web files are published; raw data and local Python launchers are not needed
+by visitors. After changing Place Lab sources, run `python3 src/build_place_site.py`
+and `npm run build:place`, then commit the updated `web/` files.
+
+Open `web/index.html`, or serve `web/` with `python -m http.server 8765 --directory web`.
+The original self-contained pages use embedded data, SVG, CSS and JavaScript.
+Place Lab uses a local 2D canvas map, bundled shadcn/Recharts graphs and JSON assets and must be served over
+HTTP. Neither UI needs external fonts or map tiles. Local profile imports remain
+in the browser. The prepared web assets can be hosted on a static site service such as GitHub Pages.
+
+- **Explore projects** (`index.html` / `projects.html`): 11 historical projects in
+  seven cities, one harmonized outcome, near/comparison counts, footprint diagrams,
+  text topics, sentiment, excerpts, source notes and coverage limitations.
+- **Analyze a proposal** (`model.html`): start with a historical example or enter/import
+  a measured baseline profile; change cost and local activity, inspect comparables,
+  export inputs and the resulting estimate. Unsupported inputs withhold the estimate.
+  Missing provenance is labeled an assumption-only scenario.
+- **Area atlas** (`atlas.html`): the earlier five-city ZIP map, review themes,
+  funding lag exploration and population context. Its optional Legacy CE layer uses
+  different methods and is preserved for comparison, not mixed into primary outcomes.
+- **Place Lab** (`place.html`): pick a point, choose type and budget, count businesses
+  within 500 m and run the existing model. A fixed 2018–2019 baseline covers five
+  metros. Placement requires nearby baseline-reviewed businesses. Optional browser tools are
+  available through the browser adapter.
+- **Archived reference calculator** (`reference.html`) and **earlier coursework report**
+  (`report.html`) retain prior research results and their original definitions.
+
+Capital efficiency here means **growth-adjusted excess Yelp reviews per $1 million
+of reported project cost**, over two post-opening years. It is an online-activity
+proxy, not financial return, public benefit, or a causal effect. Costs are nominal
+reported totals with inconsistent public/private scope; the January 2022 Yelp archive
+cannot describe current conditions.
+
+### Coverage and model evidence
+
+The project extraction scored **1,063,956 unique reviews**, yielding 1,420,312
+project/period memberships. Overlapping catchments share 292,924 reviews. Ten of 11
+projects meet baseline support requirements; Water Works Park remains visible with
+its outcome withheld. Six projects have mapped footprints and five use explicit
+center proxies. Mapped geometry is not necessarily a verified historical footprint.
+
+Text extraction records topic, whole-review sentiment, place versus business target,
+and provisional clause-level polarity for parking, transit, walking/accessibility,
+public space, safety, construction, cleanliness/maintenance, neighborhood and
+food/service/value. Pre-opening place discussion, access friction and public-realm
+complaints form model challenger features. Rule labels remain provisional: the
+local annotation task is prepared, but no independent human accuracy estimate exists.
+
+The advanced text layer learns **TF-IDF unigram/bigram features and five NMF topics**
+from baseline review language. It uses 23,691 sampled nearby baseline/post reviews
+(10,971 unique baseline reviews fit the descriptive topic basis), then exposes
+pre/post topic mixtures, normalized topic entropy, lexical diversity, review length
+and negation frequency. The prediction challenger refits its text representation
+inside every held-out fold, using a separate versioned basis. See
+[advanced text methods](docs/advanced-text-method.md) for sampling, leakage controls
+and interpretation. These learned topics often reflect food and service language;
+they are not automatically civic-satisfaction labels.
+
+On the refreshed common ten-project sample, the three-input baseline (reported cost,
+baseline reviewed businesses, reviews per reviewed business) has project-held-out MAE
+49.33 and city-held-out MAE 45.61 reviews/$1M. Rule-text, early-trend and learned-text challengers did not
+improve both errors, so the baseline remains selected. Its advantage over a mean-only
+comparator disappears when timing-sensitive cases are excluded. The displayed error
+envelope is historical error, not a calibrated confidence interval. This is a research
+prototype for exploring assumptions and evidence, not a validated budget recommender.
+
+### Rebuild the current product
+
+Python dependencies are pinned in `requirements.txt`; this workspace uses `../.venv`.
+The raw Yelp archive and business file are required for extraction, but the checked-in
+aggregate evidence/model artifacts suffice to rebuild the site.
 
 ```sh
-../.venv/bin/python src/build_review_topics.py  # stream raw text; reuse reconciled scores
-../.venv/bin/python src/build_map_page.py
+../.venv/bin/python src/build_project_evidence.py --workers 4
+../.venv/bin/python src/build_advanced_text.py
+../.venv/bin/python src/train_project_model.py
+../.venv/bin/python src/build_evidence_site.py
 ```
 
-This UI uses the existing quarterly funding panel. It does not reconcile the older
-transaction builder, reclassify awards or validate the lag model's causal claims.
-The interface describes recorded obligations and review sentiment, with geographic
-and source limitations available in its data notes.
+The extractor reuses a versioned local cache under ignored `data/interim/project_evidence/`.
+Use `--rebuild-cache` when required. `src/fetch_project_geometry.py` refreshes the
+sourced Rail Park footprint with provenance; it requires network access. See
+[the source audit](docs/project-source-audit.md) and
+[implementation plan](docs/product-improvement-plan.md),
+[browser/test validation](docs/qa/validation.md), and
+[demo walkthrough](docs/demo-walkthrough.md).
+
+```sh
+../.venv/bin/python -m unittest discover -s tests -p 'test_*.py'
+node --test tests/*.test.cjs
+```
+
+Legacy outputs remain reproducible with `src/build_map_page.py` (`atlas.html`) and
+`src/build_model_page.py` (`reference.html`). Their earlier aggregate inputs and
+pipelines are documented in [atlas exploration](docs/atlas-exploration.md).
 
 ## Data pipeline
 
@@ -100,18 +177,18 @@ Raw data is gitignored. Regenerate it from scratch with:
 ../.venv/bin/python src/fetch_map_context.py       # water, roads, county outlines
 ../.venv/bin/python src/simplify_context.py        # 8.07 MB -> 0.37 MB
 ../.venv/bin/python src/fetch_map_furniture.py     # state borders, place labels, metro extents
-../.venv/bin/python src/build_map_page.py          # -> web/index.html   (the map)
+../.venv/bin/python src/build_map_page.py          # -> web/atlas.html   (historical ZIP context)
 
 ../.venv/bin/python src/lag_analysis.py            # naive lag cross-correlation (null)
 ../.venv/bin/python src/case_studies.py            # per-award difference-in-differences
 ../.venv/bin/python src/build_lag_model.py         # 48-kernel surface + permutation + bootstrap
-../.venv/bin/python src/build_lag_page.py          # -> web/lag.html     (the demo)
+../.venv/bin/python src/build_lag_page.py          # -> web/lag.html     (earlier research explorer)
 ```
 
 `build_lag_model.py` is the slow one (~6 min): 48 kernels x 5 control regimes, plus a
 400-draw permutation null and a 300-draw ZIP-clustered bootstrap.
 
-### Headline result
+### Earlier ZIP-funding research result
 
 No weighting of twelve years of place-based obligations correlates detectably with
 ZIP-quarter review sentiment once ZIP and quarter fixed effects are applied. Best of

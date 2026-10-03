@@ -6,6 +6,63 @@ City, review quarter, review theme and coverage threshold are shared across sect
 Selecting a ZIP changes its details, history and review breakdown; the scatterplot
 and correlation still compare all eligible mapped ZIPs in the selected city.
 
+The default map depicts project Capital Efficiency (CE): a review difference
+per $1 million of reported project cost. Four project badges use matched business
+samples. Sun Link uses all 717 Yelp listings along its 500 m route corridor and
+adjusts for review growth in a farther 1.5–8 km Tucson area. Its unmatched result
+is not directly comparable with the matched badges. Green is positive, orange is
+negative, and gray means insufficient support or no estimate. The default 500-meter, all-income
+view can be changed with radius and income selectors that also update the benchmark
+table. CE uses a fixed pre/post comparison and is pinned at the end of the project
+post window on the timeline. The quarter slider changes the ZIP colors, which
+show quarterly Yelp review counts on a logarithmic scale. Review-theme filtering
+changes ZIP colors, not CE. Reported costs may mix public and private funding.
+Expansion projects use unmatched cohorts and are excluded from this map layer.
+
+The ZIP review-growth view measures quarterly Yelp review counts relative to the
+same quarter one year earlier: `100 × (N_t / N_(t−4) − 1)`. Both counts must meet
+the current minimum (30 reviews by default). The companion count view uses a fixed
+logarithmic color scale. Review count is a proxy for online activity, not visits or
+spending. The ZIP color summarizes an entire area, while project outlines mark the
+five documented footprints. The project comparison below uses nearby businesses
+(500 meters by default) and a separate comparison group; ZIP color is not that local
+estimate.
+
+## Capital Efficiency Studio
+
+`web/model.html` is a separate, self-contained capital-efficiency page linked from
+the map. It includes a trained research estimate from ten supported projects and
+shows leave-one-project-out error; the estimate is not reliable enough to choose
+a budget or site. The executed [final report](coursework/final-project/Final_Submission_Report.ipynb)
+documents the project EDA and training method. Its observed-reference scenario
+is described below.
+It loads four matched project references from `capital_efficiency.csv` and
+recomputes the full-route Sun Link reference from `sun_scopes.csv` and its
+coverage inputs (`sun_link_corridor_efficiency.csv` records the same output). For the
+selected type, radius and income group, it multiplies the observed review
+difference per business or route listing by the user-entered catchment count.
+Dividing by proposed cost in $ millions gives scenario CE in net reviews per $1M.
+Sun Link requires a count of all Yelp listings along the proposed route and uses
+an unmatched, growth-adjusted contrast.
+
+Target city and ZIP provide contextual population and all-ZIP Yelp business totals.
+They do not numerically adjust the score: a whole-ZIP listing count cannot stand
+in for a 250–1,000 m project catchment, and the five cases cannot identify an
+independent location effect. The user must supply a catchment business count.
+Rows with inadequate baseline support, missing differences, or invalid inputs
+produce no score. The radius comparison holds proposed cost and business count
+fixed while changing the reference radius; it is sensitivity, not an uncertainty
+interval. This page is an illustrative reference-case calculation, not a validated
+prediction or financial return estimate.
+
+Build and verify it with:
+
+```sh
+../.venv/bin/python src/build_model_page.py
+node --test tests/model_math.test.cjs
+../.venv/bin/python -m unittest discover -s tests -p 'test_model_page.py'
+```
+
 ## Funding timing
 
 For review quarter `t`, lag `L` and window length `W`, funding is the sum of signed
@@ -13,15 +70,16 @@ net obligations from `t − L − W + 1` through `t − L`, inclusive. A lag of 
 includes the review quarter. The UI labels the exact funding dates and outcome date.
 Example: reviews in 2021Q4, lag 4, window 4 → funding in 2020Q1–2020Q4.
 
-The default outcome is sentiment in `t` minus sentiment in `t − 4`. Both quarters
-must meet the review threshold. The alternative is sentiment level in `t` alone.
-The annual-change map always compares the same quarter one year earlier, independent
-of the funding window. The top funding chart shows original transaction timing;
+The default outcome is percent change in review count from `t − 4` to `t`. Both quarters
+must meet the review threshold. The alternative is `log(1 + reviews in t)`, with
+the current quarter meeting the same threshold. The review-growth map always compares
+the same quarter one year earlier, independent of the funding window. The top funding
+chart shows original transaction timing;
 the lag lab provides the explicit earlier funding comparison.
 
 The scatterplot has one observation per mapped ZIP in the chosen city at `t`, with
 equal dot size and equal statistical weight. Pearson correlation uses signed-log
-funding (`sign(x) * log(1 + abs(x))`) and the chosen sentiment outcome. It is a
+funding (`sign(x) * log(1 + abs(x))`) and the chosen engagement outcome. It is a
 cross-sectional description without controls, significance claims or causal inference.
 Negative obligations remain negative. A constant variable or fewer than three
 eligible observations produces an unavailable correlation, never a fabricated zero.
@@ -58,7 +116,7 @@ City theme means include study ZIPs with no mapped polygon.
 
 The source means for all reviews remain available below 30 reviews so the UI can
 apply its 10–200 review threshold consistently. The default remains 30, and the
-fixed all-review map color scale is still calculated from cells with at least 30.
+engagement map uses that threshold for growth and count coverage.
 A minimum count is a coverage filter, not an uncertainty interval.
 
 For qualitative inspection, a seeded reservoir (`20260908`) retains up to two
@@ -83,7 +141,7 @@ node tests/analysis_math.test.cjs
 ```
 
 The HTML remains self-contained and offline. Aggregates and excerpts are embedded;
-the generated page is approximately 3.2 MB. Raw and intermediate data remain ignored
+the generated page is approximately 3.6 MB. Raw and intermediate data remain ignored
 by Git. Interface templates live in `src/map_template.html` and
 `src/exploration.{html,css,js}`; pure numerical functions live in `src/analysis_math.js`.
 
@@ -91,14 +149,15 @@ Checks cover funding date alignment, unavailable history, signed amounts, outcom
 baselines, degenerate correlations, keyword boundaries and overlapping tags. When
 the local data are present, every generated ZIP-quarter review count is reconciled
 with the existing panel, and every sample excerpt must contain its theme's terms.
-Browser checks cover linked selection, sliders, missing-history states, themes,
-table sorting, CSV preview and responsive layout. A separate source calculation
-reproduced the Tucson access-theme comparison at 2021Q4, lag 4, window 4, minimum
-10: 10 eligible ZIPs and descriptive correlation rounded to −0.516.
+Earlier browser checks covered linked selection, sliders, missing-history states,
+themes, table sorting, CSV preview and responsive layout for the sentiment version.
+The engagement revision has numerical and generated-page checks but has not had a
+fresh automated browser pass. The earlier Tucson access-theme correlation applies
+to the previous sentiment outcome and should not be read as an engagement result.
 
 CSV export includes every mapped ZIP in the city, including excluded observations,
 with window dates, lag, theme, review threshold and exclusion status. Numeric
-sentiment values are serialized to at most six decimal places. Preview/copy remains
+engagement values are serialized to at most six decimal places. Preview/copy remains
 available when an embedded browser does not support saving a Blob download.
 
 ## Population-normalized funding
@@ -124,8 +183,8 @@ remain available without a population requirement.
 
 The five-region population table and selected-area cards use the same covered
 ZCTAs for both funding and population. Regional rates are the ratio of summed
-funding to summed population. Regional sentiment is review-weighted among covered
-ZCTAs meeting the selected review threshold in the outcome quarter. These study
+funding to summed population. Regional review growth uses aggregate counts among covered
+ZCTAs meeting the selected threshold in both compared quarters. These study
 regions are not municipal or official metro populations. They may exclude small,
 unmapped or sparsely reviewed areas.
 

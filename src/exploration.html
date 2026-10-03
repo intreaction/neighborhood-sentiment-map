@@ -1,17 +1,17 @@
-<div class="chapter-navigation"><span class="eyebrow">Keep exploring ↓</span><a href="#capital-efficiency">02 / Capital Efficiency</a><a href="#lag-lab">03 / Funding &amp; timing</a><a href="#population-lab">Population context</a><a href="#review-lab">04 / Community Voice</a><a href="#area-ledger">05 / Compare places</a></div>
+<div class="chapter-navigation"><span class="eyebrow">Keep exploring ↓</span><a href="#capital-efficiency">02 / Earlier CE methods</a><a href="#lag-lab">03 / Funding &amp; timing</a><a href="#population-lab">Population context</a><a href="#review-lab">04 / Community Voice</a><a href="#area-ledger">05 / Compare places</a><a data-model-link href="model.html">Model a project ↗</a></div>
 
 <section class="chapter" id="capital-efficiency" aria-labelledby="efficiency-title">
   <div class="chapter-head">
     <div>
-      <div class="eyebrow">02 / Capital Efficiency &amp; Community Voice</div>
-      <h2 id="efficiency-title">Engagement per Public Dollar.</h2>
+      <div class="eyebrow">02 / Earlier CE methods &amp; Community Voice</div>
+      <h2 id="efficiency-title">Earlier methods, preserved for comparison.</h2>
     </div>
-    <p>Customer satisfaction (stars and sentiment) did not systematically track public spending (r ≈ 0.00, failed placebo test). We evaluate where public capital actually moved commercial participation and review volume. Compare net review gains and active business expansion across project investments.</p>
+    <p>Customer satisfaction (stars and sentiment) did not systematically track recorded funding. Compare descriptive review and business-participation changes around documented projects. Reported project costs can mix public and private funding.</p>
   </div>
 
   <div class="scope-strip">
-    <strong>Curated Capital Projects Benchmark</strong>
-    <span>Matched 2-Year Pre/Post Windows</span>
+    <strong>Legacy calculations · see project analyses for current estimates</strong>
+    <span>Two-Year Pre/Post Windows</span>
   </div>
 
   <div class="population-controls">
@@ -28,132 +28,78 @@
       <option value="Middle">Middle-income tercile</option>
       <option value="Higher">Higher-income tercile</option>
     </select>
-    <span>Filter matched comparisons by distance and baseline local income.</span>
+    <span>Filters also update the project CE score on the map.</span>
   </div>
 
   <div class="table-wrap" style="margin: 20px 0;">
     <table>
       <thead>
         <tr>
-          <th>Project &amp; Typology</th>
-          <th>City</th>
-          <th>Cost ($M)</th>
-          <th>Pairs</th>
-          <th>DiD / Pair</th>
-          <th>Net Reviews</th>
-          <th>CE (Revs / $1M)</th>
-          <th>CE (Rel % / $1M)</th>
-          <th>CE (Norm % / $1M)</th>
-          <th>Support</th>
+          <th><button type="button" class="ce-column-help" data-ce-help="project" aria-controls="ceColumnHelp" aria-expanded="false">Project &amp; Typology <span aria-hidden="true">?</span></button></th>
+          <th><button type="button" class="ce-column-help" data-ce-help="city" aria-controls="ceColumnHelp" aria-expanded="false">City <span aria-hidden="true">?</span></button></th>
+          <th><button type="button" class="ce-column-help" data-ce-help="cost" aria-controls="ceColumnHelp" aria-expanded="false">Cost ($M) <span aria-hidden="true">?</span></button></th>
+          <th><button type="button" class="ce-column-help" data-ce-help="sample" aria-controls="ceColumnHelp" aria-expanded="false">Sample <span aria-hidden="true">?</span></button></th>
+          <th><button type="button" class="ce-column-help" data-ce-help="difference" aria-controls="ceColumnHelp" aria-expanded="false">Difference / Listing <span aria-hidden="true">?</span></button></th>
+          <th><button type="button" class="ce-column-help" data-ce-help="net" aria-controls="ceColumnHelp" aria-expanded="false">Net Reviews <span aria-hidden="true">?</span></button></th>
+          <th><button type="button" class="ce-column-help" data-ce-help="ce" aria-controls="ceColumnHelp" aria-expanded="false">CE (Revs / $1M) <span aria-hidden="true">?</span></button></th>
+          <th><button type="button" class="ce-column-help" data-ce-help="relative" aria-controls="ceColumnHelp" aria-expanded="false">CE (Rel % / $1M) <span aria-hidden="true">?</span></button></th>
+          <th><button type="button" class="ce-column-help" data-ce-help="normalized" aria-controls="ceColumnHelp" aria-expanded="false">CE (Norm % / $1M) <span aria-hidden="true">?</span></button></th>
+          <th><button type="button" class="ce-column-help" data-ce-help="support" aria-controls="ceColumnHelp" aria-expanded="false">Support <span aria-hidden="true">?</span></button></th>
         </tr>
       </thead>
       <tbody id="efficiencyRows"></tbody>
     </table>
   </div>
-  <p class="method-note"><strong>Descriptive comparison only:</strong> With N=5 cases (one project per city/typology), project type is collinear with geography, cost scale, and local baseline density. Water Works Park is flagged for low sample support when matched pairs fall below 20.</p>
+  <div id="ceColumnHelp" class="ce-column-popout" role="dialog" aria-modal="false" aria-labelledby="ceColumnHelpTitle" tabindex="-1" hidden>
+    <div class="ce-popout-head"><strong id="ceColumnHelpTitle"></strong><button type="button" id="ceColumnHelpClose" aria-label="Close column explanation">×</button></div>
+    <p id="ceColumnHelpText"></p>
+  </div>
+  <p class="method-note"><strong>Archived methods:</strong> these calculations retain the earlier registry and windows, including the former Gateway Arch and Crescent Park milestones. They are sensitivity references, not the current primary project results. <a href="projects.html">Open current project analyses.</a> <strong>Capital Efficiency (CE)</strong> divides a review difference by reported project cost in $ millions. Four original projects use matched business pairs. <strong>Sun Link now uses all 717 Yelp listings within 500 m of its full route:</strong> its expected post-period reviews equal corridor baseline reviews multiplied by the 1.5–8 km Tucson comparison area's review-growth factor. The six expansion projects use unmatched near and farther cohort means. These methods produce different comparisons, so scores across methods are not directly comparable. All values are descriptive, not causal returns.</p>
 
   <div class="population-stats">
     <div class="data-card">
-      <div class="eyebrow">Primary 500m Benchmark · Highest Efficiency</div>
+      <div class="eyebrow">Fixed legacy example · 500 m · matched sample</div>
       <div class="number" style="font-size:22px; color:var(--teal);">Lafitte Greenway</div>
       <p class="method-note">+165.2 net reviews / $1M (+3.80% / $1M). Linear trail in New Orleans; gains concentrated in lower-income ZIPs.</p>
     </div>
     <div class="data-card">
-      <div class="eyebrow">Primary 500m Benchmark · Highest Raw Volume</div>
+      <div class="eyebrow">Fixed legacy example · 500 m · matched sample</div>
       <div class="number" style="font-size:22px; color:var(--ink);">Dilworth Park</div>
       <p class="method-note">+67.9 net reviews / $1M (+0.43% / $1M). Dense Center City Philadelphia civic plaza; driven by established commercial core.</p>
     </div>
     <div class="data-card">
-      <div class="eyebrow">Primary 500m Benchmark · Lowest Return</div>
+      <div class="eyebrow">Sun Link · Full Route · 500 m</div>
       <div class="number" style="font-size:22px; color:var(--orange);">Sun Link Streetcar</div>
-      <p class="method-note">−0.92 net reviews / $1M (−0.02% / $1M). $196.5M fixed rail in Tucson lagged matched citywide review growth.</p>
+      <p class="method-note">−11.23 growth-adjusted reviews / $1M. Across 717 Yelp listings, reviews rose from 3,807 to 10,943; the farther Tucson comparison grew faster. This unmatched full-route result is not a causal capital return.</p>
     </div>
   </div>
 
-  <div class="scenario-card" id="scenario-explorer" style="margin-top: 30px; border-top: 1px solid var(--line); padding-top: 25px;">
-    <div class="card-heading">
-      <div>
-        <span class="eyebrow">Prospective Policy Planning</span>
-        <h3 style="font: 22px/1.2 Georgia, serif; margin: 4px 0 6px;">Reference-Case Scenario Explorer</h3>
-        <p style="font-size: 12px; color: var(--muted); margin: 0;">Apply empirical reference classes to explore prospective review volume generation and capital efficiency. Illustrative scenario ranges derived from observed single-case radius sensitivities (N=1 per typology); not a predictive forecast.</p>
-      </div>
-    </div>
-
-    <div class="scenario-grid" style="display: grid; grid-template-columns: minmax(280px, 1fr) 1.3fr; gap: 20px; margin-top: 18px;">
-      <div class="scenario-controls" style="background: var(--white); padding: 18px; border: 1px solid var(--line); border-radius: 8px;">
-        <label for="scenBudget" style="display:block; font-weight:600; margin-bottom: 6px;">
-          Proposed Capital Outlay: $<span id="scenBudgetValue">15.0</span>M
-        </label>
-        <input id="scenBudget" type="range" min="1" max="250" step="1" value="15" style="width: 100%; accent-color: var(--teal); margin-bottom: 15px;">
-
-        <label for="scenTypology" style="display:block; font-weight:600; margin-bottom: 6px;">Infrastructure Typology</label>
-        <select id="scenTypology" style="width: 100%; padding: 8px; margin-bottom: 15px; background: var(--paper);">
-          <option value="greenway" selected>Linear Greenway / Trail (Ref: Lafitte Greenway, N=1)</option>
-          <option value="plaza">Civic Plaza / Transit Hub (Ref: Dilworth Park, N=1)</option>
-          <option value="riverfront">Riverfront Event Park (Ref: Riverfront / Ascend, N=1)</option>
-          <option value="transit">Fixed-Rail Transit / Streetcar (Ref: Sun Link, N=1)</option>
-        </select>
-
-        <label for="scenZip" style="display:block; font-weight:600; margin-bottom: 6px;">Target Corridor (Study ZCTA)</label>
-        <select id="scenZip" style="width: 100%; padding: 8px; margin-bottom: 10px; background: var(--paper);"></select>
-
-        <div id="scenContext" style="font-size: 11px; color: var(--muted); background: var(--paper); padding: 10px; border-radius: 5px;"></div>
-      </div>
-
-      <div class="scenario-outputs" style="background: var(--white); padding: 18px; border: 1px solid var(--line); border-radius: 8px; display: flex; flex-direction: column; justify-content: space-between;">
-        <div>
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 8px;">
-            <span class="eyebrow" id="scenRefName">Reference Case: Lafitte Greenway (N=1)</span>
-            <span class="pill" id="scenRadiusSpread">DiD Spread: +10.59 to +23.26 revs/biz</span>
-          </div>
-
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px;">
-            <div style="background: var(--paper); padding: 14px; border-radius: 6px;">
-              <div class="eyebrow">Projected Net Reviews</div>
-              <div class="number" id="scenNetReviews" style="font-size: 24px; margin-top: 6px;">+1,500 – +3,300</div>
-              <p class="method-note" style="margin: 4px 0 0;">Estimated customer interaction surge across local business catchment.</p>
-            </div>
-            <div style="background: var(--paper); padding: 14px; border-radius: 6px;">
-              <div class="eyebrow">Projected Capital Efficiency</div>
-              <div class="number" id="scenEfficiency" style="font-size: 24px; margin-top: 6px; color: var(--teal);">+100.0 – +220.0</div>
-              <p class="method-note" style="margin: 4px 0 0;">Net reviews generated per $1M public outlay (CE_abs).</p>
-            </div>
-          </div>
-
-          <div id="scenAlert" style="display:none; padding: 12px; background: #faede6; border-left: 4px solid var(--orange); border-radius: 4px; font-size: 12px; margin-bottom: 12px;"></div>
-        </div>
-
-        <p class="method-note" style="margin: 0; font-size: 11px;">
-          <strong>Methodological Disclaimer:</strong> Adopts the principles of Reference Class Forecasting (Kahneman &amp; Flyvbjerg) using single-case empirical distance sensitivities (N=1). Projections are illustrative scenario ranges, not predictive forecasts. Transferability assumes similar local commercial responsiveness.
-        </p>
-      </div>
-    </div>
-  </div>
+  <div class="studio-callout"><div><span class="eyebrow">Model a proposal</span><h3>Analyze a proposed project.</h3><p>Use a historical baseline example or enter a local evidence profile. Inspect the learned estimate, comparable projects and measured prediction errors.</p></div><a data-model-link href="model.html">Open the proposal tool →</a></div>
 </section>
 
 <section class="chapter" id="lag-lab" aria-labelledby="lag-title">
-  <div class="chapter-head"><div><div class="eyebrow">03 / Funding &amp; timing</div><h2 id="lag-title">What if change takes time?</h2></div><p>A commitment of funding and an experience at a business happen on different clocks. Explore earlier funding alongside later sentiment, one quarter and one place at a time.</p></div>
+  <div class="chapter-head"><div><div class="eyebrow">03 / Funding &amp; timing</div><h2 id="lag-title">What if change takes time?</h2></div><p>A commitment of funding and an experience at a business happen on different clocks. Explore earlier recorded funding alongside later review activity, one quarter and one place at a time.</p></div>
   <div class="scope-strip"><strong class="analysis-scope"></strong><a href="#map-section">Change city or quarter ↑</a></div>
   <div class="population-controls"><label for="fundingBasis">Compare funding as</label><select id="fundingBasis"><option value="total">Total dollars</option><option value="resident">Dollars per 2020 resident</option></select><label for="populationMinimum">Minimum population <output id="populationMinimumValue">500</output></label><input id="populationMinimum" type="range" min="0" max="5000" step="100" value="500" aria-label="Minimum population"><span>Per-resident views only; changes included ZIPs.</span></div>
   <div class="lab-controls">
     <label><span>Funding lag <output id="lagReadout"></output></span><input id="lag" aria-label="Funding lag" type="range" min="0" max="12" step="1" value="4"><small>Gap from the end of the funding window to the review quarter.</small></label>
     <label><span>Funding window <output id="windowReadout"></output></span><input id="window" aria-label="Funding window" type="range" min="1" max="8" step="1" value="4"><small>Sum signed obligations over this many quarters.</small></label>
-    <label><span>Minimum reviews <output id="minimumReadout"></output></span><input id="minimum" aria-label="Minimum reviews" type="range" min="10" max="200" step="10" value="30"><small>Required in each sentiment quarter; also filters the map. Lower thresholds admit less stable estimates.</small></label>
+    <label><span>Minimum reviews <output id="minimumReadout"></output></span><input id="minimum" aria-label="Minimum reviews" type="range" min="10" max="200" step="10" value="30"><small>Required in both quarters for review-growth comparisons; also filters the ZIP activity map. Lower thresholds admit noisier estimates.</small></label>
   </div>
   <div class="window-explainer"><div><span class="eyebrow">Earlier recorded funding</span><strong id="fundingDates"></strong><span id="windowAmount"></span></div><div class="time-arrow"><span id="gapLabel"></span><i></i></div><div><span class="eyebrow">Review outcome</span><strong id="outcomeDates"></strong><span id="outcomeDefinition"></span></div></div>
   <div class="analysis-grid">
-    <div class="data-card scatter-card"><div class="card-heading"><div><h3>Do better-funded places look different?</h3><p>Each dot is one mapped ZIP at the selected review quarter.</p></div><select id="outcome" aria-label="Sentiment outcome"><option value="change">Annual sentiment change</option><option value="level">Sentiment level</option></select></div><svg id="scatter" class="large-plot" role="img" aria-label="Recorded funding versus sentiment by ZIP"></svg><div class="chartcaption" id="fundingAxisNote">Funding axis: signed log of net obligations. Dot size: equal per ZIP. Click a dot to select that ZIP.</div></div>
+    <div class="data-card scatter-card"><div class="card-heading"><div><h3>Do better-funded places look different?</h3><p>Each dot is one mapped ZIP at the selected review quarter.</p></div><select id="outcome" aria-label="Engagement outcome"><option value="change">Year-over-year review growth</option><option value="level">Log quarterly review count</option></select></div><svg id="scatter" class="large-plot" role="img" aria-label="Recorded funding versus review activity by ZIP"></svg><div class="chartcaption" id="fundingAxisNote">Funding axis: signed log of net obligations. Dot size: equal per ZIP. Click a dot to select that ZIP.</div></div>
     <div class="finding-card"><div class="eyebrow">Read this comparison</div><div id="correlation" class="finding-number"></div><div class="finding-label">Descriptive Pearson correlation</div><p id="relationshipText"></p><div class="finding-counts"><div><strong id="eligibleCount"></strong><span>ZIPs included</span></div><div><strong id="excludedCount"></strong><span>ZIPs excluded</span></div></div><p class="fineprint">This compares places, not investment effectiveness. Per-resident normalization adjusts scale; it does not control for demographics, local need or causal differences. Zero funding means zero in this selected extract.</p></div>
   </div>
   <div class="data-card sensitivity-card"><div class="card-heading"><div><h3>Does the picture depend on the lag?</h3><p>Every lag from zero to three years is shown. The outlined bar is your selection.</p></div><span class="pill">Same ZIP cohort across lags</span></div><svg id="lagChart" class="lag-plot" role="img" aria-label="Descriptive correlation across all funding lags"></svg><p id="lagExplanation" class="chartcaption"></p><p class="method-note">A taller bar is not evidence of the “right” lag. Trying many lags can produce a striking pattern by chance. This sensitivity view uses only ZIPs with valid outcomes and complete funding-window history at every tested lag; its cohort can differ from the scatterplot.</p></div>
 </section>
 
 <section class="chapter" id="population-lab" aria-labelledby="populationTitle">
-<div class="chapter-head"><div><div class="eyebrow">Population context</div><h2 id="populationTitle">Put the dollars in proportion.</h2></div><p>Compare recorded funding with the number of residents in the same mapped areas. Then examine sentiment alongside that scale of funding.</p></div>
+<div class="chapter-head"><div><div class="eyebrow">Population context</div><h2 id="populationTitle">Put the dollars in proportion.</h2></div><p>Compare recorded funding with the number of residents in the same mapped areas. Then examine review growth alongside that scale of funding.</p></div>
 <div class="scope-strip"><strong id="populationScope"></strong><span>Fixed 2020 Census population</span></div>
 <div class="population-stats"><div class="data-card"><div class="eyebrow">Residents in covered areas</div><div class="number" id="populationTotal"></div><p class="method-note" id="populationCoverage"></p></div><div class="data-card"><div class="eyebrow">Funding in chosen window</div><div class="number" id="populationFunding"></div><p class="method-note">Only areas with usable population; the numerator and denominator cover the same ZCTAs.</p></div><div class="data-card"><div class="eyebrow">Dollars per 2020 resident</div><div class="number" id="populationRate"></div><p class="method-note">Sum of funding ÷ sum of population, not the average ZIP rate.</p></div></div>
-<div class="table-wrap population-table"><table><thead><tr><th>Study region</th><th>Covered population</th><th>Window funding</th><th>Funding / resident</th><th>Review sentiment</th><th>Covered ZCTAs</th></tr></thead><tbody id="populationRows"></tbody></table></div>
-<p class="method-note">These are project-defined mapped study areas, not official city or metro populations. Population coverage uses the current minimum-population setting; zero and missing populations are always excluded. Regional sentiment is review-weighted across those same covered ZCTAs that meet the review threshold in the selected quarter. Funding rates are not amounts received by individual residents.</p>
+<div class="table-wrap population-table"><table><thead><tr><th>Study region</th><th>Covered population</th><th>Window funding</th><th>Funding / resident</th><th>Review growth</th><th>Covered ZCTAs</th></tr></thead><tbody id="populationRows"></tbody></table></div>
+<p class="method-note">These are project-defined mapped study areas, not official city or metro populations. Population coverage uses the current minimum-population setting; zero and missing populations are always excluded. Regional review growth compares aggregate counts across covered ZCTAs that meet the review threshold in both quarters. Funding rates are not amounts received by individual residents.</p>
 <p class="method-note">Population is the <a href="https://tigerweb.geo.census.gov/arcgis/rest/services/Census2020/PUMA_TAD_TAZ_UGA_ZCTA/MapServer/2">Census TIGERweb 2020 ZCTA population count (POP100)</a>, held fixed throughout 2012–2021. This supports a comparison of scale; it does not estimate historical per-capita spending. Tiny residential populations can produce extreme rates. An office ZIP can record funding that benefits a much larger region.</p>
 </section>
 
@@ -161,7 +107,7 @@
   <div class="chapter-head"><div><div class="eyebrow">04 / Inside the reviews</div><h2 id="review-title">What are people talking about?</h2></div><p>Overall sentiment mixes many experiences. Separate reviews mentioning parking or surroundings from reviews about service, price and products, then carry that lens back to the map.</p></div>
   <div class="scope-strip"><strong id="reviewScope"></strong><span>Selected quarter · overlapping text tags</span></div>
   <div id="topicUnavailable" class="method-note" hidden>Text categories have not been built. Run the review-topic pipeline to enable this section.</div>
-  <div class="review-grid"><div class="data-card"><div class="card-heading"><div><h3>Mentions, not conclusions</h3><p>Share of all reviews in this area and quarter. Select a theme to filter sentiment throughout the page.</p></div><button id="clearTopic">All reviews</button></div><div id="topicBars"></div><p class="method-note">Rules search for words and phrases, and a review may match several themes. A cleanliness mention can be praise or a complaint; it may refer to a bathroom, not a street. Theme sentiment is the score of the whole review, not the sentiment of that specific aspect.</p></div><div class="data-card"><div class="card-heading"><div><h3>Look beyond the average</h3><p>Star ratings for all reviews in the selected area and quarter, regardless of theme.</p></div></div><div id="ratingBars"></div><div id="ratingSummary" class="method-note"></div><p class="method-note">Stars and text sentiment measure different things. Yelp reviews are self-selected, and business or reviewer composition can change over time.</p></div></div>
+  <div class="review-grid"><div class="data-card"><div class="card-heading"><div><h3>Mentions, not conclusions</h3><p>Share of all reviews in this area and quarter. Select a theme to filter review activity throughout the page.</p></div><button id="clearTopic">All reviews</button></div><div id="topicBars"></div><p class="method-note">Rules search for words and phrases, and a review may match several themes. A cleanliness mention can be praise or a complaint; it may refer to a bathroom, not a street. Theme sentiment is the score of the whole review, not the sentiment of that specific aspect.</p></div><div class="data-card"><div class="card-heading"><div><h3>Look beyond the average</h3><p>Star ratings for all reviews in the selected area and quarter, regardless of theme.</p></div></div><div id="ratingBars"></div><div id="ratingSummary" class="method-note"></div><p class="method-note">Stars and text sentiment measure different things. Yelp reviews are self-selected, and business or reviewer composition can change over time.</p></div></div>
   <div class="data-card excerpts-card"><div class="card-heading"><div><h3>Read the language behind a tag</h3><p id="excerptScope"></p></div><select id="exampleTopic" aria-label="Example review theme"></select></div><div id="examples" class="examples"></div><p class="method-note">Short excerpts from a seeded sample, balanced across whole-review sentiment classes within each city, year and theme. They illustrate matching language and are not a representative estimate. Scores apply to the full review. No reviewer identities are included.</p></div>
   <div class="research-note"><div class="eyebrow">The next analytical step</div><h3>Validate the tags before interpreting them.</h3><p>Human-label reviews across cities and years, measure precision and recall for each theme, and distinguish business interiors from the surrounding area. Then compare these transparent rules with a text classifier. These exploratory tags give us a testable starting point.</p></div>
 </section>
@@ -169,7 +115,7 @@
 <section class="chapter" id="area-ledger" aria-labelledby="ledger-title">
   <div class="chapter-head"><div><div class="eyebrow">05 / Compare places</div><h2 id="ledger-title">Follow a pattern back to its place.</h2></div><p>Inspect the observations behind the scatterplot. Choose a ZIP to update its map outline, history and review detail, or download the current comparison.</p></div>
   <div class="scope-strip"><strong class="analysis-scope"></strong><button id="downloadComparison">Export comparison CSV</button></div>
-  <div class="table-wrap"><table><thead><tr><th>ZIP area</th><th><button id="sortFunding">Funding window ↓</button></th><th>Population (2020)</th><th><button id="sortRate">Funding / resident ↕</button></th><th>Review sentiment</th><th><button id="sortChange">Annual change ↕</button></th><th>Reviews</th><th>Coverage</th></tr></thead><tbody id="areaRows"></tbody></table></div>
+  <div class="table-wrap"><table><thead><tr><th>ZIP area</th><th><button id="sortFunding">Funding window ↓</button></th><th>Population (2020)</th><th><button id="sortRate">Funding / resident ↕</button></th><th>Reviews this quarter</th><th><button id="sortChange">Review growth ↕</button></th><th>Reviews prior year</th><th>Coverage</th></tr></thead><tbody id="areaRows"></tbody></table></div>
   <p class="method-note">Amounts are nominal net obligations in the chosen window. Missing history stays unavailable rather than becoming zero. The export includes the city, review theme, quarter, window dates, lag, coverage threshold and inclusion status.</p>
   <div class="closing-note"><span class="eyebrow">What this can tell us</span><h3>Patterns worth investigating.<br>Questions worth asking.</h3><p>Use this explorer to locate possible associations, inspect their timing and understand the language behind them. Establishing that funding changed local experiences requires better geographic exposure, validated measures and a research design that accounts for other changes.</p><a href="#map-section">Return to the map ↑</a></div>
 </section>

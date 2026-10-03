@@ -1,0 +1,149 @@
+{
+  "version": "ce-project-ridge-v2",
+  "training_target": "growth-adjusted excess Yelp reviews per $1M reported project cost",
+  "ce_unit": "net Yelp reviews per $1M reported project cost",
+  "status": "research_prototype_not_validated_for_budget_decisions",
+  "feature_names": [
+    "log_pre_reviews_per_active_business",
+    "log_cost_millions",
+    "log_baseline_reviewed"
+  ],
+  "feature_transform": "log1p([near_pre_reviews/near_baseline_reviewed, cost_millions, near_baseline_reviewed])",
+  "feature_means": [
+    2.9696964873621705,
+    3.8033315789863615,
+    4.892752565069853
+  ],
+  "feature_scales": [
+    0.27106586966455865,
+    1.0974011952831406,
+    0.9507282197451805
+  ],
+  "intercept": 40.56770516485896,
+  "coefficients": [
+    10.119766017448853,
+    -13.716107126972847,
+    13.432213505850553
+  ],
+  "alpha": 10.0,
+  "training_feature_min": [
+    2.60226872143059,
+    2.312535423847214,
+    3.367295829986474
+  ],
+  "training_feature_max": [
+    3.601500169202253,
+    5.942799375126701,
+    6.752270376141742
+  ],
+  "holdout_method": "leave-one-project-out; each test project omitted from its training fold",
+  "metrics": {
+    "n_projects_total": 11,
+    "n_projects_trained": 10,
+    "excluded_projects": [
+      "Water Works Park"
+    ],
+    "mae_ce_reviews_per_million": 56.305207572655135,
+    "baseline_mae_ce_reviews_per_million": 69.00167066504588,
+    "sign_accuracy": 0.6,
+    "baseline_sign_accuracy": 0.5
+  },
+  "held_out_projects": [
+    {
+      "project": "Lafitte",
+      "city": "New Orleans",
+      "geometry_quality": "mapped_footprint",
+      "observed_ce": 163.41213070026632,
+      "held_out_ce": 24.98523268398727,
+      "baseline_held_out_ce": 26.91832454981372,
+      "absolute_error": 138.42689801627904
+    },
+    {
+      "project": "Sun Link",
+      "city": "Tucson",
+      "geometry_quality": "mapped_footprint",
+      "observed_ce": -11.233294003911482,
+      "held_out_ce": 32.02315334091561,
+      "baseline_held_out_ce": 46.3233717391668,
+      "absolute_error": 43.256447344827095
+    },
+    {
+      "project": "Dilworth Park",
+      "city": "Philadelphia",
+      "geometry_quality": "mapped_footprint",
+      "observed_ce": 70.6923271418846,
+      "held_out_ce": 74.59867388076006,
+      "baseline_held_out_ce": 37.22052494518946,
+      "absolute_error": 3.906346738875456
+    },
+    {
+      "project": "Riverfront / Ascend",
+      "city": "Nashville",
+      "geometry_quality": "mapped_footprint",
+      "observed_ce": 124.0773554919764,
+      "held_out_ce": 30.16773938124811,
+      "baseline_held_out_ce": 31.288855128512594,
+      "absolute_error": 93.9096161107283
+    },
+    {
+      "project": "Tampa Riverwalk",
+      "city": "Tampa",
+      "geometry_quality": "center_proxy",
+      "observed_ce": 6.112174191045455,
+      "held_out_ce": 38.2839705144968,
+      "baseline_held_out_ce": 44.3960974952827,
+      "absolute_error": 32.171796323451346
+    },
+    {
+      "project": "Schuylkill Boardwalk",
+      "city": "Philadelphia",
+      "geometry_quality": "center_proxy",
+      "observed_ce": -41.36852994566316,
+      "held_out_ce": 59.77509757162505,
+      "baseline_held_out_ce": 49.67173128825032,
+      "absolute_error": 101.14362751728821
+    },
+    {
+      "project": "The Rail Park",
+      "city": "Philadelphia",
+      "geometry_quality": "center_proxy",
+      "observed_ce": 114.59652531801508,
+      "held_out_ce": 71.84500727694778,
+      "baseline_held_out_ce": 32.34228070339718,
+      "absolute_error": 42.7515180410673
+    },
+    {
+      "project": "Crescent Park",
+      "city": "New Orleans",
+      "geometry_quality": "center_proxy",
+      "observed_ce": -1.3935712838215573,
+      "held_out_ce": 35.409131265495304,
+      "baseline_held_out_ce": 45.230069214712366,
+      "absolute_error": 36.80270254931686
+    },
+    {
+      "project": "Indianapolis Cultural Trail",
+      "city": "Indianapolis",
+      "geometry_quality": "center_proxy",
+      "observed_ce": -18.778742304623776,
+      "held_out_ce": 36.626409312663,
+      "baseline_held_out_ce": 47.16175488369039,
+      "absolute_error": 55.405151617286776
+    },
+    {
+      "project": "Gateway Arch Park",
+      "city": "Saint Louis",
+      "geometry_quality": "center_proxy",
+      "observed_ce": -0.4393236565781344,
+      "held_out_ce": -15.717295124009134,
+      "baseline_held_out_ce": 45.12404170057421,
+      "absolute_error": 15.277971467431
+    }
+  ],
+  "warnings": [
+    "Only 10 independent projects meet the minimum baseline support rule.",
+    "Six expansion projects use a 500 m center proxy instead of a mapped project footprint.",
+    "Yelp review activity is not a causal estimate of investment impact, economic return, or resident welfare.",
+    "Reported project costs have mixed public and private scope; budget response is not identified."
+  ]
+}

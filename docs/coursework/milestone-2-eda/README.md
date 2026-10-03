@@ -9,6 +9,8 @@ John Wheeler (`jwheele4`), Ryan Wolff (`rwwolff`), Cameron Anthony (`cantho19`).
 
 The report covers Lafitte Greenway, Sun Link, Dilworth Park, Water Works Park and Riverfront Park / Ascend. It compares engagement, stars, VADER, embedding categories and baseline local income, with project type and reported cost as descriptive context. The Sun Link extension includes all 717 Yelp listings within 500 m of the full route, including listings without baseline reviews.
 
+`study_data/sun_coverage.csv` retains full-route listing and activity counts at several radii. The active app calculates Sun Link from all 717 Yelp listings within 500 m using `src/sun_link_corridor.py`; `study_data/sun_link_corridor_efficiency.csv` records the growth-adjusted, unmatched result. The saved route spans central Tucson districts, not every neighborhood in the city. The original EDA notebook is retained as a historical course submission and is not the active app benchmark.
+
 Engagement grows faster near some projects, but sentiment and ratings do not improve consistently. Five heterogeneous cases cannot establish causation, a spending threshold, or an income-specific spending effect. Water Works remains visible as an insufficient-support case (two primary matched pairs).
 
 ## Reproduce the submitted results
