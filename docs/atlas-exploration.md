@@ -33,7 +33,7 @@ estimate.
 `web/model.html` is a separate, self-contained capital-efficiency page linked from
 the map. It includes a trained research estimate from ten supported projects and
 shows leave-one-project-out error; the estimate is not reliable enough to choose
-a budget or site. The executed [final report](coursework/final-project/Final_Submission_Report.ipynb)
+a budget or site. The executed [historical engagement study](history/engagement-model-study-2026-09.ipynb)
 documents the project EDA and training method. Its observed-reference scenario
 is described below.
 It loads four matched project references from `capital_efficiency.csv` and

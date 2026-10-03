@@ -10,7 +10,8 @@ Before proposing changes:
    out of Git. Read DATA_AND_LICENSES.md before adding data or excerpts.
 2. Run `python3 scripts/audit_public_repo.py --history` for publication changes.
    This focused scan is supplementary to manual data and secret review.
-3. Run Python and JavaScript tests using the README commands.
+3. Run `python scripts/check_docs.py` after documentation changes. Follow
+   [maintenance](docs/maintenance.md) for rebuild scope. Run Python and JavaScript tests using the README commands.
 4. For data changes, rerun the research notebook and include its executed outputs,
    generated datasets and build manifest together. UI-only builds must not replace
    notebook-generated data.

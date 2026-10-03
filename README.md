@@ -16,7 +16,7 @@ help a planner inspect area conditions and evidence around past investments.
 The project asks what those observations can tell us—and what they cannot justify
 about a new project or budget.
 
-[Submission reading guide](docs/SUBMISSION_GUIDE.md) · [Rubric-based review](docs/grading-review.md)
+[Documentation index](docs/README.md) · [Submission reading guide](docs/SUBMISSION_GUIDE.md) · [Rubric-based review](docs/grading-review.md)
 
 ## Start here: the research and data-build notebook
 
@@ -204,7 +204,7 @@ Refresh baseline profile snapshots only after running `build_place_data.py` and
 the required ZIP analysis stages. Then run `prepare_place_inputs.py` and rerun the
 notebook. Snapshot hashes make this refresh explicit rather than silent.
 
-The earlier [final report notebook](docs/coursework/final-project/Final_Submission_Report.ipynb)
+The earlier [historical engagement notebook](docs/history/engagement-model-study-2026-09.ipynb)
 is retained as a **prior analysis** using `ce-project-ridge-v2`. Its results are not
 the current submission's model. The primary notebook above uses `project-ce-v2`.
 

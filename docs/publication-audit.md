@@ -3,7 +3,8 @@
 Audit date: 2026-10-02. **Status: locally prepared for public release; publication not performed.**
 GitHub reports `intreaction/neighborhood-sentiment-map` as **PRIVATE**. No visibility
 change, push, deployment, deletion of research evidence, or history rewrite was
-performed. Working-tree changes are local until committed.
+performed. This describes the audit-time state. The reviewed preparation was subsequently
+committed and pushed on October 2; publication/visibility changes were not performed.
 
 ## Permission confirmation
 
@@ -48,7 +49,7 @@ point calculations; rounding coordinates alone does not settle data rights.
   refs. Office XML is inspected inside ZIP packages. Matches report locations,
   never credential values.
 - Added a read-only-permission CI workflow for the focused scan, Python/JS tests,
-  dependency install and UI build. CI has not yet run on GitHub.
+  dependency install and UI build. CI subsequently passed on GitHub for commit `a1f26a3`; see [current QA](qa/place-lab.md).
 - Made Pages deployment manual to keep publication deliberate. This local workflow
   change does not remove or change any already deployed website.
 

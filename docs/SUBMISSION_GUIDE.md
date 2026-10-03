@@ -15,9 +15,9 @@
    including unfinished work. It is not an instructor-issued grade.
 
 `docs/coursework/milestone-2-eda/` and the older
-`docs/coursework/final-project/Final_Submission_Report.*` preserve research history.
+`docs/history/engagement-model-study-2026-09.*` preserve research history.
 Their results are not interchangeable with the current model. Start with the
-primary notebook above, not the file with the older “Final” name.
+primary notebook above, rather than the archived September engagement study.
 
 For submission, supply the slides and the GitHub link (or notebook files) as
 required by the rubric. Verify instructor access to the repository. No GitHub

@@ -1,5 +1,7 @@
 # Three-minute demo runbook
 
+> This runbook covers the historical evidence/profile-model demo. For the current ZIP explorer use [Place Lab walkthrough](place-demo-walkthrough.md).
+
 Use the prepared site; do not rebuild the data or models during the presentation.
 The demo needs an available Python 3 installation and a browser. It uses only
 Python's standard library and the existing `web/` files. No internet, API key,
@@ -38,7 +40,7 @@ that launcher Terminal after the demo to stop only this demo server.
 | 2:35–2:50 | Click **Export analysis ↓** once. | “The record preserves inputs, provenance, model version, result, and limitations. This supports evidence review and scenarios; it is not financial ROI or a budget recommendation.” |
 | 2:50–3:00, if time | Click **Explore projects** and select **Water Works Park · Tampa**. | “Insufficient baseline support produces a withheld result instead of an unsupported number.” |
 
-This live segment fits inside the ten-minute presentation. The preceding slide already explains Sun Link’s raw review growth and negative adjusted CE. Keep JSON import, additional projects, and the area atlas for questions. They are
+This live segment fits inside the thirteen-minute presentation. The preceding slide already explains Sun Link’s raw review growth and negative adjusted CE. Keep JSON import, additional projects, and the area atlas for questions. They are
 working features, but they distract from the three-minute story. Historical presets
 are demonstrations, not current measurements for a new location.
 
@@ -57,7 +59,7 @@ Saved, visually checked fallback images:
 - [Proposal — mobile](qa/proposal-mobile.png): estimate, historical error span, and limitations.
 
 See [validation notes](qa/validation.md) for the exact browser checks and limits.
-The longer [walkthrough](demo-walkthrough.md) covers optional questions and discussion.
+The [presenter guide](presentation/Presenter-Guide.md) covers questions and discussion.
 
 ## Presenter smoke check
 

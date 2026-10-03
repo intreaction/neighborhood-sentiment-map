@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "build:place": "esbuild src/place_app.js --bundle --minify --format=esm --target=es2022 --jsx=automatic --define:process.env.NODE_ENV=\\\"production\\\" --outfile=web/place-app.js && tailwindcss -i src/place-chart.css -o web/place-chart.css --minify",
-    "test:scene": "node --test tests/place_scene.test.mjs"
+    "test": "node --test tests/*.test.cjs tests/*.test.mjs"
   },
   "dependencies": {
     "clsx": "^2.1.1",
@@ -12,8 +12,7 @@
     "react-dom": "^19.3.0",
     "react-is": "^19.3.0",
     "recharts": "^3.8.0",
-    "tailwind-merge": "^3.7.0",
-    "three": "0.180.0"
+    "tailwind-merge": "^3.7.0"
   },
   "devDependencies": {
     "@tailwindcss/cli": "^4.3.3",

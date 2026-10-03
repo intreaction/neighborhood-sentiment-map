@@ -1,5 +1,7 @@
 # Product validation — September 25, 2026
 
+> Historical evidence/model verification; not a current Place Lab test report. See [current QA](place-lab.md).
+
 Tested the generated static site in the Codex in-app browser through a loopback
 HTTP server. This records observed checks, not a claim of universal browser support.
 
