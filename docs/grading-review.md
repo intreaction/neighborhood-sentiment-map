@@ -6,8 +6,9 @@ no course letter-grade scale was supplied. The presentation score assesses the
 prepared materials and assumes competent delivery. Timing and audience engagement
 remain unobserved.
 
-This regrade assesses repository commit `9a01fb7` and the current 15-slide Google
-Slides deck. History cleanup changed no project files and earns no extra credit.
+This regrade assesses repository commit `9a01fb7` and the then-current 15-slide Google
+Slides deck. The deck subsequently expanded to 20 slides to explain each focus;
+the 86.75 estimate has not been increased for that addition. History cleanup changed no project files and earns no extra credit.
 
 The source is the course's **Final Project Deliverables – Grading Rubric**
 (`139228374-Final Project Deliverables - Grading Rubric.pdf`, supplied in the local
@@ -52,7 +53,7 @@ positive result. A small project sample is a limitation, not evidence of bad cod
 - [Project source audit](project-source-audit.md), prepared input manifests,
   `src/place_pipeline.py`, and the current model/evidence artifacts.
 - The prior PowerPoint/PDF reviewed for this assessment has been retired. Its
-  replacement is the [15-slide Google Slides course presentation](https://docs.google.com/presentation/d/1sg0G4LGOqI1nrnQCK6E-p9zHme1tHvJlLT3XWMzv2ME/edit), rebuilt on
+  replacement is the [Google Slides course presentation](https://docs.google.com/presentation/d/1sg0G4LGOqI1nrnQCK6E-p9zHme1tHvJlLT3XWMzv2ME/edit), rebuilt on
   October 2, 2026 with the ZIP workflow, data pipeline and current findings.
   The replacement was rendered and visually checked; delivery remains ungraded.
 - [Presenter guide](presentation/Presenter-Guide.md), README, data acquisition
