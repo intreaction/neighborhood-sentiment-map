@@ -41,7 +41,8 @@ it displays saved advanced-text evaluation rather than retraining NMF from count
 | `src/place_core.cjs` | 500 m profiles, proposal validation and optional point-selection helpers |
 | `src/project_model_math.js` | Browser-side model calculation and support checks |
 | `src/place_charts.js`, `place_chart_components.tsx` | React/Recharts evidence and scenario charts |
-| `src/place_tools.cjs` | Optional browser tool adapter using the same application calculations |
+| `src/place_tools.mjs`, `place_navigation.mjs`, `place_navigator.js` | Agent tools (`window.placeLab`, WebMCP): lookups, page navigation and view changes using the same calculations as the page |
+| `src/place_measures.mjs` | ZIP measure definitions and ranking shared by the profile table and the tools |
 
 The human map workflow selects a ZIP polygon without moving a visible marker.
 Its fixed interior reference point supplies a separate 500 m model sample. A ZIP

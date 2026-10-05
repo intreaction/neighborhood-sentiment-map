@@ -15,10 +15,11 @@ The root [README](../README.md) is the installation and execution entry point.
 
 ## Current versus historical material
 
-The current interface is the desktop 2D ZIP explorer at `web/place.html`. Historical
-project evidence (`projects.html` / `index.html`) and the profile model (`model.html`)
-are supporting views. Their [demo runbook](demo-runbook.md) describes that separate
-workflow, not the ZIP explorer.
+The current interface is Place Lab at `web/place.html` (the site root redirects to it),
+with `findings.html` and `methods.html` as supporting pages. The earlier project
+evidence library (`projects.html`) and capital-efficiency proposal model (`model.html`)
+are kept as a research record. Their [demo runbook](demo-runbook.md) describes that
+separate workflow, not Place Lab.
 
 `coursework/` preserves prior course submissions; the [September engagement study](history/engagement-model-study-2026-09.ipynb)
 is archived in `history/` and is not the primary current notebook.

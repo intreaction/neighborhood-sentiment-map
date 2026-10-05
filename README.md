@@ -78,7 +78,8 @@ common raw-download filenames, and individual files over 10 MiB.
 ## Run the notebook from a fresh clone
 
 Use Python 3.12. The checked-in prepared inputs are sufficient; this workflow needs
-no raw Yelp archive, API key, network data request, or sibling course directory.
+no raw Yelp archive, API key, or sibling course directory. Section 5.4 downloads the
+public `all-MiniLM-L6-v2` sentence-transformer (about 91 MB) on first run.
 
 ```sh
 python3.12 -m venv .venv
@@ -150,14 +151,28 @@ python3 src/serve_place.py --port 8766
 Open [Place Lab locally](http://127.0.0.1:8766/place.html), or double-click
 `start-place.command`. The prepared `web/` files run without Python analysis at
 view time. Street tiles require internet; **ZIP boundaries · offline** uses bundled
-geometry. A single floating panel contains city, ZIP, focus, proposal settings,
-legend and evidence. ZIP selection highlights the boundary; there is no project
-marker or automatic relocation to another area.
+geometry. Place Lab is the primary deliverable and looks backward: a floating panel
+holds city, searchable ZIP, focus, legend, past-project shortcuts and evidence; below
+the map, a ZIP profile table and a table of what happened around past projects
+(comparison-adjusted, with charts per measure). It does not project outcomes for a
+new budget or location. Defined terms open a definition; the site root redirects to
+Place Lab.
 
-Other views provide supporting evidence:
+**Agent tools.** Place Lab exposes twelve tools as `window.placeLab` (and through
+WebMCP where supported) so a voice or chat assistant can look up ZIP profiles, rank
+ZIPs, compare past projects, define terms, and navigate the page: `navigate`
+up/down/left/right/in/out, `go_to`, `move_to_neighbor`, `describe_screen`, and two
+show tools. Results carry a spoken `say` line shown as an on-screen caption. Tools use
+the same code as the tables and change only the view. See
+[methods.html § 10](web/methods.html) and `src/place_tools.mjs`.
 
-- `projects.html` / `index.html`: historical project evidence and learned topics.
-- `model.html`: historical-profile proposal scenarios and model comparisons.
+Supporting pages:
+
+- `findings.html`: "What we found", seven findings from the EDA, text validation and
+  model tests, each linked to its notebook section.
+- `methods.html`: methodology and glossary (definitions shared with Place Lab).
+- `projects.html`, `model.html`: earlier evidence-library and capital-efficiency
+  proposal views, kept as a research record and not linked from Place Lab.
 - `atlas.html`, `lag.html`, `reference.html`, `report.html`: earlier research views;
   their definitions/results must not be mixed with the current model.
 
