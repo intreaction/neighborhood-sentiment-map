@@ -3,3 +3,9 @@ nbformat==5.11.1
 nbclient==0.11.0
 ipykernel==7.3.0
 nbconvert==7.17.1
+# Section 5.4 (BERT sentence embeddings and BERTopic, as in Lab 4).
+sentence-transformers==6.1.0
+torch==2.10.0
+bertopic==0.17.4
+umap-learn==0.5.12
+hdbscan==0.8.44
