@@ -37,14 +37,14 @@ function renderProjectCard(focus) {
   const isCombined=!!COMBINED_VIEWS[focus];
   const signalColor=focus==='none'?'#929d9b':areaColor(value,focus);
   const opportunities={
-    combined:'Compare these historical signals when deciding where to investigate further. Their overlap does not establish a cause or predict the benefit of a project.',
-    activity:'Explore public space and connections that help people reach nearby businesses.',
-    income:'Explore affordable public amenities and connections with residents; prioritize who benefits and whether access remains affordable.',
-    poverty:'Explore affordable public amenities and connections with residents; prioritize who benefits and whether access remains affordable.',
-    decline:'Explore whether better public space or connections could support local activity. Check the causes of any decline with local businesses.',
-    experience:'Use the review evidence to investigate local experiences and shape public-realm improvements with residents.',
-    access:'Investigate the access and parking reviews, then assess walking, transit and accessibility improvements. Mentions include praise and complaints.',
-    none:'Choose a focus to connect this project with the existing area analysis.'
+    combined:'Use these signals together to decide where to look closer. Where they overlap tells you nothing about cause, and nothing about what a project would deliver.',
+    activity:'Look at public space and connections that help people reach nearby businesses.',
+    income:'Talk with residents about affordable amenities and connections. Ask who benefits and whether access stays affordable.',
+    poverty:'Talk with residents about affordable amenities and connections. Ask who benefits and whether access stays affordable.',
+    decline:'Ask local businesses why activity fell before deciding whether public space or connections would help.',
+    experience:'Read the reviews behind this, then work out public-space fixes with residents.',
+    access:'Read the access and parking reviews, then check walking, transit and accessibility on the ground. Mentions count praise and complaints alike.',
+    none:'Choose a focus to color the map.'
   };
   const focusTitles={combined:'Poverty + activity',activity:'Business engagement',income:'Household income',poverty:'Poverty rate',decline:'Declining activity',experience:'Worsening experiences',access:'Access concerns',none:'Area overview'};
   panel.set({card:{
@@ -54,9 +54,9 @@ function renderProjectCard(focus) {
     signalColor:areaTextColor(value,focus),signalBorder:signalColor,combined:isCombined,
     combinedValues:isCombined?combinedEvidence(area,focus).map(({label,value,period})=>({label,value,period})):[],
     signalLabel:focus==='none'?'Yelp listings in the ZIP':`${spec.title}${spec.unit?" · "+spec.unit:""} · ${spec.period}`,
-    opportunity:(focus!=='none'&&value===null?'This area has limited evidence for this focus. ':'')+(isCombined?opportunities.combined:opportunities[focus]),
-    reach:`${number(area?.business_inventory)} Yelp listings and ${number(area?.late?.reviews)} reviews in 2019–2021 across ZIP ${zip}. These describe what happened, not what a new project would do.`,
-    move:relocation?.distance_meters>0?`Marker moved ${number(relocation.distance_meters/1000,2)} km to a nearby data-supported candidate. This card describes the marker location.`:''
+    opportunity:(focus!=='none'&&value===null?'This ZIP has too little data for this focus. ':'')+(isCombined?opportunities.combined:opportunities[focus]),
+    reach:`${number(area?.business_inventory)} Yelp listings and ${number(area?.late?.reviews)} reviews in 2019–2021 across ZIP ${zip}. These show what happened. They do not predict what a new project would do.`,
+    move:relocation?.distance_meters>0?`We moved the marker ${number(relocation.distance_meters/1000,2)} km to the nearest spot with enough data. This card describes the new spot.`:''
   }});
   renderZipReport({zip,area,city:areaData.cities.find(c=>c.id===state.city),cityLabel:data.cities.find(c=>c.id===state.city).label});
 }
@@ -142,7 +142,7 @@ function initAgentTools(){
 async function init() {
   nav=createNavigator();
   const reselect=()=>selectZip(areaAt([state.longitude,state.latitude],mapData.cities.find(c=>c.id===state.city).features));
-  const guard=fn=>(...args)=>{try{fn(...args);}catch(error){panel.set({formStatus:error.message+' The previous location is unchanged.'});sceneStatus({message:error.message});}};
+  const guard=fn=>(...args)=>{try{fn(...args);}catch(error){panel.set({formStatus:error.message+' The map stays where it was.'});sceneStatus({message:error.message});}};
   mountPanel($('panelRoot'),panel,{
     setCity:guard(city=>{change({city});reselect();}),
     setZip:zip=>areaExplorer.selectArea(zip),
@@ -176,9 +176,9 @@ async function init() {
   $('buildStatus').textContent=`5 metros · ${number(data.cities.reduce((sum,c)=>sum+c.businesses.length,0))} mapped inventory records`;
   try {
     $('scene').replaceChildren();
-    scene=await createPlaceMap({container:$('scene'),getLeftInset:()=>$('proposalControls').getBoundingClientRect().right-$('scene').getBoundingClientRect().left+24,onPick:point=>{try{const geometry=mapData.cities.find(c=>c.id===state.city);const zip=areaAt([point.longitude,point.latitude],geometry.features);if(zip){selectZip(zip);}else{panel.set({card:{...panel.get().card,move:'Choose a mapped ZIP area. Your current ZIP remains selected.'}});sceneStatus('No mapped ZIP at this click. Current selection retained.');}}catch(error){sceneStatus({message:error.message});panel.set({formStatus:error.message+' The previous location is unchanged.'});}},onStatus:sceneStatus,onBasemapStatus:basemapStatus=>panel.set({basemapStatus})});
+    scene=await createPlaceMap({container:$('scene'),getLeftInset:()=>$('proposalControls').getBoundingClientRect().right-$('scene').getBoundingClientRect().left+24,onPick:point=>{try{const geometry=mapData.cities.find(c=>c.id===state.city);const zip=areaAt([point.longitude,point.latitude],geometry.features);if(zip){selectZip(zip);}else{panel.set({card:{...panel.get().card,move:'Choose a mapped ZIP area. Your current ZIP remains selected.'}});sceneStatus('No mapped ZIP at this click. Current selection retained.');}}catch(error){sceneStatus({message:error.message});panel.set({formStatus:error.message+' The map stays where it was.'});}},onStatus:sceneStatus,onBasemapStatus:basemapStatus=>panel.set({basemapStatus})});
     render();scene.reset();
-  }catch(error){sceneStatus({mode:'desktop',message:'The map is unavailable here. Use the location controls to keep exploring. '+error.message});}
+  }catch(error){sceneStatus({mode:'desktop',message:'The map can\'t load here. The controls on the left still work. '+error.message});}
   window.addEventListener('pagehide',()=>{scene?.dispose();});
 }
-init().catch(error=>{panel.set({formStatus:'Place Lab could not load its local data. '+error.message,sceneStatus:'Run the documented build, then serve the web directory over HTTP.'});$('buildStatus').textContent='Data unavailable';});
+init().catch(error=>{panel.set({formStatus:'Place Lab couldn\'t load its data. '+error.message,sceneStatus:'Run the build in the README, then serve the web folder over HTTP.'});$('buildStatus').textContent='Data unavailable';});

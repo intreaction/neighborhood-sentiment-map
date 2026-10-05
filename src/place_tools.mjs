@@ -90,10 +90,10 @@ export function createPlaceTools({data,areas,history,model,validation=null,view}
     const status=v?.labels?.status??'Text measures have not been validated in this build.';
     const neg=v?.negative_area,pol=v?.vader_polarity;
     return {
-      [OUTCOME_KEYS.activity]:'Counts Yelp reviews; no text labelling involved. Not visits or sales.',
+      [OUTCOME_KEYS.activity]:'Counts Yelp reviews, with no text labeling. It cannot see visits or sales.',
       [OUTCOME_KEYS.sentiment]:pol?`VADER agrees with clause labels ${Math.round(100*pol.accuracy)}% of the time (macro-F1 ${round(pol.macro_f1,2)}). ${status}`:status,
-      [OUTCOME_KEYS.access]:neg?`Low reliability: keyword rules found ${Math.round(100*neg.recall)}% of negative area comments (precision ${round(neg.precision,2)}). Undercounts complaints. ${status}`:status,
-      [OUTCOME_KEYS.realm]:neg?`Low reliability, same rules as negative access (recall ${round(neg.recall,2)}). ${status}`:status
+      [OUTCOME_KEYS.access]:neg?`Low reliability. Keyword rules found ${Math.round(100*neg.recall)}% of negative area comments, with precision ${round(neg.precision,2)}, so this undercounts complaints. ${status}`:status,
+      [OUTCOME_KEYS.realm]:neg?`Low reliability. It uses the same rules as negative access, with recall ${round(neg.recall,2)}. ${status}`:status
     };
   }
   const changeOf=(r,key)=>key==='activity'?100*(Math.exp(r.effects[key])-1):r.effects[key];
@@ -115,7 +115,7 @@ export function createPlaceTools({data,areas,history,model,validation=null,view}
       const id=past.project_id??familySummary(rows,past.kind??'all').members[0]?.id,r=rows.find(r=>r.id===id),tab=CHART_TABS.find(([k])=>k===(past.chart??'engagement'));
       const key=CHART_OUTCOME[tab[0]];
       say=r?`${tab[1]} chart for ${r.project}.${key?` Compared with its surroundings, the change was ${fmtChange(key,changeOf(r,key))}.`:' It shows which topics people discussed more or less after opening.'}`:'Project charts.';
-    }else say='Notes: reviews come from Yelp’s January 2022 archive, income and poverty from ACS estimates. This is a record of what happened, not a forecast.';
+    }else say='Notes. Reviews come from Yelp\'s January 2022 archive, and income and poverty from ACS estimates. Everything here describes the past. Nothing forecasts.';
     return {section:section.key,left_right_moves:section.left_right,say,view:v};
   }
 
@@ -126,7 +126,7 @@ export function createPlaceTools({data,areas,history,model,validation=null,view}
       run:()=>({
         about:'Place Lab maps historical Yelp review activity and language with Census income and poverty for ZIPs in five metros, and shows what changed around eleven past public projects compared with their surrounding areas.',
         can_answer:['How a ZIP compares with others in its city on engagement, sentiment, access discussion, income and poverty','Which ZIPs rank highest or lowest on a measure, optionally filtered by others','What changed around past trails, parks, plazas and a streetcar line, project by project','What a term means and how it was calculated'],
-        cannot_answer:['What a new project, budget or location would cause','Current conditions: reviews end in January 2022 and income/poverty are 2007–2012 ACS estimates','Visits, sales, revenue or resident wellbeing','Areas outside the mapped ZIPs'],
+        cannot_answer:['What a new project, budget or location would cause','Current conditions, because reviews end in January 2022 and income and poverty are 2007–2012 ACS estimates','Visits, sales, revenue or resident wellbeing','Areas outside the mapped ZIPs'],
         cities:cityList.map(c=>({...c,mapped_zips:areasOf(c).length})),
         zip_measures:ZIP_MEASURES.map(m=>({key:m.key,label:m.label,unit:m.unit,map_focus:m.focus??null})),
         map_focuses:FOCUS_KEYS.map(k=>({key:k,label:FOCUSES[k].label??FOCUSES[k].title,combined:!!COMBINED_VIEWS[k]})),
@@ -143,7 +143,7 @@ export function createPlaceTools({data,areas,history,model,validation=null,view}
       inputSchema:{type:'object',properties:{},additionalProperties:false},annotations:READ,run:()=>describe()},
 
     {name:'navigate',title:'Move around the page like arrow keys',
-      description:'Moves the user’s view. up/down: previous or next page section (map, ZIP profile, past projects, project charts, notes), with smooth scrolling and focus. left/right: previous or next item inside the current section (map: neighbouring ZIP west or east; ZIP profile: previous or next measure, and the map switches to it; past projects: previous or next kind of project; project charts: previous or next chart). in/out: zoom the map. Returns what is now on screen.',
+      description:'Moves the user\'s view. up/down: previous or next page section (map, ZIP profile, past projects, project charts, notes), with smooth scrolling and focus. left/right: previous or next item inside the current section (map: neighboring ZIP west or east; ZIP profile: previous or next measure, and the map switches to it; past projects: previous or next kind of project; project charts: previous or next chart). in/out: zoom the map. Returns what is now on screen.',
       inputSchema:{type:'object',properties:{direction:{type:'string',enum:['up','down','left','right','in','out']},steps:{type:'integer',minimum:1,maximum:5,default:1}},required:['direction'],additionalProperties:false},annotations:VIEW,
       run:({direction,steps=1})=>{
         if(!['up','down','left','right','in','out'].includes(direction))throw new ToolError(`Unknown direction "${direction}".`,'Use up, down, left, right, in or out.',['up','down','left','right','in','out']);
@@ -179,7 +179,7 @@ export function createPlaceTools({data,areas,history,model,validation=null,view}
           view.showPastProjects({chart});
           return describe();
         }
-        return {...describe(),say:'There is nothing to step through here. Say up to go back to the charts.'};
+        return {...describe(),say:'Nothing to step through here. Say up to go back to the charts.'};
       }},
 
     {name:'go_to',title:'Jump to a page section',
@@ -208,7 +208,7 @@ export function createPlaceTools({data,areas,history,model,validation=null,view}
       description:'Returns every ZIP measure for one ZIP: value, unit, period, city median, rank (1 = highest), percentile, and definition. "Limited data" means too few reviews, never zero. City is optional; it is found from the ZIP. Does not change the screen; use show_on_map to show it.',
       inputSchema:{type:'object',properties:{zip:{type:'string',pattern:'^\\d{5}$',description:'Five-digit ZIP, e.g. "19134".'},city:{type:'string',description:'Optional city id or label.'}},required:['zip'],additionalProperties:false},annotations:READ,
       run:({zip,city})=>{const r=resolveZip(zip,city);return {city:r.city.label,zip:r.zip,compared_with:`${areasOf(r.city).length} mapped ZIPs in ${r.city.label}`,measures:profileOf(r.city,r.zip),
-        notes:['Review measures come from Yelp’s January 2022 archive and describe Yelp-listed businesses only.','Income and poverty are historical ACS estimates of residents, not reviewers.'],
+        notes:['Review measures come from Yelp\'s January 2022 archive and cover Yelp-listed businesses only.','Income and poverty are older ACS estimates that describe residents. Reviewers may live anywhere.'],
         say:`ZIP ${r.zip} in ${r.city.label}. ${speakMeasure(r.city,r.zip,'engagement')} ${speakMeasure(r.city,r.zip,'poverty')}`};}},
 
     {name:'find_zips',title:'Rank ZIPs in a city by a measure',
@@ -242,14 +242,14 @@ export function createPlaceTools({data,areas,history,model,validation=null,view}
         return {kind,projects:s.members.map(r=>({id:r.id,name:r.project,city:project(r.id).city_label,kind:FAMILIES[r.family].label,opened:r.opening,...changes(r)})),
           summary:Object.fromEntries(OUTCOMES.map(o=>[OUTCOME_KEYS[o.key],{average:round(s.outcomes[o.key].mean,3),min:round(s.outcomes[o.key].min,3),max:round(s.outcomes[o.key].max,3),improved:s.outcomes[o.key].better,of:s.n,unit:OUTCOME_UNITS[o.key]}])),
           reliability:reliability(),
-          does_kind_predict:{answer:'No',detail:`Holding out each of ${kindCheck.activity.n} projects, the average for its kind missed its engagement change by ${Math.round(100*kindCheck.activity.family_mae)} log points versus ${Math.round(100*kindCheck.activity.overall_mae)} for the plain all-project average; kind did not predict better on any measure.`},
+          does_kind_predict:{answer:'No',detail:`Holding out each of ${kindCheck.activity.n} projects, the average for its kind missed its engagement change by ${Math.round(100*kindCheck.activity.family_mae)} log points, against ${Math.round(100*kindCheck.activity.overall_mae)} for the plain all-project average. Knowing the kind never helped on any measure.`},
           excluded:model.excluded_projects.map(p=>({id:p.id,name:p.project,reason:p.reason})),
           notes:['Lower is better for the two negative-mention measures.','Several post-opening windows include 2020.'],
-          say:`For ${kindLabel(kind)}, ${s.n} projects: engagement improved near ${s.outcomes.activity.better} and sentiment near ${s.outcomes.sentiment.better}, relative to their surroundings. The kind of project did not predict the outcome.`};
+          say:`For ${kindLabel(kind)}, ${s.n} projects: engagement beat the surroundings near ${s.outcomes.activity.better} and sentiment near ${s.outcomes.sentiment.better}. Knowing the kind of project did not predict how it went.`};
       }},
 
     {name:'get_project_history',title:'Detail for one past project',
-      description:'Returns one past project’s periods (early, pre-opening, post-opening) near the project and in its comparison area: reviews, average sentiment and negative-mention rates, plus comparison-adjusted changes and the topics whose discussion changed most.',
+      description:'Returns one past project\'s periods (early, pre-opening, post-opening) near the project and in its comparison area: reviews, average sentiment and negative-mention rates, plus comparison-adjusted changes and the topics whose discussion changed most.',
       inputSchema:{type:'object',properties:{project_id:{type:'string',description:'Project id from get_place_lab_guide, e.g. "the-rail-park".'}},required:['project_id'],additionalProperties:false},annotations:READ,
       run:({project_id})=>{
         const p=project(project_id),h=history.projects.find(h=>h.id===p.id),r=rows.find(r=>r.id===p.id);
@@ -297,7 +297,7 @@ export function createPlaceTools({data,areas,history,model,validation=null,view}
         if(project_id!=null){
           project(project_id);
           const own=kindOf(project_id);
-          if(!own)throw new ToolError(`${project(project_id).name} is not in the comparison table.`,'It did not meet the baseline support rule; use get_project_history for its data.');
+          if(!own)throw new ToolError(`${project(project_id).name} is not in the comparison table.`,'It had too few reviewed businesses nearby before opening. Use get_project_history for its data.');
           // Keep the current filter when it already contains the project; otherwise switch to its kind.
           const current=view.current().past_projects?.kind??'all';
           if(k==null)k=current==='all'||current===own?undefined:own;

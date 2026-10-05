@@ -31,7 +31,7 @@ function Finding({n,title,lede,source,children,meaning}:{n:number,title:string,l
     </CardHeader>
     <CardContent>{children}</CardContent>
     <CardFooter className="flex flex-col items-start gap-2 border-t pt-4 text-xs leading-relaxed text-muted-foreground">
-      <p className="m-0"><strong className="text-foreground">What it means:</strong> {meaning}</p>
+      <p className="m-0"><strong className="text-foreground">What it means.</strong> {meaning}</p>
       <a className="font-semibold text-primary underline-offset-4 hover:underline" href={`${NOTEBOOK}#${source[1]}`}>Notebook {source[0]} →</a>
     </CardFooter>
   </Card>;
@@ -53,27 +53,27 @@ function Findings({areas,history,model,extra}:any) {
   const sentimentUp=growth.filter((g:any)=>g.sentiment>0).length;
   const v=extra.text_validation,b=v.embedding_benchmark;
   const f1=[['Clause is about the area','area_target'],['Negative comment about the area','negative_area']].map(([label,k])=>({task:label,rules:b[k].rules.f1,bert:b[k].embedding_lr.f1}));
-  f1.push({task:'Clause sentiment (macro-F1)',rules:b.polarity.vader.macro_f1,bert:b.polarity.embedding_lr.macro_f1});
+  f1.push({task:'Clause sentiment, macro-F1',rules:b.polarity.vader.macro_f1,bert:b.polarity.embedding_lr.macro_f1});
   const mae=[{model:'Predict the average',all:model.mean_baseline.city_metrics.mae},{model:'Ridge baseline',all:model.candidates.baseline.city_metrics.mae},
     {model:'+ text shares',all:model.candidates.text.city_metrics.mae},{model:'+ pre-opening trend',all:model.candidates.trend.city_metrics.mae},{model:'+ TF-IDF/NMF topics',all:model.candidates.advanced_text.city_metrics.mae}];
   const timing=[{sample:`All ${model.mean_baseline.city_metrics.n} projects`,ridge:model.candidates.baseline.city_metrics.mae,mean:model.mean_baseline.city_metrics.mae},
-    ...Object.values(model.sensitivities).map((s:any)=>({sample:`${s.n_projects} projects (${s.excluded.length} excluded)`,ridge:s.candidates.baseline.city_metrics.mae,mean:s.mean_baseline?.city_metrics?.mae??null}))];
+    ...Object.values(model.sensitivities).map((s:any)=>({sample:`${s.n_projects} projects, ${s.excluded.length} dropped`,ridge:s.candidates.baseline.city_metrics.mae,mean:s.mean_baseline?.city_metrics?.mae??null}))];
   const rr=v.random_reviews;
 
   return <div className="grid gap-6">
     <Finding n={1} source={['§3','3.-Build-the-ZIP-dataset-from-existing-quarterly-analysis']} title="Yelp grew unevenly, so raw growth misleads"
-      lede={`Across ${cityRows.reduce((n:number,c:any)=>n+c.zips,0)} mapped ZIPs, review counts between 2012–2014 and 2019–2021 grew far faster in some metros than others.`}
-      meaning="Much of the growth in reviews is Yelp's own adoption, and it differs by metro. That is why every project comparison subtracts the change in a nearby comparison area.">
+      lede={`Across ${cityRows.reduce((n:number,c:any)=>n+c.zips,0)} mapped ZIPs, reviews grew far faster in some metros than others between 2012–2014 and 2019–2021.`}
+      meaning="Much of the growth is just more people using Yelp, and how many more depends on the metro. So every project comparison subtracts the change in a nearby comparison area.">
       <div className="overflow-x-auto rounded-lg border"><Table>
         <TableHeader><TableRow><TableHead className={head}>Metro</TableHead><TableHead className={head}>ZIPs</TableHead><TableHead className={head}>Reviews 2012–14</TableHead><TableHead className={head}>Reviews 2019–21</TableHead><TableHead className={head}>Median ZIP change</TableHead><TableHead className={head}>Median engagement</TableHead></TableRow></TableHeader>
         <TableBody>{cityRows.map((c:any)=><TableRow key={c.city}><TableCell className="font-medium">{c.city}</TableCell><TableCell className="tabular-nums">{c.zips}</TableCell><TableCell className="tabular-nums">{fmt(c.early)}</TableCell><TableCell className="tabular-nums">{fmt(c.late)}</TableCell><TableCell className="tabular-nums font-semibold">{signed(c.growth)}%</TableCell><TableCell className="tabular-nums">{fmt(c.engagement)} / km² / yr</TableCell></TableRow>)}</TableBody>
       </Table></div>
     </Finding>
 
-    <Finding n={2} source={['§3','3.-Build-the-ZIP-dataset-from-existing-quarterly-analysis']} title="Busier areas get warmer reviews; poverty does not predict sentiment"
-      lede={`Each dot is one of the ${zips.length} ZIPs with enough reviews for both measures. Business engagement and average sentiment rise together (Spearman ρ = ${fmt(rhoEngagement,2)}); poverty and sentiment are unrelated (ρ = ${fmt(rhoPoverty,2)}).`}
-      meaning="Review sentiment mostly reflects the kind of places people review, and dense commercial areas review well. Low sentiment is not a stand-in for disadvantage, so the map shows poverty and review measures side by side rather than combining them.">
-      <p className="chart-axis-label">Average review sentiment, 2019–2021 (VADER)</p>
+    <Finding n={2} source={['§3','3.-Build-the-ZIP-dataset-from-existing-quarterly-analysis']} title="Busier areas get warmer reviews, but poverty does not predict sentiment"
+      lede={`Each dot is one of the ${zips.length} ZIPs with enough reviews for both measures. Business engagement and average sentiment rise together, with Spearman ρ = ${fmt(rhoEngagement,2)}. Poverty and sentiment barely move together, at ρ = ${fmt(rhoPoverty,2)}.`}
+      meaning="Sentiment mostly tracks what kind of places get reviewed, and dense commercial areas review well. Low sentiment does not mark disadvantage. That is why the map shows poverty and review measures side by side and never blends them.">
+      <p className="chart-axis-label">Average VADER sentiment, 2019–2021</p>
       <ChartContainer config={Object.fromEntries(cities.map((c:any)=>[c.id,{label:c.label,color:CITY_COLORS[c.id]}]))} className="decision-chart" style={{height:340}} aria-label="ZIP engagement against sentiment">
         <ScatterChart margin={{top:10,right:20,left:0,bottom:10}}>
           <CartesianGrid/><XAxis type="number" dataKey="x" domain={['auto','auto']} tickFormatter={(t:number)=>fmt(10**t)} tickLine={false} axisLine={false}/>
@@ -83,12 +83,12 @@ function Findings({areas,history,model,extra}:any) {
           {cities.map((c:any)=><Scatter key={c.id} name={c.id} data={zips.filter((z:any)=>z.city===c.id)} fill={`var(--color-${c.id})`} fillOpacity={.75} isAnimationActive={false}/>)}
         </ScatterChart>
       </ChartContainer>
-      <p className="chart-axis-label chart-x-label">Business engagement · reviews / km² / year (log scale)</p>
+      <p className="chart-axis-label chart-x-label">Business engagement · reviews / km² / year, log scale</p>
     </Finding>
 
     <Finding n={3} source={['§4','4.-Historical-project-dataset-and-outcome-construction']} title="Raw growth near a project and adjusted growth often disagree"
-      lede="Review growth near each project from two years before opening to two years after, shown raw and after subtracting the comparison area's growth."
-      meaning="Sun Link's nearby reviews nearly tripled, yet its comparison area grew faster, so the adjusted change is negative. Reading raw counts alone would credit projects with growth that was happening citywide.">
+      lede="Review growth near each project from two years before opening to two years after. Each project shows the raw change and the change after subtracting the comparison area's growth."
+      meaning="Sun Link's nearby reviews nearly tripled, but its comparison area grew faster, so the adjusted change is negative. Raw counts alone would credit projects with growth that was happening across the whole city.">
       <p className="chart-axis-label">Change in reviews · %</p>
       <ChartContainer config={{raw:{label:'Raw change near the project',color:GREY},adjusted:{label:'Adjusted for comparison area',color:GREEN}}} className="decision-chart" style={{height:380}} aria-label="Raw and adjusted review growth by project">
         <BarChart data={growth} layout="vertical" margin={{top:5,right:30,left:10,bottom:5}}>
@@ -102,9 +102,9 @@ function Findings({areas,history,model,extra}:any) {
       </ChartContainer>
     </Finding>
 
-    <Finding n={4} source={['§5','5.-How-unstructured-text-contributes']} title={`Sentiment held up near ${sentimentUp} of ${growth.length} projects, by small amounts`}
-      lede="Comparison-adjusted change in average review sentiment near each project (VADER compound, −1 to +1)."
-      meaning="This answers the question in our proposal most directly: near most projects, reviews became slightly more positive relative to their surroundings. The changes are small (all under 0.1) and cannot be attributed to the projects alone.">
+    <Finding n={4} source={['§5','5.-How-unstructured-text-contributes']} title={`Reviews got slightly warmer near ${sentimentUp} of ${growth.length} projects`}
+      lede="Comparison-adjusted change in average VADER sentiment near each project. VADER runs from −1 to +1."
+      meaning="This is the most direct answer to our proposal's question. Near most projects, reviews got a little more positive than in their surroundings. Every change is under 0.1, and we can't credit any of them to the project alone.">
       <p className="chart-axis-label">Adjusted sentiment change</p>
       <ChartContainer config={{sentiment:{label:'Adjusted sentiment change',color:GREEN}}} className="decision-chart" style={{height:340}} aria-label="Adjusted sentiment change by project">
         <BarChart data={[...growth].sort((a:any,b:any)=>b.sentiment-a.sentiment)} layout="vertical" margin={{top:5,right:30,left:10,bottom:5}}>
@@ -116,19 +116,19 @@ function Findings({areas,history,model,extra}:any) {
       </ChartContainer>
     </Finding>
 
-    <Finding n={5} source={['§5.4','5.4-BERT-sentence-embeddings-(Week-6)']} title="Most of Yelp is about food; place talk is a minority"
-      lede={`Topics learned from all reviews describe food, hotels and coffee. Only ${rr.with_place_mention} of ${rr.n} randomly sampled reviews (${fmt(100*rr.place_rate_ci[0])}–${fmt(100*rr.place_rate_ci[1])}% at 95% confidence) mention the surroundings at all.`}
-      meaning="Yelp is a business-review source, so civic signals have to be found inside it. When BERTopic is run on place-related excerpts instead, it recovers parking, safety, streetcars, construction and trash on its own.">
+    <Finding n={5} source={['§5.4','5.4-BERT-sentence-embeddings-(Week-6)']} title="Most of Yelp is about food, and few reviews talk about the place"
+      lede={`Topics learned from all reviews describe food, hotels and coffee. Only ${rr.with_place_mention} of ${rr.n} randomly sampled reviews mention the surroundings at all. The 95% interval is ${fmt(100*rr.place_rate_ci[0])}–${fmt(100*rr.place_rate_ci[1])}%.`}
+      meaning="Yelp reviews are about businesses, so anything civic has to be dug out of them. Run BERTopic on place-related excerpts instead and it finds parking, safety, streetcars, construction and trash without being told to look.">
       <div className="overflow-x-auto rounded-lg border"><Table>
-        <TableHeader><TableRow><TableHead className={head}>Learned topic (TF-IDF + NMF, all reviews)</TableHead><TableHead className={head}>Leading terms</TableHead></TableRow></TableHeader>
+        <TableHeader><TableRow><TableHead className={head}>Learned topic · TF-IDF + NMF, all reviews</TableHead><TableHead className={head}>Leading terms</TableHead></TableRow></TableHeader>
         <TableBody>{extra.topics.map((t:any)=><TableRow key={t.id}><TableCell className="font-medium">{t.id.replace('topic_','Topic ')}</TableCell><TableCell>{t.top_terms.slice(0,8).join(', ')}</TableCell></TableRow>)}</TableBody>
       </Table></div>
     </Finding>
 
-    <Finding n={6} source={['§5.5','5.5-How-accurate-are-the-rules?-Validation-against-labelled-clauses']} title="Keyword rules miss most complaints; BERT embeddings do better"
-      lede={`F1 against ${v.labels.n_items} labelled items (agent labels pending human recheck). The BERT model is logistic regression on all-MiniLM-L6-v2 embeddings, cross-validated with folds grouped by business.`}
-      meaning="Our negative access and public-space measures come from the rules, which found about one in six negative area comments, so Place Lab marks them low reliability. Sentence embeddings roughly double the F1 for complaints; rescoring the full corpus with them is the next step.">
-      <p className="chart-axis-label">F1 score (1 = perfect)</p>
+    <Finding n={6} source={['§5.5','5.5-How-accurate-are-the-rules?-Validation-against-labelled-clauses']} title="Keyword rules miss most complaints, and BERT embeddings catch more"
+      lede={`F1 on ${v.labels.n_items} items labeled by Claude Opus, which a person still needs to recheck. The BERT model is logistic regression on all-MiniLM-L6-v2 embeddings, cross-validated with folds grouped by business.`}
+      meaning="Our negative access and public-space measures come from the rules, which found about one in six negative area comments. Place Lab marks those measures low reliability. Sentence embeddings more than double the F1 on complaints, and rescoring every review with them is our next step.">
+      <p className="chart-axis-label">F1 score, where 1 is perfect</p>
       <ChartContainer config={{rules:{label:'Keyword rules / VADER',color:GREY},bert:{label:'BERT embeddings + logistic regression',color:GREEN}}} className="decision-chart" style={{height:260}} aria-label="Rules versus BERT F1">
         <BarChart data={f1} layout="vertical" margin={{top:5,right:30,left:10,bottom:5}}>
           <CartesianGrid horizontal={false}/><XAxis type="number" domain={[0,1]} tickFormatter={(t:number)=>fmt(t,1)} tickLine={false} axisLine={false}/>
@@ -142,8 +142,8 @@ function Findings({areas,history,model,extra}:any) {
     </Finding>
 
     <Finding n={7} source={['§6','6.-Reproduce-the-baseline-and-inspect-alternatives']} title="Ten projects cannot forecast a new one"
-      lede="Mean absolute error when each city's projects are held out (excess reviews per $1M; lower is better). Text features did not help, and the baseline's edge over simply predicting the average disappears once projects with 2020 or construction-overlap windows are removed."
-      meaning="This is why Place Lab shows what happened and does not project outcomes for a new budget or location. The evidence supports investigation, not a recommendation.">
+      lede="Mean absolute error in excess reviews per $1M when each city's projects are held out. Lower is better. Text features did not help. Drop the projects whose windows overlap 2020 or construction and the baseline no longer beats guessing the average."
+      meaning="So Place Lab shows what happened and stops there. It won't project outcomes for a new budget or location. Use it to decide where to look, then go look.">
       <div className="grid gap-6 md:grid-cols-2">
         <div><p className="chart-axis-label">City-held-out error, all eligible projects</p>
           <ChartContainer config={{all:{label:'Mean absolute error',color:GREEN}}} className="decision-chart" style={{height:250}} aria-label="Model comparison">

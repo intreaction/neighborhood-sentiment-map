@@ -146,7 +146,7 @@ function PlacePanel({store,actions}:{store:Store,actions:any}) {
         <AccordionItem value="past">
           <AccordionTrigger className="py-3 text-xs">Past projects</AccordionTrigger>
           <AccordionContent className="grid gap-3">
-            <p className="m-0 text-[11px] text-muted-foreground">Jump to the ZIP around one of the eleven historical projects. The tables below the map show what changed there.</p>
+            <p className="m-0 text-[11px] text-muted-foreground">Jump to the ZIP around one of the eleven past projects. The tables below the map show what changed there.</p>
             <div className="grid gap-1.5"><Label htmlFor="landmarkSelect" className="text-xs">Historical project</Label>
               <Select value={v.landmark||'custom'} onValueChange={actions.setLandmark}>
                 <SelectTrigger id="landmarkSelect" className="w-full bg-card"><SelectValue/></SelectTrigger>
@@ -157,7 +157,7 @@ function PlacePanel({store,actions}:{store:Store,actions:any}) {
           </AccordionContent>
         </AccordionItem>
         <AccordionItem value="settings">
-          <AccordionTrigger className="py-3 text-xs">Map settings &amp; evidence notes</AccordionTrigger>
+          <AccordionTrigger className="py-3 text-xs">Map settings and data notes</AccordionTrigger>
           <AccordionContent className="grid gap-3 text-[11px]">
             <div className="grid gap-1.5"><span className={fieldLabel}>Map detail</span>
               <ToggleGroup type="single" variant="outline" size="sm" value={v.basemap} onValueChange={(x:string)=>x&&actions.setBasemap(x)} aria-label="Map detail" className="w-full">
@@ -166,7 +166,7 @@ function PlacePanel({store,actions}:{store:Store,actions:any}) {
             <div className="flex items-center gap-2"><Switch id="showBusinesses" checked={v.showBusinesses} onCheckedChange={actions.setBusinesses}/><Label htmlFor="showBusinesses" className="text-xs">Business dots</Label></div>
             <Separator/>
             <p className="m-0">{v.heatExplanation}</p>{v.heatCoverage&&<p className="m-0">{v.heatCoverage}</p>}
-            <p className="m-0 text-muted-foreground">Area colors follow ZIP/ZCTA boundaries, including at street-level zoom.</p>
+            <p className="m-0 text-muted-foreground">Colors follow ZIP boundaries at every zoom level.</p>
             <div className="map-legend"><span><i/>ZIP/ZCTA areas</span><span><i className="legend-business"/>Reviewed businesses</span></div>
             <Collapsible><CollapsibleTrigger asChild><Button variant="ghost" size="sm" className="group -ml-2.5 h-7 text-[11px]"><ChevronDown className="transition-transform group-data-[state=open]:rotate-180"/>Enter exact coordinates</Button></CollapsibleTrigger>
               <CollapsibleContent><CoordinateForm longitude={v.longitude} latitude={v.latitude} onSubmit={actions.setCoordinates}/></CollapsibleContent></Collapsible>

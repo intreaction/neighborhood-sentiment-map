@@ -1,7 +1,7 @@
 // Spatial and page navigation for voice or keyboard agents. Pure functions; the
 // browser side (place_navigator.js) applies the result with scrolling and focus.
 export const SECTIONS=[
-  {key:'map',label:'Map',left_right:'neighbouring ZIP to the west or east'},
+  {key:'map',label:'Map',left_right:'neighboring ZIP to the west or east'},
   {key:'zip_profile',label:'ZIP profile',left_right:'previous or next measure (the map switches to that measure)'},
   {key:'past_projects',label:'Past projects',left_right:'previous or next kind of project'},
   {key:'project_charts',label:'Project charts',left_right:'previous or next chart'},

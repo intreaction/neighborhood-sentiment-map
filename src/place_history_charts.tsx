@@ -13,9 +13,9 @@ const NEAR='#245c49',FAR='#889686',UP='#245c49',DOWN='#b56b32';
 const PERIODS:[string,string][]=[['early','Early'],['pre','Pre-opening'],['post','Post-opening']];
 // One chart per projection measure; shares are stored as fractions and shown as percentages.
 export const PERIOD_MEASURES:Record<string,{label:string,unit:string,field:string,scale:number,digits:number,better:number,note:string}>={
-  sentiment:{label:'Sentiment',unit:'Mean VADER compound score',field:'mean_sentiment',scale:1,digits:3,better:1,note:'Whole-review sentiment, so it mostly reflects business experiences.'},
-  access:{label:'Negative access',unit:'% of reviews with a negative access or parking clause',field:'access_friction_share',scale:100,digits:2,better:-1,note:'Area-targeted negative clauses about walking, transit or parking. Lower is better.'},
-  realm:{label:'Negative public space',unit:'% of reviews with a negative public-space clause',field:'public_realm_complaint_share',scale:100,digits:2,better:-1,note:'Area-targeted negative clauses about safety, cleanliness, public space, construction or the neighbourhood. Lower is better.'}
+  sentiment:{label:'Sentiment',unit:'Mean VADER compound score',field:'mean_sentiment',scale:1,digits:3,better:1,note:'Scores the whole review, so it mostly reflects how the business went.'},
+  access:{label:'Negative access',unit:'% of reviews with a negative access or parking clause',field:'access_friction_share',scale:100,digits:2,better:-1,note:'Negative clauses about walking, transit or parking around the business. Lower is better.'},
+  realm:{label:'Negative public space',unit:'% of reviews with a negative public-space clause',field:'public_realm_complaint_share',scale:100,digits:2,better:-1,note:'Negative clauses about safety, cleanliness, public space, construction or the neighborhood around the business. Lower is better.'}
 };
 const TOPIC_LABELS:Record<string,string>={walking_accessibility:'Walking / accessibility',transit:'Transit',parking:'Parking',safety:'Safety',cleanliness_maintenance:'Cleanliness',public_space:'Public space',construction:'Construction',food_service_value:'Food / service',neighborhood:'Neighbourhood'};
 const fmt=(v:number,d:number)=>Number.isFinite(v)?v.toLocaleString('en-US',{minimumFractionDigits:d,maximumFractionDigits:d}):'—';
@@ -49,7 +49,7 @@ function PeriodChart({project,measure}:{project:any,measure:string}) {
         <Bar dataKey="far" fill="var(--color-far)" radius={3} maxBarSize={44} isAnimationActive={false}/>
       </BarChart>
     </ChartContainer>
-    <p className="mt-2 text-sm">Comparison-adjusted change, pre → post: <strong className={tone}>{signed(adjusted,m.digits)}{m.scale===100?' pp':''}</strong></p>
+    <p className="mt-2 text-sm">Comparison-adjusted change, before to after opening: <strong className={tone}>{signed(adjusted,m.digits)}{m.scale===100?' pp':''}</strong></p>
     <p className="chart-note text-muted-foreground">{m.note} Each bar is the share or mean across all reviews in that two-year period.</p>
     <ChartData headers={['Period','Near','Near reviews','Comparison','Comparison reviews']} rows={data.map(d=>[d.period,fmt(d.near,m.digits),d.nearN.toLocaleString('en-US'),fmt(d.far,m.digits),d.farN.toLocaleString('en-US')])}/>
   </>;
@@ -58,7 +58,7 @@ function PeriodChart({project,measure}:{project:any,measure:string}) {
 function TopicChart({project}:{project:any}) {
   const [mode,setMode]=React.useState('discussion');
   const rows=insights.historicalTopics(project,mode).map((r:any)=>({...r,label:TOPIC_LABELS[r.topic]||r.topic}));
-  if(!rows.length)return <p className="text-sm text-muted-foreground">Topic data are unavailable for this project.</p>;
+  if(!rows.length)return <p className="text-sm text-muted-foreground">This project has no topic data.</p>;
   const complaints=mode==='complaints';
   return <>
     <ToggleGroup type="single" variant="outline" size="sm" value={mode} onValueChange={(v:string)=>v&&setMode(v)} aria-label="Topic measure" className="mb-2">
@@ -70,12 +70,12 @@ function TopicChart({project}:{project:any}) {
         <CartesianGrid horizontal={false}/><XAxis type="number" axisLine={false} tickLine={false} tickFormatter={v=>fmt(v,1)}/>
         <YAxis type="category" dataKey="label" width={130} axisLine={false} tickLine={false} tick={{fontSize:11}}/>
         <ReferenceLine x={0} stroke="#a8baa3"/>
-        <ChartTooltip content={<ChartTooltipContent hideLabel formatter={(value:any,_n:any,item:any)=><div><strong>{item.payload.label}</strong><p>{signed(value,2)} pp adjusted</p><p>Near: {fmt(item.payload.nearPre,1)}% → {fmt(item.payload.nearPost,1)}%</p>{item.payload.sparse&&<p>Sparse counts; interpret cautiously.</p>}</div>}/>}/>
+        <ChartTooltip content={<ChartTooltipContent hideLabel formatter={(value:any,_n:any,item:any)=><div><strong>{item.payload.label}</strong><p>{signed(value,2)} pp adjusted</p><p>Near: {fmt(item.payload.nearPre,1)}% → {fmt(item.payload.nearPost,1)}%</p>{item.payload.sparse&&<p>Few mentions, so read with care.</p>}</div>}/>}/>
         <Bar dataKey="value" radius={3} maxBarSize={22} isAnimationActive={false}>{rows.map((r:any,i:number)=><Cell key={i} fill={complaints?(r.value>0?DOWN:UP):(r.value<0?DOWN:UP)} fillOpacity={r.sparse?.45:1}/>)}</Bar>
       </BarChart>
     </ChartContainer>
-    <p className="chart-note text-muted-foreground">{complaints?'Negative values mean fewer complaints near the project relative to its comparison area.':'Positive values mean more discussion, which may include praise or complaints.'} Faded bars have fewer than 20 nearby mentions in a period. Rule-based labels; not yet human-validated.</p>
-    <ChartData headers={['Topic','Near pre %','Near post %','Comparison change · pp','Adjusted · pp']} rows={rows.map((r:any)=>[r.label+(r.sparse?' (sparse)':''),fmt(r.nearPre,2),fmt(r.nearPost,2),signed(r.farChange,2),signed(r.value,2)])}/>
+    <p className="chart-note text-muted-foreground">{complaints?'Below zero means fewer complaints near the project than in its comparison area.':'Above zero means more discussion, which counts praise and complaints alike.'} Faded bars have fewer than 20 nearby mentions in a period. Keyword rules made these labels, and no person has checked them yet.</p>
+    <ChartData headers={['Topic','Near pre %','Near post %','Comparison change · pp','Adjusted · pp']} rows={rows.map((r:any)=>[r.label+(r.sparse?' · few mentions':''),fmt(r.nearPre,2),fmt(r.nearPost,2),signed(r.farChange,2),signed(r.value,2)])}/>
   </>;
 }
 

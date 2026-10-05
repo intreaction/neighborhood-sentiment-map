@@ -31,7 +31,7 @@ function TermDialog() {
         <p className="text-xs leading-relaxed text-muted-foreground">{entry.caution}</p>
       </div>}
       <DialogFooter className="sm:justify-start">
-        <a className="text-xs font-semibold text-primary underline-offset-4 hover:underline" href={`methods.html#term-${key}`}>Methodology &amp; glossary →</a>
+        <a className="text-xs font-semibold text-primary underline-offset-4 hover:underline" href={`methods.html#term-${key}`}>Methodology and glossary →</a>
       </DialogFooter>
     </DialogContent>}
   </Dialog>;

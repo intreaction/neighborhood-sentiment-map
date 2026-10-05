@@ -19,14 +19,14 @@ function contributions(id,info,ce) {
 }
 export function renderHistory(history,id) {
   const p=history.projects.find(p=>p.id===id),s=insights.historicalSeries(p);
-  if(!s){clearChart('historyChart','This historical example does not have sufficient annual coverage.');$('historyNote').textContent='';renderTopics(history,id);return;}
+  if(!s){clearChart('historyChart','This project has too few years of data to chart.');$('historyNote').textContent='';renderTopics(history,id);return;}
   const series=[{label:'Nearby businesses',color:green,points:s.near.points},{label:'Comparison area',color:gray,points:s.far.points}];
   const pre=s.near.points.filter(p=>p.period!=='post');
   if(s.near.fit)series.push({label:`Nearby pre-opening OLS fit (${s.near.fit.n} years)`,color:orange,dashed:true,points:[pre[0].x,pre.at(-1).x].map(x=>({x,y:s.near.fit.intercept+s.near.fit.slope*x}))});
   const opening=Number(s.opening.slice(0,4))+(Number(s.opening.slice(5,7))-1)/12;
   lineChart('historyChart',{title:`${s.project}: observed annual business engagement`,series,xLabel:'Calendar year',yLabel:'Review index · pre-opening annual average = 100',xFormat:v=>String(Math.round(v)),opening});
   renderTopics(history,id);
-  $('historyNote').textContent=`${s.project}, opened ${s.opening}. Each area is indexed to its own pre-opening annual average. These are historical project footprints and comparison areas, not the selected 500 m point. Missing years are not zero; opening/construction years may be omitted. The dashed regression fits pre-opening observations only and does not predict the proposal.`;
+  $('historyNote').textContent=`${s.project}, opened ${s.opening}. Each area is indexed to its own pre-opening annual average. These use the project's own footprint and comparison area. Missing years are not zero, and opening or construction years may be left out. The dashed line fits only the years before opening. It is not a prediction.`;
 }
 export function renderInsights(snapshot,model,history) {
   const info=insights.scenarioInsights(snapshot,model);

@@ -112,7 +112,7 @@ export async function createPlaceMap({container,onPick=()=>{},onStatus=()=>{},on
       city=value;selection=null;selectedArea=null;tooltip.hidden=true;
       polygons=(city.features||[]).map(f=>polygonParts(f.geometry).map(p=>p.map(r=>r.map(point=>projectPoint(point,city.center)))));
       businesses=(city.businesses||[]).filter(b=>b[2]>0&&b[0]>=city.bounds[0]&&b[0]<=city.bounds[2]&&b[1]>=city.bounds[1]&&b[1]<=city.bounds[3]).map(b=>projectPoint(b,city.center));
-      reset();report('Drag to pan · Scroll or use + / − to zoom · Click a ZIP to select its boundary · Panning stays near this city.');
+      reset();report('Drag to pan · Scroll or use + / − to zoom · Click a ZIP to select it · The map stays near this city.');
     },
     setHeatmap(focus,areas,zip){heatFocus=focus;heatAreas=new Map(areas.map(a=>[a.zip,a]));selectedArea=zip;tooltip.hidden=true;schedule();},
     focusArea(zip){
