@@ -27,8 +27,6 @@ def build():
         html = template.replace("__TITLE__", title).replace("__PAGE__", page)
         html = html.replace("__CSS__", css).replace("__DATA__", embedded_json(evidence)).replace("__MODEL__", embedded_json(model)).replace("__ADVANCED__", embedded_json(advanced)).replace("__MATH__", math).replace("__APP__", app)
         (ROOT / "web" / f"{page}.html").write_text(html)
-        if page == "projects":
-            (ROOT / "web/index.html").write_text(html)
     return len(evidence["projects"])
 
 if __name__ == "__main__":

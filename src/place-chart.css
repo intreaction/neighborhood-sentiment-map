@@ -1,10 +1,39 @@
 @import "tailwindcss" source(none);
-@source "./components/ui/chart.tsx";
+@import "tw-animate-css";
+/* The site is light-only: dark: utilities apply under an explicit .dark class, never from the OS setting. */
+@custom-variant dark (&:where(.dark, .dark *));
+@source "./components/ui";
 @source "./place_chart_components.tsx";
+@source "./place_report_view.tsx";
+@source "./place_term_dialog.tsx";
+@source "./place_panel.tsx";
+@source "./place_history_charts.tsx";
+@source "./findings_app.tsx";
+/* shadcn/ui base: borders default to the theme line colour, not currentColor. */
+@layer base { *, ::before, ::after { border-color: var(--color-border); outline-color: color-mix(in oklab, var(--color-ring) 50%, transparent); } }
+/* shadcn/ui tokens mapped to the Place Lab palette (light only; the site has no dark theme). */
 @theme inline {
   --color-background: #fffdf6;
   --color-foreground: #173c35;
+  --color-card: #fffdf6;
+  --color-card-foreground: #173c35;
+  --color-popover: #fffdf6;
+  --color-popover-foreground: #173c35;
+  --color-primary: #183e35;
+  --color-primary-foreground: #fffdf6;
+  --color-secondary: #e6ecdf;
+  --color-secondary-foreground: #183e35;
+  --color-accent: #e6ecdf;
+  --color-accent-foreground: #183e35;
   --color-muted: #e9ecdf;
   --color-muted-foreground: #5b705d;
+  --color-destructive: #96412c;
   --color-border: #d4dcca;
+  --color-input: #d4dcca;
+  --color-ring: #cc943b;
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-xl: 10px;
+  --font-serif: Georgia, serif;
 }

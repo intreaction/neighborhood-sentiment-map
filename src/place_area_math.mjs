@@ -7,10 +7,10 @@ export const COMBINED_CATEGORIES=[
   {label:'Higher poverty · declining',color:'#75578a'}
 ];
 export const FOCUSES={
-  activity:{label:'Reach active business areas',field:'annual_review_density',title:'Review activity',unit:'reviews / km² / year',period:'2019–2021 · annual average',note:'Recorded Yelp activity per square kilometre, including water inside the boundary. It does not measure visits or revenue.',range:[0,3000],log:true,ends:['0','3,000+'],palette:'sequential'},
+  activity:{label:'Reach active business areas',field:'annual_review_density',title:'Business engagement',unit:'reviews / km² / year',period:'2019–2021 · annual average',note:'Recorded Yelp activity per square kilometre, including water inside the boundary. It does not measure visits or revenue.',range:[0,3000],log:true,ends:['0','3,000+'],palette:'sequential'},
   income:{label:'Support lower-income areas',field:'median_income',title:'Median household income',unit:'historical dollars',period:'Baseline ACS · 2007–2011 / 2008–2012',note:'Warmer areas have lower baseline household income. These are historical ZIP/ZCTA estimates, not reviewer incomes or current conditions.',range:[20000,100000],reverse:true,ends:['$100k+','$20k or less'],palette:'sequential'},
   poverty:{label:'Support lower-income areas',field:'poverty_pct',title:'Population below poverty',unit:'% of poverty-status population',period:'Baseline ACS · 2007–2011 / 2008–2012',note:'Warmer areas have a higher baseline poverty rate. The estimates describe the area, not individual Yelp reviewers.',range:[0,50],ends:['0%','50%+'],palette:'sequential'},
-  decline:{label:'Explore declining activity',field:'growth_pct',title:'Change in review activity',unit:'% change in review count',period:'2012–2014 → 2019–2021',note:'Warm = decline; teal = growth. Both three-year periods need 100 reviews. The later period includes COVID-19. First or absent reviews do not establish business openings or closures.',range:[-100,100],reverse:true,ends:['Growth +100% or more','Decline −100%'],palette:'diverging'},
+  decline:{label:'Explore declining activity',field:'growth_pct',title:'Change in business engagement',unit:'% change in review count',period:'2012–2014 → 2019–2021',note:'Warm = decline; teal = growth. Both three-year periods need 100 reviews. The later period includes COVID-19. First or absent reviews do not establish business openings or closures.',range:[-100,100],reverse:true,ends:['Growth +100% or more','Decline −100%'],palette:'diverging'},
   experience:{label:'Explore worsening experiences',field:'relative_sentiment_change',title:'Sentiment change vs. the city',unit:'VADER score difference',period:'2012–2014 → 2019–2021',note:'Warm = sentiment changed less favorably than the rest of the study metro. This is whole-review business sentiment. Relative improvement can occur even when absolute sentiment falls.',range:[-.15,.15],reverse:true,ends:['Better +0.15 or more','Worse −0.15 or less'],palette:'diverging'},
   access:{label:'Investigate access concerns',field:'access_share_pct',title:'Access & parking discussion',unit:'% of reviews mentioning access',period:'2019–2021 · existing keyword analysis',note:'Parking, walking, transit and accessibility mentions include praise and complaints. This is discussion frequency, not a validated complaint rate. At least 100 reviews required.',range:[0,15],ends:['0%','15%+'],palette:'sequential'},
   none:{label:'No heatmap',title:'Street map',note:'Choose a focus to explore existing area evidence.',period:'',range:[0,1],ends:['',''],palette:'sequential'}
@@ -59,7 +59,12 @@ export function areaColor(value,focus){
   const spec=FOCUSES[focus],f=spec.log?Math.log1p:x=>x;
   let t=Math.max(0,Math.min(1,(f(value)-f(spec.range[0]))/(f(spec.range[1])-f(spec.range[0]))));
   if(spec.reverse)t=1-t;
-  const stops=spec.palette==='diverging'?[[35,118,122],[248,239,212],[177,58,36]]:[[247,231,175],[227,158,74],[153,53,37]];
+  return rampColor(t,spec.palette==='diverging');
+}
+// Shared map ramps: t in [0,1], light to dark (sequential) or teal–cream–red (diverging).
+export function rampColor(t,diverging=false){
+  const stops=diverging?[[35,118,122],[248,239,212],[177,58,36]]:[[247,231,175],[227,158,74],[153,53,37]];
+  t=Math.max(0,Math.min(1,t));
   const i=t<=.5?0:1,u=i===0?t*2:(t-.5)*2;
   return `rgb(${stops[i].map((a,j)=>Math.round(a+(stops[i+1][j]-a)*u)).join(',')})`;
 }

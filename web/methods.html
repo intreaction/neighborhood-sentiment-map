@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#173c35"><title>Methodology &amp; Glossary · Public Investment Map</title><link rel="stylesheet" href="place.css"></head>
+<body class="methods-page">
+<header class="masthead"><a class="wordmark" href="place.html"><span class="brand-symbol" aria-hidden="true">◈</span> Public Investment Map</a><nav aria-label="Main navigation"><a href="place.html">Place Lab</a><a href="findings.html">What we found</a><a href="methods.html" aria-current="page">Methodology</a></nav></header>
+<main class="methods">
+<header class="methods-hero"><p class="eyebrow">CIS 509 · Analytics for Unstructured Data · Team 4</p><h1>Methodology &amp; Glossary</h1><p>How Place Lab turns Yelp reviews, Census estimates and public-project records into the measures on the map, which text-analysis and machine-learning methods we used, and what the results can and cannot support.</p><p class="methods-team">John Wheeler · Ryan Wolff · Cameron Anthony</p></header>
+<nav class="methods-toc" aria-label="On this page"><a href="#question">1. Research question</a><a href="#data">2. Data sources</a><a href="#units">3. Units of analysis</a><a href="#text">4. Text analysis</a><a href="#measures">5. ZIP measures</a><a href="#design">6. Project comparison design</a><a href="#models">7. Prediction models</a><a href="#families">8. Past-project comparison</a><a href="#validation">9. Checking the text measures</a><a href="#agents">10. Talking to Place Lab</a><a href="#tools">11. Software and tools</a><a href="#limits">12. Limitations</a><a href="#glossary">13. Glossary</a></nav>
+
+<section id="question"><h2>1. Research question</h2>
+<p>Can unstructured customer reviews show how areas changed around past public investments, and can that history inform where and what a city builds next? We treat review text and volume as evidence about local business engagement and experience. We do not treat them as a measure of public welfare.</p></section>
+
+<section id="data"><h2>2. Data sources</h2>
+<table class="methods-table"><thead><tr><th scope="col">Source</th><th scope="col">What we used</th><th scope="col">Period</th></tr></thead><tbody>
+<tr><th scope="row"><a href="#term-yelp">Yelp Open Dataset</a></th><td>Business locations and review text; 1,063,956 unique reviews scored around 11 projects in 7 cities, plus ZIP aggregates in 5 metros</td><td>January 2022 archive</td></tr>
+<tr><th scope="row"><a href="#term-acs">American Community Survey</a></th><td>Five-year median household income (with margins of error) and poverty rate by ZCTA</td><td>2007–2011 or 2008–2012</td></tr>
+<tr><th scope="row">Census TIGERweb</th><td><a href="#term-zcta">ZCTA</a> boundary polygons for 196 mapped areas</td><td>Fixed vintage</td></tr>
+<tr><th scope="row">Public project records</th><td>Opening dates, reported costs and footprints for 11 projects, each checked against public sources</td><td>Openings 2013–2018</td></tr>
+</tbody></table></section>
+
+<section id="units"><h2>3. Units of analysis</h2>
+<p>Place Lab uses two units, and they are kept separate:</p>
+<ol><li><strong>ZIP areas.</strong> Whole-ZCTA measures that compare 2012–2014 with 2019–2021. These drive the map colours and the ZIP profile table.</li>
+<li><strong>Historical project areas.</strong> A <a href="#term-near_area">near area</a> within 500 m of each project and a <a href="#term-comparison_area">comparison ring</a> 1.5–8 km away, observed for two years before and two years after opening. These drive the past-projects table and charts.</li></ol>
+<p>The capital-efficiency model in Section 7 used a third unit, a 500 m sample around a fixed point in a ZIP. It is a research result reported in the notebook and is no longer part of the app.</p></section>
+
+<section id="text"><h2>4. Text analysis</h2>
+<p>Three methods were applied to review text, each answering a different question.</p>
+<h3>Lexicon sentiment</h3><p>Every review receives a <a href="#term-vader">VADER</a> compound score from −1 to +1. VADER needs no training data and handles negation and intensifiers, which suits short informal text. It scores the whole review, so it mostly reflects the business experience.</p>
+<h3>Clause-level topic rules</h3><p>To separate comments about the surrounding area from comments about the business, reviews are split into clauses. Keyword patterns tag nine topics. Each clause is labelled by target (area, business or unclear) and polarity, which feeds the <a href="#term-negative_access">negative access</a> and <a href="#term-negative_realm">negative public-space</a> rates. Section 9 measures how accurate they are.</p>
+<h3>Learned topics</h3><p>A <a href="#term-tfidf">TF-IDF</a> representation and <a href="#term-nmf">non-negative matrix factorization</a> learned five topics without predefined labels from a reproducible sample of 23,691 reviews. Most learned topics describe food, service and value. That is a finding in itself: Yelp text says more about businesses than about public infrastructure.</p>
+<h3>BERT sentence embeddings and BERTopic</h3><p>Following Week 6 and Lab 4, the notebook encodes the 413 published place-related excerpts with the <code>all-MiniLM-L6-v2</code> sentence transformer and fits BERTopic (UMAP, HDBSCAN, c-TF-IDF). On place-related text, BERTopic recovers civic themes without being told them: parking, neighbourhood safety, streetcars, construction and trash. The same embeddings feed the <a href="#term-embedding_classifier">BERT-embedding classifier</a> in Section 9.</p></section>
+
+<section id="measures"><h2>5. ZIP measures</h2>
+<p>Each ZIP measure has a glossary entry with its formula. The main ones are <a href="#term-engagement">business engagement</a>, <a href="#term-engagement_change">change in business engagement</a>, <a href="#term-sentiment">average sentiment</a>, <a href="#term-sentiment_vs_metro">sentiment change vs. the rest of the metro</a>, <a href="#term-access_discussion">access &amp; parking discussion</a>, <a href="#term-income">median household income</a> and <a href="#term-poverty">poverty</a>. Review-based measures need at least 100 reviews per period; below that a ZIP shows <a href="#term-limited_data">limited data</a>, which is different from zero.</p></section>
+
+<section id="design"><h2>6. Project comparison design</h2>
+<p>For each historical project we compare the change near the project with the change in its comparison ring over the same years. This is a <a href="#term-adjusted_change">difference-in-differences</a> design: the comparison ring absorbs citywide trends, such as Yelp’s own growth, that would have happened without the project. Ten of the eleven projects meet the support rule of at least 20 reviewed businesses near the project before opening; Water Works Park does not.</p>
+<p>The primary outcome is <a href="#term-capital_efficiency">capital efficiency</a>: excess reviews near the project per $1 million of reported cost, beyond what the comparison area’s growth would predict.</p></section>
+
+<section id="models"><h2>7. Prediction models and evaluation</h2>
+<p>The selected model is a <a href="#term-ridge">ridge regression</a> on three log-transformed, standardised inputs: budget, number of reviewed businesses nearby, and reviews per business. We compared it against a mean-only predictor and three <a href="#term-challengers">challengers</a> using <a href="#term-holdout">project- and city-held-out evaluation</a>.</p>
+<table class="methods-table"><thead><tr><th scope="col">Model</th><th scope="col">Project-held-out MAE</th><th scope="col">City-held-out MAE</th></tr></thead><tbody>
+<tr><th scope="row">Mean only</th><td>61.6</td><td>58.5</td></tr>
+<tr><th scope="row">Ridge baseline (selected)</th><td>49.3</td><td>45.6</td></tr>
+<tr><th scope="row">Sentiment and topic shares</th><td>53.1</td><td>48.2</td></tr>
+<tr><th scope="row">Pre-opening trend</th><td>51.5</td><td>46.3</td></tr>
+<tr><th scope="row">TF-IDF / NMF text features</th><td>53.0</td><td>46.7</td></tr>
+</tbody></table>
+<p class="methods-note"><a href="#term-mae">MAE</a> in excess reviews per $1M; ten projects. Text features did not improve prediction. The baseline’s advantage over the mean disappears when projects with uncertain timing are excluded, so we present the model as exploratory.</p></section>
+
+<section id="families"><h2>8. Past-project comparison</h2>
+<p>Place Lab’s “What happened around similar past projects?” table lists the observed <a href="#term-adjusted_change">comparison-adjusted change</a> at each of the ten eligible projects for engagement, sentiment, negative access mentions and negative public-space mentions. Projects can be filtered by <a href="#term-project_family">kind</a>: trail / greenway (4), waterfront park (3), civic park / plaza (2) and transit line (1). A <a href="#term-family_average">family average</a> row summarises them.</p>
+<p>We tested whether the kind of project predicts its outcome. In a <a href="#term-loo_check">leave-one-project-out check</a>, family averages (partially pooled toward the overall mean) did not predict a held-out project better than the plain all-project average on any of the four measures. Projects of the same kind differed more than kinds did. The table is therefore a record of what happened at specific places. It does not estimate what a new project would do.</p></section>
+
+<section id="validation"><h2>9. Checking the text measures</h2>
+<p>The annotation sample has 731 items: 200 random reviews, 200 random keyword-screen clauses and 331 clauses stratified by project, period and topic. Claude Opus labelled each one for target (area or business), topics and polarity, seeing only the text. These are <a href="#term-agent_labels">agent labels</a> pending human recheck. We then scored the keyword rules, VADER, and a <a href="#term-embedding_classifier">BERT-embedding classifier</a> (cross-validated with folds grouped by business) on the same items.</p>
+<table class="methods-table"><thead><tr><th scope="col">Task</th><th scope="col">Rules / VADER</th><th scope="col">BERT embeddings</th></tr></thead><tbody>
+<tr><th scope="row">Clause is about the area (F1)</th><td>0.70</td><td>0.77</td></tr>
+<tr><th scope="row">Negative comment about the area (F1)</th><td>0.23 (recall 0.16)</td><td>0.52 (recall 0.70)</td></tr>
+<tr><th scope="row">Clause sentiment, three classes (macro-F1)</th><td>0.56 (VADER)</td><td>0.62</td></tr>
+</tbody></table>
+<p class="methods-note">514 clauses with a decided target; 488 with a decided polarity. About 30% of random reviews mention a place at all (95% CI 25–37%); the keyword screen catches 80% of them. Full tables, including per-topic precision and recall, are in notebook Section 5.5.</p>
+<p>What this means for the app: area targeting is moderately accurate, but the negative-comment rates behind the “negative access” and “negative public space” measures miss most complaints. Place Lab marks those columns as low reliability. The embedding classifier is the clearest improvement; applying it to the full 1.06 million reviews requires the raw archive and is the next step.</p></section>
+
+<section id="agents"><h2>10. Talking to Place Lab</h2>
+<p>Place Lab can be driven by a voice or chat assistant. The page publishes twelve tools as <code>window.placeLab</code> and, in browsers that support it, through <a href="https://github.com/webmachinelearning/webmcp">WebMCP</a>, so an assistant can look things up, move around the page and show the user what it found. A planner can ask “show me ZIP 19134 in Philly”, “go down”, “next”, “what’s north of here?” or “how did trails do?” and the page scrolls, highlights and answers.</p>
+<table class="methods-table"><thead><tr><th scope="col">Group</th><th scope="col">Tools</th><th scope="col">What they do</th></tr></thead><tbody>
+<tr><th scope="row">Look up</th><td><code>get_place_lab_guide</code>, <code>get_zip_profile</code>, <code>find_zips</code>, <code>compare_past_projects</code>, <code>get_project_history</code>, <code>define_term</code></td><td>Read-only answers with units, periods, city ranks, reliability notes and definitions</td></tr>
+<tr><th scope="row">Navigate</th><td><code>navigate</code> (up, down, left, right, in, out), <code>go_to</code>, <code>move_to_neighbor</code> (north, south, east, west), <code>describe_screen</code></td><td>Up and down move between sections; left and right step through ZIPs, measures, project kinds or charts; smooth scrolling and keyboard focus follow</td></tr>
+<tr><th scope="row">Show</th><td><code>show_on_map</code>, <code>show_past_projects</code></td><td>Select a city, ZIP, map layer, project kind, project or chart on screen</td></tr>
+</tbody></table>
+<p>Design choices: the tools call the same code as the tables, so an assistant reports exactly the numbers on screen. Every result includes a one-sentence <code>say</code> line for voice, which also appears as an on-screen caption and in a screen-reader live region. Errors explain how to recover and list valid values. Navigation and show tools change only the view; no tool forecasts a new project, stores data or contacts a server. Smooth scrolling is skipped for users who prefer reduced motion.</p>
+<p class="methods-note">Try it from the browser console: <code>await placeLab.call("show_on_map", {city: "Philly", zip: "19134"})</code>, then <code>await placeLab.call("navigate", {direction: "down"})</code>.</p></section>
+
+<section id="tools"><h2>11. Software and tools</h2>
+<table class="methods-table"><thead><tr><th scope="col">Task</th><th scope="col">Tools</th></tr></thead><tbody>
+<tr><th scope="row">Data preparation</th><td>Python 3.12, pandas, NumPy, SciPy</td></tr>
+<tr><th scope="row">Sentiment</th><td>vaderSentiment</td></tr>
+<tr><th scope="row">Text features and models</th><td>scikit-learn: TfidfVectorizer, NMF, LogisticRegression, Ridge, StandardScaler, SimpleImputer</td></tr>
+<tr><th scope="row">BERT embeddings and topics</th><td>sentence-transformers (all-MiniLM-L6-v2), BERTopic, UMAP, HDBSCAN</td></tr>
+<tr><th scope="row">Analysis notebook</th><td>Jupyter (nbclient, nbconvert), matplotlib</td></tr>
+<tr><th scope="row">Web application</th><td>JavaScript, Canvas 2D map, React and Recharts charts, esbuild, Tailwind CSS, OpenStreetMap tiles</td></tr>
+<tr><th scope="row">Testing</th><td>Python unittest and Node test runner; Python/JavaScript model parity checks</td></tr>
+</tbody></table>
+<p class="methods-note">OpenAI Codex and Anthropic Claude assisted with code, analysis checks, debugging and drafting. The team is responsible for the submitted work and its interpretation.</p></section>
+
+<section id="limits"><h2>12. Limitations</h2>
+<ul><li>Ten eligible projects is a small sample, however many reviews they contain.</li>
+<li>Reviews measure engagement with Yelp-listed businesses, not visits, revenue or resident wellbeing.</li>
+<li>Reported project costs differ in public and private scope.</li>
+<li>Text accuracy figures rest on agent labels; independent human recheck is pending. The keyword rules undercount negative comments.</li>
+<li>The later ZIP window (2019–2021) includes COVID-19, and some post-opening periods include 2020.</li>
+<li>Income and poverty estimates are historical baselines with sampling error.</li>
+<li>No result here identifies a causal effect of a project.</li></ul></section>
+
+<section id="glossary"><h2>13. Glossary</h2><p>Every defined term in Place Lab, grouped by topic. The definitions match the pop-ups on the map page.</p><div id="glossaryList"></div></section>
+</main>
+<footer><span>Public Investment Map / Methodology &amp; Glossary</span><a href="place.html">Back to Place Lab ↗</a></footer>
+<script type="module" src="methods-app.js"></script>
+</body></html>

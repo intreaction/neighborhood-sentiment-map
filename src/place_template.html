@@ -4,66 +4,15 @@
 <body>
 <a class="skip" href="#toggleControls">Skip to proposal controls</a>
 <div id="placeApp">
-<header class="masthead"><a class="wordmark" href="projects.html"><span class="brand-symbol" aria-hidden="true">◈</span> Public Investment Map</a><nav aria-label="Main navigation"><a href="projects.html">Evidence library</a><a href="model.html">Proposal model</a><span class="version-tag">EXPERIMENT 01 / PLACE LAB</span></nav></header>
+<header class="masthead"><a class="wordmark" href="place.html"><span class="brand-symbol" aria-hidden="true">◈</span> Public Investment Map</a><nav aria-label="Main navigation"><a href="findings.html">What we found</a><a href="methods.html">Methodology</a><span class="version-tag">EXPERIMENT 01 / PLACE LAB</span></nav></header>
 <main>
 <div class="workspace"><section class="map-panel" aria-labelledby="mapTitle">
 <div id="scene" class="scene" role="group" aria-label="Interactive 2D city map. Click a ZIP to select its boundary, or choose a ZIP in the left panel."><p class="loading-note">Preparing your city…</p></div>
-<aside id="proposalControls" class="floating-controls" aria-label="Map and project controls">
-<div class="panel-heading"><div><p class="eyebrow">Place Lab / ZIP explorer</p><h1 id="mapTitle">Philadelphia</h1></div><button id="toggleControls" type="button" aria-expanded="true" aria-controls="panelBody" aria-label="Collapse controls">−</button></div>
-<div id="panelBody">
-<div class="panel-places"><label class="drawer-city">Map city<select id="citySelect" disabled></select></label><div><label for="areaSelect">Project ZIP</label><select id="areaSelect"><option value="">Choose an area</option></select></div></div>
-<div class="focus-controls"><label for="focusSelect">Your focus</label><select id="focusSelect"><option value="activity">Reach active business areas</option><option value="income">Support lower-income areas</option><option value="decline">Explore declining activity</option><option value="experience">Explore worsening experiences</option><option value="access">Investigate access concerns</option><option value="none">No heatmap</option></select><label id="economicControl" hidden>Measure<select id="economicMeasure"><option value="income">Household income</option><option value="poverty">Poverty rate</option></select></label><span id="heatPeriod" class="heat-period"></span></div>
-<div class="map-actions"><button id="zoomIn" type="button" aria-label="Zoom in">+</button><button id="zoomOut" type="button" aria-label="Zoom out">−</button><button id="resetView" type="button">City view ↗</button><button id="focusLocation" type="button">Selected ZIP ↗</button></div>
-<div id="heatLegend" class="heat-legend"><strong id="heatLegendTitle"></strong><div class="heat-scale"><div id="heatRamp" class="heat-ramp"></div><div class="heat-scale-labels"><span id="heatLegendLow"></span><span id="heatLegendHigh"></span></div></div><span class="missing-key"><i></i> Limited data</span></div>
-<details class="proposal-fold"><summary>Budget &amp; proposal <span>Model uses a 500 m sample</span></summary>
-<div class="planner-heading"><p class="eyebrow">02 / Your proposal</p><h2 id="proposalTitle">Shape the next project.</h2><p>Choose a location, project type and budget. Your analysis updates automatically.</p></div>
-<label class="landmark-field" for="landmarkSelect">Location shortcut</label><select id="landmarkSelect" aria-describedby="landmarkHelp"><option value="">Custom point on map</option></select><p class="field-help" id="landmarkHelp">Choose a historical location or click the map. Map clicks select the entire ZIP area. Exact coordinate entries keep your requested location.</p>
-<div class="proposal-controls"><label>Project type<select id="projectType"></select><small>Changes comparable cases, not the estimate.</small></label><label>Estimated budget · $ million<input id="budget" aria-describedby="formStatus" type="number" step="any" min="0.01" max="1000000" value="25" required><small>Historical model cost support: $9.1M–$380M.</small></label></div>
-<p class="form-status" id="formStatus" role="status"></p>
-<p class="field-help" id="locationAdjustment" role="status"></p>
-<div class="planner-actions"><a class="dark-button button-link" href="#results">View analysis ↓</a><button id="resetProposal" type="button" class="text-button">Reset scenario</button></div>
-<p class="no-ai-note">The budget changes the point estimate. Heatmap colors show observed area conditions.</p>
-</details>
-<details class="map-settings"><summary>Map settings &amp; evidence notes</summary>
-<div class="map-layer-controls"><label>Map detail<select id="basemapSelect"><option value="streets">Streets · online</option><option value="offline">ZIP boundaries · offline</option></select></label><label class="business-toggle"><input id="showBusinesses" type="checkbox"> Business dots</label></div>
-<div class="heat-explanation"><p id="heatExplanation"></p><p id="heatCoverage"></p><span>Area colors follow ZIP/ZCTA boundaries, including at street-level zoom.</span></div>
-<div class="map-legend"><span><i></i>ZIP/ZCTA areas</span><span><i class="legend-ring"></i>500 m model sample</span><span><i class="legend-business"></i>Reviewed businesses</span></div>
-<details class="location-details"><summary>Enter exact coordinates</summary><div class="location-fields"><form id="coordinateForm"><label>Longitude<input id="longitude" type="number" step="any" min="-180" max="180" required></label><label>Latitude<input id="latitude" type="number" step="any" min="-90" max="90" required></label><button type="submit">Set location</button></form></div></details>
-<p id="basemapStatus" class="scene-status" role="status">Loading street detail…</p>
-<p id="sceneStatus" class="scene-status" role="status">Map loading. Click anywhere to explore the nearest supported location.</p>
-</details>
-<article class="project-card" aria-labelledby="projectCardTitle" aria-live="polite">
-<div class="project-card-top"><span class="eyebrow">ZIP project proposal</span><button id="toggleProjectCard" aria-expanded="true" aria-controls="projectCardBody" aria-label="Collapse project details">−</button></div>
-<h2 id="projectCardTitle">Your project</h2><p id="projectMeta"></p>
-<div id="projectCardBody"><div id="projectSignal" class="project-signal">—</div><p id="projectSignalLabel"></p><p id="projectOpportunity"></p><p id="projectReach"></p><p id="projectEstimate"></p><p id="projectMove"></p><a href="#results">Explore the full analysis ↓</a></div>
-</article>
-<details class="area-notes"><summary>More ZIP evidence</summary><div class="area-inspector"><p class="eyebrow">Area evidence</p><div class="area-inspector-heading"><h2 id="areaHeading">Explore an area</h2><button type="button" class="text-button" id="areaFocusButton">Zoom to area ↗</button></div><div id="areaMetric" class="area-metric">—</div><p id="areaMetricLabel"></p><div id="areaEvidence" aria-live="polite"></div></div>
-</details>
-<p id="selectionLabel" class="panel-selection"></p>
-</div></aside>
+<div id="panelRoot"></div>
 </section></div>
 
-<section id="results" class="results-grid" aria-label="Location profile and estimate" aria-live="polite">
-<div class="metric-card"><p class="eyebrow">Within 500 meters</p><div class="metric" id="businessCount">—</div><h3>Businesses with baseline reviews</h3><p id="inventoryNote">Measuring the selected place…</p></div>
-<div class="metric-card"><p class="eyebrow">2018–2019 baseline</p><div class="metric" id="reviewRate">—</div><h3>Reviews per reviewed business</h3><p id="reviewNote">A fixed two-year historical activity profile.</p></div>
-<div class="metric-card estimate-card"><p class="eyebrow">Exploratory capital efficiency</p><div class="metric" id="estimate">—</div><h3>Excess reviews per $1M over two post years</h3><p id="estimateNote">Checking model support…</p><details><summary>Uncertainty &amp; assumptions</summary><p id="uncertainty"></p><p>Ten usable historical projects. Project type is not a fitted feature. Budget changes describe model associations, not a causal return. Timing sensitivity weakens the model’s advantage.</p></details></div>
-</section>
-<section class="engagement-insights" aria-labelledby="insightsTitle">
-<div class="insights-heading"><div><p class="eyebrow">03 / Beyond the score</p><h2 id="insightsTitle">How much engagement, and when?</h2></div><p>Engagement is measured as Yelp review activity. Explore the model total, its assumptions, and the historical evidence.</p></div>
-<div class="engagement-metrics" id="engagementMetrics"></div>
-<div id="decisionContext" class="decision-context" role="status"></div>
-<div class="insights-grid">
-<article class="insight-card"><p class="eyebrow">Timing assumption</p><h3>A possible two-year accumulation</h3><p>Illustration: the estimated excess reviews arrive evenly across the two-post-year analysis window. The model estimates the total, not this timing.</p><div id="timelineChart" class="insight-chart"></div><p id="timelineNote" class="chart-note"></p></article>
-<article class="insight-card"><p class="eyebrow">Fitted budget association</p><h3>How the scenario varies with budget</h3><p>Same location and business profile, different budgets. Gaps mark combinations outside model support.</p><div id="budgetChart" class="insight-chart"></div><p class="chart-note">Budget associations are not a causal spending response or a recommendation.</p></article>
-<article class="insight-card"><p class="eyebrow">Observed historical activity</p><h3>What happened around a real project?</h3><label class="history-select">Historical example<select id="historyProject"></select></label><div id="historyChart" class="insight-chart"></div><p id="historyNote" class="chart-note"></p></article>
-<article class="insight-card"><p class="eyebrow">What people discussed · historical evidence</p><h3>Which engagement topics changed?</h3><p>Changes around the historical example selected above, adjusted for changes in its comparison area. These are observed topic changes, not topic predictions for your proposal.</p><label class="topic-mode" for="topicMeasure">Measure</label><select id="topicMeasure" aria-label="Topic measure"><option value="discussion">Topic discussion</option><option value="complaints">Negative area experiences</option></select><div id="topicChart" class="insight-chart"></div><p id="topicNote" class="chart-note"></p></article>
-<article class="insight-card"><p class="eyebrow">Inside the regression</p><h3>What makes up the score?</h3><p>Contributions from the fitted regression, in excess reviews per $1M. Inputs use standardized log transforms.</p><div id="contributionChart" class="insight-chart"></div><p class="chart-note">These terms explain the calculation; they do not identify causal effects. Project type affects comparables only.</p></article>
-<article class="insight-card"><p class="eyebrow">How much trust to place in the estimate</p><h3>Predictions versus historical outcomes</h3><p>Each prediction holds out the project’s entire city during training. Points near the diagonal were predicted accurately; points far away were not.</p><div id="validationChart" class="insight-chart"></div><p id="reliabilityNote" class="chart-note"></p></article>
-</div>
-<details class="regression-notes"><summary>What these regressions can tell us</summary><p>The selected ridge regression relates the two-year outcome to budget, reviewed-business count, and review intensity. Historical trend lines fit annual review activity before opening using ordinary least squares; they describe past patterns. A reliable forecast of the timing of uplift would require a validated time model and more observations around each opening. Visits, sales, foot traffic, and sentiment changes are not predicted here.</p><p id="validationNote"></p></details>
-</section>
-<section class="evidence-row"><div><p class="eyebrow">04 / Inspect the evidence</p><h2>The model should explain itself.</h2><p>Explore nearby-profile comparables and their review language. Sentiment and learned topics are evidence to inspect; the selected model uses budget, business count and review intensity.</p><button type="button" id="exportScenario">Export this scenario ↓</button><span id="exportStatus" role="status"></span></div><div id="comparables" class="comparables"></div></section>
-<aside class="archive-note"><strong>A historical sandbox, with real data.</strong><p>2018–2019 reviews from Yelp’s January 2022 archive. Counts cover Yelp-listed businesses, not every business or today’s conditions. This is an activity proxy, not revenue, visits, financial ROI, or a forecast validated for a new construction project. A 500 m point radius can differ from the footprints used for historical projects.</p></aside>
+<div id="reportRoot"></div>
 </main><footer><span>Public Investment Map / Place Lab</span><a href="projects.html#method">Read the research method ↗</a><span id="buildStatus">Loading local evidence…</span></footer>
+<div id="termRoot"></div><div id="agentCaption" class="agent-caption" role="presentation" hidden></div><div id="agentLive" class="sr-only" aria-live="polite" aria-atomic="true"></div>
 </div><script type="module" src="place-app.js"></script>
 </body></html>

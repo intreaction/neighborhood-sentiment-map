@@ -19,7 +19,7 @@ class EvidenceSiteTests(unittest.TestCase):
         self.assertEqual(len(self.evidence['projects']), 11)
         ids = [p['id'] for p in self.evidence['projects']]
         self.assertEqual(len(set(ids)), 11)
-        for name in ('index', 'projects', 'model'):
+        for name in ('projects', 'model'):
             html = (ROOT / 'web' / f'{name}.html').read_text()
             self.assertNotIn('__DATA__', html)
             self.assertNotIn('__MATH__', html)
@@ -32,7 +32,7 @@ class EvidenceSiteTests(unittest.TestCase):
                 path.write_text(script)
                 checked = subprocess.run(['node', '--check', str(path)], capture_output=True, text=True)
                 self.assertEqual(checked.returncode, 0, checked.stderr)
-        self.assertEqual((ROOT / 'web/index.html').read_text(), (ROOT / 'web/projects.html').read_text())
+        self.assertIn('url=place.html', (ROOT / 'web/index.html').read_text())
 
     def test_advanced_text_evidence_is_embedded_for_every_project(self):
         advanced = json.loads((ROOT / 'data/derived/advanced_text.json').read_text())

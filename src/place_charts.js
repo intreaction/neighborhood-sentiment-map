@@ -24,7 +24,7 @@ export function renderHistory(history,id) {
   const pre=s.near.points.filter(p=>p.period!=='post');
   if(s.near.fit)series.push({label:`Nearby pre-opening OLS fit (${s.near.fit.n} years)`,color:orange,dashed:true,points:[pre[0].x,pre.at(-1).x].map(x=>({x,y:s.near.fit.intercept+s.near.fit.slope*x}))});
   const opening=Number(s.opening.slice(0,4))+(Number(s.opening.slice(5,7))-1)/12;
-  lineChart('historyChart',{title:`${s.project}: observed annual review activity`,series,xLabel:'Calendar year',yLabel:'Review index · pre-opening annual average = 100',xFormat:v=>String(Math.round(v)),opening});
+  lineChart('historyChart',{title:`${s.project}: observed annual business engagement`,series,xLabel:'Calendar year',yLabel:'Review index · pre-opening annual average = 100',xFormat:v=>String(Math.round(v)),opening});
   renderTopics(history,id);
   $('historyNote').textContent=`${s.project}, opened ${s.opening}. Each area is indexed to its own pre-opening annual average. These are historical project footprints and comparison areas, not the selected 500 m point. Missing years are not zero; opening/construction years may be omitted. The dashed regression fits pre-opening observations only and does not predict the proposal.`;
 }
@@ -50,6 +50,7 @@ export function renderInsights(snapshot,model,history) {
 }
 
 export function renderTopics(history,id) {
+  if(!$('topicChart'))return;
   const project=history.projects.find(p=>p.id===id),mode=$('topicMeasure').value;
   const labels={walking_accessibility:'Walking / accessibility',transit:'Transit',parking:'Parking',safety:'Safety',cleanliness_maintenance:'Cleanliness / maintenance',public_space:'Public space',construction:'Construction',food_service_value:'Food / service / value',neighborhood:'Neighborhood'};
   const records=insights.historicalTopics(project,mode);
