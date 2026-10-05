@@ -252,5 +252,6 @@ and the local server. Server tests need permission to bind localhost.
 
 The presentation explains ZIP exploration, the notebook-to-JSON pipeline, historical
 project analysis and model limitations. Independent human label validation remains unfinished.
-OpenAI Codex assisted with code, analysis checks, debugging, visuals and drafting;
-the team remains responsible for the submitted work and its interpretation.
+OpenAI Codex and Anthropic Claude (Claude Code, with Claude Opus models) assisted with code,
+analysis checks, debugging, visuals, slides and drafting. Claude Opus also produced the 731
+validation labels. The team remains responsible for the submitted work and its interpretation.
