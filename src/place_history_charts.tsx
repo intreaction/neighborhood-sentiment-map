@@ -9,7 +9,7 @@ import {Collapsible,CollapsibleContent,CollapsibleTrigger} from './components/ui
 import {Table,TableBody,TableCell,TableHead,TableHeader,TableRow} from './components/ui/table';
 import {Button} from './components/ui/button';
 
-const NEAR='#245c49',FAR='#889686',UP='#245c49',DOWN='#b56b32';
+const NEAR='var(--c-245c49)',FAR='var(--c-889686)',UP='var(--c-245c49)',DOWN='var(--c-b56b32)';
 const PERIODS:[string,string][]=[['early','Early'],['pre','Pre-opening'],['post','Post-opening']];
 // One chart per projection measure; shares are stored as fractions and shown as percentages.
 export const PERIOD_MEASURES:Record<string,{label:string,unit:string,field:string,scale:number,digits:number,better:number,note:string}>={
@@ -35,14 +35,14 @@ function PeriodChart({project,measure}:{project:any,measure:string}) {
   const data=PERIODS.filter(([k])=>near[k]?.n_reviews&&far[k]?.n_reviews).map(([k,label])=>({period:`${label} ${years(near[k])}`,near:near[k][m.field]*m.scale,far:far[k][m.field]*m.scale,nearN:near[k].n_reviews,farN:far[k].n_reviews}));
   const adjusted=((near.post[m.field]-near.pre[m.field])-(far.post[m.field]-far.pre[m.field]))*m.scale;
   const config={near:{label:'Near (within 500 m)',color:NEAR},far:{label:'Comparison (1.5–8 km)',color:FAR}};
-  const tone=adjusted*m.better>0?'text-[#23767a]':adjusted*m.better<0?'text-[#a63824]':'';
+  const tone=adjusted*m.better>0?'text-[var(--c-23767a)]':adjusted*m.better<0?'text-[var(--c-a63824)]':'';
   return <>
     <p className="chart-axis-label">{m.unit}</p>
     <ChartContainer config={config} className="decision-chart" style={{height:300}} aria-label={`${project.project}: ${m.label} by period`}>
       <BarChart accessibilityLayer data={data} margin={{top:10,right:20,left:0,bottom:5}}>
         <CartesianGrid vertical={false}/><XAxis dataKey="period" tickLine={false} axisLine={false} tick={{fontSize:11}}/>
         <YAxis tickLine={false} axisLine={false} width={55} tickFormatter={v=>fmt(v,m.digits>2?2:1)}/>
-        <ReferenceLine y={0} stroke="#b4c2ae"/>
+        <ReferenceLine y={0} stroke="var(--c-b4c2ae)"/>
         <ChartTooltip content={<ChartTooltipContent formatter={(value:any,name:any,item:any)=><div className="chart-tooltip-row"><span style={{color:item.color}}>{(config as any)[name].label}</span><strong>{fmt(value,m.digits)}{m.scale===100?'%':''}</strong></div>}/>}/>
         <ChartLegend content={<ChartLegendContent/>}/>
         <Bar dataKey="near" fill="var(--color-near)" radius={3} maxBarSize={44} isAnimationActive={false}/>
@@ -69,7 +69,7 @@ function TopicChart({project}:{project:any}) {
       <BarChart accessibilityLayer layout="vertical" data={rows} margin={{top:5,right:30,left:5,bottom:5}}>
         <CartesianGrid horizontal={false}/><XAxis type="number" axisLine={false} tickLine={false} tickFormatter={v=>fmt(v,1)}/>
         <YAxis type="category" dataKey="label" width={130} axisLine={false} tickLine={false} tick={{fontSize:11}}/>
-        <ReferenceLine x={0} stroke="#a8baa3"/>
+        <ReferenceLine x={0} stroke="var(--c-a8baa3)"/>
         <ChartTooltip content={<ChartTooltipContent hideLabel formatter={(value:any,_n:any,item:any)=><div><strong>{item.payload.label}</strong><p>{signed(value,2)} pp adjusted</p><p>Near: {fmt(item.payload.nearPre,1)}% → {fmt(item.payload.nearPost,1)}%</p>{item.payload.sparse&&<p>Few mentions, so read with care.</p>}</div>}/>}/>
         <Bar dataKey="value" radius={3} maxBarSize={22} isAnimationActive={false}>{rows.map((r:any,i:number)=><Cell key={i} fill={complaints?(r.value>0?DOWN:UP):(r.value<0?DOWN:UP)} fillOpacity={r.sparse?.45:1}/>)}</Bar>
       </BarChart>

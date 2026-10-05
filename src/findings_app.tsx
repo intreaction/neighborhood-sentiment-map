@@ -9,8 +9,8 @@ import {projectEffects} from './place_projection.mjs';
 
 // Every figure here is computed from files the site already serves; nothing is hand-entered.
 const NOTEBOOK='https://github.com/intreaction/neighborhood-sentiment-map/blob/main/output/jupyter-notebook/Project_Research_Walkthrough.ipynb';
-const GREEN='#245c49',GREY='#889686',ORANGE='#b56b32',RED='#a63824';
-const CITY_COLORS:Record<string,string>={Philadelphia:'#245c49',TampaBay:'#b56b32',Nashville:'#5992b5',NewOrleans:'#75578a',Tucson:'#c49a2c'};
+const GREEN='var(--c-245c49)',GREY='var(--c-889686)',ORANGE='var(--c-b56b32)',RED='var(--c-a63824)';
+const CITY_COLORS:Record<string,string>={Philadelphia:'var(--c-245c49)',TampaBay:'var(--c-b56b32)',Nashville:'var(--c-5992b5)',NewOrleans:'var(--c-75578a)',Tucson:'var(--c-c49a2c)'};
 const fmt=(v:number,d=0)=>Number.isFinite(v)?v.toLocaleString('en-US',{minimumFractionDigits:d,maximumFractionDigits:d}):'—';
 const signed=(v:number,d=0)=>(v>0?'+':v<0?'−':'')+fmt(Math.abs(v),d);
 const median=(xs:number[])=>{const v=xs.filter(Number.isFinite).sort((a,b)=>a-b),m=v.length>>1;return v.length%2?v[m]:(v[m-1]+v[m])/2;};
@@ -93,7 +93,7 @@ function Findings({areas,history,model,extra}:any) {
       <ChartContainer config={{raw:{label:'Raw change near the project',color:GREY},adjusted:{label:'Adjusted for comparison area',color:GREEN}}} className="decision-chart" style={{height:380}} aria-label="Raw and adjusted review growth by project">
         <BarChart data={growth} layout="vertical" margin={{top:5,right:30,left:10,bottom:5}}>
           <CartesianGrid horizontal={false}/><XAxis type="number" tickFormatter={(t:number)=>signed(t)+'%'} tickLine={false} axisLine={false}/>
-          <YAxis type="category" dataKey="project" width={160} tick={{fontSize:11}} tickLine={false} axisLine={false}/><ReferenceLine x={0} stroke="#a8baa3"/>
+          <YAxis type="category" dataKey="project" width={160} tick={{fontSize:11}} tickLine={false} axisLine={false}/><ReferenceLine x={0} stroke="var(--c-a8baa3)"/>
           <ChartTooltip content={<ChartTooltipContent formatter={(val:any,name:any,item:any)=><div className="chart-tooltip-row"><span style={{color:item.color}}>{name==='raw'?'Raw':'Adjusted'}</span><strong>{signed(val)}%</strong></div>}/>}/>
           <ChartLegend content={<ChartLegendContent/>}/>
           <Bar dataKey="raw" fill="var(--color-raw)" radius={3} maxBarSize={12} isAnimationActive={false}/>
@@ -109,7 +109,7 @@ function Findings({areas,history,model,extra}:any) {
       <ChartContainer config={{sentiment:{label:'Adjusted sentiment change',color:GREEN}}} className="decision-chart" style={{height:340}} aria-label="Adjusted sentiment change by project">
         <BarChart data={[...growth].sort((a:any,b:any)=>b.sentiment-a.sentiment)} layout="vertical" margin={{top:5,right:30,left:10,bottom:5}}>
           <CartesianGrid horizontal={false}/><XAxis type="number" tickFormatter={(t:number)=>signed(t,2)} tickLine={false} axisLine={false}/>
-          <YAxis type="category" dataKey="project" width={160} tick={{fontSize:11}} tickLine={false} axisLine={false}/><ReferenceLine x={0} stroke="#a8baa3"/>
+          <YAxis type="category" dataKey="project" width={160} tick={{fontSize:11}} tickLine={false} axisLine={false}/><ReferenceLine x={0} stroke="var(--c-a8baa3)"/>
           <ChartTooltip content={<ChartTooltipContent hideLabel formatter={(val:any,_n:any,item:any)=><div><strong>{item.payload.project}</strong><p>{signed(val,3)}</p></div>}/>}/>
           <Bar dataKey="sentiment" radius={3} maxBarSize={18} isAnimationActive={false}>{[...growth].sort((a:any,b:any)=>b.sentiment-a.sentiment).map((g:any,i:number)=><Cell key={i} fill={g.sentiment<0?ORANGE:GREEN}/>)}</Bar>
         </BarChart>
@@ -150,12 +150,12 @@ function Findings({areas,history,model,extra}:any) {
             <BarChart data={mae} layout="vertical" margin={{top:5,right:30,left:10,bottom:5}}>
               <CartesianGrid horizontal={false}/><XAxis type="number" tickLine={false} axisLine={false}/><YAxis type="category" dataKey="model" width={130} tick={{fontSize:11}} tickLine={false} axisLine={false}/>
               <ChartTooltip content={<ChartTooltipContent hideLabel formatter={(val:any,_n:any,item:any)=><div><strong>{item.payload.model}</strong><p>{fmt(val,1)}</p></div>}/>}/>
-              <Bar dataKey="all" radius={3} maxBarSize={18} isAnimationActive={false}>{mae.map((m:any,i:number)=><Cell key={i} fill={i===0?GREY:i===1?GREEN:'#9fb59f'}/>)}</Bar>
+              <Bar dataKey="all" radius={3} maxBarSize={18} isAnimationActive={false}>{mae.map((m:any,i:number)=><Cell key={i} fill={i===0?GREY:i===1?GREEN:'var(--c-9fb59f)'}/>)}</Bar>
             </BarChart>
           </ChartContainer></div>
         <div className="overflow-x-auto self-start rounded-lg border"><Table>
           <TableHeader><TableRow><TableHead className={head}>Sample</TableHead><TableHead className={head}>Ridge</TableHead><TableHead className={head}>Average</TableHead></TableRow></TableHeader>
-          <TableBody>{timing.map((t:any)=><TableRow key={t.sample}><TableCell>{t.sample}</TableCell><TableCell className={`tabular-nums font-semibold ${t.mean!=null&&t.ridge>t.mean?'text-[#a63824]':''}`}>{fmt(t.ridge,1)}</TableCell><TableCell className="tabular-nums">{t.mean==null?'—':fmt(t.mean,1)}</TableCell></TableRow>)}</TableBody>
+          <TableBody>{timing.map((t:any)=><TableRow key={t.sample}><TableCell>{t.sample}</TableCell><TableCell className={`tabular-nums font-semibold ${t.mean!=null&&t.ridge>t.mean?'text-[var(--c-a63824)]':''}`}>{fmt(t.ridge,1)}</TableCell><TableCell className="tabular-nums">{t.mean==null?'—':fmt(t.mean,1)}</TableCell></TableRow>)}</TableBody>
         </Table></div>
       </div>
     </Finding>

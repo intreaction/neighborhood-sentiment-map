@@ -57,7 +57,7 @@ export function TimelineControls({store,actions}:{store:Store,actions:any}) {
         onValueChange={(x:number[])=>actions.setTime(compare?{from:x[0],to:x[1]}:{at:x[0]})}
         thumbLabels={compare?['Start of the earlier period','Start of the later period']:['Period shown']}
         aria-valuetext={compare?v.text.change:v.text.level}>
-        {compare&&windowBox(s.from,s.length,'bg-[#b9c2b5]/70','Earlier period')}
+        {compare&&windowBox(s.from,s.length,'bg-[var(--c-b9c2b5)]/70','Earlier period')}
         {compare&&windowBox(s.to,s.length,'bg-primary/35','Later period')}
       </Slider>
       <div className="relative mt-1.5 h-3.5 border-t border-border/60 pt-0.5 text-[9px] leading-none text-muted-foreground" aria-hidden="true">

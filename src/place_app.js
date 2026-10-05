@@ -38,7 +38,7 @@ function renderProjectCard(focus) {
   const area=areaData.cities.find(c=>c.id===state.city).areas.find(a=>a.zip===zip);
   const value=areaValue(area,focus),spec=FOCUSES[focus];
   const isCombined=!!COMBINED_VIEWS[focus];
-  const signalColor=focus==='none'?'#929d9b':areaColor(value,focus);
+  const signalColor=focus==='none'?'var(--c-929d9b)':areaColor(value,focus);
   const opportunities={
     combined:'Use these signals together to decide where to look closer. Where they overlap tells you nothing about cause, and nothing about what a project would deliver.',
     activity:'Look at public space and connections that help people reach nearby businesses.',

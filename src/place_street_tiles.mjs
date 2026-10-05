@@ -54,7 +54,7 @@ export function createStreetTiles({redraw,onStatus=()=>{},makeImage=()=>new Imag
       const next=wanted.map(t=>t.key).join('|');
       if(next!==signature){signature=next;clearTimeout(timer);timer=setTimeout(load,180);}
       let loaded=0,failed=0;
-      ctx.save();ctx.filter='saturate(0.45)';
+      ctx.save();ctx.filter=globalThis.matchMedia?.('(prefers-color-scheme: dark)').matches?'invert(1) hue-rotate(180deg) saturate(0.35) brightness(0.82) contrast(0.92)':'saturate(0.45)';
       for(const tile of wanted) {
         const entry=cache.get(tile.key);
         if(entry?.ready){ctx.drawImage(entry.image,tile.x,tile.y,tile.width+.5,tile.height+.5);loaded++;}

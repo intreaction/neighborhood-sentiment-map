@@ -79,10 +79,10 @@ export function rampColor(t,diverging=false){
 }
 // Text uses a darker directional hue so small changes remain readable.
 export function areaTextColor(value,focus){
-  if(!Number.isFinite(value)||focus==='none'||value===0&&FOCUSES[focus].palette==='diverging')return '#5a6d68';
-  if(COMBINED_VIEWS[focus])return ['#465351','#86511c','#295e7e','#684779'][value];
-  if(FOCUSES[focus].palette==='diverging')return value>0?'#23767a':'#a63824';
-  return `color-mix(in srgb, ${areaColor(value,focus)} 55%, #30251d)`;
+  if(!Number.isFinite(value)||focus==='none'||value===0&&FOCUSES[focus].palette==='diverging')return 'var(--c-5a6d68)';
+  if(COMBINED_VIEWS[focus])return ['var(--c-465351)','var(--c-86511c)','var(--c-295e7e)','var(--c-684779)'][value];
+  if(FOCUSES[focus].palette==='diverging')return value>0?'var(--c-23767a)':'var(--c-a63824)';
+  return `color-mix(in srgb, ${areaColor(value,focus)} 55%, var(--c-30251d))`;
 }
 export function pointInRing([x,y],ring){
   let inside=false;

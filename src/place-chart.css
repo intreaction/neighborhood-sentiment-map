@@ -1,7 +1,7 @@
 @import "tailwindcss" source(none);
 @import "tw-animate-css";
-/* The site is light-only: dark: utilities apply under an explicit .dark class, never from the OS setting. */
-@custom-variant dark (&:where(.dark, .dark *));
+/* Dark mode follows the system setting. */
+@custom-variant dark (@media (prefers-color-scheme: dark));
 @source "./components/ui";
 @source "./place_chart_components.tsx";
 @source "./place_report_view.tsx";
@@ -14,26 +14,28 @@
 @source "./place_toolbar.tsx";
 /* shadcn/ui base: borders default to the theme line colour, not currentColor. */
 @layer base { *, ::before, ::after { border-color: var(--color-border); outline-color: color-mix(in oklab, var(--color-ring) 50%, transparent); } }
-/* shadcn/ui tokens mapped to the Place Lab palette (light only; the site has no dark theme). */
+/* shadcn/ui tokens mapped to the Place Lab palette, light and dark. */
+:root{--ui-background:#fffdf6;--ui-foreground:#173c35;--ui-card:#fffdf6;--ui-card-foreground:#173c35;--ui-popover:#fffdf6;--ui-popover-foreground:#173c35;--ui-primary:#183e35;--ui-primary-foreground:#fffdf6;--ui-secondary:#e6ecdf;--ui-secondary-foreground:#183e35;--ui-accent:#e6ecdf;--ui-accent-foreground:#183e35;--ui-muted:#e9ecdf;--ui-muted-foreground:#5b705d;--ui-destructive:#96412c;--ui-border:#d4dcca;--ui-input:#d4dcca;--ui-ring:#cc943b;}
+@media (prefers-color-scheme: dark){:root{--ui-background:#111a16;--ui-foreground:#e3ebe4;--ui-card:#16211c;--ui-card-foreground:#e3ebe4;--ui-popover:#18241f;--ui-popover-foreground:#e3ebe4;--ui-primary:#9fd2bb;--ui-primary-foreground:#0f1a16;--ui-secondary:#24322b;--ui-secondary-foreground:#dce7de;--ui-accent:#24322b;--ui-accent-foreground:#dce7de;--ui-muted:#1e2a24;--ui-muted-foreground:#a2b4a6;--ui-destructive:#e2826a;--ui-border:#2f3e37;--ui-input:#3a4a42;--ui-ring:#d9a756;}}
 @theme inline {
-  --color-background: #fffdf6;
-  --color-foreground: #173c35;
-  --color-card: #fffdf6;
-  --color-card-foreground: #173c35;
-  --color-popover: #fffdf6;
-  --color-popover-foreground: #173c35;
-  --color-primary: #183e35;
-  --color-primary-foreground: #fffdf6;
-  --color-secondary: #e6ecdf;
-  --color-secondary-foreground: #183e35;
-  --color-accent: #e6ecdf;
-  --color-accent-foreground: #183e35;
-  --color-muted: #e9ecdf;
-  --color-muted-foreground: #5b705d;
-  --color-destructive: #96412c;
-  --color-border: #d4dcca;
-  --color-input: #d4dcca;
-  --color-ring: #cc943b;
+  --color-background: var(--ui-background);
+  --color-foreground: var(--ui-foreground);
+  --color-card: var(--ui-card);
+  --color-card-foreground: var(--ui-card-foreground);
+  --color-popover: var(--ui-popover);
+  --color-popover-foreground: var(--ui-popover-foreground);
+  --color-primary: var(--ui-primary);
+  --color-primary-foreground: var(--ui-primary-foreground);
+  --color-secondary: var(--ui-secondary);
+  --color-secondary-foreground: var(--ui-secondary-foreground);
+  --color-accent: var(--ui-accent);
+  --color-accent-foreground: var(--ui-accent-foreground);
+  --color-muted: var(--ui-muted);
+  --color-muted-foreground: var(--ui-muted-foreground);
+  --color-destructive: var(--ui-destructive);
+  --color-border: var(--ui-border);
+  --color-input: var(--ui-input);
+  --color-ring: var(--ui-ring);
   --radius-sm: 4px;
   --radius-md: 6px;
   --radius-lg: 8px;

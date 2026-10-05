@@ -21,11 +21,11 @@ function PlaceFilters({panel,actions}:{panel:Store,actions:any}) {
       </Select>
       <div className="w-[118px] [&_button]:h-8 [&_button]:text-xs"><ZipCombobox zips={v.zips} zip={v.zip} onSelect={actions.setZip} disabled={!ready}/></div>
       <Select value={v.focus} onValueChange={actions.setFocus}>
-        <SelectTrigger id="focusSelect" size="sm" aria-label="Map focus" className={cn('h-8 w-[220px] border-primary bg-primary text-xs font-semibold text-primary-foreground [&_svg]:text-primary-foreground! [&_svg]:opacity-80',isCombined&&'border-[#684779] bg-[#684779]')}><SelectValue/></SelectTrigger>
+        <SelectTrigger id="focusSelect" size="sm" aria-label="Map focus" className={cn('h-8 w-[220px] border-primary bg-primary dark:bg-primary dark:hover:bg-primary text-xs font-semibold text-primary-foreground [&_svg]:text-primary-foreground! [&_svg]:opacity-80',isCombined&&'border-[var(--c-684779)] bg-[var(--c-684779)] dark:bg-[var(--c-684779)] dark:hover:bg-[var(--c-684779)]')}><SelectValue/></SelectTrigger>
         <SelectContent>
           <SelectGroup><SelectLabel>Single focus</SelectLabel>{SINGLE_FOCUSES.map(([k,l])=><SelectItem key={k} value={k}>{l}</SelectItem>)}</SelectGroup>
           <SelectSeparator/>
-          <SelectGroup><SelectLabel className="text-[#59396d]">Combined views</SelectLabel>{COMBINED_FOCUSES.map(([k,l])=><SelectItem key={k} value={k} className="text-[#59396d] focus:bg-[#eee6f3] focus:text-[#59396d]">◈ {l}</SelectItem>)}</SelectGroup>
+          <SelectGroup><SelectLabel className="text-[var(--c-59396d)]">Combined views</SelectLabel>{COMBINED_FOCUSES.map(([k,l])=><SelectItem key={k} value={k} className="text-[var(--c-59396d)] focus:bg-[var(--c-eee6f3)] focus:text-[var(--c-59396d)]">◈ {l}</SelectItem>)}</SelectGroup>
         </SelectContent>
       </Select>
       {v.focus==='income'&&<ToggleGroup type="single" variant="outline" size="sm" value={v.economic} onValueChange={(x:string)=>x&&actions.setEconomic(x)} aria-label="Economic measure">

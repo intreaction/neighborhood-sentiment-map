@@ -10,6 +10,9 @@ export async function createPlaceMap({container,onPick=()=>{},onStatus=()=>{},on
   canvas.setAttribute('role','img');
   canvas.setAttribute('aria-label','2D city map. Drag to pan, scroll to zoom, click to select a ZIP. Use arrow keys to pan, plus and minus to zoom, or the coordinate form to select a location.');
   const ctx=canvas.getContext('2d');
+  // Canvas cannot read CSS variables directly; resolve the theme palette at draw time.
+  const dark=window.matchMedia?.('(prefers-color-scheme: dark)');
+  const themed=hex=>getComputedStyle(document.documentElement).getPropertyValue('--c-'+hex.slice(1)).trim()||hex;
   if(!ctx)throw new Error('2D graphics are unavailable.');
   container.append(canvas);
   const attribution=document.createElement('a');
@@ -18,8 +21,12 @@ export async function createPlaceMap({container,onPick=()=>{},onStatus=()=>{},on
   container.append(attribution);
   const tooltip=document.createElement('div');tooltip.className='area-map-tooltip';tooltip.hidden=true;container.append(tooltip);
   const hatch=document.createElement('canvas');hatch.width=8;hatch.height=8;
-  const hctx=hatch.getContext('2d');hctx.strokeStyle='#445a5866';hctx.lineWidth=1;hctx.beginPath();hctx.moveTo(0,8);hctx.lineTo(8,0);hctx.stroke();
-  const missingPattern=ctx.createPattern(hatch,'repeat');
+  const hctx=hatch.getContext('2d');
+  let missingPattern=null;
+  function paintHatch(){hctx.clearRect(0,0,8,8);hctx.strokeStyle=dark?.matches?'#c9d6cd66':'#445a5866';hctx.lineWidth=1;hctx.beginPath();hctx.moveTo(0,8);hctx.lineTo(8,0);hctx.stroke();missingPattern=ctx.createPattern(hatch,'repeat');}
+  paintHatch();
+  // Redraw in the new palette when the system switches between light and dark.
+  dark?.addEventListener?.('change',()=>{paintHatch();schedule();});
   let city,selection,view,width=1,height=1,leftInset=0,drag=null,disposed=false,frame=null;
   let showBusinesses=false,heatFocus='none',heatAreas=new Map(),selectedArea=null;
   const streetLayer=createStreetTiles({redraw:schedule,onStatus:onBasemapStatus});
@@ -28,15 +35,15 @@ export async function createPlaceMap({container,onPick=()=>{},onStatus=()=>{},on
   const screen=point=>screenPoint(point,view,width,height);
   function draw() {
     frame=null;if(disposed||!city||!view)return;
-    ctx.clearRect(0,0,width,height);ctx.fillStyle='#e8eee9';ctx.fillRect(0,0,width,height);
-    const colors=['#d7e4d6','#cddfcf','#e0e9da','#d3e1ce'];
+    ctx.clearRect(0,0,width,height);ctx.fillStyle=themed('#e8eee9');ctx.fillRect(0,0,width,height);
+    const colors=dark?.matches?['#1f2b25','#1c2822','#223029','#1d2a24']:['#d7e4d6','#cddfcf','#e0e9da','#d3e1ce'];
     polygons.forEach((parts,index)=>{
       ctx.beginPath();
       for(const rings of parts)for(const ring of rings) {
         ring.forEach((point,i)=>{const [x,y]=screen(point);if(i)ctx.lineTo(x,y);else ctx.moveTo(x,y);});ctx.closePath();
       }
       ctx.fillStyle=colors[index%colors.length];ctx.fill('evenodd');
-      ctx.strokeStyle=city.features[index].properties.zip===selectedArea?'#173c35':'#a7bba9';ctx.lineWidth=city.features[index].properties.zip===selectedArea?2.5:.7;ctx.stroke();
+      ctx.strokeStyle=city.features[index].properties.zip===selectedArea?themed('#173c35'):themed('#a7bba9');ctx.lineWidth=city.features[index].properties.zip===selectedArea?2.5:.7;ctx.stroke();
     });
     streetLayer.draw(ctx,view,city.center,width,height);
     if(heatFocus!=='none')polygons.forEach((parts,index)=>{
@@ -45,9 +52,9 @@ export async function createPlaceMap({container,onPick=()=>{},onStatus=()=>{},on
       for(const rings of parts)for(const ring of rings){ring.forEach((point,i)=>{const [x,y]=screen(point);if(i)ctx.lineTo(x,y);else ctx.moveTo(x,y);});ctx.closePath();}
       ctx.save();ctx.globalAlpha=value===null?.25:COMBINED_VIEWS[heatFocus]?.7:.5;ctx.fillStyle=areaColor(value,heatFocus);ctx.fill('evenodd');ctx.restore();
       if(value===null&&missingPattern){ctx.fillStyle=missingPattern;ctx.fill('evenodd');}
-      ctx.strokeStyle=zip===selectedArea?'#173c35':'#6d625075';ctx.lineWidth=zip===selectedArea?2.5:.8;ctx.stroke();
+      ctx.strokeStyle=zip===selectedArea?themed('#173c35'):themed('#6d625075');ctx.lineWidth=zip===selectedArea?2.5:.8;ctx.stroke();
     });
-    ctx.fillStyle='#245647b3';ctx.beginPath();
+    ctx.fillStyle=themed('#245647b3');ctx.beginPath();
     for(const point of showBusinesses?businesses:[]) {
       const [x,y]=screen(point);if(x<0||x>width||y<0||y>height)continue;
       ctx.moveTo(x+1.7,y);ctx.arc(x,y,1.7,0,Math.PI*2);
@@ -57,9 +64,9 @@ export async function createPlaceMap({container,onPick=()=>{},onStatus=()=>{},on
     const target=85/view.scale,power=10**Math.floor(Math.log10(target));
     const km=[1,2,5,10].map(n=>n*power).find(n=>n>=target)||power*10;
     const pixels=km*view.scale;
-    ctx.fillStyle='#fffdf6e8';ctx.fillRect(12,height-36,pixels+20,27);
-    ctx.strokeStyle='#386451';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(22,height-17);ctx.lineTo(22+pixels,height-17);ctx.stroke();
-    ctx.fillStyle='#204a3b';ctx.font='10px system-ui';ctx.fillText(km>=1?`${km} km`:`${Math.round(km*1000)} m`,22,height-23);
+    ctx.fillStyle=themed('#fffdf6e8');ctx.fillRect(12,height-36,pixels+20,27);
+    ctx.strokeStyle=themed('#386451');ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(22,height-17);ctx.lineTo(22+pixels,height-17);ctx.stroke();
+    ctx.fillStyle=themed('#204a3b');ctx.font='10px system-ui';ctx.fillText(km>=1?`${km} km`:`${Math.round(km*1000)} m`,22,height-23);
     ctx.font='bold 12px system-ui';ctx.fillText('N ↑',width-39,25);
   }
   function schedule(){if(city&&view)view=constrainCityView(view,city.bounds,city.center,width,height,leftInset);if(!disposed&&frame===null)frame=requestAnimationFrame(draw);}

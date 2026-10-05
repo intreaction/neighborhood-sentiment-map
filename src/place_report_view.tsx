@@ -30,7 +30,7 @@ const OUTCOME_FMT:Record<string,(v:number)=>string>={
   activity:v=>signed(v,0)+'%',sentiment:v=>signed(v,3),access:v=>signed(v,2)+' pp',realm:v=>signed(v,2)+' pp'
 };
 const OUTCOME_HEAD:Record<string,[string,string]>={activity:['Business engagement','engagement_change'],sentiment:['Sentiment','sentiment'],access:['Negative access','negative_access'],realm:['Negative public space','negative_realm']};
-const tone=(key:string,v:number)=>{const b=(OUTCOMES as any[]).find(o=>o.key===key).better;return v*b>0?'text-[#23767a]':v*b<0?'text-[#a63824]':'';};
+const tone=(key:string,v:number)=>{const b=(OUTCOMES as any[]).find(o=>o.key===key).better;return v*b>0?'text-[var(--c-23767a)]':v*b<0?'text-[var(--c-a63824)]':'';};
 
 function SectionHeading({eyebrow,title,children}:{eyebrow:string,title:React.ReactNode,children:React.ReactNode}) {
   return <div className="mb-5 flex flex-col gap-3 md:flex-row md:items-end md:justify-between md:gap-9">
@@ -116,7 +116,7 @@ function PastProjects({rows,check,history,projects,onHistory}:any) {
       <TableHeader><TableRow className="hover:bg-transparent">
         <TableHead className={headClass}>Project</TableHead><TableHead className={headClass}>Opened</TableHead>
         {OUTCOMES.map((o:any)=><TableHead key={o.key} className={headClass}><Term k={OUTCOME_HEAD[o.key][1]}>{OUTCOME_HEAD[o.key][0]}</Term>
-          {(o.key==='access'||o.key==='realm')&&<Badge variant="outline" className="mt-1 flex w-fit border-[#b56b32] px-1.5 text-[9px] text-[#a63824] normal-case tracking-normal">low reliability</Badge>}</TableHead>)}
+          {(o.key==='access'||o.key==='realm')&&<Badge variant="outline" className="mt-1 flex w-fit border-[var(--c-b56b32)] px-1.5 text-[9px] text-[var(--c-a63824)] normal-case tracking-normal">low reliability</Badge>}</TableHead>)}
       </TableRow></TableHeader>
       <TableBody>
         {members.map((m:any)=><TableRow key={m.id} data-project={m.id} data-state={m.id===selectedHistory?'selected':undefined} className="data-[state=selected]:bg-muted/60">
@@ -152,7 +152,7 @@ function PastProjects({rows,check,history,projects,onHistory}:any) {
 }
 
 function ArchiveNote() {
-  return <Alert id="notes" className="mx-3.5 mb-8 w-auto max-w-[1440px] bg-[#e9ecdf] md:mx-[4vw]">
+  return <Alert id="notes" className="mx-3.5 mb-8 w-auto max-w-[1440px] bg-[var(--c-e9ecdf)] md:mx-[4vw]">
     <AlertTitle className="font-serif text-xl font-normal">This shows what happened. It does not forecast.</AlertTitle>
     <AlertDescription className="text-xs leading-relaxed">
       <p>Reviews come from Yelp's January 2022 archive, and income and poverty from older ACS estimates. Business engagement counts Yelp reviews. It can't see revenue, visits or welfare. We measured past-project changes within 500 m of each project, and they describe those places only. Sentiment and mention rates come from <Term k="clause_rules">keyword rules</Term> and <Term k="vader">VADER</Term>, checked against AI labels that a person still needs to review. <a className="font-semibold text-primary underline" href="findings.html">What we found</a> · <a className="font-semibold text-primary underline" href="methods.html">Methodology and glossary</a></p>

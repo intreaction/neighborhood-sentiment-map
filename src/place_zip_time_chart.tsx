@@ -12,9 +12,9 @@ export function ZipTimeChart({time,zip,cityLabel}:{time:any,zip:string,cityLabel
   const tick=(i:number)=>series[i]?.label.slice(-4)??'';
   const ticks=series.filter((_:any,i:number)=>i%(grain==='quarter'?4:12)===0).map((p:any)=>p.index);
   const marks=<>
-    <ReferenceArea x1={covidIndex} x2={series.length-1} fill="#9ea8a8" fillOpacity={.12} ifOverflow="hidden"/>
-    {shade.map(([a,b,kind]:[number,number,string],i:number)=><ReferenceArea key={i} x1={a} x2={b} fill={kind==='level'?'#245c49':'#889686'} fillOpacity={kind==='level'?.16:.18}/>)}
-    {markers.map((m:any)=><ReferenceLine key={m.id} x={m.index} stroke="#b56b32" strokeDasharray="3 3"/>)}
+    <ReferenceArea x1={covidIndex} x2={series.length-1} fill="var(--c-9ea8a8)" fillOpacity={.12} ifOverflow="hidden"/>
+    {shade.map(([a,b,kind]:[number,number,string],i:number)=><ReferenceArea key={i} x1={a} x2={b} fill={kind==='level'?'var(--c-245c49)':'var(--c-889686)'} fillOpacity={kind==='level'?.16:.18}/>)}
+    {markers.map((m:any)=><ReferenceLine key={m.id} x={m.index} stroke="var(--c-b56b32)" strokeDasharray="3 3"/>)}
   </>;
   const x=<XAxis dataKey="index" type="number" domain={[0,series.length-1]} ticks={ticks} tickFormatter={tick} tickLine={false} axisLine={false} fontSize={10}/>;
   const per=grain==='quarter'?'quarter':smooth>1?`month, ${smooth}-month average`:'month';
@@ -24,7 +24,7 @@ export function ZipTimeChart({time,zip,cityLabel}:{time:any,zip:string,cityLabel
       <p className="m-0 text-[11px] text-muted-foreground">Shaded green: the period the map shows · grey: the period it is compared with · dashed: past-project openings in {cityLabel} · light band: COVID-19 from March 2020</p>
     </div>
     <div><p className="chart-axis-label">Reviews per {grain==='quarter'?'quarter':'month'}</p>
-      <ChartContainer config={{reviews:{label:'Reviews',color:'#245c49'}}} className="decision-chart" style={{height:170}} aria-label={`ZIP ${zip}: reviews per period`}>
+      <ChartContainer config={{reviews:{label:'Reviews',color:'var(--c-245c49)'}}} className="decision-chart" style={{height:170}} aria-label={`ZIP ${zip}: reviews per period`}>
         <BarChart data={series} margin={{top:5,right:8,left:0,bottom:0}} barCategoryGap={1}>
           <CartesianGrid vertical={false}/>{x}<YAxis width={44} tickLine={false} axisLine={false} fontSize={10} tickFormatter={(v:number)=>fmt(v)}/>
           {marks}
@@ -33,7 +33,7 @@ export function ZipTimeChart({time,zip,cityLabel}:{time:any,zip:string,cityLabel
         </BarChart>
       </ChartContainer></div>
     <div><p className="chart-axis-label">Average VADER sentiment, per {per}</p>
-      <ChartContainer config={{sentiment:{label:`ZIP ${zip}`,color:'#245c49'},metro_sentiment:{label:`Rest of ${cityLabel}`,color:'#889686'}}} className="decision-chart" style={{height:170}} aria-label={`ZIP ${zip}: sentiment compared with the rest of the city`}>
+      <ChartContainer config={{sentiment:{label:`ZIP ${zip}`,color:'var(--c-245c49)'},metro_sentiment:{label:`Rest of ${cityLabel}`,color:'var(--c-889686)'}}} className="decision-chart" style={{height:170}} aria-label={`ZIP ${zip}: sentiment compared with the rest of the city`}>
         <LineChart data={series} margin={{top:5,right:8,left:0,bottom:0}}>
           <CartesianGrid vertical={false}/>{x}<YAxis width={44} domain={['auto','auto']} tickLine={false} axisLine={false} fontSize={10} tickFormatter={(v:number)=>fmt(v,2)}/>
           {marks}
