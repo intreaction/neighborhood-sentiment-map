@@ -10,7 +10,7 @@ export const FOCUSES={
   activity:{label:'Reach active business areas',field:'annual_review_density',title:'Business engagement',unit:'reviews / km² / year',period:'2019–2021 · annual average',note:'Yelp reviews per square kilometer, counting water inside the boundary. It can\'t see visits or revenue.',range:[0,3000],log:true,ends:['0','3,000+'],palette:'sequential'},
   income:{label:'Support lower-income areas',field:'median_income',title:'Median household income',unit:'historical dollars',period:'Baseline ACS · 2007–2011 / 2008–2012',note:'Warmer areas had lower household income. These are older ZIP estimates of residents, so they may not match reviewers or today.',range:[20000,100000],reverse:true,ends:['$100k+','$20k or less'],palette:'sequential'},
   poverty:{label:'Support lower-income areas',field:'poverty_pct',title:'Population below poverty',unit:'% of poverty-status population',period:'Baseline ACS · 2007–2011 / 2008–2012',note:'Warmer areas had a higher poverty rate. The estimates describe residents. Reviewers may live anywhere.',range:[0,50],ends:['0%','50%+'],palette:'sequential'},
-  decline:{label:'Explore declining activity',field:'growth_pct',title:'Change in business engagement',unit:'% change in review count',period:'2012–2014 → 2019–2021',note:'Warm means decline and teal means growth. Both three-year periods need 100 reviews. The later period includes COVID-19. Reviews starting or stopping does not mean a business opened or closed.',range:[-100,100],reverse:true,ends:['Growth +100% or more','Decline −100%'],palette:'diverging'},
+  decline:{label:'Explore declining activity',field:'growth_pct',title:'Change in business engagement',unit:'% change in review count',period:'2012–2014 → 2019–2021',note:'Warm means decline and teal means growth. Each period needs at least 100 reviews, or 50 if it is shorter than a year. Periods from 2020 on include COVID-19. Reviews starting or stopping does not mean a business opened or closed.',range:[-100,100],reverse:true,ends:['Growth +100% or more','Decline −100%'],palette:'diverging'},
   experience:{label:'Explore worsening experiences',field:'relative_sentiment_change',title:'Sentiment change vs. the city',unit:'VADER score difference',period:'2012–2014 → 2019–2021',note:'Warm means sentiment changed for the worse compared with the rest of the metro. It scores whole reviews, which are mostly about businesses. A ZIP can improve relative to the metro even when its own sentiment falls.',range:[-.15,.15],reverse:true,ends:['Better +0.15 or more','Worse −0.15 or less'],palette:'diverging'},
   access:{label:'Investigate access concerns',field:'access_share_pct',title:'Access & parking discussion',unit:'% of reviews mentioning access',period:'2019–2021 · existing keyword analysis',note:'Mentions of parking, walking, transit and accessibility, counting praise and complaints alike. A high rate does not mean people are unhappy. Needs at least 100 reviews.',range:[0,15],ends:['0%','15%+'],palette:'sequential'},
   none:{label:'No heatmap',title:'Street map',note:'Choose a focus to color the map.',period:'',range:[0,1],ends:['',''],palette:'sequential'}
@@ -31,6 +31,15 @@ export const COMBINED_VIEWS={
 for(const [key,view] of Object.entries(COMBINED_VIEWS)){
   const measures=view.measures.map(key=>COMBINED_MEASURES[key]);
   FOCUSES[key]={label:view.title,title:view.title,period:[...new Set(measures.map(m=>FOCUSES[m.focus].period))].join('; '),note:measures.map(m=>m.note).join(' ')+' Both measures must have data. Overlap is not a need score or a causal finding.',ends:['',''],palette:'categorical'};
+}
+// The map timeline changes which periods the review measures describe; legends and cards read these.
+export const PERIODS={level:'2019–2021',base:'2012–2014',change:'2012–2014 → 2019–2021'};
+export function applyPeriodLabels(labels){
+  Object.assign(PERIODS,labels);
+  FOCUSES.activity.period=`${PERIODS.level} · annual rate`;
+  FOCUSES.decline.period=FOCUSES.experience.period=PERIODS.change;
+  FOCUSES.access.period=`${PERIODS.level} · keyword analysis`;
+  for(const [key,view] of Object.entries(COMBINED_VIEWS))FOCUSES[key].period=[...new Set(view.measures.map(m=>FOCUSES[COMBINED_MEASURES[m].focus].period))].join('; ');
 }
 export function combinedMeasures(focus){return COMBINED_VIEWS[focus]?.measures.map(key=>COMBINED_MEASURES[key])??[];}
 export function combinedEvidence(area,focus){return combinedMeasures(focus).map(m=>({

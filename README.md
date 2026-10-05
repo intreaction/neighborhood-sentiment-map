@@ -112,7 +112,7 @@ ZIP / project / text / model tables → web/place-*.json
 
 | Location | Role |
 |---|---|
-| `data/derived/place_inputs/` | Frozen, prepared page inputs; manifest records upstream origins and SHA-256 hashes |
+| `data/derived/place_inputs/` | Frozen, prepared page inputs, including monthly ZIP review sums for the timeline; manifest records upstream origins and SHA-256 hashes |
 | `data/derived/project_evidence.json` | Current historical project counts, text measures, source notes and outcomes |
 | `data/derived/advanced_text.json` | Saved descriptive TF-IDF/NMF results and coverage |
 | `data/derived/project_model.json` | Current fitted model, holdouts and sensitivities |
@@ -158,10 +158,22 @@ the map, a ZIP profile table and a table of what happened around past projects
 new budget or location. Defined terms open a definition; the site root redirects to
 Place Lab.
 
-**Agent tools.** Place Lab exposes twelve tools as `window.placeLab` (and through
+**Map timeline.** A sticky header holds the city, ZIP and focus controls and a time bar that sets the period behind every
+review-based ZIP measure, at quarter or month grain from January 2012 to December 2021.
+"One period" shows a single quarter or month (months can be averaged over 3 or 12) and
+its change from the same period a year earlier; "Compare two" compares two equal
+periods. Past-project openings sit on the bar as markers; choosing one compares up to
+two years either side of the opening and selects its ZIP. Change in sentiment is always
+measured against the rest of the metro. The default, 2012–2014 against 2019–2021,
+restores the published values exactly. The ZIP profile adds a chart of the ZIP across
+every period. Data come from `data/derived/place_inputs/review_zip_month.csv` (monthly
+counts and score sums, no review text) via `web/place-timeline.json`; the logic is
+`src/place_timeline.mjs`.
+
+**Agent tools.** Place Lab exposes thirteen tools as `window.placeLab` (and through
 WebMCP where supported) so a voice or chat assistant can look up ZIP profiles, rank
 ZIPs, compare past projects, define terms, and navigate the page: `navigate`
-up/down/left/right/in/out, `go_to`, `move_to_neighbor`, `describe_screen`, and two
+up/down/left/right/in/out, `go_to`, `move_to_neighbor`, `describe_screen`, `set_map_time` for the timeline, and two
 show tools. Results carry a spoken `say` line shown as an on-screen caption. Tools use
 the same code as the tables and change only the view. See
 [methods.html § 10](web/methods.html) and `src/place_tools.mjs`.

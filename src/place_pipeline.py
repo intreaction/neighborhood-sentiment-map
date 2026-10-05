@@ -8,7 +8,7 @@ import hashlib
 import json
 from pathlib import Path
 
-from build_place_areas import compute_areas
+from build_place_areas import compute_areas, compute_timeline
 
 
 def digest(path):
@@ -60,9 +60,16 @@ def derive_history(evidence):
                      for band in ('near', 'far')}} for p in evidence['projects']]}
 
 
+def derive_timeline(inputs):
+    """Monthly ZIP and metro sums behind the map's time controls."""
+    return compute_timeline(inputs['map_geometry.json'], inputs['metro_zips.json'],
+                            inputs['review_zip_month.csv'], inputs['access_quarters.json'])
+
+
 def build_payloads(inputs, areas):
-    """Assemble the five data files consumed by place_app.js."""
-    return {'place-data.json': inputs['baseline_profiles.json'],
+    """Assemble the six data files consumed by place_app.js."""
+    return {'place-timeline.json': derive_timeline(inputs),
+            'place-data.json': inputs['baseline_profiles.json'],
             'place-map.json': inputs['map_geometry.json'],
             'place-areas.json': areas,
             'place-model.json': inputs['project_model'],
@@ -91,6 +98,15 @@ def validate_payloads(payloads):
             if area['late']['reviews'] < areas['minimum_reviews_per_period']:
                 if area['access_share_pct'] is not None or area['annual_review_density'] is not None:
                     raise ValueError('Insufficient observations must remain null.')
+    # The timeline must reproduce the published three-year windows exactly.
+    timeline = payloads.get('place-timeline.json')
+    if timeline:
+        for city in timeline['cities']:
+            published = {a['zip']: a for a in next(c for c in areas['cities'] if c['id'] == city['id'])['areas']}
+            for zip_code, cell in city['areas'].items():
+                late = sum(sum(cell['n'][(year-2012)*12:(year-2012)*12+12]) for year in areas['late_years'])
+                if late != published[zip_code]['late']['reviews']:
+                    raise ValueError(f'Timeline does not reconcile with area totals: {zip_code}')
     # JSON encoding rejects NaN and infinity, which browsers cannot parse as JSON.
     for data in payloads.values():
         json.dumps(data, allow_nan=False)

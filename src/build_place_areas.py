@@ -98,6 +98,51 @@ def compute_areas(map_data, metro_zips, sentiment_rows, topic_data, inventory_ro
     return output
 
 
+def compute_timeline(map_data, metro_zips, month_rows, topic_data, start=(2012, 1), months=120):
+    """Monthly ZIP and metro series for the map timeline; the browser derives every measure from these sums.
+
+    Arrays are aligned to calendar months from `start`; access counts are quarterly because the
+    keyword analysis was only aggregated by quarter. Metro totals cover every study ZIP, mapped or not,
+    so the browser can compare a ZIP with the rest of its metro exactly as compute_areas does.
+    """
+    def month_index(text):
+        year, month = int(text[:4]), int(text[5:7])
+        return (year-start[0])*12+month-start[1]
+    def quarter_index(text):
+        return (int(text[:4])-start[0])*4+int(text[5])-1
+    quarters = months//3
+    series = defaultdict(lambda: {'n': [0]*months, 'c': [0.0]*months, 's': [0]*months, 'neg': [0]*months,
+                                  'an': [0]*quarters, 'ad': [0]*quarters})
+    for row in month_rows:
+        i = month_index(row['month'])
+        if 0 <= i < months:
+            cell = series[row['zip5']]
+            cell['n'][i] += int(row['n_reviews']); cell['c'][i] += float(row['compound_sum'])
+            cell['s'][i] += int(row['stars_sum']); cell['neg'][i] += int(row['n_negative'])
+    for zip_code, by_quarter in topic_data['panel'].items():
+        for quarter, values in by_quarter.items():
+            i = quarter_index(quarter)
+            if 0 <= i < quarters:
+                series[zip_code]['an'][i] += values['topics'].get('access', [0])[0]
+                series[zip_code]['ad'][i] += sum(values['stars'])
+    def packed(cell):
+        return {**cell, 'c': [round(v, 4) for v in cell['c']]}
+    def total(zips):
+        keys = ('n', 'c', 's', 'neg', 'an', 'ad')
+        return packed({k: [sum(series[z][k][i] for z in zips if z in series) for i in range(len(series[next(iter(series))][k]))] for k in keys})
+    cities = []
+    for city in map_data['cities']:
+        zips = [f['properties']['zip'] for f in city['features']]
+        cities.append({'id': city['id'], 'metro': total(metro_zips[city['id']]),
+                       'areas': {z: packed(series[z]) for z in zips}})
+    return {'version': 'place-timeline-v1', 'start': f'{start[0]}-{start[1]:02d}', 'months': months,
+            'minimum_reviews': {'year_or_longer': MIN_REVIEWS, 'shorter': 50},
+            'method': {'series': 'n = reviews, c = VADER compound sum, s = star sum, neg = reviews at or below -0.05, by calendar month.',
+                       'access': 'an = access and parking mentions, ad = reviews, by calendar quarter from the existing keyword analysis.',
+                       'metro': 'Sums over every study ZIP in the metro, including ZIPs not drawn on the map.'},
+            'cities': cities}
+
+
 def build():
     """CLI equivalent of the notebook's area transformation and export."""
     from place_pipeline import load_inputs, derive_areas, write_json

@@ -17,7 +17,7 @@ export const PERIOD_MEASURES:Record<string,{label:string,unit:string,field:strin
   access:{label:'Negative access',unit:'% of reviews with a negative access or parking clause',field:'access_friction_share',scale:100,digits:2,better:-1,note:'Negative clauses about walking, transit or parking around the business. Lower is better.'},
   realm:{label:'Negative public space',unit:'% of reviews with a negative public-space clause',field:'public_realm_complaint_share',scale:100,digits:2,better:-1,note:'Negative clauses about safety, cleanliness, public space, construction or the neighborhood around the business. Lower is better.'}
 };
-const TOPIC_LABELS:Record<string,string>={walking_accessibility:'Walking / accessibility',transit:'Transit',parking:'Parking',safety:'Safety',cleanliness_maintenance:'Cleanliness',public_space:'Public space',construction:'Construction',food_service_value:'Food / service',neighborhood:'Neighbourhood'};
+const TOPIC_LABELS:Record<string,string>={walking_accessibility:'Walking / accessibility',transit:'Transit',parking:'Parking',safety:'Safety',cleanliness_maintenance:'Cleanliness',public_space:'Public space',construction:'Construction',food_service_value:'Food / service',neighborhood:'Neighborhood'};
 const fmt=(v:number,d:number)=>Number.isFinite(v)?v.toLocaleString('en-US',{minimumFractionDigits:d,maximumFractionDigits:d}):'—';
 const signed=(v:number,d:number)=>(v>0?'+':v<0?'−':'')+fmt(Math.abs(v),d);
 const years=(p:any)=>{const y=Object.keys(p?.by_year||{}).sort();return y.length?(y.length>1?`${y[0]}–${y.at(-1)!.slice(2)}`:y[0]):'';};

@@ -9,6 +9,9 @@
 @source "./place_panel.tsx";
 @source "./place_history_charts.tsx";
 @source "./findings_app.tsx";
+@source "./place_timeline_bar.tsx";
+@source "./place_zip_time_chart.tsx";
+@source "./place_toolbar.tsx";
 /* shadcn/ui base: borders default to the theme line colour, not currentColor. */
 @layer base { *, ::before, ::after { border-color: var(--color-border); outline-color: color-mix(in oklab, var(--color-ring) 50%, transparent); } }
 /* shadcn/ui tokens mapped to the Place Lab palette (light only; the site has no dark theme). */

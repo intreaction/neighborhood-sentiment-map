@@ -35,7 +35,7 @@ class NotebookPipelineTests(unittest.TestCase):
             manifest = export_payloads(payloads, inputs, root / 'web')
             self.assertEqual(manifest['summary']['ZIPs'], 196)
             self.assertEqual(manifest['summary']['historical_projects'], 11)
-            self.assertEqual(len(manifest['outputs_sha256']), 5)
+            self.assertEqual(len(manifest['outputs_sha256']), 6)
             # No substantive values change when replaying prepared inputs.
             for name, generated in payloads.items():
                 assert_numeric_tree(self, generated, json.loads((ROOT / 'web' / name).read_text()), name)

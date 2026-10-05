@@ -25,12 +25,12 @@ export function createPanelStore(initial:PanelView) {
 }
 type Store=ReturnType<typeof createPanelStore>;
 
-const SINGLE_FOCUSES=[['activity','Reach active business areas'],['income','Support lower-income areas'],['decline','Explore declining activity'],['experience','Explore worsening experiences'],['access','Investigate access concerns'],['none','No heatmap']];
-const COMBINED_FOCUSES=[['combined','Poverty + activity'],['poverty_experience','Poverty + sentiment'],['poverty_access','Poverty + access discussion'],['decline_experience','Activity + sentiment']];
+export const SINGLE_FOCUSES=[['activity','Reach active business areas'],['income','Support lower-income areas'],['decline','Explore declining activity'],['experience','Explore worsening experiences'],['access','Investigate access concerns'],['none','No heatmap']];
+export const COMBINED_FOCUSES=[['combined','Poverty + activity'],['poverty_experience','Poverty + sentiment'],['poverty_access','Poverty + access discussion'],['decline_experience','Activity + sentiment']];
 const fieldLabel='text-[10px] font-semibold uppercase tracking-wider text-muted-foreground';
 const smallButton='h-8 gap-1 px-2.5 text-[11px]';
 
-function ZipCombobox({zips,zip,onSelect,disabled}:{zips:string[],zip:string|null,onSelect:(z:string)=>void,disabled:boolean}) {
+export function ZipCombobox({zips,zip,onSelect,disabled}:{zips:string[],zip:string|null,onSelect:(z:string)=>void,disabled:boolean}) {
   const [open,setOpen]=React.useState(false);
   return <Popover open={open} onOpenChange={setOpen}>
     <PopoverTrigger asChild><Button id="areaSelect" variant="outline" role="combobox" aria-expanded={open} aria-label="Project ZIP" disabled={disabled} className="w-full justify-between bg-card font-semibold">
@@ -101,38 +101,14 @@ function FocusCard({card}:{card:any}) {
 function PlacePanel({store,actions}:{store:Store,actions:any}) {
   const v=React.useSyncExternalStore(store.subscribe,store.get);
   const [open,setOpen]=React.useState(true);
-  const ready=v.cities.length>0,isCombined=COMBINED_FOCUSES.some(([k])=>k===v.focus);
+  
   return <aside id="proposalControls" className="floating-controls" aria-label="Map and project controls">
     <div className="flex items-start justify-between gap-3">
       <div><p className="eyebrow">Place Lab / ZIP explorer</p><h1 id="mapTitle" className="m-0 font-serif text-[38px] leading-tight tracking-tight">{v.cityLabel}</h1></div>
       <Button variant="ghost" size="icon" onClick={()=>setOpen(!open)} aria-expanded={open} aria-controls="panelBody" aria-label={open?'Collapse controls':'Expand controls'}>{open?<Minus/>:<Plus/>}</Button>
     </div>
     {open&&<div id="panelBody">
-      <div className="mt-3 grid grid-cols-2 gap-2.5">
-        <div className="grid gap-1.5"><Label htmlFor="citySelect" className={fieldLabel}>Map city</Label>
-          <Select value={v.city||undefined} onValueChange={actions.setCity} disabled={!ready}>
-            <SelectTrigger id="citySelect" className="w-full bg-card font-semibold"><SelectValue placeholder="Loading…"/></SelectTrigger>
-            <SelectContent>{v.cities.map((c:any)=><SelectItem key={c.id} value={c.id}>{c.label}</SelectItem>)}</SelectContent>
-          </Select></div>
-        <div className="grid gap-1.5"><Label htmlFor="areaSelect" className={fieldLabel}>Project ZIP</Label>
-          <ZipCombobox zips={v.zips} zip={v.zip} onSelect={actions.setZip} disabled={!ready}/></div>
-      </div>
-
-      <div className="grid gap-1.5 pt-4 pb-1">
-        <Label htmlFor="focusSelect" className={fieldLabel}>Your focus</Label>
-        <Select value={v.focus} onValueChange={actions.setFocus}>
-          <SelectTrigger id="focusSelect" className={cn('w-full border-primary bg-primary font-semibold text-primary-foreground [&_svg]:text-primary-foreground! [&_svg]:opacity-80',isCombined&&'border-[#684779] bg-[#684779]')}><SelectValue/></SelectTrigger>
-          <SelectContent>
-            <SelectGroup><SelectLabel>Single focus</SelectLabel>{SINGLE_FOCUSES.map(([k,l])=><SelectItem key={k} value={k}>{l}</SelectItem>)}</SelectGroup>
-            <SelectSeparator/>
-            <SelectGroup><SelectLabel className="text-[#59396d]">Combined views</SelectLabel>{COMBINED_FOCUSES.map(([k,l])=><SelectItem key={k} value={k} className="text-[#59396d] focus:bg-[#eee6f3] focus:text-[#59396d]">◈ {l}</SelectItem>)}</SelectGroup>
-          </SelectContent>
-        </Select>
-        {v.focus==='income'&&<ToggleGroup type="single" variant="outline" size="sm" value={v.economic} onValueChange={(x:string)=>x&&actions.setEconomic(x)} aria-label="Economic measure" className="mt-1.5 w-full">
-          <ToggleGroupItem value="income" className="flex-1 text-[11px]">Household income</ToggleGroupItem><ToggleGroupItem value="poverty" className="flex-1 text-[11px]">Poverty rate</ToggleGroupItem>
-        </ToggleGroup>}
-        <span className="text-[9px] text-muted-foreground">{v.heatPeriod}</span>
-      </div>
+      <p className="mt-1 mb-2 text-[10px] text-muted-foreground">{v.heatPeriod}</p>
 
       <div className="mt-1 mb-1 flex flex-wrap gap-1.5">
         <Button variant="outline" size="icon" className="size-8" aria-label="Zoom in" onClick={actions.zoomIn}><ZoomIn/></Button>

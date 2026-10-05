@@ -3,7 +3,8 @@ import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {createPlaceTools,registerPlaceTools} from '../src/place_tools.mjs';
 import {zipProfile} from '../src/place_measures.mjs';
-import {areaAnchor} from '../src/place_area_math.mjs';
+import {areaAnchor,applyPeriodLabels} from '../src/place_area_math.mjs';
+import {DEFAULT_TIME,applyTime,parsePeriod,periodCount,periodLabel} from '../src/place_timeline.mjs';
 
 const load=f=>JSON.parse(readFileSync(new URL(`../web/${f}`,import.meta.url)));
 const data=load('place-data.json'),areas=load('place-areas.json'),history=load('place-history.json'),model=load('place-model.json'),map=load('place-map.json');
@@ -27,7 +28,7 @@ const call=async(tools,name,args={})=>tools.find(t=>t.name===name).execute(args)
 
 test('every tool has a schema, annotations and a spoken result',async()=>{
   const {view}=fakeView(),tools=toolsFor(view);
-  assert.deepEqual(tools.map(t=>t.name),['get_place_lab_guide','describe_screen','navigate','go_to','move_to_neighbor','get_zip_profile','find_zips','compare_past_projects','get_project_history','define_term','show_on_map','show_past_projects']);
+  assert.deepEqual(tools.map(t=>t.name),['get_place_lab_guide','describe_screen','navigate','go_to','move_to_neighbor','get_zip_profile','find_zips','compare_past_projects','get_project_history','define_term','show_on_map','set_map_time','show_past_projects']);
   for(const t of tools){
     assert.equal(t.inputSchema.additionalProperties,false,t.name);
     assert.equal(typeof t.annotations.readOnlyHint,'boolean',t.name);
@@ -135,4 +136,26 @@ test('WebMCP registration returns plain results for the browser to serialise',as
   let provided=null;
   assert.equal(await registerPlaceTools({provideContext:c=>{provided=c;}},tools),true);
   assert.equal(provided.tools.length,tools.length);
+});
+
+test('set_map_time changes the periods behind the ZIP profile and restores the default',async()=>{
+  const timed=load('place-areas.json'),timeline=load('place-timeline.json');let setting={...DEFAULT_TIME};
+  const apply=patch=>{setting={...setting,...patch};const t=applyTime(timed,timeline,setting);applyPeriodLabels(t.labels);return {setting:{...setting},labels:{...t.labels}};};
+  apply({});
+  const {view}=fakeView();
+  Object.assign(view,{time:()=>({setting:{...setting},labels:{...timed.time.labels},first:periodLabel(timeline,setting.grain,0),last:periodLabel(timeline,setting.grain,periodCount(timeline,setting.grain)-1)}),
+    parsePeriod:(g,t)=>parsePeriod(timeline,g,t),setTime:apply,startAtProject:()=>apply({mode:'compare',from:8,to:17,length:8})});
+  const tools=createPlaceTools({data,areas:timed,history,model,validation,view});
+  const before=(await call(tools,'get_zip_profile',{zip:'19134'})).measures.find(m=>m.measure==='engagement');
+  const snap=await call(tools,'set_map_time',{period:'2016Q3'});
+  assert.equal(snap.ok,true);assert.match(snap.say,/Q3 2016/);assert.equal(snap.map_time.setting.mode,'snapshot');
+  const after=(await call(tools,'get_zip_profile',{zip:'19134'})).measures.find(m=>m.measure==='engagement');
+  assert.notEqual(after.value,before.value);assert.match(after.period,/Q3 2016/);
+  const bad=await call(tools,'set_map_time',{period:'2030Q1'});
+  assert.equal(bad.ok,false);assert.match(bad.hint,/Q1 2012/);
+  const cmp=await call(tools,'set_map_time',{from:'2013',to:'2017',length:4});
+  assert.match(cmp.say,/2013 → 2017/);
+  const reset=await call(tools,'set_map_time',{reset:true});
+  assert.match(reset.say,/2012–2014 → 2019–2021/);
+  assert.equal((await call(tools,'get_zip_profile',{zip:'19134'})).measures.find(m=>m.measure==='engagement').value,before.value);
 });

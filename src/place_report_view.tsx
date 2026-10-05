@@ -13,6 +13,7 @@ import {cn} from './lib/utils';
 import {HistoryTabs} from './place_history_charts';
 import {areaColor,rampColor} from './place_area_math.mjs';
 import {zipProfile} from './place_measures.mjs';
+import {ZipTimeChart} from './place_zip_time_chart';
 
 const fixed=(v:number|null|undefined,d=0)=>Number.isFinite(v)?(v as number).toLocaleString('en-US',{maximumFractionDigits:d,minimumFractionDigits:d}):'—';
 const signed=(v:number|null|undefined,d:number)=>Number.isFinite(v)?((v as number)>0?'+':(v as number)<0?'−':'')+fixed(Math.abs(v as number),d):'—';
@@ -52,7 +53,7 @@ function RankStrip({position,color,label}:{position:number,color:string,label:st
   </span>;
 }
 
-function ProfileTable({zip,area,city,cityLabel}:any) {
+function ProfileTable({zip,area,city,cityLabel,time}:any) {
   return <section id="results" className="zip-report" aria-live="polite">
     <SectionHeading eyebrow="03 / ZIP profile" title={zip?`ZIP ${zip} in ${cityLabel}`:'Choose a ZIP'}>
       Yelp and Census measures for this ZIP next to the {city.areas.length} mapped ZIPs in {cityLabel}. Rank 1 is the highest value. Limited data means there were too few reviews to measure. It doesn't mean zero.
@@ -80,6 +81,7 @@ function ProfileTable({zip,area,city,cityLabel}:any) {
       <span className="flex items-center gap-2"><span className="h-2 w-24 rounded-full" style={{background:`linear-gradient(90deg,${rampColor(0,true)},${rampColor(.5,true)},${rampColor(1,true)})`}}/>Changes: teal means growth or better, red means decline or worse</span>
       <span className="flex items-center gap-2"><RankStrip position={.8} color={rampColor(.8)} label="Example position"/>Position among the city's ZIPs. The tick marks the median</span>
     </div>
+    {zip&&<ZipTimeChart time={time} zip={zip} cityLabel={cityLabel}/>}
   </section>;
 }
 

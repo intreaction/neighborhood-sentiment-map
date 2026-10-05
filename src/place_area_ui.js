@@ -1,4 +1,4 @@
-import {COMBINED_VIEWS,combinedMeasures,combinedEvidence,COMBINED_CATEGORIES,FOCUSES,areaValue,areaTextColor,formatAreaValue,areaAt} from './place_area_math.mjs';
+import {PERIODS,COMBINED_VIEWS,combinedMeasures,combinedEvidence,COMBINED_CATEGORIES,FOCUSES,areaValue,areaTextColor,formatAreaValue,areaAt} from './place_area_math.mjs';
 const n=value=>Number.isFinite(value)?Math.round(value).toLocaleString('en-US'):'—';
 // Computes the heatmap legend and area evidence for the selected ZIP and writes them to the panel store.
 export function createAreaExplorer({areaData,mapData,store,getState,getScene,onChange=()=>{},onSelect=()=>{}}) {
@@ -19,13 +19,13 @@ export function createAreaExplorer({areaData,mapData,store,getState,getScene,onC
     const f=focus(),spec=FOCUSES[f],row=city.areas.find(a=>a.zip===selected);
     const isCombined=!!COMBINED_VIEWS[f],includesMeasure=m=>f===m||COMBINED_VIEWS[f]?.measures.includes(m);
     const lines=row?[
-      `${n(row.early.reviews)} reviews in 2012–2014 → ${n(row.late.reviews)} in 2019–2021.`,
+      `${n(row.early.reviews)} reviews in ${PERIODS.base} → ${n(row.late.reviews)} in ${PERIODS.level}.`,
       ...(f==='income'||includesMeasure('poverty')?[row.acs_year?`ACS ${row.acs_year-4}–${row.acs_year}: household income ${formatAreaValue(row.median_income,'income')}${row.income_moe!==null?', ±$'+n(row.income_moe)+' margin of error':''}; poverty ${formatAreaValue(row.poverty_pct,'poverty')}.`:'The ACS has no estimate for this ZIP.']:[]),
       ...(f==='activity'?[`${n(row.business_inventory)} Yelp listings in the January 2022 inventory. ${row.area_km2.toFixed(1)} km² of mapped area.`]:[]),
       ...(includesMeasure('experience')?[`Absolute sentiment change: ${formatAreaValue(row.sentiment_change,'experience')}. The map compares this change with the rest of the city.`]:[]),
-      ...(includesMeasure('access')?[`${n(row.access_mentions)} access/parking mentions out of ${n(row.late.reviews)} reviews. Mentions can be positive or negative.`]:[]),
+      ...(includesMeasure('access')?[`${n(row.access_mentions)} access/parking mentions in ${PERIODS.level}. Mentions can be positive or negative.`]:[]),
       ...(includesMeasure('decline')?[`Business engagement change: ${formatAreaValue(row.growth_pct,'decline')}.`]:[]),
-      ...(includesMeasure('decline')?[`Two three-year windows of Yelp reviews. A change here does not mean businesses opened or closed.`]:[])
+      ...(includesMeasure('decline')?[`Compares ${PERIODS.change}. A change in reviews does not mean businesses opened or closed.`]:[])
     ]:['Hover over the map or choose a ZIP to see its numbers.'];
     store.set({...patch,zip:selected,heatPeriod:spec.period,
       legend:{hidden:f==='none',title:spec.title+(spec.unit?' · '+spec.unit:''),low:spec.ends[0],high:spec.ends[1],diverging:spec.palette==='diverging',combined:isCombined?combinedLegend(f):null},

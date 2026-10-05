@@ -3,8 +3,10 @@
 Run after rebuilding the upstream analysis. This refresh is deliberately separate
 from notebook execution so reruns do not silently change their own source data.
 """
+import csv
 import hashlib
 import json
+from collections import defaultdict
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -36,7 +38,18 @@ def prepare(root=ROOT, destination=DESTINATION):
                    for quarter, values in quarters.items()}
         for zip_code, quarters in topics['panel'].items()}}
     (destination / 'access_quarters.json').write_text(json.dumps(access, separators=(',', ':'))+'\n')
-    snapshot_files = [*copies, 'access_quarters.json']
+    # Monthly ZIP totals for the map timeline: counts and score sums only, no review IDs or text.
+    months = defaultdict(lambda: [0, 0.0, 0, 0])
+    with read('data/interim/reviews_5metro.csv').open() as stream:
+        for row in csv.DictReader(stream):
+            cell, compound = months[(row['zip5'], row['date'][:7])], float(row['compound'])
+            cell[0] += 1; cell[1] += compound; cell[2] += int(row['stars']); cell[3] += compound <= -0.05
+    with (destination / 'review_zip_month.csv').open('w', newline='') as stream:
+        writer = csv.writer(stream)
+        writer.writerow(['zip5', 'month', 'n_reviews', 'compound_sum', 'stars_sum', 'n_negative'])
+        for (zip_code, month), (n, compound, stars, negative) in sorted(months.items()):
+            writer.writerow([zip_code, month, n, f'{compound:.4f}', stars, negative])
+    snapshot_files = [*copies, 'access_quarters.json', 'review_zip_month.csv']
     manifest = {
         'version': 'place-notebook-inputs-v1',
         'description': 'Prepared historical aggregates, not original raw data. Frozen from the existing course analysis.',
@@ -46,6 +59,7 @@ def prepare(root=ROOT, destination=DESTINATION):
             'baseline_profiles.json': 'build_place_data.py: full Yelp January 2022 archive, business coordinates and 2018–2019 review counts; copied from its existing published output.',
             'map_geometry.json': 'build_place_data.py: existing simplified Census ZCTA polygons; copied from its existing published output.',
             'sentiment_zip_quarter.csv': 'build_sentiment_panel.py: Yelp review text scored with VADER, aggregated by ZIP and quarter.',
+            'review_zip_month.csv': 'build_sentiment_panel.py per-review scores (reviews_5metro.csv), summed by ZIP and calendar month: review count, VADER compound sum, star sum and count at or below the -0.05 negative cutoff.',
             'access_quarters.json': 'build_review_topics.py: existing keyword-rule counts. Includes positive and negative mentions; not a complaint classifier.',
             'income.csv': 'Earlier course ACS extracts: 2007–2011 Philadelphia/Tucson, 2008–2012 other metros. Historical estimates, not current incomes.',
             'metro_zips.json': 'Existing atlas study ZIP membership; retained to compute comparison against the rest of each study metro.',

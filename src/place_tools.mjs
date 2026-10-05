@@ -6,6 +6,7 @@
 // new project or sends data anywhere.
 import {ZIP_MEASURES,zipProfile} from './place_measures.mjs';
 import {FOCUSES,COMBINED_VIEWS} from './place_area_math.mjs';
+import {DEFAULT_TIME} from './place_timeline.mjs';
 import {FAMILIES,OUTCOMES,projectEffects,familySummary,leaveOneOut} from './place_projection.mjs';
 import {GLOSSARY,CATEGORIES} from './place_glossary.mjs';
 import {SECTIONS,CHART_TABS,COMPASS,stepIndex,neighborZip} from './place_navigation.mjs';
@@ -135,6 +136,8 @@ export function createPlaceTools({data,areas,history,model,validation=null,view}
         project_kinds:KINDS.map(k=>({key:k,label:k==='all'?'All projects':FAMILIES[k].label,projects:k==='all'?rows.length:rows.filter(r=>r.family===k).length})),
         past_projects:data.projects.map(p=>({id:p.id,name:p.name,city:p.city_label,kind:kindOf(p.id),opened:history.projects.find(h=>h.id===p.id)?.opening??null,compared:!!kindOf(p.id)})),
         chart_tabs:CHART_TABS.map(([key,label])=>({key,label})),
+        map_time:view.time?.()??null,
+        time_note:'Review-based ZIP measures can describe any quarter or month from January 2012 to December 2021. Use set_map_time to change the period. Income and poverty stay at their ACS baseline.',
         current_view:view.current(),
         say:`Place Lab covers ${cityList.length} metros and ${data.projects.length} past projects, ${rows.length} with enough data to compare. Ask about a ZIP, rank ZIPs by a measure, or compare past projects.`})},
 
@@ -285,6 +288,34 @@ export function createPlaceTools({data,areas,history,model,validation=null,view}
         view.showOnMap({city:target.city.id,zip:target.zip,focus});
         if(view.current().section!=='map')view.goTo('map');
         return describe();
+      }},
+
+    {name:'set_map_time',title:'Choose the period the ZIP map describes',
+      description:'Sets the period behind the ZIP map, the ZIP profile and get_zip_profile. mode "snapshot" shows one period and its change from the same period a year earlier; mode "compare" compares two equal periods. Write periods as "2016", "2016Q3" or "2016-07". grain is quarter or month; smooth (month grain only) averages the last 1, 3 or 12 months. start_at_project compares up to two years either side of a past project\'s opening and selects its ZIP. reset restores 2012–2014 against 2019–2021. Data run from January 2012 to December 2021. Changes only the on-screen view.',
+      inputSchema:{type:'object',properties:{mode:{type:'string',enum:['snapshot','compare']},grain:{type:'string',enum:['quarter','month']},
+        period:{type:'string',description:'Snapshot period, e.g. "2016Q3".'},from:{type:'string',description:'Start of the earlier compared period.'},to:{type:'string',description:'Start of the later compared period.'},
+        length:{type:'integer',minimum:1,description:'Length of each compared period, in quarters or months.'},smooth:{type:'integer',enum:[1,3,12]},
+        start_at_project:{type:'string',description:'Past project id from get_place_lab_guide.'},reset:{type:'boolean'}},minProperties:1,additionalProperties:false},annotations:VIEW,
+      run:({mode,grain,period,from,to,length,smooth,start_at_project,reset})=>{
+        const now=view.time?.();
+        if(!now)throw new ToolError('The map timeline did not load.','Reload the page; the map still shows 2012–2014 against 2019–2021.');
+        if(mode!=null&&!['snapshot','compare'].includes(mode))throw new ToolError(`Unknown mode "${mode}".`,'Use snapshot or compare.',['snapshot','compare']);
+        if(grain!=null&&!['quarter','month'].includes(grain))throw new ToolError(`Unknown grain "${grain}".`,'Use quarter or month.',['quarter','month']);
+        let result;
+        if(reset)result=view.setTime({...DEFAULT_TIME});
+        else if(start_at_project!=null){project(start_at_project);result=view.startAtProject(start_at_project);}
+        else{
+          const g=grain??now.setting.grain,patch={};
+          const at=(text,name)=>{const i=view.parsePeriod(g,text);if(i==null)throw new ToolError(`"${text}" is not a period in the data.`,`Use a ${name} between ${now.first} and ${now.last}, written like 2016, 2016Q3 or 2016-07.`);return i;};
+          if(grain!=null)patch.grain=grain;if(mode!=null)patch.mode=mode;if(smooth!=null)patch.smooth=smooth;if(length!=null)patch.length=length;
+          if(period!=null){patch.at=at(period,'period');patch.mode??='snapshot';}
+          if(from!=null){patch.from=at(from,'start');patch.mode??='compare';}
+          if(to!=null){patch.to=at(to,'start');patch.mode??='compare';}
+          result=view.setTime(patch);
+        }
+        const {setting,labels}=result;
+        const limits=labels.minimum?` Each period needs ${labels.minimum} reviews, or the ZIP shows limited data.`:'';
+        return {map_time:result,say:setting.mode==='compare'?`The map now compares ${labels.change}.${limits}`:`The map now shows ${labels.level}, with change from ${labels.base}.${limits}`};
       }},
 
     {name:'show_past_projects',title:'Show past projects to the user',
