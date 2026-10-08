@@ -1,0 +1,22 @@
+flowchart LR
+  sources["Sources<br/>Yelp reviews · ACS · ZCTA · project records"]
+  prepare["Join + score<br/>Cohorts · VADER · clause / mention rules"]
+  research["Research checks<br/>TF-IDF / NMF · BERTopic · BERT"]
+  areas["Area measures<br/>ZIP aggregates · ACS context"]
+  projects["Project outcomes<br/>Near vs comparison · pre / post windows"]
+  model["Model evaluation<br/>Project / city holdouts · timing sensitivity"]
+  export["Validate + export<br/>Six static data files · build hashes"]
+  app["Place Lab<br/>Map · evidence · history"]
+  sources --> prepare
+  prepare -.-> research
+  prepare --> areas
+  prepare --> projects
+  areas --> export
+  projects --> model
+  model --> export
+  export --> app
+
+  classDef standard fill:#e6ecdf,stroke:#5a6d60,color:#183e35;
+  classDef product fill:#183e35,stroke:#183e35,color:#fffdf6;
+  class sources,prepare,research,areas,projects,model,export standard;
+  class app product;

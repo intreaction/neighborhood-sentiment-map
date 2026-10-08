@@ -1,9 +1,9 @@
 #!/bin/zsh
-# Local launch only. Secrets, when configured, are inherited from the environment.
+# Local presentation server: data queries and acknowledged page commands.
 set -e
 cd -- "${0:A:h}"
-if command -v python3 >/dev/null 2>&1; then
-  exec python3 src/serve_place.py --port 8766 --open
+if command -v node >/dev/null 2>&1; then
+  exec node src/serve_place.mjs --open
 fi
-print 'Python 3 is required. Install it, then run python3 src/serve_place.py.'
+print 'Node.js 22 or newer is required. Install it, then run npm run start:place.'
 exit 1

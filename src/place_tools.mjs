@@ -1,9 +1,9 @@
 // Place Lab agent tools: the same evidence a person sees, as structured tool calls,
-// designed for voice and chat agents. Exposed as window.placeLab and registered with
-// WebMCP (document.modelContext; navigator.modelContext before Chrome 150) when supported. Lookup tools are
+// designed for voice and chat agents. Exposed as window.placeLab and through the
+// localhost command bridge. Lookup tools are
 // read-only; navigation and show_* tools only change what is on screen. Every result
 // carries `say`, a short sentence an agent can read aloud. Nothing here forecasts a
-// new project or sends data anywhere.
+// new project. The localhost bridge carries commands and results only.
 import {ZIP_MEASURES,zipProfile} from './place_measures.mjs';
 import {FOCUSES,COMBINED_VIEWS} from './place_area_math.mjs';
 import {DEFAULT_TIME} from './place_timeline.mjs';
@@ -12,7 +12,7 @@ import {GLOSSARY,CATEGORIES} from './place_glossary.mjs';
 import {SECTIONS,CHART_TABS,COMPASS,stepIndex,neighborZip} from './place_navigation.mjs';
 import insights from './place_insights.cjs';
 
-export const TOOLKIT_VERSION='place-lab-tools-v2';
+export const TOOLKIT_VERSION='place-lab-tools-v3';
 const KINDS=['all',...Object.keys(FAMILIES)];
 const FOCUS_KEYS=Object.keys(FOCUSES);
 const MEASURE_KEYS=ZIP_MEASURES.map(m=>m.key);
@@ -26,7 +26,7 @@ const CHART_OUTCOME={engagement:'activity',sentiment:'sentiment',access:'access'
 const round=(v,d=3)=>Number.isFinite(v)?Number(v.toFixed(d)):null;
 const ordinal=n=>n+(['th','st','nd','rd'][(n%100-20)%10]||['th','st','nd','rd'][n%100]||'th');
 const READ={readOnlyHint:true,openWorldHint:false};
-// consequentialHint is Chrome's WebMCP hint; the others are MCP's. View changes are harmless and reversible.
+// View changes are reversible.
 const VIEW={readOnlyHint:false,consequentialHint:false,destructiveHint:false,idempotentHint:false,openWorldHint:false};
 
 class ToolError extends Error{constructor(message,hint,valid){super(message);this.hint=hint;this.valid_values=valid;}}
@@ -69,10 +69,10 @@ export function createPlaceTools({data,areas,history,model,validation=null,view}
   };
   const kindOf=id=>rows.find(r=>r.id===id)?.family??null;
   const kindLabel=k=>k==='all'?'all projects':FAMILIES[k].label;
-  const definition=term=>GLOSSARY[term]?{definition:GLOSSARY[term].definition,caution:GLOSSARY[term].caution??null}:{};
+  const definition=term=>GLOSSARY[term]?{definition:GLOSSARY[term].definition,caution:GLOSSARY[term].caution?.replace('Needs at least 100 reviews in the period.',`Needs at least ${areas.time?.labels.minimum??100} reviews in the period.`)??null}:{};
 
   function profileOf(city,zip){
-    return zipProfile(areasOf(city),zip).map(r=>({
+    return zipProfile(areasOf(city),zip,areas.time?.labels).map(r=>({
       measure:r.measure.key,label:r.measure.label,value:round(r.value),display:r.value===null?'Limited data':r.measure.format(r.value),
       unit:r.measure.unit,period:r.period,city_median:round(r.median),rank:r.rank,ranked_zips:r.compared,
       percentile:r.position===null?null:Math.round(100*r.position),limited_data:r.value===null,
@@ -80,7 +80,7 @@ export function createPlaceTools({data,areas,history,model,validation=null,view}
   }
   // One spoken sentence about a measure in a ZIP, e.g. "Business engagement: 876 reviews / km² / year, 6th of 48 in Philadelphia (city median 52)."
   function speakMeasure(city,zip,key){
-    const r=zipProfile(areasOf(city),zip).find(r=>r.measure.key===key);
+    const r=zipProfile(areasOf(city),zip,areas.time?.labels).find(r=>r.measure.key===key);
     if(!r)return '';
     if(r.value===null)return `${r.measure.label} has limited data in ZIP ${zip}.`;
     const unit=/%|\$|km²/.test(r.measure.format(r.value))?'':' '+r.measure.unit;
@@ -229,7 +229,7 @@ export function createPlaceTools({data,areas,history,model,validation=null,view}
         if(!['highest','lowest'].includes(order))throw new ToolError(`Unknown order "${order}".`,'Use "highest" or "lowest".',['highest','lowest']);
         const all=areasOf(c),usable=all.filter(a=>Number.isFinite(m.value(a))&&fs.every(f=>Number.isFinite(f.m.value(a))));
         const kept=usable.filter(a=>fs.every(f=>(f.min==null||f.m.value(a)>=f.min)&&(f.max==null||f.m.value(a)<=f.max)));
-        kept.sort((a,b)=>order==='highest'?m.value(b)-m.value(a):m.value(a)-m.value(b));
+        kept.sort((a,b)=>(order==='highest'?m.value(b)-m.value(a):m.value(a)-m.value(b))||a.zip.localeCompare(b.zip));
         const top=kept.slice(0,Math.max(1,Math.min(20,Math.floor(limit))));
         return {city:c.label,measure:m.key,unit:m.unit,order,matched:kept.length,excluded_for_limited_data:all.length-usable.length,
           zips:top.map(a=>({zip:a.zip,value:round(m.value(a)),display:m.format(m.value(a)),...Object.fromEntries(fs.map(f=>[f.m.key,round(f.m.value(a))]))})),
@@ -352,16 +352,4 @@ export function createPlaceTools({data,areas,history,model,validation=null,view}
       return {ok:false,error:error.message,...(error.hint?{hint:error.hint}:{}),...(error.valid_values?{valid_values:error.valid_values}:{}),say:`${error.message} ${error.hint??''}`.trim()};
     }
   }}));
-}
-
-// WebMCP: Chrome serialises whatever execute returns, so return the plain result object;
-// wrapping it in MCP text content would hand agents doubly escaped JSON.
-// Chrome passes inputs as an object plus a cancellation signal; only the inputs are used.
-export async function registerPlaceTools(context,tools){
-  if(!context)return false;
-  const wrapped=tools.map(t=>({...t,execute:args=>t.execute(args??{})}));
-  if(typeof context.provideContext==='function'){await context.provideContext({tools:wrapped});return true;}
-  if(typeof context.registerTool!=='function')return false;
-  for(const tool of wrapped)await context.registerTool(tool);
-  return true;
 }

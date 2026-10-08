@@ -1,156 +1,151 @@
-# Project overview — presenter guide
+# Place Lab — presenter guide
 
 [Open the Google Slides deck](https://docs.google.com/presentation/d/1sg0G4LGOqI1nrnQCK6E-p9zHme1tHvJlLT3XWMzv2ME/edit) · [CIS 509 Group folder](https://drive.google.com/drive/folders/1VNB4BIbkiL1KiISKPGbI3SAH_ryArrsc)
 
-The presentation follows the course's Final Project Deliverables – Grading Rubric.
-It has 21 presentation slides plus two source appendix slides. The planned talk
-is 14:35, including a 60-second demo; the appendix is for questions.
-The rubric recommends approximately 12–15 minutes. Assign speakers and rehearse;
-the timing below is a plan, not a measured delivery.
+Updated October 8, 2026. The current deck has **21 slides: 16 story slides and five supporting slides**.
+Supporting slides are currently interleaved at positions 16–17 and 19–21.
+The main talk answers two questions: **What problem are we solving? How do we solve it?**
+It follows a planner from a need for local evidence through text analysis and historical
+comparisons to an explorable tool. The presentation selects evidence that carries this
+story; the notebook and appendix hold the technical detail.
 
-| Slides | Rubric coverage | Weight |
+The planned story content is **12:55**, including a **1:30 demonstration**. Allow
+25 seconds for transitions to target **13:20**. Supporting slides are optional;
+these are pacing targets that still need rehearsal.
+
+## Main talk
+
+| Slide | Story and evidence | Target time |
 |---|---|---|
-| 2–4, 8–12, 19 | Planning problem, focus questions and proposed uses | 15% |
-| 4–5, 8–12, 15 | Sources, preparation, coverage and observed patterns | 10% |
-| 8–14, 17 | Focus calculations, NLP choices and held-out evaluation | 25% |
-| 8–12, 15–19, 21 | Worked ZIP examples, model findings and planning implications | 25% |
-| Throughout | Clear narrative and visuals; delivery requires rehearsal | 10% |
-| 6 plus repository | Notebook, reusable modules, tests and reproducibility | 15% |
+| 1 | Place Lab | 0:00–0:20 |
+| 2 | Better area data helps identify local needs | 0:20–0:55 |
+| 3 | Procurement takes time. Public data can inform decisions earlier. | 0:55–1:45 |
+| 4 | Only about 3 in 10 reviews mention the surrounding place | 1:45–2:25 |
+| 5 | Join each source at the scale it actually describes | 2:25–3:20 |
+| 6 | From historical data to explorable local evidence | 3:20–3:40 |
+| 7 | Split the review before deciding what it describes | 3:40–4:45 |
+| 8 | BERTopic groups recurring language in place excerpts | 4:45–5:30 |
+| 9 | A second topic model checks what the wider text contains | 5:30–6:20 |
+| 10 | Validate labels, then compare the rules with BERT | 6:20–7:10 |
+| 11 | Turn review counts and scores into area measures | 7:10–8:10 |
+| 12 | Compare nearby change with the surrounding trend | 8:10–9:15 |
+| 13 | Test the model on entire held-out projects and cities | 9:15–10:15 |
+| 14 | Past projects show a mixed picture of review activity | 10:15–10:50 |
+| 15 | Sentiment changes were modest across the past projects | 10:50–11:25 |
+| 18 | From a planning question to an area worth investigating | 11:25–12:55 |
 
-These are the full project's rubric weights. The focus section is the center of
-the talk. Notes provide detailed formulas and sources for questions; do not read
-them verbatim. Five NMF topics remain exploratory and human label validation is
-unfinished. The deck does not imply the heatmaps forecast project effects.
+Use slides 5–13 for the process walkthrough. The [pipeline analysis](Pipeline-Walkthrough.md)
+provides the detailed explanation and code links for each stage. State the question,
+point to the evidence, and explain what it changes for the planner. Sources, evaluation
+details and interpretation boundaries are also in the Google Slides speaker notes.
 
-| Slide | Topic | Target time |
-|---|---|---|
-| 1 | Project and team | 0:00–0:30 |
-| 2 | NYC: Yelp reveals missing reports | 0:30–1:15 |
-| 3 | NYC: procurement timelines | 1:15–2:00 |
-| 4 | Public data retrieval and preparation | 2:00–2:45 |
-| 5 | Preparation and coverage | 2:45–3:25 |
-| 6 | Notebook and static exports | 3:25–3:55 |
-| 7 | Current map | 3:55–4:20 |
-| 8 | Reach active business areas | 4:20–5:05 |
-| 9 | Support lower-income areas | 5:05–5:55 |
-| 10 | Explore declining activity | 5:55–6:40 |
-| 11 | Explore worsening experiences | 6:40–7:35 |
-| 12 | Investigate access concerns | 7:35–8:25 |
-| 13 | Geographic units | 8:25–8:55 |
-| 14 | NLP methods | 8:55–9:50 |
-| 15 | Learned topic terms | 9:50–10:25 |
-| 16 | Sun Link outcome | 10:25–11:10 |
-| 17 | Model evaluation | 11:10–11:55 |
-| 18 | Timing sensitivity | 11:55–12:30 |
-| 19 | Planning implications | 12:30–13:10 |
-| 20 | Demonstration | 13:10–14:10 |
-| 21 | Conclusions | 14:10–14:35 |
+## Opening and conclusion
 
-Appendix A1 links the opening evidence; Appendix A2 links datasets, source audits,
-text methods and model results. Both are outside the timed talk.
+**Opening:** Our project hypothesis is that public officials, investment developers and
+investors need area-specific data to identify local needs. Place Lab supports this
+investigation. Access to additional data and analysis can depend on procurement. Existing
+public data can support early investigation, helping officials refine their questions
+and narrow the scope of a subsequent request. Place Lab applies that idea to local
+conditions and past public projects.
 
-## Focus data lineage
+**Solution:** Align historical sources, extract place meaning, compare local changes
+with surrounding changes, and make the evidence explorable in Place Lab.
 
-All worked examples use ZIP 19134 and the current `web/place-areas.json` export.
-The notebook calls `src/build_place_areas.py` to derive these measures from the
-prepared inputs in `data/derived/place_inputs/`.
-
-| Focus | Prepared source | Calculation / example |
-|---|---|---|
-| Activity | `sentiment_zip_quarter.csv`, `map_geometry.json` | 1,702 reviews ÷ 3 years ÷ 9.7004 km² = 58.5 per km²/year |
-| Income / poverty | `income.csv` | ACS 2007–2011: median household income $24,048 (MOE $1,889); poverty 49.0% |
-| Declining activity | `sentiment_zip_quarter.csv` | 100 × (1,702 ÷ 1,012 − 1) = +68.2%; this ZIP grew |
-| Worsening experiences | `sentiment_zip_quarter.csv`, `metro_zips.json` | ZIP sentiment change +0.017 minus rest-of-metro change −0.072 = +0.089 relative improvement |
-| Access concerns | `access_quarters.json` | 56 keyword-matching reviews ÷ 1,702 total × 100 = 3.3% |
-
-Review windows are 2012–2014 and 2019–2021. ACS uses 2007–2011 in Philadelphia
-and Tucson, 2008–2012 elsewhere. Income is historical, not a reviewer attribute.
-Access includes praise and complaints. “No heatmap” turns the overlay off; it is
-not a sixth analytical focus. Limited data is not zero.
+**Conclusion:** Explore before procurement, refine the question and narrow the request.
+These are proposed planning uses; deployment benefits and procurement time savings
+have not been measured. The historical evidence does not establish causal effects or
+support reliable new-project forecasts.
 
 ## Live demonstration
 
-Start `python3 src/serve_place.py --port 8766` before presenting and open
-`http://127.0.0.1:8766/place.html`.
+Open [Place Lab](https://intreaction.github.io/neighborhood-sentiment-map/place.html)
+before presenting. For a local fallback, run `python3 src/serve_place.py --port 8766`
+and open `http://127.0.0.1:8766/place.html`.
 
-1. Choose Philadelphia. Switch between business engagement and access concerns;
-   explain the legend, historical dates and limited-data colour.
-2. Type 19134 in the ZIP search. Scroll to the ZIP profile table and click one
-   underlined term to show a definition.
-3. In "What happened around similar past projects?", choose Trail / greenway, click
-   The Rail Park, and switch the chart tabs from Business engagement to Sentiment.
-   Point out the low-reliability badge on the negative-comment columns.
+1. Choose Philadelphia and search for ZIP **19134**. Select the **access** map layer.
+2. Show **56 of 1,702 reviews = 3.3% access mentions**, alongside the **49.0% historical
+   poverty estimate**. Explain that mentions include praise and complaints; this is a
+   question worth investigating, not proof of an access deficit.
+3. Choose **Trail / greenway** and **The Rail Park** in the past-project section.
+   Compare business engagement with sentiment and open a definition or reliability warning.
+4. Return to the opening question: the planner can now choose what to investigate
+   through an on-site visit, resident outreach or an accessibility audit.
 
-**Agent segment (about 30 seconds).** Place Lab's twelve agent tools let a voice or chat
-assistant drive the page (Methodology § 10). If no assistant is connected, run the same
-calls from the browser console; each one scrolls, highlights and shows a caption:
+Keep the demonstration to 1:30. Slide 18 is the screenshot fallback.
+Do not debug during the talk. Assistant navigation is optional appendix material,
+not a required part of the main demonstration.
 
-```js
-await placeLab.call("show_on_map", {city: "Philly", zip: "19134", focus: "access"})
-await placeLab.call("navigate", {direction: "down"})          // ZIP profile
-await placeLab.call("navigate", {direction: "right"})         // next measure; map follows
-await placeLab.call("move_to_neighbor", {direction: "north"}) // ZIP next door
-await placeLab.call("show_past_projects", {project_id: "the-rail-park", chart: "sentiment"})
-```
+## Evidence behind the procurement opening
 
-Say what makes it trustworthy: the tools use the same code as the tables, change only
-the view, and never forecast.
+- [NYC MOCS FY2026 Citywide Indicators Report](https://www.nyc.gov/site/mocs/resources/citywide-indicator-reports.page): median end-to-end cycle times of **282 days** for competitive sealed bids and **527 days** for competitive sealed proposals. These are citywide contract categories, not measured delays specific to data purchases or studies.
+- [Federal Data Strategy](https://strategy.data.gov/practices/), practices 1, 4 and 33: identify data needs, use data to guide decisions, and promote open access.
+- [FAR 12.202](https://www.acquisition.gov/far/12.202): market research informs the description of need, solicitation and contract. This is federal procurement guidance, not a rule governing NYC.
 
-Keep the demo to 60 seconds. Use slide 6 as the fallback if the browser fails. Do not debug during the talk.
-The older [historical-project demo](../demo-runbook.md) remains an optional deeper
-workflow; it is not the primary sequence for this deck.
+The proposal that Place Lab can help narrow a later request is our application of
+these principles. The sources do not establish a measured time saving for this tool.
+Yelp is publicly obtainable under dataset terms; Census data are open government data.
+
+## Evidence behind the main graphs
+
+| Slide | Evidence and interpretation |
+|---|---|
+| 4 | `data/derived/text_validation/metrics.json`: 61 of 200 randomly sampled reviews mention the place (30.5%; 95% interval approximately 25–37%). Claude Opus labels were checked by human reviewers and found satisfactory, as confirmed by the team. |
+| 8 | Seven displayed BERTopic clusters among 413 place excerpts: 84 parking; 22 neighborhood/night; 19 parks/water; 13 walking/distance; 12 streetcar; 9 construction/noise; 9 trash. About one-third are unclustered; displayed clusters are not exhaustive or population prevalence. The text-method sequence is shown separately from the cluster result. |
+| 10 | Business-grouped five-fold evaluation on 514 clauses: rules recover 12 of 73 negative area clauses (16.4%); MiniLM plus logistic regression recovers 51 of 73 (69.9%). Classifier precision is 41.8%, and human reviewers have checked the labels and found them satisfactory, as confirmed by the team. This benchmark has not replaced all deployed rule-based measures. |
+| 12 | Sun Link nearby reviews: 3,807 before, 10,943 after. Comparison ring: 9,957 before, 34,394 after. Expected nearby count: 3,807 × 34,394 ÷ 9,957 ≈ 13,150; actual is about 17% lower. |
+| 14–15 | Current historical project evidence: ten eligible outcomes. Five have positive comparison-adjusted review growth; seven have positive adjusted sentiment change. Every absolute sentiment change is below 0.1. |
+| 18 | `web/place-areas.json`: ZIP 19134, 2019–21 reviews; ACS 2007–11 poverty estimate. Historical context describes the area, not the reviewers. |
+
+## Supporting slides
+
+| Position | Content |
+|---|---|
+| 16 | Uneven review growth across metros |
+| 17 | ZIP activity, sentiment and poverty correlations |
+| 19 | Sources and AI-use disclosure |
+| 20 | NLP methods and course connections |
+| 21 | Clause-rule examples and errors |
+
+Use these selectively during the talk or for questions. The current deck order
+comes from the live Google Slides presentation; repository documentation does not
+restore slides removed in the editor. Reproduction evidence remains in the notebook
+and repository even though that slide is no longer in this deck.
 
 ## Interpretation boundaries
 
-- Review activity is not revenue, visits, welfare or financial ROI.
-- Heatmap focuses are descriptive; the model does not forecast improvement in them.
-- Ten eligible project outcomes remain a small prediction sample despite the
-  much larger review corpus.
-- Learned text did not improve held-out prediction. Timing exclusions weaken the
-  simpler model's advantage over a mean predictor.
-- Rule labels still need independent human validation. The notebook rebuilds
-  published outputs from prepared inputs; raw-source replication requires acquisition.
+- Yelp activity is not visits, revenue, public benefit or financial ROI.
+- Business-review sentiment is not direct resident satisfaction.
+- Historical comparisons do not isolate causal project effects.
+- Ten eligible project outcomes remain a small sample despite the review corpus size.
+- Humans reviewed the AI-generated labels and found them satisfactory; the BERT benchmark still produces false positives.
+- The topic analysis is exploratory; cluster counts do not describe the whole corpus.
+- Review and income data are historical; Place Lab cannot describe current conditions.
+- The prediction advantage disappears after timing exclusions; the tool does not forecast.
 
-## Submission
+## Rubric coverage and submission
 
-Verify instructor access to the deck and rehearse timing. Export a PDF or PowerPoint
-from Google Slides only if the course submission system requires an attachment.
-The shared-folder deck is the presentation source of truth.
+The instructor requests slides and Python notebook files or a GitHub repository link,
+with approximately 12–15 minutes recommended. The rubric emphasizes connecting the
+business problem, technical approach and insights.
 
-## Contrast check (2026-10-02)
+| Rubric category | Where it is communicated |
+|---|---|
+| Business problem | Slides 2–4 and the planning scenario |
+| EDA | Slides 4–5, 14–17 and the notebook |
+| Methodology | Slides 5–13, 20–21 and the notebook |
+| Results and business insights | Slides 10, 12–15, 18 |
+| Presentation and communication | Two-question story, graphs, examples and demonstration; delivery needs rehearsal |
+| Code clarity and quality | Submitted notebook/repository and the pipeline walkthrough |
 
-The original check covered all 161 visible editable text runs across 15 slides using their Google
-Slides text and background colors, with the WCAG relative-luminance calculation.
-The chosen target is 4.5:1 for all text, including large text. The final minimum
-is 5.24:1. Fixed black slide numbers on the two dark slides (previously 1.81:1),
-darkened brown callouts (previously 3.36:1), and strengthened small captions.
-The deck was rendered and visually checked, including browser inspection.
+The shared-folder Google Slides deck is the presentation source of truth. Verify
+instructor access. Export a PDF or PowerPoint only if the submission system needs one.
 
-This does not certify every pixel of the embedded app screenshot. Its map labels
-are small and sit on variable backgrounds; use the live demo for those details.
-Reference: https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html
+## Visual review
 
-The expanded focus deck preserves that palette. Its five new slides use the same
-text styles; all 20 rendered slides were checked after the expansion.
-
-
-## Opening evidence and chart sources
-
-The opening distinguishes the value of existing data from the work needed to use it.
-The project is a prototype intended to support investigation; deployment savings
-and improvements in public decisions have not been measured.
-
-- **NYC Yelp pilot (2012–2013):** among 468 reviews consistent with recent or
-  potentially recent illness, 15 also corresponded to reports to 311. The other
-  chart bar is derived as 468 − 15 = 453. Expert review and follow-up identified
-  three previously unreported outbreaks. This is review-text screening followed
-  by investigation, not an automated diagnosis. [Harrison et al., CDC MMWR (2014)](https://www.cdc.gov/mmwr/preview/mmwrhtml/mm6320a1.htm).
-- **NYC procurement (FY2026):** median cycle times were 282 days for competitive
-  sealed bids and 527 for competitive sealed proposals. Both bars start at zero.
-  These are citywide contract categories, not data-only or consultant-only
-  purchases, and are not estimates of time saved by our app.
-  [NYC MOCS Citywide Indicators Report](https://www.nyc.gov/site/mocs/resources/citywide-indicator-reports.page).
-- **Our retrieval workflow:** Census tables and geographic vintages, Yelp archive
-  joins, and separate project records must be aligned and checked. See
-  [data setup](../data-setup.md) and [project source audit](../project-source-audit.md).
-  Yelp is publicly obtainable subject to dataset terms, not unrestricted open data.
+The October 6 pipeline revision was read back from Google Slides and rendered for visual
+review. It uses the existing Georgia/Nunito Sans typography and cream/forest-green
+palette, larger main-slide labels, native editable charts, and fitted product screenshots.
+The structural issue checker reported no issues. The 25-slide output was rendered
+and inspected, with worked examples and separate stages instead of a flowchart.
+All slides were inspected. Embedded UI labels remain small; use the live demonstration
+for detail. This edit does not constitute a new pixel-level contrast certification.

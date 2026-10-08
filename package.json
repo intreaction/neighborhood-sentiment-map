@@ -4,7 +4,9 @@
   "private": true,
   "scripts": {
     "build:place": "esbuild src/place_app.js --bundle --minify --format=esm --target=es2022 --jsx=automatic --define:process.env.NODE_ENV=\\\"production\\\" --outfile=web/place-app.js && esbuild src/methods_app.js --bundle --minify --format=esm --target=es2022 --outfile=web/methods-app.js && esbuild src/findings_app.tsx --bundle --minify --format=esm --target=es2022 --jsx=automatic --define:process.env.NODE_ENV=\\\"production\\\" --outfile=web/findings-app.js && tailwindcss -i src/place-chart.css -o web/place-chart.css --minify",
-    "test": "node --test tests/*.test.cjs tests/*.test.mjs"
+    "test": "node --test tests/*.test.cjs tests/*.test.mjs",
+    "start:place": "node src/serve_place.mjs",
+    "place": "node src/place_cli.mjs"
   },
   "dependencies": {
     "class-variance-authority": "^0.7.1",

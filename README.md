@@ -18,29 +18,117 @@ about a new project or budget.
 
 [Documentation index](docs/README.md) · [Submission reading guide](docs/SUBMISSION_GUIDE.md) · [Rubric-based review](docs/grading-review.md)
 
-## Start here: the research and data-build notebook
+## Start here: deliverables and project guide
 
-**[Open the executed research walkthrough](output/jupyter-notebook/Project_Research_Walkthrough.ipynb).**
+The instructor's **Final Project Deliverables – Grading Rubric** requires
+presentation slides and **Python notebook file(s) or a GitHub repository link**.
+It recommends approximately **12–15 minutes** for the presentation. The business
+problem and insights should connect clearly to the technical approach;
+creativity and originality also matter.
 
-This is the primary reading path for the GitHub submission. It explains the source
-data, displays the datasets, derives ZIP measures, checks project outcomes,
-reproduces baseline model evaluation, interprets the results, and exports the
-five JSON files consumed by Place Lab. Saved tables and charts can be read on
-GitHub without running Python.
+- **[Google Slides presentation](https://docs.google.com/presentation/d/1sg0G4LGOqI1nrnQCK6E-p9zHme1tHvJlLT3XWMzv2ME/edit):**
+  the higher-level story, organized around “What problem are we solving?” and
+  “How do we solve it?” The current 21-slide deck includes 16 story slides and five
+  supporting slides, with graphs, pipeline examples and a demonstration.
+- **[Executed research notebook](output/jupyter-notebook/Project_Research_Walkthrough.ipynb):**
+  the detailed analysis and code reading path. Saved tables and charts can be read
+  on GitHub without running Python. The notebook explains decisions, calls reusable
+  functions in `src/`, and exports the data consumed by Place Lab.
+- **[Presenter guide](docs/presentation/Presenter-Guide.md):**
+  timing, speaker guidance, demonstration steps and slide-to-rubric coverage.
+- **[Pipeline walkthrough](docs/presentation/Pipeline-Walkthrough.md):**
+  detailed analysis of the source preparation, NLP, evaluation, measures and export
+  stages presented on slides 5–13.
 
-The notebook calls small, tested Python functions. It explains the analytical
-choices; `src/` contains reusable implementation. The browser reads the exported
-data files, not the notebook itself.
+Read the evidence below **in the rubric's order**. Each section explains what the
+instructor assesses and where this project addresses it. The separate
+[rubric-based review](docs/grading-review.md) is an advisory self-assessment of an
+earlier project/deck version, not an instructor grade or an assessment of the
+current presentation.
 
-| Read in order | What it establishes |
-|---|---|
-| Notebook §§1–2 | Source lineage, evolution of the research question, units and coverage |
-| Notebook §3 | The ZIP dataset, missingness, formulas and distributions |
-| Notebook §§4–5 | Historical outcomes and unstructured-text methods |
-| Notebook §§6–7 | Holdout evaluation, sensitivity and supported conclusions |
-| Notebook §8 | Validated dataset exports and page data contract |
-| [Source audit](docs/project-source-audit.md) | Project dates, costs, geometry and limitations |
-| [Advanced text method](docs/advanced-text-method.md) | Sampling, TF-IDF/NMF, leakage controls and pending validation |
+### 1. Business problem definition
+
+A planner considering a public project needs to understand an area's conditions
+and learn from similar past projects. Yelp contains useful observations, but
+business feedback and place observations are mixed together. We ask how review
+text, Census context and historical comparisons can support investigation.
+Proposed planning uses have not been evaluated in deployment.
+
+**Read:** [Notebook §1](output/jupyter-notebook/Project_Research_Walkthrough.ipynb)
+for the question and its development; [slides 2–4](https://docs.google.com/presentation/d/1sg0G4LGOqI1nrnQCK6E-p9zHme1tHvJlLT3XWMzv2ME/edit#slide=id.n18_use)
+for the planning scenario and evidence buried in reviews.
+
+### 2. Exploratory data analysis
+
+We examine source coverage, geographic units, missing data and support thresholds,
+then explore ZIP activity, sentiment, access mentions, income and poverty.
+Historical project tables expose the raw counts behind adjusted outcomes.
+Uneven review growth and limited place-related text affect interpretation.
+
+**Read:** [Notebook §§2–4](output/jupyter-notebook/Project_Research_Walkthrough.ipynb)
+for data quality, ZIP distributions and project measurements;
+[data setup](docs/data-setup.md), [data dictionary](docs/data-dictionary.md) and
+[project source audit](docs/project-source-audit.md) for preparation, definitions
+and source limitations. [Appendix A1–A2](https://docs.google.com/presentation/d/1sg0G4LGOqI1nrnQCK6E-p9zHme1tHvJlLT3XWMzv2ME/edit#slide=id.n05_growth)
+shows review-growth and ZIP-correlation graphs.
+
+### 3. Methodology
+
+VADER measures tone; clause and target rules distinguish business feedback from
+area comments; TF-IDF/NMF and BERTopic explore recurring language; MiniLM BERT
+embeddings support an experimental classifier. We evaluate extraction errors and
+compare project outcomes with surrounding changes. Human reviewers have checked
+the AI-generated labels and found them satisfactory.
+
+**Read:** [Notebook §§4–6](output/jupyter-notebook/Project_Research_Walkthrough.ipynb)
+for outcome construction, worked NLP examples and evaluation;
+[NLP method documentation](docs/advanced-text-method.md) and
+[methodology/glossary](web/methods.html) for implementation choices and definitions.
+[Slides 5–13, 20–21](https://docs.google.com/presentation/d/1sg0G4LGOqI1nrnQCK6E-p9zHme1tHvJlLT3XWMzv2ME/edit#slide=id.n04_data)
+walk through the pipeline stage by stage; slides 20–21 add detail.
+
+### 4. Results and business insights
+
+Raw growth can differ from comparison-adjusted growth. Historical activity
+outcomes are mixed, sentiment changes are modest, and the predictive model's
+advantage disappears after timing exclusions. The BERT benchmark recovers more
+negative area comments but still produces false positives. These findings support
+screening and follow-up questions, while limiting claims about causal effects or
+new-project forecasts.
+
+**Read:** [Notebook §§5–7](output/jupyter-notebook/Project_Research_Walkthrough.ipynb)
+and [findings](web/findings.html) for results and interpretation;
+[model comparison](data/derived/notebook_dataset/model_comparison.csv) and
+[timing sensitivity](data/derived/notebook_dataset/timing_sensitivity.csv) for
+the evaluation tables. [Slides 10, 12–15, 18](https://docs.google.com/presentation/d/1sg0G4LGOqI1nrnQCK6E-p9zHme1tHvJlLT3XWMzv2ME/edit#slide=id.n10_validation)
+connect the evidence to a proposed planning workflow.
+
+### 5. Presentation and communication
+
+The main talk follows the planning problem through our solution to a worked
+Place Lab demonstration. It selects the graphs and examples needed to explain
+the story; the notebook and appendix hold the technical detail. The planned
+story content is 12:55, including a 1:30 demo, with 25 seconds reserved for transitions;
+timing and delivery still need rehearsal.
+
+**Use:** [Google Slides](https://docs.google.com/presentation/d/1sg0G4LGOqI1nrnQCK6E-p9zHme1tHvJlLT3XWMzv2ME/edit),
+the [presenter guide](docs/presentation/Presenter-Guide.md), and
+[Place Lab](https://intreaction.github.io/neighborhood-sentiment-map/place.html).
+
+### 6. Code clarity and quality
+
+The notebook explains analytical decisions; reusable Python and JavaScript
+modules implement transformations and the application. Prepared inputs allow
+notebook execution from a fresh clone, and the browser consumes static exports.
+Tests cover calculations, support rules, data contracts and other behavior.
+Prepared-data reproduction and a full raw-source rebuild are distinct workflows.
+
+**Read:** [Notebook §§8–9](output/jupyter-notebook/Project_Research_Walkthrough.ipynb),
+[source modules](src/), [tests](tests/), [CI workflow](.github/workflows/ci.yml),
+[architecture](docs/architecture.md) and [contributing guidance](CONTRIBUTING.md).
+The [notebook execution instructions](#run-the-notebook-from-a-fresh-clone) below
+provide the reproducible starting point; [verification](#verification-and-presentation)
+lists the test commands.
 
 ## What we found
 
@@ -50,8 +138,9 @@ data files, not the notebook itself.
 - Raw review growth can coexist with negative comparison-adjusted growth. Sun Link
   illustrates why activity counts and adjusted outcomes must be shown together.
 - Learned topics often concern food and service. They cannot automatically be
-  interpreted as civic satisfaction. Place-targeting rules remain provisional;
-  independent human precision/recall has not been established.
+  interpreted as civic satisfaction. Human reviewers have checked the AI-generated
+  validation labels and found them satisfactory; the reported evaluation still
+  shows errors in the place-targeting rules.
 - Text challengers did not improve both project- and city-held-out errors.
   The retained three-input baseline has MAE **49.33** and **45.61 reviews/$1M**, respectively.
 - The baseline's advantage over a mean predictor disappears after timing exclusions.
@@ -145,13 +234,13 @@ praise and complaints.
 ## Run the application
 
 ```sh
-python3 src/serve_place.py --port 8766
+npm run start:place
 ```
 
 Open [Place Lab locally](http://127.0.0.1:8766/place.html), or double-click
 `start-place.command`. The prepared `web/` files run without Python analysis at
 view time. Street tiles require internet; **ZIP boundaries · offline** uses bundled
-geometry. Place Lab is the primary deliverable and looks backward: a floating panel
+geometry. Place Lab is the interactive evidence interface and looks backward: a floating panel
 holds city, searchable ZIP, focus, legend, past-project shortcuts and evidence; below
 the map, a ZIP profile table and a table of what happened around past projects
 (comparison-adjusted, with charts per measure). It does not project outcomes for a
@@ -170,13 +259,26 @@ every period. Data come from `data/derived/place_inputs/review_zip_month.csv` (m
 counts and score sums, no review text) via `web/place-timeline.json`; the logic is
 `src/place_timeline.mjs`.
 
-**Agent tools.** Place Lab exposes thirteen tools as `window.placeLab` (and through
-WebMCP where supported) so a voice or chat assistant can look up ZIP profiles, rank
-ZIPs, compare past projects, define terms, and navigate the page: `navigate`
-up/down/left/right/in/out, `go_to`, `move_to_neighbor`, `describe_screen`, `set_map_time` for the timeline, and two
-show tools. Results carry a spoken `say` line shown as an on-screen caption. Tools use
-the same code as the tables and change only the view. See
-[methods.html § 10](web/methods.html) and `src/place_tools.mjs`.
+**Voice and agent control.** The local Node server loads the prepared data once and
+exposes eleven tools for rankings, ZIP profiles/comparisons/timelines, historical
+projects, definitions, navigation and view/time changes. A persistent event stream
+carries view commands to the selected browser tab; the tab acknowledges the applied
+state and reports manual changes. No browser automation or experimental flags are
+required. Data queries work without a browser when their city is explicit.
+
+```sh
+node src/place_cli.mjs get_context
+node src/place_cli.mjs set_view --city Tucson
+node src/place_cli.mjs rank_areas --measure engagement --limit 1 --show
+node src/place_cli.mjs navigate --direction down
+```
+
+Start a Codex session in this repository and say: “Use the Place Lab CLI for the
+live demo. Keep spoken replies short.” The repository's `AGENTS.md` supplies the
+command conventions. See [voice setup and HTTP API](docs/presentation/Voice-Control.md)
+for session selection, time overrides, arbitrary local LLM integration and troubleshooting.
+Requires Node.js 22+. `start-place.command` opens the same server. The Python static
+server remains available for viewing only; it has no command bridge.
 
 Supporting pages:
 
@@ -250,8 +352,10 @@ and the local server. Server tests need permission to bind localhost.
 - [Presenter guide](docs/presentation/Presenter-Guide.md)
 - [Source/model browser validation](docs/qa/validation.md)
 
-The presentation explains ZIP exploration, the notebook-to-JSON pipeline, historical
-project analysis and model limitations. Independent human label validation remains unfinished.
+The presentation follows the planning problem through text extraction, historical
+comparisons and a Place Lab demonstration. Supporting analysis and implementation
+details are in the appendix and notebook. Human reviewers have checked the AI-generated
+validation labels and found them satisfactory.
 OpenAI Codex and Anthropic Claude (Claude Code, with Claude Opus models) assisted with code,
 analysis checks, debugging, visuals, slides and drafting. Claude Opus also produced the 731
 validation labels. The team remains responsible for the submitted work and its interpretation.

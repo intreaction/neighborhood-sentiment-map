@@ -5,6 +5,16 @@ const MONTHS=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov',
 export const DEFAULT_TIME={mode:'compare',grain:'quarter',smooth:3,at:39,from:0,to:28,length:12};
 export const SMOOTHING=[1,3,12];
 
+// Both the page and local query engine normalize time settings by these rules.
+export function clampTimeSetting(timeline,s){
+  const n=periodCount(timeline,s.grain),out={...s};
+  out.length=Math.max(1,Math.min(out.length,Math.floor(n/2)));
+  out.to=Math.max(out.length,Math.min(out.to,n-out.length));
+  out.from=Math.max(0,Math.min(out.from,out.to-out.length));
+  out.at=Math.max(s.grain==='month'?out.smooth-1:0,Math.min(out.at,n-1));
+  return out;
+}
+
 const startOf=t=>{const [y,m]=t.start.split('-').map(Number);return {year:y,month:m-1};};
 export function periodCount(timeline,grain){return grain==='quarter'?timeline.months/3:timeline.months;}
 export function periodLabel(timeline,grain,i){

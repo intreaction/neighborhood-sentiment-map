@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
-import {createPlaceTools,registerPlaceTools} from '../src/place_tools.mjs';
+import {createPlaceTools} from '../src/place_tools.mjs';
 import {zipProfile} from '../src/place_measures.mjs';
 import {areaAnchor,applyPeriodLabels} from '../src/place_area_math.mjs';
 import {DEFAULT_TIME,applyTime,parsePeriod,periodCount,periodLabel} from '../src/place_timeline.mjs';
@@ -124,18 +124,6 @@ test('define_term finds glossary entries by name',async()=>{
   const tools=toolsFor(fakeView().view);
   const r=await call(tools,'define_term',{term:'comparison area'});
   assert.equal(r.key,'comparison_area');assert.match(r.link,/methods\.html#term-comparison_area/);
-});
-
-test('WebMCP registration returns plain results for the browser to serialise',async()=>{
-  const tools=toolsFor(fakeView().view),registered=[];
-  assert.equal(await registerPlaceTools(undefined,tools),false);
-  assert.equal(await registerPlaceTools({registerTool:t=>registered.push(t)},tools),true);
-  const out=await registered.find(t=>t.name==='define_term').execute({term:'VADER'},{signal:null});
-  assert.equal(out.ok,true);assert.match(out.say,/VADER/);
-  assert.equal((await registered.find(t=>t.name==='get_place_lab_guide').execute(undefined)).ok,true);
-  let provided=null;
-  assert.equal(await registerPlaceTools({provideContext:c=>{provided=c;}},tools),true);
-  assert.equal(provided.tools.length,tools.length);
 });
 
 test('set_map_time changes the periods behind the ZIP profile and restores the default',async()=>{

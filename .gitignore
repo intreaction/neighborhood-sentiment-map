@@ -49,3 +49,7 @@ data/derived/*review*.jsonl
 
 # Presentation finalizer chart-data intermediates
 .chart-data-*/
+
+# Local presentation bridge credentials and browser captures
+.place-runtime.json
+.playwright-mcp/

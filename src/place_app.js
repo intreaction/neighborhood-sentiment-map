@@ -2,14 +2,15 @@ import {PERIODS,applyPeriodLabels,COMBINED_VIEWS,combinedEvidence,FOCUSES,areaAt
 import {createAreaExplorer} from './place_area_ui.js';
 import {createPlaceMap} from './place_map.js';
 import core from './place_core.cjs';
-import {createPlaceTools,registerPlaceTools,TOOLKIT_VERSION} from './place_tools.mjs';
+import {createPlaceTools,TOOLKIT_VERSION} from './place_tools.mjs';
 import {createNavigator} from './place_navigator.js';
+import {connectPlaceBridge} from './place_bridge.mjs';
 import {ZIP_MEASURES} from './place_measures.mjs';
 import {renderHistory} from './place_charts.js';
 import {mountZipReport} from './place_report_view.tsx';
 import {initTerms} from './place_term_dialog.tsx';
 import {createPanelStore,mountPanel} from './place_panel.tsx';
-import {DEFAULT_TIME,applyTime,isDefault,periodCount,periodLabel,parsePeriod,windows,zipSeries} from './place_timeline.mjs';
+import {DEFAULT_TIME,clampTimeSetting,applyTime,isDefault,periodCount,periodLabel,parsePeriod,windows,zipSeries} from './place_timeline.mjs';
 import {mountToolbar} from './place_toolbar.tsx';
 
 const $=id=>document.getElementById(id);
@@ -92,14 +93,8 @@ function change(changes) {
 // Map timeline: every review-based ZIP measure is rebuilt for the chosen periods, in place,
 // so the map, the ZIP profile and the agent tools always describe the same periods.
 const monthIndex=text=>{const [y,m]=text.split('-').map(Number);const [y0,m0]=timeline.start.split('-').map(Number);return (y-y0)*12+(m||1)-m0;};
-function clampTime(s){
-  const n=periodCount(timeline,s.grain),out={...s};
-  out.length=Math.max(1,Math.min(out.length,Math.floor(n/2)));
-  out.to=Math.max(out.length,Math.min(out.to,n-out.length));
-  out.from=Math.max(0,Math.min(out.from,out.to-out.length));
-  out.at=Math.max(s.grain==='month'?out.smooth-1:0,Math.min(out.at,n-1));
-  return out;
-}
+function clampTime(s){return clampTimeSetting(timeline,s);}
+
 function cityMarkers(u,n){
   return history.projects.filter(p=>data.projects.find(d=>d.id===p.id)?.city_id===state.city)
     .map(p=>({id:p.id,name:p.project,opening:p.opening.slice(0,7),index:Math.floor(monthIndex(p.opening)/u)})).filter(m=>m.index>=0&&m.index<n);
@@ -193,16 +188,9 @@ function initAgentTools(){
   // Every result is announced on screen and to assistive technology.
   const tools=createPlaceTools({data,areas:areaData,history,model,validation:findings?.text_validation??null,view:agentView})
     .map(tool=>({...tool,execute:async args=>{const result=await tool.execute(args);nav.announce(result.say);return result;}}));
-  const webmcp={status:'checking',api:null,error:null};
-  Object.defineProperty(window,'placeLab',{value:Object.freeze({version:TOOLKIT_VERSION,webmcp,tools:tools.map(({execute,...definition})=>definition),
+  Object.defineProperty(window,'placeLab',{value:Object.freeze({version:TOOLKIT_VERSION,tools:tools.map(({execute,...definition})=>definition),
     async call(name,args={}){const tool=tools.find(t=>t.name===name);return tool?tool.execute(args):{ok:false,error:`Unknown tool "${name}".`,valid_values:tools.map(t=>t.name)};}}),configurable:true});
-  // WebMCP is optional: report whether the browser offered it, and why registration failed if it did.
-  const context=document.modelContext??navigator.modelContext;
-  webmcp.api=document.modelContext?'document.modelContext':navigator.modelContext?'navigator.modelContext':null;
-  if(!context){webmcp.status='unavailable';console.info(`Place Lab: ${tools.length} agent tools are available as window.placeLab. WebMCP is not enabled in this browser, so they are not registered with it (enable chrome://flags "WebMCP for testing" and relaunch).`);}
-  else registerPlaceTools(context,tools)
-    .then(ok=>{webmcp.status=ok?'registered':'unsupported';console.info(`Place Lab: ${ok?`registered ${tools.length} tools with ${webmcp.api}`:`${webmcp.api} has no registerTool or provideContext`}.`);})
-    .catch(error=>{webmcp.status='failed';webmcp.error=String(error);console.warn('Place Lab: WebMCP registration failed.',error);});
+
 }
 async function init() {
   nav=createNavigator();
@@ -254,6 +242,7 @@ async function init() {
     scene=await createPlaceMap({container:$('scene'),getLeftInset:()=>$('proposalControls').getBoundingClientRect().right-$('scene').getBoundingClientRect().left+24,onPick:point=>{try{const geometry=mapData.cities.find(c=>c.id===state.city);const zip=areaAt([point.longitude,point.latitude],geometry.features);if(zip){selectZip(zip);}else{panel.set({card:{...panel.get().card,move:'Choose a mapped ZIP area. Your current ZIP remains selected.'}});sceneStatus('No mapped ZIP at this click. Current selection retained.');}}catch(error){sceneStatus({message:error.message});panel.set({formStatus:error.message+' The map stays where it was.'});}},onStatus:sceneStatus,onBasemapStatus:basemapStatus=>panel.set({basemapStatus})});
     render();scene.reset();
   }catch(error){sceneStatus({mode:'desktop',message:'The map can\'t load here. The controls on the left still work. '+error.message});}
+  connectPlaceBridge({call:window.placeLab.call,current:()=>({...agentView.current(),time:agentView.time()}),subscribe:fn=>{const a=panel.subscribe(fn),b=timeStore.subscribe(fn);return ()=>{a();b();};}});
   window.addEventListener('pagehide',()=>{scene?.dispose();});
 }
 init().catch(error=>{panel.set({formStatus:'Place Lab couldn\'t load its data. '+error.message,sceneStatus:'Run the build in the README, then serve the web folder over HTTP.'});$('buildStatus').textContent='Data unavailable';});
